@@ -67,8 +67,7 @@
 	</binding>
 	<service name="ProviderInformationDirectory_Service">
 		<port name="ProviderInformationDirectory_Port_Soap" binding="tns:ProviderInformationDirectory_Binding">
-			<soap:address
-				location="https://localhost:${HttpsDefaultPort}/ProvoderInformationDirectoryService" />
+			<soap:address location="http://localhost/pdti-server/ProviderInformationDirectoryService"/>
 		</port>
 	</service>
 </definitions>
