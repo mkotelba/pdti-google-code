@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <definitions name="HPDProviderInformationDirectory"
 	targetNamespace="urn:ihe:iti:hpd:2010" xmlns:tns="urn:ihe:iti:hpd:2010"
 	xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core"

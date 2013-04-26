@@ -126,15 +126,17 @@
 						<goals>
 							<goal>wsimport</goal>
 						</goals>
+						<configuration>
+							<wsdlFiles>
+								<wsdlFile>HPD_ProviderInformationDirectory.wsdl</wsdlFile>
+							</wsdlFiles>
+							<wsdlLocation>WEB-INF/wsdl/*</wsdlLocation>
+						</configuration>
 					</execution>
 				</executions>
 				<configuration>
 					<extension>true</extension>
 					<packageName>gov.hhs.onc.pdti.ws.api</packageName>
-					<wsdlFiles>
-						<wsdlFile>HPD_ProviderInformationDirectory.wsdl</wsdlFile>
-					</wsdlFiles>
-					<wsdlLocation>WEB-INF/wsdl/*</wsdlLocation>
 					<verbose>true</verbose>
 				</configuration>
 			</plugin>
