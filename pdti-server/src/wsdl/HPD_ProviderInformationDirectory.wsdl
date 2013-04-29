@@ -2,7 +2,7 @@
 <definitions name="HPDProviderInformationDirectory"
 	targetNamespace="urn:ihe:iti:hpd:2010" xmlns:tns="urn:ihe:iti:hpd:2010"
 	xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core"
-	xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap12/"
+	xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<documentation>IHE HPD Provider Information Directory</documentation>
 	<types>
@@ -33,40 +33,40 @@
 	</message>
 	<portType name="ProviderInformationDirectory_PortType">
 		<operation name="ProviderInformationQueryRequest">
-			<input message="tns:ProviderInformationQueryRequestMessage"></input>
-			<output message="tns:ProviderInformationQueryResponseMessage"></output>
+			<input message="tns:ProviderInformationQueryRequestMessage"/>
+			<output message="tns:ProviderInformationQueryResponseMessage"/>
 		</operation>
 		<operation name="ProviderInformationFeedRequest">
-			<input message="tns:ProviderInformationFeedRequestMessage"></input>
-			<output message="tns:ProviderInformationFeedResponseMessage"></output>
+			<input message="tns:ProviderInformationFeedRequestMessage"/>
+			<output message="tns:ProviderInformationFeedResponseMessage"/>
 		</operation>
 	</portType>
 	<binding name="ProviderInformationDirectory_Binding" type="tns:ProviderInformationDirectory_PortType">
-		<soap:binding style="document"
+		<soap12:binding style="document"
 			transport="http://schemas.xmlsoap.org/soap/http" />
 		<operation name="ProviderInformationQueryRequest">
-			<soap:operation
+			<soap12:operation
 				soapAction="urn:ihe:iti:hpd:2010:ProviderInformationQueryRequest" />
 			<input>
-				<soap:body use="literal" />
+				<soap12:body use="literal" />
 			</input>
 			<output name="response">
-				<soap:body use="literal" />
+				<soap12:body use="literal" />
 			</output>
 		</operation>
 		<operation name="ProviderInformationFeedRequest">
-			<soap:operation soapAction="urn:ihe:iti:hpd:2010:ProviderInformationFeedRequest" />
+			<soap12:operation soapAction="urn:ihe:iti:hpd:2010:ProviderInformationFeedRequest" />
 			<input>
-				<soap:body use="literal" />
+				<soap12:body use="literal" />
 			</input>
 			<output name="response">
-				<soap:body use="literal" />
+				<soap12:body use="literal" />
 			</output>
 		</operation>
 	</binding>
 	<service name="ProviderInformationDirectory_Service">
 		<port name="ProviderInformationDirectory_Port_Soap" binding="tns:ProviderInformationDirectory_Binding">
-			<soap:address location="http://localhost/pdti-server/ProviderInformationDirectoryService"/>
+			<soap12:address location="http://localhost/pdti-server/ProviderInformationDirectoryService"/>
 		</port>
 	</service>
 </definitions>
