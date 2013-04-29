@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default"
+    name="HPD_ProviderInformationDirectory" resourceRoot=""
+    soapui-version="4.5.1" xmlns:con="http://eviware.com/soapui/config">
+    <con:settings />
+    <con:interface xsi:type="con:WsdlInterface"
+        wsaVersion="NONE" name="ProviderInformationDirectory_Binding"
+        type="wsdl"
+        bindingName="{urn:ihe:iti:hpd:2010}ProviderInformationDirectory_Binding"
+        soapVersion="1_2" anonymous="optional"
+        definition="http://${project.hostname}:${project.server.port}/pdti-server/HPD_ProviderInformationDirectory.wsdl"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <con:settings />
+        <con:endpoints>
+            <con:endpoint>http://${project.hostname}:${project.server.port}/pdti-server/ProviderInformationDirectoryService</con:endpoint>
+        </con:endpoints>
+    </con:interface>
+    <con:testSuite name="TestSuite 1">
+        <con:settings />
+        <con:runType>SEQUENTIAL</con:runType>
+        <con:testCase failOnError="true"
+            failTestCaseOnErrors="true" keepSession="false" maxResults="0"
+            name="TestCase 1" searchProperties="true"
+            id="f8d94915-1080-495a-8e35-9bcddd139968">
+            <con:settings />
+            <con:properties />
+        </con:testCase>
+        <con:properties />
+    </con:testSuite>
+    <con:properties />
+    <con:wssContainer />
+</con:soapui-project>
