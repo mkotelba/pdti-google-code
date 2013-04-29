@@ -135,7 +135,7 @@
 			<id>default-tomcat.manager.url</id>
 			<activation>
 				<property>
-					<name>!settings.tomcat.manager.url</name>
+					<name>!tomcat.manager.url</name>
 				</property>
 			</activation>
 			<properties>
@@ -148,7 +148,7 @@
 			<id>default-tomcat.manager.username</id>
 			<activation>
 				<property>
-					<name>!settings.tomcat.manager.username</name>
+					<name>!tomcat.manager.username</name>
 				</property>
 			</activation>
 			<properties>
@@ -161,7 +161,7 @@
 			<id>default-tomcat.manager.password</id>
 			<activation>
 				<property>
-					<name>!settings.tomcat.manager.password</name>
+					<name>!tomcat.manager.password</name>
 				</property>
 			</activation>
 			<properties>
