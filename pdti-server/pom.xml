@@ -73,8 +73,8 @@
                         <configuration>
                             <junitReport>true</junitReport>
                             <exportAll>true</exportAll>
-                            <projectFile>target/test-classes/soapui-project.xml</projectFile>
-                            <outputFolder>target/soapui-reports</outputFolder>
+                            <projectFile>${project.basedir}/target/test-classes/soapui-project.xml</projectFile>
+                            <outputFolder>${project.basedir}/target/soapui-reports</outputFolder>
                             <printReport>true</printReport>
                             <testFailIgnore>false</testFailIgnore>
                         </configuration>
@@ -180,14 +180,14 @@
                 <configuration>
                     <webResources>
                         <webResource>
-                            <directory>src/schema</directory>
+                            <directory>${project.basedir}/src/schema</directory>
                             <includes>
                                 <include>**/*.xsd</include>
                             </includes>
                             <targetPath>WEB-INF/schema</targetPath>
                         </webResource>
                         <webResource>
-                            <directory>src/wsdl</directory>
+                            <directory>${project.basedir}/src/wsdl</directory>
                             <includes>
                                 <include>**/*.wsdl</include>
                             </includes>
