@@ -30,11 +30,11 @@
 		<param name="threshold" value="all"/>
 
 		<rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
-			<param name="fileNamePattern" value="${catalina.base}/logs/pdti-server.%d{yyyy-MM-dd}.log"/>
+			<param name="fileNamePattern" value="${pdti.log.dir}/pdti-server.%d{yyyy-MM-dd}.log"/>
 		</rollingPolicy>
 		
 		<triggeringPolicy class="org.apache.log4j.rolling.SizeBasedTriggeringPolicy">
-			<param name="maxFileSize" value="10485760"/>
+			<param name="maxFileSize" value="20"/>
 		</triggeringPolicy>
 
 		<layout class="org.apache.log4j.PatternLayout">
@@ -54,7 +54,7 @@
 	<!--==================================================
 	= LOGGERS: PROJECT
 	===================================================-->
-	<logger name="gov.hhs.onc.dcdt" additivity="false">
+	<logger name="gov.hhs.onc" additivity="false">
 		<level value="all"/>
 		<appender-ref ref="consoleApp"/>
 		<appender-ref ref="fileApp"/>
@@ -65,7 +65,7 @@
 	===================================================-->
 	<!--========== CONSOLE ==========-->
 	<logger name="console" additivity="false">
-		<level value="all"/>
+		<level value="warn"/>
 		<appender-ref ref="consoleApp"/>
 	</logger>
 	<!--========== FILE ==========-->

@@ -19,7 +19,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.hostname>localhost</project.hostname>
         <project.server.port>8080</project.server.port>
-        <cargo.servlet.port>18080</cargo.servlet.port>
+        <embedded.jetty.servlet.port>18080</embedded.jetty.servlet.port>
     </properties>
     <profiles>
         <!-- Set Tomcat manager URL property if not defined already -->
@@ -91,6 +91,7 @@
                     <plugin>
                         <groupId>org.codehaus.cargo</groupId>
                         <artifactId>cargo-maven2-plugin</artifactId>
+                        <version>1.4.0</version>
                         <executions>
                             <execution>
                                 <id>start-container</id>
@@ -112,11 +113,14 @@
                             <container>
                                 <containerId>jetty9x</containerId>
                                 <type>embedded</type>
+                                <systemProperties>
+                                    <pdti.log.dir>${project.basedir}/target</pdti.log.dir>
+                                </systemProperties>
                             </container>
                             <configuration>
                                 <properties>
                                     <cargo.hostname>${project.hostname}</cargo.hostname>
-                                    <cargo.servlet.port>${cargo.servlet.port}</cargo.servlet.port>
+                                    <cargo.servlet.port>${embedded.jetty.servlet.port}</cargo.servlet.port>
                                 </properties>
                             </configuration>
                         </configuration>
