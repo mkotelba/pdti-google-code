@@ -19,6 +19,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.hostname>localhost</project.hostname>
         <project.server.port>8080</project.server.port>
+        <cargo.servlet.port>18080</cargo.servlet.port>
     </properties>
     <profiles>
         <!-- Set Tomcat manager URL property if not defined already -->
@@ -115,7 +116,7 @@
                             <configuration>
                                 <properties>
                                     <cargo.hostname>${project.hostname}</cargo.hostname>
-                                    <cargo.servlet.port>${project.server.port}</cargo.servlet.port>
+                                    <cargo.servlet.port>${cargo.servlet.port}</cargo.servlet.port>
                                 </properties>
                             </configuration>
                         </configuration>
