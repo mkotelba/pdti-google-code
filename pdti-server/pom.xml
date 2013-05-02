@@ -43,7 +43,7 @@
                 </property>
             </activation>
             <properties>
-                <tomcat.manager.username />
+                <tomcat.manager.username/>
             </properties>
         </profile>
         <!-- Set Tomcat manager password property if not defined already -->
@@ -68,15 +68,24 @@
                 <plugins>
                     <!-- Run SOAP UI tests during the integration phase. -->
                     <plugin>
-                        <groupId>eviware</groupId>
-                        <artifactId>maven-soapui-plugin</artifactId>
-                        <version>2.5.1</version>
+                        <groupId>com.github.redfish4ktc.soapui</groupId>
+                        <artifactId>maven-soapui-extension-plugin</artifactId>
+                        <version>4.5.1.4</version>
                         <configuration>
-                            <junitReport>true</junitReport>
+                            <coverage>true</coverage>
                             <exportAll>true</exportAll>
-                            <projectFile>${project.basedir}/target/test-classes/soapui-project.xml</projectFile>
-                            <outputFolder>${project.basedir}/target/soapui-reports</outputFolder>
+                            <junitReport>true</junitReport>
+                            <outputFolder>${project.build.directory}/soapui-reports</outputFolder>
                             <printReport>true</printReport>
+                            <projectFile>${project.build.testOutputDirectory}/soapui-project.xml</projectFile>
+                            <saveAfterRun>true</saveAfterRun>
+                            <settingsFile>${project.build.testOutputDirectory}/soapui-settings.xml</settingsFile>
+                            <soapuiProperties>
+                                <property>
+                                    <name>soapui.logroot</name>
+                                    <value>${project.build.directory}/test-logs/</value>
+                                </property>
+                            </soapuiProperties>
                             <testFailIgnore>false</testFailIgnore>
                         </configuration>
                         <executions>
@@ -109,12 +118,11 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <wait>false</wait>
                             <container>
                                 <containerId>jetty9x</containerId>
                                 <type>embedded</type>
                                 <systemProperties>
-                                    <pdti.log.dir>${project.basedir}/target</pdti.log.dir>
+									<pdti.log.dir>${project.build.directory}/test-logs</pdti.log.dir>
                                 </systemProperties>
                             </container>
                             <configuration>
@@ -159,12 +167,6 @@
     </dependencies>
     <build>
         <finalName>pdti-server</finalName>
-        <testResources>
-            <testResource>
-                <filtering>true</filtering>
-                <directory>src/test/resources</directory>
-            </testResource>
-        </testResources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
