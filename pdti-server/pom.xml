@@ -295,7 +295,6 @@
                 <configuration>
                     <extension>true</extension>
                     <packageName>gov.hhs.onc.pdti.ws.api</packageName>
-                    <quiet>true</quiet>
                 </configuration>
             </plugin>
         </plugins>
