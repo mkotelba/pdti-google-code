@@ -6,16 +6,14 @@ import gov.hhs.onc.pdti.ws.api.ProviderInformationDirectoryPortType;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
+import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
 import org.apache.log4j.Logger;
-import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-public class ProviderInformationDirectoryImpl extends SpringBeanAutowiringSupport implements ProviderInformationDirectoryPortType {
-
-	private static final Logger LOGGER = Logger.getLogger(ProviderInformationDirectoryImpl.class.getName());
-	
-	static {
-		LOGGER.info("sanity check!");
-	}
+@SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
+@WebService(serviceName = "ProviderInformationDirectory_Service")
+public class ProviderInformationDirectoryImpl implements ProviderInformationDirectoryPortType {
+	private static final Logger LOGGER = Logger.getLogger(ProviderInformationDirectoryImpl.class);
 
 	@Override
 	@WebMethod(operationName = "ProviderInformationQueryRequest", action = "urn:ihe:iti:hpd:2010:ProviderInformationQueryRequest")
@@ -34,5 +32,4 @@ public class ProviderInformationDirectoryImpl extends SpringBeanAutowiringSuppor
 		
 		return new BatchResponse();
 	}
-
 }

@@ -62,7 +62,9 @@
         <profile>
             <id>soapui</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>!skipTests</name>
+                </property>
             </activation>
             <build>
                 <plugins>
@@ -122,7 +124,7 @@
                                 <containerId>jetty9x</containerId>
                                 <type>embedded</type>
                                 <systemProperties>
-									<pdti.log.dir>${project.build.directory}/test-logs</pdti.log.dir>
+                                    <pdti.log.dir>${project.build.directory}/test-logs</pdti.log.dir>
                                 </systemProperties>
                             </container>
                             <configuration>
@@ -131,6 +133,7 @@
                                     <cargo.servlet.port>${embedded.jetty.servlet.port}</cargo.servlet.port>
                                 </properties>
                             </configuration>
+                            <wait>true</wait>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -139,9 +142,30 @@
     </profiles>
     <dependencies>
         <dependency>
+            <groupId>com.sun.xml.stream.buffer</groupId>
+            <artifactId>streambuffer</artifactId>
+            <version>1.5.1</version>
+        </dependency>
+        <dependency>
             <groupId>com.sun.xml.ws</groupId>
             <artifactId>jaxws-rt</artifactId>
             <version>2.2.6</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.sun.xml.stream.buffer</groupId>
+                    <artifactId>streambuffer</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.jvnet.staxex</groupId>
+                    <artifactId>stax-ex</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
@@ -152,6 +176,39 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jvnet.jax-ws-commons.spring</groupId>
+            <artifactId>jaxws-spring</artifactId>
+            <version>1.8</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.sun.xml.stream.buffer</groupId>
+                    <artifactId>streambuffer</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.jvnet.staxex</groupId>
+                    <artifactId>stax-ex</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-context</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>3.2.2.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>3.2.2.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.ws</groupId>
@@ -191,14 +248,14 @@
                             <includes>
                                 <include>**/*.xsd</include>
                             </includes>
-                            <targetPath>WEB-INF/schema</targetPath>
+                            <targetPath>META-INF/schema</targetPath>
                         </webResource>
                         <webResource>
                             <directory>${project.basedir}/src/wsdl</directory>
                             <includes>
                                 <include>**/*.wsdl</include>
                             </includes>
-                            <targetPath>WEB-INF/wsdl</targetPath>
+                            <targetPath>META-INF/wsdl</targetPath>
                         </webResource>
                     </webResources>
                 </configuration>
@@ -231,7 +288,7 @@
                             <wsdlFiles>
                                 <wsdlFile>HPD_ProviderInformationDirectory.wsdl</wsdlFile>
                             </wsdlFiles>
-                            <wsdlLocation>WEB-INF/wsdl/*</wsdlLocation>
+                            <wsdlLocation>META-INF/wsdl/*</wsdlLocation>
                         </configuration>
                     </execution>
                 </executions>
