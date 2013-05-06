@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="
-		http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+        http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>gov.hhs.onc.pdti</groupId>
     <artifactId>pdti-server</artifactId>
@@ -17,9 +17,11 @@
     </pluginRepositories>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.hostname>localhost</project.hostname>
-        <project.server.port>8080</project.server.port>
-        <embedded.jetty.servlet.port>18080</embedded.jetty.servlet.port>
+        <project.deploy.server.host>localhost</project.deploy.server.host>
+        <project.deploy.server.port>8080</project.deploy.server.port>
+        <project.test.log.dir>${project.build.directory}/test-logs</project.test.log.dir>
+        <project.test.server.host>localhost</project.test.server.host>
+        <project.test.server.port>18080</project.test.server.port>
     </properties>
     <profiles>
         <!-- Set Tomcat manager URL property if not defined already -->
@@ -31,7 +33,7 @@
                 </property>
             </activation>
             <properties>
-                <tomcat.manager.url>http://${project.hostname}:${project.server.port}/manager/text</tomcat.manager.url>
+                <tomcat.manager.url>http://${project.deploy.server.host}:${project.deploy.server.port}/manager/text</tomcat.manager.url>
             </properties>
         </profile>
         <!-- Set Tomcat manager username property if not defined already -->
@@ -58,9 +60,9 @@
                 <tomcat.manager.password />
             </properties>
         </profile>
-        <!-- allow for optional running of soapui integration tests -->
+        <!-- Allow for optional running of integration tests against a temporary instance -->
         <profile>
-            <id>soapui</id>
+            <id>test-server</id>
             <activation>
                 <property>
                     <name>!skipTests</name>
@@ -68,7 +70,6 @@
             </activation>
             <build>
                 <plugins>
-                    <!-- Run SOAP UI tests during the integration phase. -->
                     <plugin>
                         <groupId>com.github.redfish4ktc.soapui</groupId>
                         <artifactId>maven-soapui-extension-plugin</artifactId>
@@ -76,6 +77,10 @@
                         <configuration>
                             <coverage>true</coverage>
                             <exportAll>true</exportAll>
+                            <globalProperties>
+                                <globalProperty>project.test.server.host=${project.test.server.host}</globalProperty>
+                                <globalProperty>project.test.server.port=${project.test.server.port}</globalProperty>
+                            </globalProperties>
                             <junitReport>true</junitReport>
                             <outputFolder>${project.build.directory}/soapui-reports</outputFolder>
                             <printReport>true</printReport>
@@ -85,12 +90,13 @@
                             <soapuiProperties>
                                 <property>
                                     <name>soapui.logroot</name>
-                                    <value>${project.build.directory}/test-logs/</value>
+                                    <value>${project.test.log.dir}/</value>
                                 </property>
                             </soapuiProperties>
                             <testFailIgnore>false</testFailIgnore>
                         </configuration>
                         <executions>
+                            <!-- Run SOAP UI tests -->
                             <execution>
                                 <phase>integration-test</phase>
                                 <goals>
@@ -124,13 +130,23 @@
                                 <containerId>jetty9x</containerId>
                                 <type>embedded</type>
                                 <systemProperties>
-                                    <pdti.log.dir>${project.build.directory}/test-logs</pdti.log.dir>
+                                    <pdti.log.dir>${project.test.log.dir}</pdti.log.dir>
                                 </systemProperties>
                             </container>
+                            <deployables>
+                                <deployable>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>${project.artifactId}</artifactId>
+                                    <type>${project.packaging}</type>
+                                    <properties>
+                                        <context>/${project.build.finalName}</context>
+                                    </properties>
+                                </deployable>
+                            </deployables>
                             <configuration>
                                 <properties>
-                                    <cargo.hostname>${project.hostname}</cargo.hostname>
-                                    <cargo.servlet.port>${embedded.jetty.servlet.port}</cargo.servlet.port>
+                                    <cargo.hostname>${project.test.server.host}</cargo.hostname>
+                                    <cargo.servlet.port>${project.test.server.port}</cargo.servlet.port>
                                 </properties>
                             </configuration>
                             <wait>true</wait>

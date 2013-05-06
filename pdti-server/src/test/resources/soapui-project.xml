@@ -1,32 +1,281 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <con:soapui-project activeEnvironment="Default"
-    name="HPD_ProviderInformationDirectory" resourceRoot=""
+    name="ProviderInformationDirectoryService" resourceRoot=""
     soapui-version="4.5.1" xmlns:con="http://eviware.com/soapui/config">
-    <con:settings />
+    <con:settings/>
     <con:interface xsi:type="con:WsdlInterface"
-        wsaVersion="NONE" name="ProviderInformationDirectory_Binding"
+        wsaVersion="NONE" name="ProviderInformationDirectoryImplPortBinding"
         type="wsdl"
-        bindingName="{urn:ihe:iti:hpd:2010}ProviderInformationDirectory_Binding"
+        bindingName="{urn:ihe:iti:hpd:2010}ProviderInformationDirectoryImplPortBinding"
         soapVersion="1_2" anonymous="optional"
-        definition="http://${project.hostname}:${project.server.port}/pdti-server/HPD_ProviderInformationDirectory.wsdl"
+        definition="http://${project.test.server.host}:${project.test.server.port}/pdti-server/ProviderInformationDirectoryService?wsdl"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-        <con:settings />
+        <con:settings/>
         <con:endpoints>
-            <con:endpoint>http://${project.hostname}:${project.server.port}/pdti-server/ProviderInformationDirectoryService</con:endpoint>
+            <con:endpoint>http://${project.test.server.host}:${project.test.server.port}/pdti-server/ProviderInformationDirectoryService</con:endpoint>
         </con:endpoints>
+        <con:operation isOneWay="false" action="urn:ihe:iti:hpd:2010:ProviderInformationFeedRequest" name="ProviderInformationFeedRequest" bindingOperationName="ProviderInformationFeedRequest" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional">
+            <con:settings/>
+        </con:operation>
+        <con:operation isOneWay="false" action="urn:ihe:iti:hpd:2010:ProviderInformationQueryRequest" name="ProviderInformationQueryRequest" bindingOperationName="ProviderInformationQueryRequest" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional">
+            <con:settings/>
+        </con:operation>
     </con:interface>
-    <con:testSuite name="TestSuite 1">
-        <con:settings />
+    <con:testSuite name="ProviderInformationQueryRequestTestSuite">
+        <con:settings/>
         <con:runType>SEQUENTIAL</con:runType>
-        <con:testCase failOnError="true"
-            failTestCaseOnErrors="true" keepSession="false" maxResults="0"
-            name="TestCase 1" searchProperties="true"
-            id="f8d94915-1080-495a-8e35-9bcddd139968">
-            <con:settings />
-            <con:properties />
+        <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="ProviderInformationQueryRequestTestSuite" searchProperties="true" id="61ee9589-4457-4c10-8509-e28cbce89eac">
+        <con:settings/>
+        <con:testStep type="request" name="search_provider_by_name">
+            <con:settings/>
+            <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+            <con:operation>ProviderInformationQueryRequest</con:operation>
+            <con:request name="search_provider_by_name">
+                <con:settings>
+                <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+                </con:settings>
+                <con:encoding>UTF-8</con:encoding>
+                <con:endpoint>http://${project.test.server.host}:${project.test.server.port}/pdti-server/ProviderInformationDirectoryService</con:endpoint>
+                <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+    <soap-env:Body>
+        <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dsml:searchRequest dn="ou=Providers,o=dev.provider-directories.com,dc=hpd" scope="singleLevel" derefAliases="derefFindingBaseObj">
+                <dsml:filter>
+                <dsml:substrings name="givenName">
+                    <dsml:initial>Thomas</dsml:initial>
+                </dsml:substrings>
+                </dsml:filter>
+                <dsml:attributes>
+                <dsml:attribute name="cn"/>
+                <dsml:attribute name="sn"/>
+                <dsml:attribute name="description"/>
+                <dsml:attribute name="employeeNumber"/>
+                <dsml:attribute name="givenName"/>
+                <dsml:attribute name="homePhone"/>
+                <dsml:attribute name="initials"/>
+                <dsml:attribute name="l"/>
+                <dsml:attribute name="mail"/>
+                <dsml:attribute name="mobile"/>
+                <dsml:attribute name="pager"/>
+                <dsml:attribute name="postalAddress"/>
+                <dsml:attribute name="postalCode"/>
+                <dsml:attribute name="st"/>
+                <dsml:attribute name="street"/>
+                <dsml:attribute name="telephoneNumber"/>
+                <dsml:attribute name="uid"/>
+                <dsml:attribute name="HcIdentifier"/>
+                <dsml:attribute name="HcProfession"/>
+                <dsml:attribute name="HCSpecialization"/>
+                <dsml:attribute name="hpdCredential"/>
+                <dsml:attribute name="memberOf"/>
+                </dsml:attributes>
+            </dsml:searchRequest>
+        </dsml:batchRequest>
+    </soap-env:Body>
+</soap-env:Envelope>]]></con:request>
+                <con:assertion type="SOAP Response"/>
+                <con:assertion type="Schema Compliance">
+                <con:configuration/>
+                </con:assertion>
+                <con:assertion type="SOAP Fault Assertion"/>
+                <con:credentials>
+                <con:authType>Global HTTP Settings</con:authType>
+                </con:credentials>
+                <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+                <con:jmsPropertyConfig/>
+                <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+                <con:wsrmConfig version="1.2"/>
+            </con:request>
+            </con:config>
+        </con:testStep>
+        <con:testStep type="request" name="search_org_by_id">
+            <con:settings/>
+            <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+            <con:operation>ProviderInformationQueryRequest</con:operation>
+            <con:request name="search_org_by_id">
+                <con:settings>
+                <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+                </con:settings>
+                <con:encoding>UTF-8</con:encoding>
+                <con:endpoint>http://${project.test.server.host}:${project.test.server.port}/pdti-server/ProviderInformationDirectoryService</con:endpoint>
+                <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+    <soap-env:Body>
+        <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dsml:searchRequest dn="ou=Organizations,o=dev.provider-directories.com,dc=hpd" scope="singleLevel" derefAliases="derefFindingBaseObj">
+                <dsml:filter>
+                <dsml:substrings name="HcIdentifier">
+                    <dsml:initial>org1</dsml:initial>
+                </dsml:substrings>
+                </dsml:filter>
+                <dsml:attributes>
+                    <dsml:attribute name="o"/>
+                <dsml:attribute name="HcIdentifier"/>
+                <dsml:attribute name="HcRegisteredAddr"/>
+                <dsml:attribute name="hpdOrgId"/>
+                </dsml:attributes>
+            </dsml:searchRequest>
+        </dsml:batchRequest>
+    </soap-env:Body>
+</soap-env:Envelope>]]></con:request>
+                <con:assertion type="SOAP Response"/>
+                <con:assertion type="Schema Compliance">
+                <con:configuration/>
+                </con:assertion>
+                <con:assertion type="SOAP Fault Assertion"/>
+                <con:credentials>
+                <con:authType>Global HTTP Settings</con:authType>
+                </con:credentials>
+                <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+                <con:jmsPropertyConfig/>
+                <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+                <con:wsrmConfig version="1.2"/>
+            </con:request>
+            </con:config>
+        </con:testStep>
+        <con:testStep type="request" name="search_membership_by_provider">
+            <con:settings/>
+            <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+            <con:operation>ProviderInformationQueryRequest</con:operation>
+            <con:request name="search_membership_by_provider">
+                <con:settings>
+                <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+                </con:settings>
+                <con:encoding>UTF-8</con:encoding>
+                <con:endpoint>http://${project.test.server.host}:${project.test.server.port}/pdti-server/ProviderInformationDirectoryService</con:endpoint>
+                <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+    <soap-env:Body>
+        <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dsml:searchRequest dn="ou=Memberships,o=dev.provider-directories.com,dc=hpd" scope="singleLevel" derefAliases="derefFindingBaseObj">
+                <dsml:filter>
+                <dsml:substrings name="hpdHasAProvider">
+                    <dsml:initial>HcIdentifier=provider1,ou=Providers,o=dev.provider-directories.com,dc=hpd</dsml:initial>
+                </dsml:substrings>
+                </dsml:filter>
+                <dsml:attributes>
+                    <dsml:attribute name="hpdHasAnOrg"/>
+                <dsml:attribute name="hpdHasAProvider"/>
+                <dsml:attribute name="hpdHasAService"/>
+                <dsml:attribute name="hpdMemberEmail"/>
+                <dsml:attribute name="hpdMemberId"/>
+                <dsml:attribute name="hpdMemberName"/>
+                </dsml:attributes>
+            </dsml:searchRequest>
+        </dsml:batchRequest>
+    </soap-env:Body>
+</soap-env:Envelope>]]></con:request>
+                <con:assertion type="SOAP Response"/>
+                <con:assertion type="Schema Compliance">
+                <con:configuration/>
+                </con:assertion>
+                <con:assertion type="SOAP Fault Assertion"/>
+                <con:credentials>
+                <con:authType>Global HTTP Settings</con:authType>
+                </con:credentials>
+                <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+                <con:jmsPropertyConfig/>
+                <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+                <con:wsrmConfig version="1.2"/>
+            </con:request>
+            </con:config>
+        </con:testStep>
+        <con:testStep type="request" name="search_service_by_id">
+            <con:settings/>
+            <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+            <con:operation>ProviderInformationQueryRequest</con:operation>
+            <con:request name="search_service_by_id">
+                <con:settings>
+                <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+                </con:settings>
+                <con:encoding>UTF-8</con:encoding>
+                <con:endpoint>http://${project.test.server.host}:${project.test.server.port}/pdti-server/ProviderInformationDirectoryService</con:endpoint>
+                <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+    <soap-env:Body>
+        <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dsml:searchRequest dn="ou=Services,o=dev.provider-directories.com,dc=hpd" scope="singleLevel" derefAliases="derefFindingBaseObj">
+                <dsml:filter>
+                <dsml:substrings name="hpdServiceId">
+                    <dsml:initial>1</dsml:initial>
+                </dsml:substrings>
+                </dsml:filter>
+                <dsml:attributes>
+                    <dsml:attribute name="hpdServiceAddress"/>
+                <dsml:attribute name="hpdServiceId"/>
+                <dsml:attribute name="hpdServicePayload"/>
+                <dsml:attribute name="hpdServiceProtocol"/>
+                <dsml:attribute name="hpdServiceType"/>
+                </dsml:attributes>
+            </dsml:searchRequest>
+        </dsml:batchRequest>
+    </soap-env:Body>
+</soap-env:Envelope>]]></con:request>
+                <con:assertion type="SOAP Response"/>
+                <con:assertion type="Schema Compliance">
+                <con:configuration/>
+                </con:assertion>
+                <con:assertion type="SOAP Fault Assertion"/>
+                <con:credentials>
+                <con:authType>Global HTTP Settings</con:authType>
+                </con:credentials>
+                <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+                <con:jmsPropertyConfig/>
+                <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+                <con:wsrmConfig version="1.2"/>
+            </con:request>
+            </con:config>
+        </con:testStep>
+        <con:testStep type="request" name="search_credential_by_id">
+            <con:settings/>
+            <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+            <con:operation>ProviderInformationQueryRequest</con:operation>
+            <con:request name="search_credential_by_id">
+                <con:settings>
+                <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+                </con:settings>
+                <con:encoding>UTF-8</con:encoding>
+                <con:endpoint>http://${project.test.server.host}:${project.test.server.port}/pdti-server/ProviderInformationDirectoryService</con:endpoint>
+                <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+    <soap-env:Body>
+        <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dsml:searchRequest dn="ou=Credentials,o=dev.provider-directories.com,dc=hpd" scope="singleLevel" derefAliases="derefFindingBaseObj">
+                <dsml:filter>
+                <dsml:substrings name="hpdCredentialId">
+                    <dsml:initial>1</dsml:initial>
+                </dsml:substrings>
+                </dsml:filter>
+                <dsml:attributes>
+                    <dsml:attribute name="credentialName"/>
+                <dsml:attribute name="credentialNumber"/>
+                <dsml:attribute name="credentialType"/>
+                <dsml:attribute name="hpdCredentialId"/>
+                </dsml:attributes>
+            </dsml:searchRequest>
+        </dsml:batchRequest>
+    </soap-env:Body>
+</soap-env:Envelope>]]></con:request>
+                <con:assertion type="SOAP Response"/>
+                <con:assertion type="Schema Compliance">
+                <con:configuration/>
+                </con:assertion>
+                <con:assertion type="SOAP Fault Assertion"/>
+                <con:credentials>
+                <con:authType>Global HTTP Settings</con:authType>
+                </con:credentials>
+                <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+                <con:jmsPropertyConfig/>
+                <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+                <con:wsrmConfig version="1.2"/>
+            </con:request>
+            </con:config>
+        </con:testStep>
+        <con:properties/>
         </con:testCase>
-        <con:properties />
+        <con:properties/>
     </con:testSuite>
-    <con:properties />
-    <con:wssContainer />
+    <con:properties/>
+    <con:wssContainer/>
 </con:soapui-project>

@@ -43,7 +43,7 @@
 	</portType>
 	<binding name="ProviderInformationDirectory_Binding" type="tns:ProviderInformationDirectory_PortType">
 		<soap12:binding style="document"
-			transport="http://schemas.xmlsoap.org/soap/http" />
+			transport="http://www.w3.org/2003/05/soap/bindings/HTTP/" />
 		<operation name="ProviderInformationQueryRequest">
 			<soap12:operation
 				soapAction="urn:ihe:iti:hpd:2010:ProviderInformationQueryRequest" />
