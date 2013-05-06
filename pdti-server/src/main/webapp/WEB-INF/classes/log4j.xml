@@ -34,7 +34,7 @@
 		</rollingPolicy>
 		
 		<triggeringPolicy class="org.apache.log4j.rolling.SizeBasedTriggeringPolicy">
-			<param name="maxFileSize" value="20"/>
+			<param name="maxFileSize" value="10485760"/>
 		</triggeringPolicy>
 
 		<layout class="org.apache.log4j.PatternLayout">
@@ -46,7 +46,12 @@
 	= LOGGERS: DEPENDENCIES
 	===================================================-->
 	<logger name="org.apache" additivity="false">
-		<level value="warn"/>
+		<level value="info"/>
+		<appender-ref ref="consoleApp"/>
+		<appender-ref ref="fileApp"/>
+	</logger>
+	<logger name="org.springframework" additivity="false">
+		<level value="info"/>
 		<appender-ref ref="consoleApp"/>
 		<appender-ref ref="fileApp"/>
 	</logger>
@@ -54,7 +59,7 @@
 	<!--==================================================
 	= LOGGERS: PROJECT
 	===================================================-->
-	<logger name="gov.hhs.onc" additivity="false">
+	<logger name="gov.hhs.onc.pdti" additivity="false">
 		<level value="all"/>
 		<appender-ref ref="consoleApp"/>
 		<appender-ref ref="fileApp"/>
@@ -65,7 +70,7 @@
 	===================================================-->
 	<!--========== CONSOLE ==========-->
 	<logger name="console" additivity="false">
-		<level value="warn"/>
+		<level value="all"/>
 		<appender-ref ref="consoleApp"/>
 	</logger>
 	<!--========== FILE ==========-->
@@ -75,7 +80,7 @@
 	</logger>
 	<!--========== ROOT ==========-->
 	<root>
-		<level value="info"/>
+		<level value="all"/>
 		<appender-ref ref="consoleApp"/>
 		<appender-ref ref="fileApp"/>
 	</root>

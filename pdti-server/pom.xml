@@ -142,6 +142,11 @@
     </profiles>
     <dependencies>
         <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.2.7</version>
+        </dependency>
+        <dependency>
             <groupId>com.sun.xml.stream.buffer</groupId>
             <artifactId>streambuffer</artifactId>
             <version>1.5.1</version>
@@ -149,7 +154,7 @@
         <dependency>
             <groupId>com.sun.xml.ws</groupId>
             <artifactId>jaxws-rt</artifactId>
-            <version>2.2.6</version>
+            <version>2.2.7</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.sun.xml.stream.buffer</groupId>
@@ -178,6 +183,21 @@
             <version>1.2.17</version>
         </dependency>
         <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.directory.api</groupId>
+            <artifactId>api-dsml-engine</artifactId>
+            <version>1.0.0-M17</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.directory.api</groupId>
+            <artifactId>api-ldap-client-all</artifactId>
+            <version>1.0.0-M17</version>
+        </dependency>
+        <dependency>
             <groupId>org.jvnet.jax-ws-commons.spring</groupId>
             <artifactId>jaxws-spring</artifactId>
             <version>1.8</version>
@@ -201,6 +221,21 @@
             </exclusions>
         </dependency>
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>3.2.2.RELEASE</version>
@@ -208,6 +243,11 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
+            <version>3.2.2.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-oxm</artifactId>
             <version>3.2.2.RELEASE</version>
         </dependency>
         <dependency>
