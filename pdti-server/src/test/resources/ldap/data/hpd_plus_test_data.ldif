@@ -1,0 +1,241 @@
+version: 1
+
+dn: o=dev.provider-directories.com,dc=hpd
+objectClass: domain
+objectClass: top
+dc: dev.provider-directories.com
+
+#==================================================
+# START: PROVIDER(S)
+#==================================================
+
+dn: ou=Providers,o=dev.provider-directories.com,dc=hpd
+objectClass: organizationalunit
+objectClass: top
+ou: Providers
+
+dn: HcIdentifier=provider1,ou=Providers,o=dev.provider-directories.com,dc=hpd
+objectClass: top
+objectClass: person
+objectClass: organizationalperson
+objectClass: inetorgperson
+objectClass: HCProfessional
+objectClass: HPDProvider
+HcIdentifier: provider1
+HcProfession: Doctor
+HCSpecialization: Orthopedic Surgeon
+cn: Thomas Jones
+description: This is the description for Thomas Jones.
+employeeNumber: 0
+givenName: Thomas
+sn: Jones
+homePhone: +1 225 216 5900
+initials: ASA
+l: Panama City
+mail: thomas.jones@mail1.com
+mobile: +1 010 154 3228
+pager: +1 779 041 6341
+postalAddress: Thomas Jones$01251 Chestnut Street$Panama City, DE 50369
+postalCode: 50369
+st: DE
+street: 01251 Chestnut Street
+telephoneNumber: +1 685 622 6202
+uid: thomas.jones
+memberOf: HcIdentifier=org1,ou=Organizations,o=dev.provider-directories.com,dc=hpd
+hpdCredential: hpdCredentialId=1,ou=Credentials,o=dev.provider-directories.com,dc=hpd
+
+dn: HcIdentifier=provider2,ou=Providers,o=dev.provider-directories.com,dc=hpd
+objectClass: top
+objectClass: person
+objectClass: organizationalperson
+objectClass: inetorgperson
+objectClass: HCProfessional
+objectClass: HPDProvider
+HcIdentifier: provider2
+HcProfession: Doctor
+HCSpecialization: Ear Nose Throat
+cn: John Smith
+description: This is the description for John Smith.
+employeeNumber: 0
+givenName: John
+sn: Smith
+homePhone: +1 225 216 5901
+initials: JS
+l: Panama City
+mail: john.smith@mail2.com
+mobile: +1 010 154 3228
+pager: +1 779 041 6341
+postalAddress: John Smith$01251 Wallnut Street$Panama City, DE 50371
+postalCode: 50371
+st: DE
+street: 01251 Walnut Street
+telephoneNumber: +1 685 622 6202
+uid: john.smith
+memberOf: HcIdentifier=org2,ou=Organizations,o=dev.provider-directories.com,dc=hpd
+
+dn: HcIdentifier=provider3,ou=Providers,o=dev.provider-directories.com,dc=hpd
+objectClass: top
+objectClass: person
+objectClass: organizationalperson
+objectClass: inetorgperson
+objectClass: HCProfessional
+objectClass: HPDProvider
+HcIdentifier: provider3
+HcProfession: Doctor
+HCSpecialization: OBGYN
+cn: Bob Jefferson
+description: This is the description for Bob Jefferson.
+employeeNumber: 0
+givenName: Bob
+sn: Jefferson
+homePhone: +1 225 216 5900
+initials: JS
+l: Panama City
+mail: bob.jefferson@mail3.com
+mobile: +1 010 154 3228
+pager: +1 779 041 6341
+postalAddress: Bob Jefferson$123 Oak Street$Panama City, DE 50371
+postalCode: 50371
+st: DE
+street: 123 Oak Street
+telephoneNumber: +1 685 622 6201
+uid: bob.jefferson
+memberOf: HcIdentifier=org2,ou=Organizations,o=dev.provider-directories.com,dc=hpd
+
+#==================================================
+# END: PROVIDER(S)
+#==================================================
+
+#==================================================
+# START: ORGANIZATION(S)
+#==================================================
+
+dn: ou=Organizations,o=dev.provider-directories.com,dc=hpd
+objectClass: organizationalunit
+objectClass: top
+ou: Organizations
+
+dn: HcIdentifier=org1,ou=Organizations,o=dev.provider-directories.com,dc=hpd
+objectClass: top
+objectClass: organization
+objectClass: HCRegulatedOrganization
+objectClass: HPDProvider
+HcIdentifier: org1
+o:Dr. Thomas Jones Private Practice
+HcRegisteredAddr: Dr. Thomas Jones Private Practice$01251 Chestnut Street$Panama City, DE 50369
+hpdOrgId: org1
+
+dn: HcIdentifier=org2,ou=Organizations,o=dev.provider-directories.com,dc=hpd
+objectClass: top
+objectClass: organization
+objectClass: HCRegulatedOrganization
+objectClass: HPDProvider
+HcIdentifier: org2
+o: Panama City Clinic
+HcRegisteredAddr: Panama City Clinic$01251 Wallnut Street$Panama City, DE 50371
+hpdOrgId: org2
+
+#==================================================
+# END: ORGANIZATION(S)
+#==================================================
+
+#==================================================
+# START: MEMBERSHIP(S)
+#==================================================
+
+dn: ou=Memberships,o=dev.provider-directories.com,dc=hpd
+objectClass: organizationalunit
+objectClass: top
+ou: Memberships
+
+dn: hpdMemberId=1,ou=Memberships,o=dev.provider-directories.com,dc=hpd
+objectClass: top
+objectClass: HPDProviderMembership
+hpdHasAnOrg: HcIdentifier=org1,ou=Organizations,o=dev.provider-directories.com,dc=hpd
+hpdHasAProvider: HcIdentifier=provider1,ou=Providers,o=dev.provider-directories.com,dc=hpd
+hpdMemberEmail: thomas.jones@org1.com
+hpdHasAService: hpdServiceId=1,ou=Services,o=dev.provider-directories.com,dc=hpd^hpdServiceId=2,ou=Services,o=dev.provider-directories.com,dc=hpd^hpdServiceId=3,ou=Services,o=dev.provider-directories.com,dc=hpd
+hpdMemberId: 1
+hpdMemberName: Dr Thomas Jones Private Practice
+
+dn: hpdMemberId=2,ou=Memberships,o=dev.provider-directories.com,dc=hpd
+objectClass: top
+objectClass: HPDProviderMembership
+hpdHasAnOrg: HcIdentifier=org2,ou=Organizations,o=dev.provider-directories.com,dc=hpd
+hpdHasAProvider: HcIdentifier=provider2,ou=Providers,o=dev.provider-directories.com,dc=hpd
+hpdMemberEmail: john.smith@org2.com
+hpdMemberId: 2
+hpdMemberName: Panama City Clinic
+
+dn: hpdMemberId=3,ou=Memberships,o=dev.provider-directories.com,dc=hpd
+objectClass: top
+objectClass: HPDProviderMembership
+hpdHasAnOrg: HcIdentifier=org2,ou=Organizations,o=dev.provider-directories.com,dc=hpd
+hpdHasAProvider: HcIdentifier=provider3,ou=Providers,o=dev.provider-directories.com,dc=hpd
+hpdMemberEmail: bob.jefferson@org2.com
+hpdMemberId: 2
+
+#==================================================
+# END: MEMBERSHIP(S)
+#==================================================
+
+#==================================================
+# START: SERVICE(S)
+#==================================================
+
+dn: ou=Services,o=dev.provider-directories.com,dc=hpd
+objectClass: organizationalunit
+objectClass: top
+ou: Services
+
+dn: hpdServiceId=1,ou=Services,o=dev.provider-directories.com,dc=hpd
+objectClass: top
+objectClass: HPDElectronicService
+hpdServiceAddress: thomas.jones@direct.service1.com
+hpdServiceProtocol: SMTP
+hpdServiceType: Service 1 Direct
+hpdServicePayload: CCD^PDF
+hpdServiceId: 1
+
+dn: hpdServiceId=2,ou=Services,o=dev.provider-directories.com,dc=hpd
+objectClass: top
+objectClass: HPDElectronicService
+hpdServiceAddress: https://service2.com:8181/DocumentRepository_Service/DocumentRepository
+hpdServiceProtocol: SOAP
+hpdServiceType: Service 2 Repository
+hpdServicePayload: CCD^PDF
+hpdServiceId: 2
+
+dn: hpdServiceId=3,ou=Services,o=dev.provider-directories.com,dc=hpd
+objectClass: top
+objectClass: HPDElectronicService
+hpdServiceAddress: https://service3.com:8181/DocumentRegistry_Service/DocumentRegistry
+hpdServiceProtocol: SOAP
+hpdServiceType: Service 3 Registry
+hpdServicePayload: CCD^PDF
+hpdServiceId: 3
+
+#==================================================
+# END: SERVICE(S)
+#==================================================
+
+#==================================================
+# START: CREDENTIAL(S)
+#==================================================
+
+dn: ou=Credentials,o=dev.provider-directories.com,dc=hpd
+objectClass: organizationalunit
+objectClass: top
+ou: Credentials
+
+dn: hpdCredentialId=1,ou=Credentials,o=dev.provider-directories.com,dc=hpd
+objectClass: top
+objectClass: HPDProviderCredential
+credentialName: Credential 1
+credentialType: X509 Certificate
+credentialNumber: 1
+hpdCredentialId: 1
+
+#==================================================
+# END: CREDENTIAL(S)
+#==================================================
