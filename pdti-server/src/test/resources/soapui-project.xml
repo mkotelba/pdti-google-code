@@ -24,20 +24,20 @@
     <con:testSuite name="ProviderInformationQueryRequestTestSuite">
         <con:settings/>
         <con:runType>SEQUENTIAL</con:runType>
-        <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="ProviderInformationQueryRequestTestSuite" searchProperties="true" id="61ee9589-4457-4c10-8509-e28cbce89eac">
-        <con:settings/>
-        <con:testStep type="request" name="search_provider_by_name">
+        <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="search_provider_by_name" searchProperties="true">
             <con:settings/>
-            <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
-            <con:operation>ProviderInformationQueryRequest</con:operation>
-            <con:request name="search_provider_by_name">
-                <con:settings>
-                <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                </con:settings>
-                <con:encoding>UTF-8</con:encoding>
-                <con:endpoint>http://${project.test.server.host}:${project.test.server.port}/pdti-server/ProviderInformationDirectoryService</con:endpoint>
-                <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:testStep type="request" name="search_provider_by_name">
+                <con:settings/>
+                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:operation>ProviderInformationQueryRequest</con:operation>
+                <con:request name="search_provider_by_name">
+                    <con:settings>
+                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+                    </con:settings>
+                    <con:encoding>UTF-8</con:encoding>
+                    <con:endpoint>http://${project.test.server.host}:${project.test.server.port}/pdti-server/ProviderInformationDirectoryService</con:endpoint>
+                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
     <soap-env:Body>
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <dsml:searchRequest dn="ou=Providers,o=dev.provider-directories.com,dc=hpd" scope="singleLevel" derefAliases="derefFindingBaseObj">
@@ -74,33 +74,36 @@
         </dsml:batchRequest>
     </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                <con:assertion type="SOAP Response"/>
-                <con:assertion type="Schema Compliance">
-                <con:configuration/>
-                </con:assertion>
-                <con:assertion type="SOAP Fault Assertion"/>
-                <con:credentials>
-                <con:authType>Global HTTP Settings</con:authType>
-                </con:credentials>
-                <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                <con:jmsPropertyConfig/>
-                <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                <con:wsrmConfig version="1.2"/>
-            </con:request>
-            </con:config>
-        </con:testStep>
-        <con:testStep type="request" name="search_org_by_id">
+                    <con:assertion type="SOAP Response"/>
+                    <con:assertion type="Schema Compliance">
+                    <con:configuration/>
+                    </con:assertion>
+                    <con:assertion type="SOAP Fault Assertion"/>
+                    <con:credentials>
+                    <con:authType>Global HTTP Settings</con:authType>
+                    </con:credentials>
+                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+                    <con:jmsPropertyConfig/>
+                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+                    <con:wsrmConfig version="1.2"/>
+                </con:request>
+                </con:config>
+            </con:testStep>
+        </con:testCase>
+        <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="search_org_by_id" searchProperties="true">
             <con:settings/>
-            <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
-            <con:operation>ProviderInformationQueryRequest</con:operation>
-            <con:request name="search_org_by_id">
-                <con:settings>
-                <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                </con:settings>
-                <con:encoding>UTF-8</con:encoding>
-                <con:endpoint>http://${project.test.server.host}:${project.test.server.port}/pdti-server/ProviderInformationDirectoryService</con:endpoint>
-                <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:testStep type="request" name="search_org_by_id">
+                <con:settings/>
+                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:operation>ProviderInformationQueryRequest</con:operation>
+                <con:request name="search_org_by_id">
+                    <con:settings>
+                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+                    </con:settings>
+                    <con:encoding>UTF-8</con:encoding>
+                    <con:endpoint>http://${project.test.server.host}:${project.test.server.port}/pdti-server/ProviderInformationDirectoryService</con:endpoint>
+                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
     <soap-env:Body>
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <dsml:searchRequest dn="ou=Organizations,o=dev.provider-directories.com,dc=hpd" scope="singleLevel" derefAliases="derefFindingBaseObj">
@@ -119,33 +122,36 @@
         </dsml:batchRequest>
     </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                <con:assertion type="SOAP Response"/>
-                <con:assertion type="Schema Compliance">
-                <con:configuration/>
-                </con:assertion>
-                <con:assertion type="SOAP Fault Assertion"/>
-                <con:credentials>
-                <con:authType>Global HTTP Settings</con:authType>
-                </con:credentials>
-                <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                <con:jmsPropertyConfig/>
-                <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                <con:wsrmConfig version="1.2"/>
-            </con:request>
-            </con:config>
-        </con:testStep>
-        <con:testStep type="request" name="search_membership_by_provider">
+                    <con:assertion type="SOAP Response"/>
+                    <con:assertion type="Schema Compliance">
+                    <con:configuration/>
+                    </con:assertion>
+                    <con:assertion type="SOAP Fault Assertion"/>
+                    <con:credentials>
+                    <con:authType>Global HTTP Settings</con:authType>
+                    </con:credentials>
+                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+                    <con:jmsPropertyConfig/>
+                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+                    <con:wsrmConfig version="1.2"/>
+                </con:request>
+                </con:config>
+            </con:testStep>
+        </con:testCase>
+        <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="search_membership_by_provider" searchProperties="true">
             <con:settings/>
-            <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
-            <con:operation>ProviderInformationQueryRequest</con:operation>
-            <con:request name="search_membership_by_provider">
-                <con:settings>
-                <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                </con:settings>
-                <con:encoding>UTF-8</con:encoding>
-                <con:endpoint>http://${project.test.server.host}:${project.test.server.port}/pdti-server/ProviderInformationDirectoryService</con:endpoint>
-                <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:testStep type="request" name="search_membership_by_provider">
+                <con:settings/>
+                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:operation>ProviderInformationQueryRequest</con:operation>
+                <con:request name="search_membership_by_provider">
+                    <con:settings>
+                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+                    </con:settings>
+                    <con:encoding>UTF-8</con:encoding>
+                    <con:endpoint>http://${project.test.server.host}:${project.test.server.port}/pdti-server/ProviderInformationDirectoryService</con:endpoint>
+                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
     <soap-env:Body>
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <dsml:searchRequest dn="ou=Memberships,o=dev.provider-directories.com,dc=hpd" scope="singleLevel" derefAliases="derefFindingBaseObj">
@@ -166,33 +172,36 @@
         </dsml:batchRequest>
     </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                <con:assertion type="SOAP Response"/>
-                <con:assertion type="Schema Compliance">
-                <con:configuration/>
-                </con:assertion>
-                <con:assertion type="SOAP Fault Assertion"/>
-                <con:credentials>
-                <con:authType>Global HTTP Settings</con:authType>
-                </con:credentials>
-                <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                <con:jmsPropertyConfig/>
-                <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                <con:wsrmConfig version="1.2"/>
-            </con:request>
-            </con:config>
-        </con:testStep>
-        <con:testStep type="request" name="search_service_by_id">
+                    <con:assertion type="SOAP Response"/>
+                    <con:assertion type="Schema Compliance">
+                    <con:configuration/>
+                    </con:assertion>
+                    <con:assertion type="SOAP Fault Assertion"/>
+                    <con:credentials>
+                    <con:authType>Global HTTP Settings</con:authType>
+                    </con:credentials>
+                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+                    <con:jmsPropertyConfig/>
+                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+                    <con:wsrmConfig version="1.2"/>
+                </con:request>
+                </con:config>
+            </con:testStep>
+        </con:testCase>
+        <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="search_service_by_id" searchProperties="true">
             <con:settings/>
-            <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
-            <con:operation>ProviderInformationQueryRequest</con:operation>
-            <con:request name="search_service_by_id">
-                <con:settings>
-                <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                </con:settings>
-                <con:encoding>UTF-8</con:encoding>
-                <con:endpoint>http://${project.test.server.host}:${project.test.server.port}/pdti-server/ProviderInformationDirectoryService</con:endpoint>
-                <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:testStep type="request" name="search_service_by_id">
+                <con:settings/>
+                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:operation>ProviderInformationQueryRequest</con:operation>
+                <con:request name="search_service_by_id">
+                    <con:settings>
+                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+                    </con:settings>
+                    <con:encoding>UTF-8</con:encoding>
+                    <con:endpoint>http://${project.test.server.host}:${project.test.server.port}/pdti-server/ProviderInformationDirectoryService</con:endpoint>
+                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
     <soap-env:Body>
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <dsml:searchRequest dn="ou=Services,o=dev.provider-directories.com,dc=hpd" scope="singleLevel" derefAliases="derefFindingBaseObj">
@@ -212,33 +221,36 @@
         </dsml:batchRequest>
     </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                <con:assertion type="SOAP Response"/>
-                <con:assertion type="Schema Compliance">
-                <con:configuration/>
-                </con:assertion>
-                <con:assertion type="SOAP Fault Assertion"/>
-                <con:credentials>
-                <con:authType>Global HTTP Settings</con:authType>
-                </con:credentials>
-                <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                <con:jmsPropertyConfig/>
-                <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                <con:wsrmConfig version="1.2"/>
-            </con:request>
-            </con:config>
-        </con:testStep>
-        <con:testStep type="request" name="search_credential_by_id">
+                    <con:assertion type="SOAP Response"/>
+                    <con:assertion type="Schema Compliance">
+                    <con:configuration/>
+                    </con:assertion>
+                    <con:assertion type="SOAP Fault Assertion"/>
+                    <con:credentials>
+                    <con:authType>Global HTTP Settings</con:authType>
+                    </con:credentials>
+                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+                    <con:jmsPropertyConfig/>
+                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+                    <con:wsrmConfig version="1.2"/>
+                </con:request>
+                </con:config>
+            </con:testStep>
+        </con:testCase>
+        <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="search_credential_by_id" searchProperties="true">
             <con:settings/>
-            <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
-            <con:operation>ProviderInformationQueryRequest</con:operation>
-            <con:request name="search_credential_by_id">
-                <con:settings>
-                <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                </con:settings>
-                <con:encoding>UTF-8</con:encoding>
-                <con:endpoint>http://${project.test.server.host}:${project.test.server.port}/pdti-server/ProviderInformationDirectoryService</con:endpoint>
-                <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:testStep type="request" name="search_credential_by_id">
+                <con:settings/>
+                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:operation>ProviderInformationQueryRequest</con:operation>
+                <con:request name="search_credential_by_id">
+                    <con:settings>
+                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+                    </con:settings>
+                    <con:encoding>UTF-8</con:encoding>
+                    <con:endpoint>http://${project.test.server.host}:${project.test.server.port}/pdti-server/ProviderInformationDirectoryService</con:endpoint>
+                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
     <soap-env:Body>
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <dsml:searchRequest dn="ou=Credentials,o=dev.provider-directories.com,dc=hpd" scope="singleLevel" derefAliases="derefFindingBaseObj">
@@ -257,22 +269,22 @@
         </dsml:batchRequest>
     </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                <con:assertion type="SOAP Response"/>
-                <con:assertion type="Schema Compliance">
-                <con:configuration/>
-                </con:assertion>
-                <con:assertion type="SOAP Fault Assertion"/>
-                <con:credentials>
-                <con:authType>Global HTTP Settings</con:authType>
-                </con:credentials>
-                <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                <con:jmsPropertyConfig/>
-                <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                <con:wsrmConfig version="1.2"/>
-            </con:request>
-            </con:config>
-        </con:testStep>
-        <con:properties/>
+                    <con:assertion type="SOAP Response"/>
+                    <con:assertion type="Schema Compliance">
+                    <con:configuration/>
+                    </con:assertion>
+                    <con:assertion type="SOAP Fault Assertion"/>
+                    <con:credentials>
+                    <con:authType>Global HTTP Settings</con:authType>
+                    </con:credentials>
+                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+                    <con:jmsPropertyConfig/>
+                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+                    <con:wsrmConfig version="1.2"/>
+                </con:request>
+                </con:config>
+            </con:testStep>
+            <con:properties/>
         </con:testCase>
         <con:properties/>
     </con:testSuite>
