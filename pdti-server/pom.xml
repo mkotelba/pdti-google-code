@@ -77,10 +77,10 @@
                         <configuration>
                             <coverage>true</coverage>
                             <exportAll>true</exportAll>
-                            <globalProperties>
-                                <globalProperty>project.test.server.host=${project.test.server.host}</globalProperty>
-                                <globalProperty>project.test.server.port=${project.test.server.port}</globalProperty>
-                            </globalProperties>
+                            <projectProperties>
+									<value>project.test.server.host=${project.test.server.host}</value>
+									<value>project.test.server.port=${project.test.server.port}</value>
+							</projectProperties>
                             <junitReport>true</junitReport>
                             <outputFolder>${project.build.directory}/soapui-reports</outputFolder>
                             <printReport>true</printReport>
