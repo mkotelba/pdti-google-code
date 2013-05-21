@@ -181,35 +181,35 @@ m-name: hpdServiceAddress
 m-singlevalue: TRUE
 m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
 
-dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1.26,ou=attributeTypes,cn=hpd,ou=schema
-objectclass: metaTop
-objectclass: metaAttributeType
-objectclass: top
-m-oid: 1.3.6.1.4.1.19376.1.2.4.1.26
-m-description: A coded value set whice describes the integration profile.  S
- tore as a delimited string, like and address:  IntegrationProfile%Integrati
- onProfileVersion$IntegrationProfileOptions.  Values are defined through loc
- al configuration.
-m-equality: caseIgnoreMatch
-m-length: 0
-m-name: hpdIntegrationProfile
-m-singlevalue: FALSE
-m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
+# dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1.26,ou=attributeTypes,cn=hpd,ou=schema
+# objectclass: metaTop
+# objectclass: metaAttributeType
+# objectclass: top
+# m-oid: 1.3.6.1.4.1.19376.1.2.4.1.26
+# m-description: A coded value set whice describes the integration profile.  S
+#  tore as a delimited string, like and address:  IntegrationProfile%Integrati
+#  onProfileVersion$IntegrationProfileOptions.  Values are defined through loc
+#  al configuration.
+# m-equality: caseIgnoreMatch
+# m-length: 0
+# m-name: hpdIntegrationProfile
+# m-singlevalue: FALSE
+# m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
 
-dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1.27,ou=attributeTypes,cn=hpd,ou=schema
-objectclass: metaTop
-objectclass: metaAttributeType
-objectclass: top
-m-oid: 1.3.6.1.4.1.19376.1.2.4.1.27
-m-description: A coded value set whice describes the content profile.  Store
-  as a delimited string, like and address:  ContentProfile%ContentProfileVer
- sion$ContentProfileConstraints.  Values are defined through local configura
- tion.
-m-equality: caseIgnoreMatch
-m-length: 0
-m-name: hpdContentProfile
-m-singlevalue: FALSE
-m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
+# dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1.27,ou=attributeTypes,cn=hpd,ou=schema
+# objectclass: metaTop
+# objectclass: metaAttributeType
+# objectclass: top
+# m-oid: 1.3.6.1.4.1.19376.1.2.4.1.27
+# m-description: A coded value set whice describes the content profile.  Store
+#   as a delimited string, like and address:  ContentProfile%ContentProfileVer
+#  sion$ContentProfileConstraints.  Values are defined through local configura
+#  tion.
+# m-equality: caseIgnoreMatch
+# m-length: 0
+# m-name: hpdContentProfile
+# m-singlevalue: FALSE
+# m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
 
 dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1.28,ou=attributeTypes,cn=hpd,ou=schema
 objectclass: metaTop
@@ -258,20 +258,20 @@ m-name: hpdCredentialId
 m-singlevalue: TRUE
 m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
 
-dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1.31,ou=attributeTypes,cn=hpd,ou=schema
-objectclass: metaTop
-objectclass: metaAttributeType
-objectclass: top
-m-oid: 1.3.6.1.4.1.19376.1.2.4.1.31
-m-description: A coded value set which describes the Security Profile of a s
-  ervice. Stored as a delimited string, like and address:  SecurityProfile%S
-  ecurityProfileVersion$SecurityProfileConstraints.  Values are defined thro
-  ugh local configuration.
-m-equality: caseIgnoreMatch
-m-length: 0
-m-name: hpdSecurityProfile
-m-singlevalue: FALSE
-m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
+# dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1.31,ou=attributeTypes,cn=hpd,ou=schema
+# objectclass: metaTop
+# objectclass: metaAttributeType
+# objectclass: top
+# m-oid: 1.3.6.1.4.1.19376.1.2.4.1.31
+# m-description: A coded value set which describes the Security Profile of a s
+#   ervice. Stored as a delimited string, like and address:  SecurityProfile%S
+#   ecurityProfileVersion$SecurityProfileConstraints.  Values are defined thro
+#   ugh local configuration.
+# m-equality: caseIgnoreMatch
+# m-length: 0
+# m-name: hpdSecurityProfile
+# m-singlevalue: FALSE
+# m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
 
 dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1.4,ou=attributeTypes,cn=hpd,ou=schema
 objectclass: metaTop
@@ -284,18 +284,18 @@ m-name: hpdProviderPracticeAddress
 m-substr: caseIgnoreSubstringsMatch
 m-syntax: 1.3.6.1.4.1.1466.115.121.1.41
 
-dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1.5,ou=attributeTypes,cn=hpd,ou=schema
-objectclass: metaTop
-objectclass: metaAttributeType
-objectclass: top
-m-oid: 1.3.6.1.4.1.19376.1.2.4.1.5
-m-description: Electronic mailing address of provider where medical records 
- can be sent
-m-equality: caseIgnoreMatch
-m-length: 0
-m-name: hpdMedicalRecordsDeliveryEmailAddress
-m-singlevalue: TRUE
-m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
+# dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1.5,ou=attributeTypes,cn=hpd,ou=schema
+# objectclass: metaTop
+# objectclass: metaAttributeType
+# objectclass: top
+# m-oid: 1.3.6.1.4.1.19376.1.2.4.1.5
+# m-description: Electronic mailing address of provider where medical records 
+#  can be sent
+# m-equality: caseIgnoreMatch
+# m-length: 0
+# m-name: hpdMedicalRecordsDeliveryEmailAddress
+# m-singlevalue: TRUE
+# m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
 
 dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1.6,ou=attributeTypes,cn=hpd,ou=schema
 objectclass: metaTop
@@ -376,17 +376,17 @@ m-name: credentialNumber
 m-singlevalue: TRUE
 m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
 
-dn: m-oid=1.3.6.1.4.1.19376.1.2.4.2.4,ou=attributeTypes,cn=hpd,ou=schema
-objectclass: metaTop
-objectclass: metaAttributeType
-objectclass: top
-m-oid: 1.3.6.1.4.1.19376.1.2.4.2.4
-m-description: Additional information on the credential
-m-equality: caseIgnoreMatch
-m-length: 0
-m-name: credentialDescription
-m-singlevalue: TRUE
-m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
+# dn: m-oid=1.3.6.1.4.1.19376.1.2.4.2.4,ou=attributeTypes,cn=hpd,ou=schema
+# objectclass: metaTop
+# objectclass: metaAttributeType
+# objectclass: top
+# m-oid: 1.3.6.1.4.1.19376.1.2.4.2.4
+# m-description: Additional information on the credential
+# m-equality: caseIgnoreMatch
+# m-length: 0
+# m-name: credentialDescription
+# m-singlevalue: TRUE
+# m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
 
 dn: m-oid=1.3.6.1.4.1.19376.1.2.4.2.5,ou=attributeTypes,cn=hpd,ou=schema
 objectclass: metaTop
@@ -436,24 +436,24 @@ m-must: hpdRejectMailFrom
 m-name: hpdMailPerson
 m-typeobjectclass: AUXILIARY
 
-dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1,ou=objectClasses,cn=hpd,ou=schema
-objectclass: metaObjectClass
-objectclass: metaTop
-objectclass: top
-m-oid: 1.3.6.1.4.1.19376.1.2.4.1
-m-may: hpdProviderStatus
-m-may: hpdProviderLanguageSupported
-m-may: hpdProviderBillingAddress
-m-may: hpdProviderMailingAddress
-m-may: hpdProviderPracticeAddress
-m-may: hpdMedicalRecordsDeliveryEmailAddress
-m-may: memberOf
-m-may: hpdProviderLegalAddress
-m-may: hpdHasAService
-m-may: hpdCredential
-m-name: HPDProvider
-m-supobjectclass: top
-m-typeobjectclass: AUXILIARY
+# dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1,ou=objectClasses,cn=hpd,ou=schema
+# objectclass: metaObjectClass
+# objectclass: metaTop
+# objectclass: top
+# m-oid: 1.3.6.1.4.1.19376.1.2.4.1
+# m-may: hpdProviderStatus
+# m-may: hpdProviderLanguageSupported
+# m-may: hpdProviderBillingAddress
+# m-may: hpdProviderMailingAddress
+# m-may: hpdProviderPracticeAddress
+# m-may: hpdMedicalRecordsDeliveryEmailAddress
+# m-may: memberOf
+# m-may: hpdProviderLegalAddress
+# m-may: hpdHasAService
+# m-may: hpdCredential
+# m-name: HPDProvider
+# m-supobjectclass: top
+# m-typeobjectclass: AUXILIARY
 
 dn: m-oid=1.3.6.1.4.1.19376.1.2.4.2,ou=objectClasses,cn=hpd,ou=schema
 objectclass: metaObjectClass
@@ -463,7 +463,8 @@ m-oid: 1.3.6.1.4.1.19376.1.2.4.2
 m-may: credentialIssueDate
 m-may: credentialRenewalDate
 m-may: credentialStatus
-m-may: credentialDescription
+# m-may: credentialDescription
+m-may: description
 m-may: hpdHasAnOrg
 m-may: hpdHasAProvider
 m-must: credentialName
@@ -516,17 +517,17 @@ m-supobjectclass: top
 
 #========== START: PDTI HPD PLUS ATTRIBUTE TYPE(S) ==========
 
-dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1.100,ou=attributeTypes,cn=hpd,ou=schema
-objectclass: metaTop
-objectclass: metaAttributeType
-objectclass: top
-m-oid: 1.3.6.1.4.1.19376.1.2.4.1.100
-m-description: HPD Plus hpdMemberEmail attributeType
-m-equality: caseIgnoreMatch
-m-length: 0
-m-name: hpdMemberEmail
-m-singlevalue: TRUE
-m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
+# dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1.100,ou=attributeTypes,cn=hpd,ou=schema
+# objectclass: metaTop
+# objectclass: metaAttributeType
+# objectclass: top
+# m-oid: 1.3.6.1.4.1.19376.1.2.4.1.100
+# m-description: HPD Plus hpdMemberEmail attributeType
+# m-equality: caseIgnoreMatch
+# m-length: 0
+# m-name: hpdMemberEmail
+# m-singlevalue: TRUE
+# m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
 
 dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1.101,ou=attributeTypes,cn=hpd,ou=schema
 objectclass: metaTop
@@ -576,6 +577,43 @@ m-name: hpdServiceType
 m-singlevalue: TRUE
 m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
 
+dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1.105,ou=attributeTypes,cn=hpd,ou=schema
+objectclass: metaTop
+objectclass: metaAttributeType
+objectclass: top
+m-oid: 1.3.6.1.4.1.19376.1.2.4.1.105
+m-description: HPD Plus hpdProviderPracticeLocation attributeType
+m-equality: caseIgnoreMatch
+m-length: 0
+m-name: hpdProviderPracticeLocation
+m-singlevalue: TRUE
+m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
+
+dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1.106,ou=attributeTypes,cn=hpd,ou=schema
+objectclass: metaTop
+objectclass: metaAttributeType
+objectclass: top
+m-oid: 1.3.6.1.4.1.19376.1.2.4.1.106
+m-description: HPD Plus hpdMemberStatus attributeType
+m-equality: caseIgnoreMatch
+m-length: 0
+m-name: hpdMemberStatus
+m-singlevalue: TRUE
+m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
+
+dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1.107,ou=attributeTypes,cn=hpd,ou=schema
+objectclass: metaTop
+objectclass: metaAttributeType
+objectclass: top
+m-oid: 1.3.6.1.4.1.19376.1.2.4.1.107
+m-description: HPD Plus hpdMemberType attributeType
+m-equality: caseIgnoreMatch
+m-length: 0
+m-name: hpdMemberType
+m-singlevalue: TRUE
+m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
+
+
 #========== END: PDTI HPD PLUS ATTRIBUTE TYPE(S) ==========
 
 #========== START: PDTI HPD PLUS OBJECT CLASS(ES) (MODIFIED) ==========
@@ -589,11 +627,13 @@ m-may: hpdHasAService
 m-may: telephoneNumber
 m-may: facsimileTelephoneNumber
 m-may: mobile
-m-may: Pager
-m-may: Email
+m-may: pager
+m-may: mail
 # START: NEW ATTRIBUTE(S) (OPTIONAL)
-m-may: hpdMemberEmail
+# m-may: hpdMemberEmail
 m-may: hpdMemberName
+m-may: hpdMemberStatus
+m-may: hpdMemberType
 # END: NEW ATTRIBUTE(S) (OPTIONAL)
 m-must: hpdMemberId
 m-must: hpdHasAProvider
@@ -608,9 +648,9 @@ objectclass: metaTop
 objectclass: top
 m-oid: 1.3.6.1.4.1.19376.1.2.4.5
 m-may: hpdCertificate
-m-may: hpdContentProfile
-m-may: hpdIntegrationProfile
-m-may: hpdSecurityProfile
+# m-may: hpdContentProfile
+# m-may: hpdIntegrationProfile
+# m-may: hpdSecurityProfile
 # START: NEW ATTRIBUTE(S) (OPTIONAL)
 m-may: hpdServicePayload
 m-may: hpdServiceProtocol
@@ -621,6 +661,26 @@ m-must: hpdServiceId
 m-name: HPDElectronicService
 m-supobjectclass: top
 m-typeobjectclass: STRUCTURAL
+
+dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1,ou=objectClasses,cn=hpd,ou=schema
+objectclass: metaObjectClass
+objectclass: metaTop
+objectclass: top
+m-oid: 1.3.6.1.4.1.19376.1.2.4.1
+m-may: hpdProviderStatus
+m-may: hpdProviderLanguageSupported
+m-may: hpdProviderBillingAddress
+m-may: hpdProviderMailingAddress
+m-may: hpdProviderPracticeAddress
+# m-may: hpdMedicalRecordsDeliveryEmailAddress
+m-may: memberOf
+m-may: hpdProviderLegalAddress
+m-may: hpdHasAService
+m-may: hpdCredential
+m-may: hpdProviderPracticeLocation
+m-name: HPDProvider
+m-supobjectclass: top
+m-typeobjectclass: AUXILIARY
 
 #========== END: PDTI HPD PLUS OBJECT CLASS(ES) (MODIFIED) ==========
 

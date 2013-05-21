@@ -153,7 +153,6 @@ objectClass: top
 objectClass: HPDProviderMembership
 hpdHasAnOrg: HcIdentifier=org1,ou=Organizations,o=dev.provider-directories.com,dc=hpd
 hpdHasAProvider: HcIdentifier=provider1,ou=Providers,o=dev.provider-directories.com,dc=hpd
-hpdMemberEmail: thomas.jones@org1.com
 hpdHasAService: hpdServiceId=1,ou=Services,o=dev.provider-directories.com,dc=hpd^hpdServiceId=2,ou=Services,o=dev.provider-directories.com,dc=hpd^hpdServiceId=3,ou=Services,o=dev.provider-directories.com,dc=hpd
 hpdMemberId: 1
 hpdMemberName: Dr Thomas Jones Private Practice
@@ -163,7 +162,6 @@ objectClass: top
 objectClass: HPDProviderMembership
 hpdHasAnOrg: HcIdentifier=org2,ou=Organizations,o=dev.provider-directories.com,dc=hpd
 hpdHasAProvider: HcIdentifier=provider2,ou=Providers,o=dev.provider-directories.com,dc=hpd
-hpdMemberEmail: john.smith@org2.com
 hpdMemberId: 2
 hpdMemberName: Panama City Clinic
 
@@ -172,7 +170,6 @@ objectClass: top
 objectClass: HPDProviderMembership
 hpdHasAnOrg: HcIdentifier=org2,ou=Organizations,o=dev.provider-directories.com,dc=hpd
 hpdHasAProvider: HcIdentifier=provider3,ou=Providers,o=dev.provider-directories.com,dc=hpd
-hpdMemberEmail: bob.jefferson@org2.com
 hpdMemberId: 2
 
 #==================================================
