@@ -20,8 +20,10 @@
         <project.deploy.server.host>localhost</project.deploy.server.host>
         <project.deploy.server.port>8080</project.deploy.server.port>
         <project.test.log.dir>${project.build.directory}/test-logs</project.test.log.dir>
+        <project.test.server.scheme>http</project.test.server.scheme>
         <project.test.server.host>localhost</project.test.server.host>
         <project.test.server.port>18080</project.test.server.port>
+        <project.test.server.dsml.dn.base>o=dev.provider-directories.com,dc=hpd</project.test.server.dsml.dn.base>
     </properties>
     <profiles>
         <!-- Set Tomcat manager URL property if not defined already -->
@@ -77,14 +79,9 @@
                         <configuration>
                             <coverage>true</coverage>
                             <exportAll>true</exportAll>
-                            <projectProperties>
-									<value>project.test.server.host=${project.test.server.host}</value>
-									<value>project.test.server.port=${project.test.server.port}</value>
-							</projectProperties>
                             <junitReport>true</junitReport>
                             <outputFolder>${project.build.directory}/soapui-reports</outputFolder>
                             <printReport>true</printReport>
-                            <projectFile>${project.build.testOutputDirectory}/soapui-project.xml</projectFile>
                             <saveAfterRun>true</saveAfterRun>
                             <settingsFile>${project.build.testOutputDirectory}/soapui-settings.xml</settingsFile>
                             <soapuiProperties>
@@ -98,10 +95,40 @@
                         <executions>
                             <!-- Run SOAP UI tests -->
                             <execution>
+                                <id>test</id>
                                 <phase>integration-test</phase>
                                 <goals>
                                     <goal>test</goal>
                                 </goals>
+                                <configuration>
+                                    <projectFile>${project.build.testOutputDirectory}/soapui-project.xml</projectFile>
+                                    <projectProperties>
+                                        <value>project.test.server.scheme=${project.test.server.scheme}</value>
+                                        <value>project.test.server.host=${project.test.server.host}</value>
+                                        <value>project.test.server.port=${project.test.server.port}</value>
+                                        <value>project.test.server.context=${project.build.finalName}</value>
+                                        <value>project.test.server.service=ProviderInformationDirectoryService</value>
+                                        <value>project.test.server.dsml.dn.base=${project.test.server.dsml.dn.base}</value>
+                                    </projectProperties>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>test-hpdplus</id>
+                                <phase>integration-test</phase>
+                                <goals>
+                                    <goal>test</goal>
+                                </goals>
+                                <configuration>
+                                    <projectFile>${project.build.testOutputDirectory}/soapui-project_hpdplus.xml</projectFile>
+                                    <projectProperties>
+                                        <value>project.test.server.scheme=${project.test.server.scheme}</value>
+                                        <value>project.test.server.host=${project.test.server.host}</value>
+                                        <value>project.test.server.port=${project.test.server.port}</value>
+                                        <value>project.test.server.context=${project.build.finalName}</value>
+                                        <value>project.test.server.service=Hpd_Plus_ProviderInformationDirectoryService</value>
+                                        <value>project.test.server.dsml.dn.base=${project.test.server.dsml.dn.base}</value>
+                                    </projectProperties>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
@@ -341,16 +368,17 @@
                             <goal>wsimport</goal>
                         </goals>
                         <configuration>
+                            <packageName>gov.hhs.onc.pdti.ws.api</packageName>
                             <wsdlFiles>
                                 <wsdlFile>HPD_ProviderInformationDirectory.wsdl</wsdlFile>
+                                <wsdlFile>HPD_Plus_ProviderInformationDirectory.wsdl</wsdlFile>
                             </wsdlFiles>
-                            <wsdlLocation>META-INF/wsdl/*</wsdlLocation>
                         </configuration>
                     </execution>
                 </executions>
                 <configuration>
                     <extension>true</extension>
-                    <packageName>gov.hhs.onc.pdti.ws.api</packageName>
+                    <wsdlLocation>META-INF/wsdl/*</wsdlLocation>
                 </configuration>
             </plugin>
         </plugins>

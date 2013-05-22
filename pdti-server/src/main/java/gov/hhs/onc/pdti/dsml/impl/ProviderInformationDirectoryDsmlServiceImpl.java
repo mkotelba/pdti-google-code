@@ -35,11 +35,12 @@ import gov.hhs.onc.pdti.ws.api.SearchRequest;
 @Service("providerInformationDirectoryDsmlService")
 public class ProviderInformationDirectoryDsmlServiceImpl implements ProviderInformationDirectoryDsmlService {
     private final static Class<? extends DsmlMessage>[] VALID_REQUEST_TYPES = ArrayUtils.toArray(SearchRequest.class);
-
-    private final static ObjectFactory OBJ_FACTORY = new ObjectFactory();
-
+	
     private final static Logger LOGGER = Logger.getLogger(ProviderInformationDirectoryDsmlServiceImpl.class);
 
+	@Autowired
+    private ObjectFactory objectFactory;
+	
     @Autowired
     private Jaxb2Marshaller marshaller;
 
@@ -101,7 +102,7 @@ public class ProviderInformationDirectoryDsmlServiceImpl implements ProviderInfo
                     ldapConnConfig.getCredentials());
 
             try {
-                String batchReqStr = this.marshal(OBJ_FACTORY.createBatchRequest(batchReq));
+                String batchReqStr = this.marshal(this.objectFactory.createBatchRequest(batchReq));
 
                 LOGGER.trace("Processing DSML batch request:\n" + batchReqStr);
 

@@ -19,6 +19,10 @@
     
     <context:component-scan base-package="gov.hhs.onc.pdti"/>
     
+    <sws:annotation-driven/>
+    
+    <beans:bean id="objectFactory" class="gov.hhs.onc.pdti.ws.api.ObjectFactory"/>
+    
     <beans:bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller"
         p:contextPath="gov.hhs.onc.pdti.ws.api">
         <beans:property name="marshallerProperties">
@@ -33,8 +37,6 @@
         </beans:property>
     </beans:bean>
     
-    <sws:annotation-driven/>
-    
     <beans:bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory">
         <beans:property name="soapVersion">
             <util:constant static-field="org.springframework.ws.soap.SoapVersion.SOAP_12"/>
@@ -45,6 +47,13 @@
         <wss:service>
             <ws:service 
                 bean="#providerInformationDirectoryImpl"
+                bindingID="http://www.w3.org/2003/05/soap/bindings/HTTP/"/>
+        </wss:service>
+    </wss:binding>
+    <wss:binding url="/Hpd_Plus_ProviderInformationDirectoryService">
+        <wss:service>
+            <ws:service 
+                bean="#hpdPlusProviderInformationDirectoryImpl"
                 bindingID="http://www.w3.org/2003/05/soap/bindings/HTTP/"/>
         </wss:service>
     </wss:binding>

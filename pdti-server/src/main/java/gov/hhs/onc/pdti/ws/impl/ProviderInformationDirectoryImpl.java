@@ -1,5 +1,6 @@
 package gov.hhs.onc.pdti.ws.impl;
 
+import gov.hhs.onc.pdti.ws.api.ObjectFactory;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -24,6 +25,9 @@ public class ProviderInformationDirectoryImpl implements ProviderInformationDire
     private final static Logger LOGGER = Logger.getLogger(ProviderInformationDirectoryImpl.class);
 
     @Autowired
+    private ObjectFactory objectFactory;
+
+    @Autowired
     private ProviderInformationDirectoryDsmlService dsmlService;
 
     @Override
@@ -42,6 +46,6 @@ public class ProviderInformationDirectoryImpl implements ProviderInformationDire
             @WebParam(name = "batchRequest", targetNamespace = "urn:oasis:names:tc:DSML:2:0:core", partName = "body") BatchRequest body) {
 
         // TODO: implement
-        return new BatchResponse();
+        return this.objectFactory.createBatchResponse();
     }
 }

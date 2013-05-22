@@ -1,0 +1,154 @@
+<xsd:schema
+    elementFormDefault="qualified"
+    targetNamespace="urn:gov:hhs:onc:hpdplus:2013"
+    xmlns="urn:gov:hhs:onc:hpdplus:2013"
+    xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:import namespace="urn:oasis:names:tc:DSML:2:0:core" schemaLocation="../DSML/DSMLv2.xsd"/>
+    
+    <xsd:simpleType name="NotBlank">
+        <xsd:annotation>
+            <xsd:documentation>
+                A non-blank token.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+            <xsd:pattern value=".*\S.*"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="HpdErrorDetail">
+        <xsd:annotation>
+            <xsd:documentation>
+                A HPD Plus error detail.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:any/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="HpdErrorType">
+        <xsd:annotation>
+            <xsd:documentation>
+                A HPD Plus error type.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="NotBlank">
+            <!-- Copied from urn:oasis:names:tc:DSML:2:0:core:ErrorResponse type attribute -->
+            <xsd:enumeration value="notAttempted"/>
+            <xsd:enumeration value="couldNotConnect"/>
+            <xsd:enumeration value="connectionClosed"/>
+            <xsd:enumeration value="malformedRequest"/>
+            <xsd:enumeration value="gatewayInternalError"/>
+            <xsd:enumeration value="authenticationFailed"/>
+            <xsd:enumeration value="unresolvableURI"/>
+            <xsd:enumeration value="other"/>
+            <!-- New to (extended) HPD Plus -->
+            <xsd:enumeration value="federationLoop"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="HpdError">
+        <xsd:annotation>
+            <xsd:documentation>
+                A HPD Plus error.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="message" type="xsd:token" minOccurs="0"/>
+            <xsd:element name="detail" type="HpdErrorDetail" minOccurs="0"/>
+        </xsd:sequence>
+        <xsd:attribute name="requestID" type="dsml:RequestID" use="optional"/>
+        <xsd:attribute name="type" type="HpdErrorType"/>
+    </xsd:complexType>
+    
+    <xsd:complexType name="HpdMetadataProperty">
+        <xsd:annotation>
+            <xsd:documentation>
+                A HPD Plus metadata property.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:attribute name="name" type="NotBlank"/>
+        <xsd:attribute name="value" type="xsd:token"/>
+    </xsd:complexType>
+    
+    <xsd:complexType name="HpdMetadataProperties">
+        <xsd:annotation>
+            <xsd:documentation>
+                A HPD Plus metadata properties container.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="property" type="HpdMetadataProperty" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="HpdMetadata" abstract="true">
+        <xsd:annotation>
+            <xsd:documentation>
+                An abstract HPD Plus metadata container.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="properties" type="HpdMetadataProperties" minOccurs="0">
+                <xsd:unique name="propertyName">
+                    <xsd:selector xpath="property"/>
+                    <xsd:field xpath="@name"/>
+                </xsd:unique>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="HpdRequestMetadata">
+        <xsd:annotation>
+            <xsd:documentation>
+                A HPD Plus request metadata container.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="HpdMetadata"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="HpdRequest">
+        <xsd:annotation>
+            <xsd:documentation>
+                A HPD Plus request.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="hpdRequestMetadata" type="HpdRequestMetadata" maxOccurs="1"/>
+            <xsd:element name="batchRequest" type="dsml:BatchRequest"/>
+        </xsd:choice>
+    </xsd:complexType>
+    
+    <xsd:complexType name="HpdResponseMetadata">
+        <xsd:annotation>
+            <xsd:documentation>
+                A HPD Plus response metadata container.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="HpdMetadata"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="HpdResponse">
+        <xsd:annotation>
+            <xsd:documentation>
+                A HPD Plus response.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="hpdError" type="HpdError"/>
+            <xsd:element name="hpdResponseMetadata" type="HpdResponseMetadata" maxOccurs="1"/>
+            <xsd:element name="batchResponse" type="dsml:BatchResponse"/>
+            <xsd:element name="hpdResponse" type="HpdResponse"/>
+        </xsd:choice>
+    </xsd:complexType>
+    
+    <xsd:element name="hpdRequest" type="HpdRequest"/>
+    <xsd:element name="hpdResponse" type="HpdResponse"/>
+</xsd:schema>
