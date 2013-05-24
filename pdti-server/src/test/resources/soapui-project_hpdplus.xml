@@ -40,28 +40,35 @@
                 </dsml:substrings>
                 </dsml:filter>
                 <dsml:attributes>
-                <dsml:attribute name="cn"/>
-                <dsml:attribute name="sn"/>
-                <dsml:attribute name="description"/>
-                <dsml:attribute name="employeeNumber"/>
-                <dsml:attribute name="givenName"/>
-                <dsml:attribute name="homePhone"/>
-                <dsml:attribute name="initials"/>
-                <dsml:attribute name="l"/>
-                <dsml:attribute name="mail"/>
-                <dsml:attribute name="mobile"/>
-                <dsml:attribute name="pager"/>
-                <dsml:attribute name="postalAddress"/>
-                <dsml:attribute name="postalCode"/>
-                <dsml:attribute name="st"/>
-                <dsml:attribute name="street"/>
-                <dsml:attribute name="telephoneNumber"/>
-                <dsml:attribute name="uid"/>
-                <dsml:attribute name="HcIdentifier"/>
-                <dsml:attribute name="HcProfession"/>
-                <dsml:attribute name="HCSpecialization"/>
-                <dsml:attribute name="hpdCredential"/>
-                <dsml:attribute name="memberOf"/>
+	               <dsml:attribute name="uid"/>
+	               <dsml:attribute name="hcIdentfier"/>
+	               <dsml:attribute name="hcProfession"/>
+	               <dsml:attribute name="description"/>
+	               <dsml:attribute name="hpdProviderStatus"/>
+	               <dsml:attribute name="displayName"/>
+	               <dsml:attribute name="title"/>
+	               <dsml:attribute name="givenName"/>
+	               <dsml:attribute name="initials"/>
+	               <dsml:attribute name="sn"/>
+	               <dsml:attribute name="cn"/>
+	               <dsml:attribute name="hpdProviderLanguageSupported"/>
+	               <dsml:attribute name="gender"/>
+	               <dsml:attribute name="mail"/>
+	               <dsml:attribute name="labeledUri"/>
+	               <dsml:attribute name="physicalDeliveryOfficeName"/>
+	               <dsml:attribute name="hpdProviderMailingAddress"/>
+	               <dsml:attribute name="hpdProviderBillingAddress"/>
+	               <dsml:attribute name="hpdProviderPracticeAddress"/>
+	               <dsml:attribute name="hpdProviderPracticeLocation"/>
+	               <dsml:attribute name="telephoneNumber"/>
+	               <dsml:attribute name="mobile"/>
+	               <dsml:attribute name="pager"/>
+	               <dsml:attribute name="facsimileTelephoneNumber"/>
+	               <dsml:attribute name="hcSpecialization"/>
+	               <dsml:attribute name="memberOf"/>
+	               <dsml:attribute name="suffix"/>
+	               <dsml:attribute name="hpdHasAService"/>
+	               <dsml:attribute name="hpdProviderLegalAddress"/>
                 </dsml:attributes>
             </dsml:searchRequest>
         </dsml:batchRequest>
@@ -103,15 +110,31 @@
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <dsml:searchRequest dn="ou=Organizations,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
                 <dsml:filter>
-                <dsml:substrings name="HcIdentifier">
+                <dsml:substrings name="hpdOrgId">
                     <dsml:initial>org1</dsml:initial>
                 </dsml:substrings>
                 </dsml:filter>
                 <dsml:attributes>
-                <dsml:attribute name="o"/>
-                <dsml:attribute name="HcIdentifier"/>
-                <dsml:attribute name="HcRegisteredAddr"/>
-                <dsml:attribute name="hpdOrgId"/>
+	               <dsml:attribute name="hcIdentfier"/>
+	               <dsml:attribute name="o"/>
+	               <dsml:attribute name="businessCategory"/>
+	               <dsml:attribute name="hcRegisteredName"/>
+	               <dsml:attribute name="description"/>
+	               <dsml:attribute name="hpdProviderStatus"/>
+	               <dsml:attribute name="clinicalInformationContact"/>
+	               <dsml:attribute name="hpdProviderMailingAddress"/>
+	               <dsml:attribute name="hpdProviderBillingAddress"/>
+	               <dsml:attribute name="hpdProviderPracticeAddress"/>
+	               <dsml:attribute name="hpdProviderLanguageSupported"/>
+	               <dsml:attribute name="hcSpeciailization"/>
+	               <dsml:attribute name="labeledUri"/>
+	               <dsml:attribute name="telephoneNumber"/>
+	               <dsml:attribute name="facsimileTelephoneNumber"/>
+	               <dsml:attribute name="memberOf"/>
+	               <dsml:attribute name="hpdHasAService"/>
+	               <dsml:attribute name="mail"/>
+	               <dsml:attribute name="policyInformation"/>
+	               <dsml:attribute name="hpdOrgId"/>
                 </dsml:attributes>
             </dsml:searchRequest>
         </dsml:batchRequest>
@@ -158,12 +181,18 @@
                 </dsml:substrings>
                 </dsml:filter>
                 <dsml:attributes>
-                <dsml:attribute name="hpdHasAnOrg"/>
-                <dsml:attribute name="hpdHasAProvider"/>
-                <dsml:attribute name="hpdHasAService"/>
-                <dsml:attribute name="hpdMemberEmail"/>
-                <dsml:attribute name="hpdMemberId"/>
-                <dsml:attribute name="hpdMemberName"/>
+	               <dsml:attribute name="hpdMemberId"/>
+	               <dsml:attribute name="hpdMemberName"/>
+	               <dsml:attribute name="hpdHasAProvider"/>
+	               <dsml:attribute name="hpdHasAnOrg"/>
+	               <dsml:attribute name="hpdMemberStatus"/>
+	               <dsml:attribute name="hpdMemberType"/>
+	               <dsml:attribute name="hpdHasAService"/>
+	               <dsml:attribute name="telephoneNumber"/>
+	               <dsml:attribute name="mail"/>
+	               <dsml:attribute name="facsimileTelephoneNumber"/>
+	               <dsml:attribute name="mobile"/>
+	               <dsml:attribute name="pager"/>
                 </dsml:attributes>
             </dsml:searchRequest>
         </dsml:batchRequest>
@@ -210,11 +239,12 @@
                </dsml:substrings>
             </dsml:filter>
             <dsml:attributes>
-               <dsml:attribute name="hpdServiceAddress"/>
                <dsml:attribute name="hpdServiceId"/>
+               <dsml:attribute name="hpdServiceAddress"/>
                <dsml:attribute name="hpdServicePayload"/>
                <dsml:attribute name="hpdServiceProtocol"/>
                <dsml:attribute name="hpdServiceType"/>
+               <dsml:attribute name="hpdCertificate"/>
             </dsml:attributes>
          </dsml:searchRequest>
       </dsml:batchRequest>
@@ -261,10 +291,13 @@
                 </dsml:substrings>
                 </dsml:filter>
                 <dsml:attributes>
-                <dsml:attribute name="credentialName"/>
-                <dsml:attribute name="credentialNumber"/>
-                <dsml:attribute name="credentialType"/>
-                <dsml:attribute name="hpdCredentialId"/>
+	               <dsml:attribute name="credentialType"/>
+	               <dsml:attribute name="credentialName"/>
+	               <dsml:attribute name="credentialNumber"/>
+	               <dsml:attribute name="description"/>
+	               <dsml:attribute name="credentialIssueDate"/>
+	               <dsml:attribute name="credentialRenewalDate"/>
+	               <dsml:attribute name="credentialStatus"/>
                 </dsml:attributes>
             </dsml:searchRequest>
         </dsml:batchRequest>
@@ -307,15 +340,31 @@
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <dsml:searchRequest dn="ou=Organizations,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
                 <dsml:filter>
-                <dsml:equalityMatch name="HcIdentifier">
+                <dsml:equalityMatch name="hpdOrgId">
                     <dsml:value>org1</dsml:value>
                 </dsml:equalityMatch>
                 </dsml:filter>
                 <dsml:attributes>
-                <dsml:attribute name="o"/>
-                <dsml:attribute name="HcIdentifier"/>
-                <dsml:attribute name="HcRegisteredAddr"/>
-                <dsml:attribute name="hpdOrgId"/>
+	               <dsml:attribute name="hcIdentfier"/>
+	               <dsml:attribute name="o"/>
+	               <dsml:attribute name="businessCategory"/>
+	               <dsml:attribute name="hcRegisteredName"/>
+	               <dsml:attribute name="description"/>
+	               <dsml:attribute name="hpdProviderStatus"/>
+	               <dsml:attribute name="clinicalInformationContact"/>
+	               <dsml:attribute name="hpdProviderMailingAddress"/>
+	               <dsml:attribute name="hpdProviderBillingAddress"/>
+	               <dsml:attribute name="hpdProviderPracticeAddress"/>
+	               <dsml:attribute name="hpdProviderLanguageSupported"/>
+	               <dsml:attribute name="hcSpeciailization"/>
+	               <dsml:attribute name="labeledUri"/>
+	               <dsml:attribute name="telephoneNumber"/>
+	               <dsml:attribute name="facsimileTelephoneNumber"/>
+	               <dsml:attribute name="memberOf"/>
+	               <dsml:attribute name="hpdHasAService"/>
+	               <dsml:attribute name="mail"/>
+	               <dsml:attribute name="policyInformation"/>
+	               <dsml:attribute name="hpdOrgId"/>
                 </dsml:attributes>
             </dsml:searchRequest>
         </dsml:batchRequest>
@@ -354,16 +403,22 @@
                 <dsml:searchRequest dn="ou=Memberships,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
                     <dsml:filter>
                     <dsml:substrings name="hpdHasAnOrg">
-                        <dsml:initial>HcIdentifier=org1,ou=Organizations,${#Project#project.test.server.dsml.dn.base}</dsml:initial>
+                        <dsml:initial>hpdOrgId=org1,ou=Organizations,${#Project#project.test.server.dsml.dn.base}</dsml:initial>
                     </dsml:substrings>
                     </dsml:filter>
                     <dsml:attributes>
-                        <dsml:attribute name="hpdHasAnOrg"/>
-                    <dsml:attribute name="hpdHasAProvider"/>
-                    <dsml:attribute name="hpdHasAService"/>
-                    <dsml:attribute name="hpdMemberEmail"/>
-                    <dsml:attribute name="hpdMemberId"/>
-                    <dsml:attribute name="hpdMemberName"/>
+	                    <dsml:attribute name="hpdMemberId"/>
+	                    <dsml:attribute name="hpdMemberName"/>
+	                    <dsml:attribute name="hpdHasAProvider"/>
+	                    <dsml:attribute name="hpdHasAnOrg"/>
+	                    <dsml:attribute name="hpdMemberStatus"/>
+	                    <dsml:attribute name="hpdMemberType"/>
+	                    <dsml:attribute name="hpdHasAService"/>
+	                    <dsml:attribute name="telephoneNumber"/>
+	                    <dsml:attribute name="mail"/>
+	                    <dsml:attribute name="facsimileTelephoneNumber"/>
+	                    <dsml:attribute name="mobile"/>
+	                    <dsml:attribute name="pager"/>
                     </dsml:attributes>
                 </dsml:searchRequest>
             </dsml:batchRequest>
@@ -406,28 +461,35 @@
                 </dsml:equalityMatch>
                 </dsml:filter>
                 <dsml:attributes>
-                <dsml:attribute name="cn"/>
-                <dsml:attribute name="sn"/>
-                <dsml:attribute name="description"/>
-                <dsml:attribute name="employeeNumber"/>
-                <dsml:attribute name="givenName"/>
-                <dsml:attribute name="homePhone"/>
-                <dsml:attribute name="initials"/>
-                <dsml:attribute name="l"/>
-                <dsml:attribute name="mail"/>
-                <dsml:attribute name="mobile"/>
-                <dsml:attribute name="pager"/>
-                <dsml:attribute name="postalAddress"/>
-                <dsml:attribute name="postalCode"/>
-                <dsml:attribute name="st"/>
-                <dsml:attribute name="street"/>
-                <dsml:attribute name="telephoneNumber"/>
-                <dsml:attribute name="uid"/>
-                <dsml:attribute name="HcIdentifier"/>
-                <dsml:attribute name="HcProfession"/>
-                <dsml:attribute name="HCSpecialization"/>
-                <dsml:attribute name="hpdCredential"/>
-                <dsml:attribute name="memberOf"/>
+	               <dsml:attribute name="uid"/>
+	               <dsml:attribute name="hcIdentfier"/>
+	               <dsml:attribute name="hcProfession"/>
+	               <dsml:attribute name="description"/>
+	               <dsml:attribute name="hpdProviderStatus"/>
+	               <dsml:attribute name="displayName"/>
+	               <dsml:attribute name="title"/>
+	               <dsml:attribute name="givenName"/>
+	               <dsml:attribute name="initials"/>
+	               <dsml:attribute name="sn"/>
+	               <dsml:attribute name="cn"/>
+	               <dsml:attribute name="hpdProviderLanguageSupported"/>
+	               <dsml:attribute name="gender"/>
+	               <dsml:attribute name="mail"/>
+	               <dsml:attribute name="labeledUri"/>
+	               <dsml:attribute name="physicalDeliveryOfficeName"/>
+	               <dsml:attribute name="hpdProviderMailingAddress"/>
+	               <dsml:attribute name="hpdProviderBillingAddress"/>
+	               <dsml:attribute name="hpdProviderPracticeAddress"/>
+	               <dsml:attribute name="hpdProviderPracticeLocation"/>
+	               <dsml:attribute name="telephoneNumber"/>
+	               <dsml:attribute name="mobile"/>
+	               <dsml:attribute name="pager"/>
+	               <dsml:attribute name="facsimileTelephoneNumber"/>
+	               <dsml:attribute name="hcSpecialization"/>
+	               <dsml:attribute name="memberOf"/>
+	               <dsml:attribute name="suffix"/>
+	               <dsml:attribute name="hpdHasAService"/>
+	               <dsml:attribute name="hpdProviderLegalAddress"/>
                 </dsml:attributes>
             </dsml:searchRequest>
         </dsml:batchRequest>
@@ -567,28 +629,35 @@
                 </dsml:equalityMatch>
                 </dsml:filter>
                 <dsml:attributes>
-                <dsml:attribute name="cn"/>
-                <dsml:attribute name="sn"/>
-                <dsml:attribute name="description"/>
-                <dsml:attribute name="employeeNumber"/>
-                <dsml:attribute name="givenName"/>
-                <dsml:attribute name="homePhone"/>
-                <dsml:attribute name="initials"/>
-                <dsml:attribute name="l"/>
-                <dsml:attribute name="mail"/>
-                <dsml:attribute name="mobile"/>
-                <dsml:attribute name="pager"/>
-                <dsml:attribute name="postalAddress"/>
-                <dsml:attribute name="postalCode"/>
-                <dsml:attribute name="st"/>
-                <dsml:attribute name="street"/>
-                <dsml:attribute name="telephoneNumber"/>
-                <dsml:attribute name="uid"/>
-                <dsml:attribute name="HcIdentifier"/>
-                <dsml:attribute name="HcProfession"/>
-                <dsml:attribute name="HCSpecialization"/>
-                <dsml:attribute name="hpdCredential"/>
-                <dsml:attribute name="memberOf"/>
+	               <dsml:attribute name="uid"/>
+	               <dsml:attribute name="hcIdentfier"/>
+	               <dsml:attribute name="hcProfession"/>
+	               <dsml:attribute name="description"/>
+	               <dsml:attribute name="hpdProviderStatus"/>
+	               <dsml:attribute name="displayName"/>
+	               <dsml:attribute name="title"/>
+	               <dsml:attribute name="givenName"/>
+	               <dsml:attribute name="initials"/>
+	               <dsml:attribute name="sn"/>
+	               <dsml:attribute name="cn"/>
+	               <dsml:attribute name="hpdProviderLanguageSupported"/>
+	               <dsml:attribute name="gender"/>
+	               <dsml:attribute name="mail"/>
+	               <dsml:attribute name="labeledUri"/>
+	               <dsml:attribute name="physicalDeliveryOfficeName"/>
+	               <dsml:attribute name="hpdProviderMailingAddress"/>
+	               <dsml:attribute name="hpdProviderBillingAddress"/>
+	               <dsml:attribute name="hpdProviderPracticeAddress"/>
+	               <dsml:attribute name="hpdProviderPracticeLocation"/>
+	               <dsml:attribute name="telephoneNumber"/>
+	               <dsml:attribute name="mobile"/>
+	               <dsml:attribute name="pager"/>
+	               <dsml:attribute name="facsimileTelephoneNumber"/>
+	               <dsml:attribute name="hcSpecialization"/>
+	               <dsml:attribute name="memberOf"/>
+	               <dsml:attribute name="suffix"/>
+	               <dsml:attribute name="hpdHasAService"/>
+	               <dsml:attribute name="hpdProviderLegalAddress"/>
                 </dsml:attributes>
             </dsml:searchRequest>
         </dsml:batchRequest>
@@ -725,10 +794,26 @@
                 </dsml:substrings>
                 </dsml:filter>
                 <dsml:attributes>
-                <dsml:attribute name="o"/>
-                <dsml:attribute name="HcIdentifier"/>
-                <dsml:attribute name="HcRegisteredAddr"/>
-                <dsml:attribute name="hpdOrgId"/>
+	               <dsml:attribute name="hcIdentfier"/>
+	               <dsml:attribute name="o"/>
+	               <dsml:attribute name="businessCategory"/>
+	               <dsml:attribute name="hcRegisteredName"/>
+	               <dsml:attribute name="description"/>
+	               <dsml:attribute name="hpdProviderStatus"/>
+	               <dsml:attribute name="clinicalInformationContact"/>
+	               <dsml:attribute name="hpdProviderMailingAddress"/>
+	               <dsml:attribute name="hpdProviderBillingAddress"/>
+	               <dsml:attribute name="hpdProviderPracticeAddress"/>
+	               <dsml:attribute name="hpdProviderLanguageSupported"/>
+	               <dsml:attribute name="hcSpeciailization"/>
+	               <dsml:attribute name="labeledUri"/>
+	               <dsml:attribute name="telephoneNumber"/>
+	               <dsml:attribute name="facsimileTelephoneNumber"/>
+	               <dsml:attribute name="memberOf"/>
+	               <dsml:attribute name="hpdHasAService"/>
+	               <dsml:attribute name="mail"/>
+	               <dsml:attribute name="policyInformation"/>
+	               <dsml:attribute name="hpdOrgId"/>
                 </dsml:attributes>
             </dsml:searchRequest>
         </dsml:batchRequest>
@@ -767,7 +852,7 @@
             <dsml:searchRequest dn="ou=Memberships,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
                 <dsml:filter>
                 <dsml:equalityMatch name="hpdHasAnOrg">
-                    <dsml:value>HcIdentifier=org1,ou=Organizations,${#Project#project.test.server.dsml.dn.base}</dsml:value>
+                    <dsml:value>hpdOrgId=org1,ou=Organizations,${#Project#project.test.server.dsml.dn.base}</dsml:value>
                 </dsml:equalityMatch>
                 </dsml:filter>
                 <dsml:attributes>
@@ -814,28 +899,35 @@
                 </dsml:equalityMatch>
                 </dsml:filter>
                 <dsml:attributes>
-                <dsml:attribute name="cn"/>
-                <dsml:attribute name="sn"/>
-                <dsml:attribute name="description"/>
-                <dsml:attribute name="employeeNumber"/>
-                <dsml:attribute name="givenName"/>
-                <dsml:attribute name="homePhone"/>
-                <dsml:attribute name="initials"/>
-                <dsml:attribute name="l"/>
-                <dsml:attribute name="mail"/>
-                <dsml:attribute name="mobile"/>
-                <dsml:attribute name="pager"/>
-                <dsml:attribute name="postalAddress"/>
-                <dsml:attribute name="postalCode"/>
-                <dsml:attribute name="st"/>
-                <dsml:attribute name="street"/>
-                <dsml:attribute name="telephoneNumber"/>
-                <dsml:attribute name="uid"/>
-                <dsml:attribute name="HcIdentifier"/>
-                <dsml:attribute name="HcProfession"/>
-                <dsml:attribute name="HCSpecialization"/>
-                <dsml:attribute name="hpdCredential"/>
-                <dsml:attribute name="memberOf"/>
+	               <dsml:attribute name="uid"/>
+	               <dsml:attribute name="hcIdentfier"/>
+	               <dsml:attribute name="hcProfession"/>
+	               <dsml:attribute name="description"/>
+	               <dsml:attribute name="hpdProviderStatus"/>
+	               <dsml:attribute name="displayName"/>
+	               <dsml:attribute name="title"/>
+	               <dsml:attribute name="givenName"/>
+	               <dsml:attribute name="initials"/>
+	               <dsml:attribute name="sn"/>
+	               <dsml:attribute name="cn"/>
+	               <dsml:attribute name="hpdProviderLanguageSupported"/>
+	               <dsml:attribute name="gender"/>
+	               <dsml:attribute name="mail"/>
+	               <dsml:attribute name="labeledUri"/>
+	               <dsml:attribute name="physicalDeliveryOfficeName"/>
+	               <dsml:attribute name="hpdProviderMailingAddress"/>
+	               <dsml:attribute name="hpdProviderBillingAddress"/>
+	               <dsml:attribute name="hpdProviderPracticeAddress"/>
+	               <dsml:attribute name="hpdProviderPracticeLocation"/>
+	               <dsml:attribute name="telephoneNumber"/>
+	               <dsml:attribute name="mobile"/>
+	               <dsml:attribute name="pager"/>
+	               <dsml:attribute name="facsimileTelephoneNumber"/>
+	               <dsml:attribute name="hcSpecialization"/>
+	               <dsml:attribute name="memberOf"/>
+	               <dsml:attribute name="suffix"/>
+	               <dsml:attribute name="hpdHasAService"/>
+	               <dsml:attribute name="hpdProviderLegalAddress"/>
                 </dsml:attributes>
             </dsml:searchRequest>
         </dsml:batchRequest>
@@ -975,29 +1067,35 @@
                 </dsml:equalityMatch>
                 </dsml:filter>
                 <dsml:attributes>
-                <!--dsml:attribute name="cn"/>
-                <dsml:attribute name="sn"/>
-                <dsml:attribute name="description"/>
-                <dsml:attribute name="employeeNumber"/>
-                <dsml:attribute name="givenName"/>
-                <dsml:attribute name="homePhone"/>
-                <dsml:attribute name="initials"/>
-                <dsml:attribute name="l"/>
-                <dsml:attribute name="mail"/>
-                <dsml:attribute name="mobile"/>
-                <dsml:attribute name="pager"/>
-                <dsml:attribute name="postalAddress"/>
-                <dsml:attribute name="postalCode"/>
-                <dsml:attribute name="st"/>
-                <dsml:attribute name="street"/>
-                <dsml:attribute name="telephoneNumber"/>
-                <dsml:attribute name="uid"/>
-                <dsml:attribute name="HcIdentifier"/>
-                <dsml:attribute name="HcProfession"/>
-                <dsml:attribute name="HCSpecialization"/>
-                <dsml:attribute name="hpdCredential"/>
-                <dsml:attribute name="memberOf"/-->
-                <dsml:attribute name="createTimestamp"/>
+	               <dsml:attribute name="uid"/>
+	               <dsml:attribute name="hcIdentfier"/>
+	               <dsml:attribute name="hcProfession"/>
+	               <dsml:attribute name="description"/>
+	               <dsml:attribute name="hpdProviderStatus"/>
+	               <dsml:attribute name="displayName"/>
+	               <dsml:attribute name="title"/>
+	               <dsml:attribute name="givenName"/>
+	               <dsml:attribute name="initials"/>
+	               <dsml:attribute name="sn"/>
+	               <dsml:attribute name="cn"/>
+	               <dsml:attribute name="hpdProviderLanguageSupported"/>
+	               <dsml:attribute name="gender"/>
+	               <dsml:attribute name="mail"/>
+	               <dsml:attribute name="labeledUri"/>
+	               <dsml:attribute name="physicalDeliveryOfficeName"/>
+	               <dsml:attribute name="hpdProviderMailingAddress"/>
+	               <dsml:attribute name="hpdProviderBillingAddress"/>
+	               <dsml:attribute name="hpdProviderPracticeAddress"/>
+	               <dsml:attribute name="hpdProviderPracticeLocation"/>
+	               <dsml:attribute name="telephoneNumber"/>
+	               <dsml:attribute name="mobile"/>
+	               <dsml:attribute name="pager"/>
+	               <dsml:attribute name="facsimileTelephoneNumber"/>
+	               <dsml:attribute name="hcSpecialization"/>
+	               <dsml:attribute name="memberOf"/>
+	               <dsml:attribute name="suffix"/>
+	               <dsml:attribute name="hpdHasAService"/>
+	               <dsml:attribute name="hpdProviderLegalAddress"/>
                 </dsml:attributes>
             </dsml:searchRequest>
         </dsml:batchRequest>
@@ -1125,7 +1223,7 @@
             <dsml:searchRequest dn="ou=Memberships,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
                 <dsml:filter>
                 <dsml:equalityMatch name="hpdHasAnOrg">
-                    <dsml:value>HcIdentifier=org1,ou=Organizations,${#Project#project.test.server.dsml.dn.base}</dsml:value>
+                    <dsml:value>hpdOrgId=org1,ou=Organizations,${#Project#project.test.server.dsml.dn.base}</dsml:value>
                 </dsml:equalityMatch>
                 </dsml:filter>
                 <dsml:attributes>
@@ -1226,28 +1324,35 @@
                 </dsml:equalityMatch>
                 </dsml:filter>
                 <dsml:attributes>
-                <dsml:attribute name="cn"/>
-                <dsml:attribute name="sn"/>
-                <dsml:attribute name="description"/>
-                <dsml:attribute name="employeeNumber"/>
-                <dsml:attribute name="givenName"/>
-                <dsml:attribute name="homePhone"/>
-                <dsml:attribute name="initials"/>
-                <dsml:attribute name="l"/>
-                <dsml:attribute name="mail"/>
-                <dsml:attribute name="mobile"/>
-                <dsml:attribute name="pager"/>
-                <dsml:attribute name="postalAddress"/>
-                <dsml:attribute name="postalCode"/>
-                <dsml:attribute name="st"/>
-                <dsml:attribute name="street"/>
-                <dsml:attribute name="telephoneNumber"/>
-                <dsml:attribute name="uid"/>
-                <dsml:attribute name="HcIdentifier"/>
-                <dsml:attribute name="HcProfession"/>
-                <dsml:attribute name="HCSpecialization"/>
-                <dsml:attribute name="hpdCredential"/>
-                <dsml:attribute name="memberOf"/>
+	               <dsml:attribute name="uid"/>
+	               <dsml:attribute name="hcIdentfier"/>
+	               <dsml:attribute name="hcProfession"/>
+	               <dsml:attribute name="description"/>
+	               <dsml:attribute name="hpdProviderStatus"/>
+	               <dsml:attribute name="displayName"/>
+	               <dsml:attribute name="title"/>
+	               <dsml:attribute name="givenName"/>
+	               <dsml:attribute name="initials"/>
+	               <dsml:attribute name="sn"/>
+	               <dsml:attribute name="cn"/>
+	               <dsml:attribute name="hpdProviderLanguageSupported"/>
+	               <dsml:attribute name="gender"/>
+	               <dsml:attribute name="mail"/>
+	               <dsml:attribute name="labeledUri"/>
+	               <dsml:attribute name="physicalDeliveryOfficeName"/>
+	               <dsml:attribute name="hpdProviderMailingAddress"/>
+	               <dsml:attribute name="hpdProviderBillingAddress"/>
+	               <dsml:attribute name="hpdProviderPracticeAddress"/>
+	               <dsml:attribute name="hpdProviderPracticeLocation"/>
+	               <dsml:attribute name="telephoneNumber"/>
+	               <dsml:attribute name="mobile"/>
+	               <dsml:attribute name="pager"/>
+	               <dsml:attribute name="facsimileTelephoneNumber"/>
+	               <dsml:attribute name="hcSpecialization"/>
+	               <dsml:attribute name="memberOf"/>
+	               <dsml:attribute name="suffix"/>
+	               <dsml:attribute name="hpdHasAService"/>
+	               <dsml:attribute name="hpdProviderLegalAddress"/>
                 </dsml:attributes>
             </dsml:searchRequest>
         </dsml:batchRequest>
@@ -1290,10 +1395,26 @@
                 </dsml:substrings>
                 </dsml:filter>
                 <dsml:attributes>
-                <dsml:attribute name="o"/>
-                <dsml:attribute name="HcIdentifier"/>
-                <dsml:attribute name="HcRegisteredAddr"/>
-                <dsml:attribute name="hpdOrgId"/>
+	               <dsml:attribute name="hcIdentfier"/>
+	               <dsml:attribute name="o"/>
+	               <dsml:attribute name="businessCategory"/>
+	               <dsml:attribute name="hcRegisteredName"/>
+	               <dsml:attribute name="description"/>
+	               <dsml:attribute name="hpdProviderStatus"/>
+	               <dsml:attribute name="clinicalInformationContact"/>
+	               <dsml:attribute name="hpdProviderMailingAddress"/>
+	               <dsml:attribute name="hpdProviderBillingAddress"/>
+	               <dsml:attribute name="hpdProviderPracticeAddress"/>
+	               <dsml:attribute name="hpdProviderLanguageSupported"/>
+	               <dsml:attribute name="hcSpeciailization"/>
+	               <dsml:attribute name="labeledUri"/>
+	               <dsml:attribute name="telephoneNumber"/>
+	               <dsml:attribute name="facsimileTelephoneNumber"/>
+	               <dsml:attribute name="memberOf"/>
+	               <dsml:attribute name="hpdHasAService"/>
+	               <dsml:attribute name="mail"/>
+	               <dsml:attribute name="policyInformation"/>
+	               <dsml:attribute name="hpdOrgId"/>
                 </dsml:attributes>
             </dsml:searchRequest>
         </dsml:batchRequest>

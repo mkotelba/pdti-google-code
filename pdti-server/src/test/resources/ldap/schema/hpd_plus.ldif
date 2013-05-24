@@ -1,9 +1,5 @@
 version: 1
 
-#==================================================
-# START: MIRTH HPD LDAP SCHEMA
-#==================================================
-
 dn: cn=hpd,ou=schema
 objectclass: metaSchema
 objectclass: top
@@ -64,19 +60,6 @@ dn: ou=syntaxes,cn=hpd,ou=schema
 objectclass: organizationalUnit
 objectclass: top
 ou: syntaxes
-
-dn: m-oid=1.3.6.1.4.1.1466.115.121.1.1.6,ou=attributeTypes,cn=hpd,ou=schema
-objectclass: metaTop
-objectclass: metaAttributeType
-objectclass: top
-m-oid: 1.3.6.1.4.1.1466.115.121.1.1.6
-m-description: date from which new mail will be rejected
-m-equality: generalizedTimeMatch
-m-length: 0
-m-name: hpdRejectMailFrom
-m-ordering: generalizedTimeOrderingMatch
-m-singlevalue: TRUE
-m-syntax: 1.3.6.1.4.1.1466.115.121.1.24
 
 dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1.1,ou=attributeTypes,cn=hpd,ou=schema
 objectclass: metaTop
@@ -216,12 +199,11 @@ objectclass: metaTop
 objectclass: metaAttributeType
 objectclass: top
 m-oid: 1.3.6.1.4.1.19376.1.2.4.1.28
-m-description: Public Digital Certificate for this service
-m-equality: octetStringMatch
+m-description: X.509 certificate for an Electronic Service
 m-length: 0
 m-name: hpdCertificate
 m-singlevalue: FALSE
-m-syntax: 1.3.6.1.4.1.1466.115.121.1.40
+m-syntax: 1.3.6.1.4.1.1466.115.121.1.8
 
 dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1.29,ou=attributeTypes,cn=hpd,ou=schema
 objectclass: metaTop
@@ -426,16 +408,6 @@ m-name: credentialStatus
 m-singlevalue: TRUE
 m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
 
-dn: m-oid=1.3.6.1.4.1.1466.115.121.1.1.7,ou=objectClasses,cn=hpd,ou=schema
-objectclass: metaObjectClass
-objectclass: metaTop
-objectclass: top
-m-oid: 1.3.6.1.4.1.1466.115.121.1.1.7
-m-description: object class holding the hpdRejectMailFrom attribute
-m-must: hpdRejectMailFrom
-m-name: hpdMailPerson
-m-typeobjectclass: AUXILIARY
-
 # dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1,ou=objectClasses,cn=hpd,ou=schema
 # objectclass: metaObjectClass
 # objectclass: metaTop
@@ -506,16 +478,6 @@ m-supobjectclass: top
 #m-name: HPDElectronicService
 #m-supobjectclass: top
 #m-typeobjectclass: STRUCTURAL
-
-#==================================================
-# END: MIRTH HPD LDAP SCHEMA
-#==================================================
-
-#==================================================
-# START: PDTI HPD PLUS LDAP SCHEMA
-#==================================================
-
-#========== START: PDTI HPD PLUS ATTRIBUTE TYPE(S) ==========
 
 # dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1.100,ou=attributeTypes,cn=hpd,ou=schema
 # objectclass: metaTop
@@ -613,11 +575,6 @@ m-name: hpdMemberType
 m-singlevalue: TRUE
 m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
 
-
-#========== END: PDTI HPD PLUS ATTRIBUTE TYPE(S) ==========
-
-#========== START: PDTI HPD PLUS OBJECT CLASS(ES) (MODIFIED) ==========
-
 dn: m-oid=1.3.6.1.4.1.19376.1.2.4.4,ou=objectClasses,cn=hpd,ou=schema
 objectclass: metaObjectClass
 objectclass: metaTop
@@ -681,10 +638,3 @@ m-may: hpdProviderPracticeLocation
 m-name: HPDProvider
 m-supobjectclass: top
 m-typeobjectclass: AUXILIARY
-
-#========== END: PDTI HPD PLUS OBJECT CLASS(ES) (MODIFIED) ==========
-
-#==================================================
-# END: PDTI HPD PLUS LDAP SCHEMA
-#==================================================
-
