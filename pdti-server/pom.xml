@@ -19,6 +19,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.deploy.server.host>localhost</project.deploy.server.host>
         <project.deploy.server.port>8080</project.deploy.server.port>
+        <project.service>ProviderInformationDirectoryService</project.service>
+        <project.service.hpdplus>Hpd_Plus_ProviderInformationDirectoryService</project.service.hpdplus>
         <project.test.log.dir>${project.build.directory}/test-logs</project.test.log.dir>
         <project.test.server.scheme>http</project.test.server.scheme>
         <project.test.server.host>localhost</project.test.server.host>
@@ -90,7 +92,7 @@
                                     <value>${project.test.log.dir}/</value>
                                 </property>
                             </soapuiProperties>
-                            <testFailIgnore>false</testFailIgnore>
+                            <testFailIgnore>true</testFailIgnore>
                         </configuration>
                         <executions>
                             <!-- Run SOAP UI tests -->
@@ -107,7 +109,7 @@
                                         <value>project.test.server.host=${project.test.server.host}</value>
                                         <value>project.test.server.port=${project.test.server.port}</value>
                                         <value>project.test.server.context=${project.build.finalName}</value>
-                                        <value>project.test.server.service=ProviderInformationDirectoryService</value>
+                                        <value>project.test.server.service=${project.service}</value>
                                         <value>project.test.server.dsml.dn.base=${project.test.server.dsml.dn.base}</value>
                                     </projectProperties>
                                 </configuration>
@@ -125,16 +127,24 @@
                                         <value>project.test.server.host=${project.test.server.host}</value>
                                         <value>project.test.server.port=${project.test.server.port}</value>
                                         <value>project.test.server.context=${project.build.finalName}</value>
-                                        <value>project.test.server.service=Hpd_Plus_ProviderInformationDirectoryService</value>
+                                        <value>project.test.server.service=${project.service.hpdplus}</value>
                                         <value>project.test.server.dsml.dn.base=${project.test.server.dsml.dn.base}</value>
                                     </projectProperties>
                                 </configuration>
+                            </execution>
+                            <execution>
+                                <id>test-verify</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>test-verify</goal>
+                                </goals>
                             </execution>
                         </executions>
                     </plugin>
                     <plugin>
                         <groupId>org.codehaus.cargo</groupId>
                         <artifactId>cargo-maven2-plugin</artifactId>
+                        <!-- Do not update to 1.4.1 due to https://bugs.eclipse.org/bugs/show_bug.cgi?id=408720 -->
                         <version>1.4.0</version>
                         <executions>
                             <execution>
@@ -172,6 +182,7 @@
                             </deployables>
                             <configuration>
                                 <properties>
+                                    <cargo.jvmargs>-XX:PermSize=512m -XX:MaxPermSize=1024 -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:+CMSPermGenSweepingEnabled</cargo.jvmargs>
                                     <cargo.hostname>${project.test.server.host}</cargo.hostname>
                                     <cargo.servlet.port>${project.test.server.port}</cargo.servlet.port>
                                 </properties>
@@ -184,6 +195,28 @@
         </profile>
     </profiles>
     <dependencies>
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>findbugs</artifactId>
+            <version>2.0.1</version>
+            <!-- Excluding incompatible Xerces dependencies (they don't support the SAX feature "http://javax.xml.XMLConstants/feature/secure-processing") -->
+            <exclusions>
+                <exclusion>
+                    <groupId>xerces</groupId>
+                    <artifactId>xercesImpl</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>xerces</groupId>
+                    <artifactId>xercesParserAPIs</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- Explicit ICU4J dependency to fix http://jira.codehaus.org/browse/JETTY-1201 -->
+        <dependency>
+            <groupId>com.ibm.icu</groupId>
+            <artifactId>icu4j</artifactId>
+            <version>51.1</version>
+        </dependency>
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>
@@ -239,6 +272,16 @@
             <groupId>org.apache.directory.api</groupId>
             <artifactId>api-ldap-client-all</artifactId>
             <version>1.0.0-M17</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jvnet.jaxb2_commons</groupId>
+            <artifactId>jaxb2-basics-annotate</artifactId>
+            <version>0.6.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jvnet.jaxb2_commons</groupId>
+            <artifactId>jaxb2-basics-runtime</artifactId>
+            <version>0.6.4</version>
         </dependency>
         <dependency>
             <groupId>org.jvnet.jax-ws-commons.spring</groupId>
@@ -361,24 +404,71 @@
                 <groupId>org.jvnet.jax-ws-commons</groupId>
                 <artifactId>jaxws-maven-plugin</artifactId>
                 <version>2.2</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jvnet.jaxb2_commons</groupId>
+                        <artifactId>jaxb2-basics-annotate</artifactId>
+                        <version>0.6.4</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jvnet.jaxb2_commons</groupId>
+                        <artifactId>jaxb2-basics</artifactId>
+                        <version>0.6.4</version>
+                    </dependency>
+                </dependencies>
                 <executions>
                     <execution>
+                        <id>wsimport</id>
                         <phase>generate-sources</phase>
                         <goals>
                             <goal>wsimport</goal>
                         </goals>
                         <configuration>
-                            <packageName>gov.hhs.onc.pdti.ws.api</packageName>
+                            <args>
+                                <arg>-b</arg>
+                                <arg>file:src/schema/DSML/DSMLv2.xsd</arg>
+                            </args>
+                            <bindingFiles>
+                                <bindingFile>DSMLv2.xjb</bindingFile>
+                            </bindingFiles>
                             <wsdlFiles>
                                 <wsdlFile>HPD_ProviderInformationDirectory.wsdl</wsdlFile>
+                            </wsdlFiles>
+                            <wsdlLocation>META-INF/wsdl/HPD_ProviderInformationDirectory.wsdl</wsdlLocation>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>wsimport-hpdplus</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+                            <args>
+                                <arg>-b</arg>
+                                <arg>file:src/schema/DSML/DSMLv2.xsd</arg>
+                                <arg>-b</arg>
+                                <arg>file:src/schema/HPD_Plus/HPD_Plus.xsd</arg>
+                            </args>
+                            <bindingFiles>
+                                <bindingFile>DSMLv2.xjb</bindingFile>
+                                <bindingFile>HPD_Plus.xjb</bindingFile>
+                            </bindingFiles>
+                            <wsdlFiles>
                                 <wsdlFile>HPD_Plus_ProviderInformationDirectory.wsdl</wsdlFile>
                             </wsdlFiles>
+                            <wsdlLocation>META-INF/wsdl/HPD_Plus_ProviderInformationDirectory.wsdl</wsdlLocation>
                         </configuration>
                     </execution>
                 </executions>
                 <configuration>
+                    <xjcArgs>
+                        <xjcArg>-Xannotate</xjcArg>
+                        <xjcArg>-Xinheritance</xjcArg>
+                    </xjcArgs>
                     <extension>true</extension>
-                    <wsdlLocation>META-INF/wsdl/*</wsdlLocation>
+                    <packageName>gov.hhs.onc.pdti.ws.api</packageName>
+                    <xadditionalHeaders>true</xadditionalHeaders>
                 </configuration>
             </plugin>
         </plugins>

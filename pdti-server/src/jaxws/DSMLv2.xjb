@@ -1,0 +1,31 @@
+<jaxb:bindings
+	jaxb:extensionBindingPrefixes="annox inheritance xjc"
+	version="2.1"
+	xmlns:annox="http://annox.dev.java.net"
+	xmlns:inheritance="http://jaxb2-commons.dev.java.net/basic/inheritance"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd">
+	
+	<!--
+	<jaxb:bindings schemaLocation="../schema/DSML/DSMLv2.xsd" node="/xsd:schema">
+		<jaxb:bindings node="xsd:complexType[@name='BatchRequest']">
+			<annox:annotate>
+				<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement"
+					name="batchRequest"
+					namespace="urn:oasis:names:tc:DSML:2:0:core"/>
+			</annox:annotate>
+		</jaxb:bindings>
+		<jaxb:bindings node="xsd:complexType[@name='BatchResponse']">
+			<annox:annotate>
+				<annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement"
+					name="batchResponse"
+					namespace="urn:oasis:names:tc:DSML:2:0:core"/>
+			</annox:annotate>
+		</jaxb:bindings>
+	</jaxb:bindings>
+	-->
+ </jaxb:bindings>

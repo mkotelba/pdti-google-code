@@ -1,35 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <con:soapui-project activeEnvironment="Default" name="HpdPlusProviderInformationDirectoryService" resourceRoot="" soapui-version="4.5.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings/>
+  <con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="HpdPlusProviderInformationDirectoryImplPortBinding" type="wsdl" bindingName="{urn:gov:hhs:onc:hpdplus:2013}HpdPlusProviderInformationDirectoryImplPortBinding" soapVersion="1_2" anonymous="optional" definition="${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <con:settings/>
-    <con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="Hpd_Plus_ProviderInformationDirectoryImplPortBinding" type="wsdl" bindingName="{urn:gov:hhs:onc:hpdplus:2013}HpdPlusProviderInformationDirectoryImplPortBinding" soapVersion="1_2" anonymous="optional" definition="${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <con:endpoints>
+      <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+      <con:endpoint>http://mk.provider-directories.com:80/pdti-server/Hpd_Plus_ProviderInformationDirectoryService</con:endpoint>
+    </con:endpoints>
+    <con:operation isOneWay="false" action="urn:gov:hhs:onc:hpdplus:2013:Hpd_Plus_ProviderInformationFeedRequest" name="Hpd_Plus_ProviderInformationFeedRequest" bindingOperationName="Hpd_Plus_ProviderInformationFeedRequest" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional">
+      <con:settings/>
+    </con:operation>
+    <con:operation isOneWay="false" action="urn:gov:hhs:onc:hpdplus:2013:Hpd_Plus_ProviderInformationQueryRequest" name="Hpd_Plus_ProviderInformationQueryRequest" bindingOperationName="Hpd_Plus_ProviderInformationQueryRequest" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional">
+      <con:settings/>
+    </con:operation>
+  </con:interface>
+  <con:testSuite name="Hpd_Plus_ProviderInformationQueryRequestTestSuite">
+    <con:settings/>
+    <con:runType>SEQUENTIAL</con:runType>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="search_provider_by_name" searchProperties="true" id="c32cf9e5-f39b-4ab7-a71e-e1198c61ad97">
+      <con:settings/>
+      <con:testStep type="request" name="search_provider_by_name">
         <con:settings/>
-        <con:endpoints>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HpdPlusProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_provider_by_name" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
             <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-        </con:endpoints>
-        <con:operation isOneWay="false" action="urn:gov:hhs:onc:hpdplus:2013:Hpd_Plus_ProviderInformationFeedRequest" name="Hpd_Plus_ProviderInformationFeedRequest" bindingOperationName="Hpd_Plus_ProviderInformationFeedRequest" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional">
-            <con:settings/>
-        </con:operation>
-        <con:operation isOneWay="false" action="urn:gov:hhs:onc:hpdplus:2013:Hpd_Plus_ProviderInformationQueryRequest" name="Hpd_Plus_ProviderInformationQueryRequest" bindingOperationName="Hpd_Plus_ProviderInformationQueryRequest" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional">
-            <con:settings/>
-        </con:operation>
-    </con:interface>
-    <con:testSuite name="Hpd_Plus_ProviderInformationQueryRequestTestSuite">
-        <con:settings/>
-        <con:runType>SEQUENTIAL</con:runType>
-        <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="search_provider_by_name" searchProperties="true" id="c32cf9e5-f39b-4ab7-a71e-e1198c61ad97">
-            <con:settings/>
-            <con:testStep type="request" name="search_provider_by_name">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>Hpd_Plus_ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_provider_by_name" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdRequest xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -75,36 +76,42 @@
       </hpdplus:hpdRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration><definition/></con:configuration>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep>
-        <con:properties/></con:testCase>
-        <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="search_org_by_id" searchProperties="true" id="83868f79-29fc-45c8-a1e0-040ee822cd9a">
-            <con:settings/>
-            <con:testStep type="request" name="search_org_by_id">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>Hpd_Plus_ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_org_by_id" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration>
+                <definition/>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+    </con:testCase>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="search_org_by_id" searchProperties="true" id="83868f79-29fc-45c8-a1e0-040ee822cd9a">
+      <con:settings/>
+      <con:testStep type="request" name="search_org_by_id">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HpdPlusProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_org_by_id" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdRequest xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -141,36 +148,40 @@
       </hpdplus:hpdRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration/>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep>
-        <con:properties/></con:testCase>
-        <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="search_membership_by_provider" searchProperties="true" id="37d87fb5-6488-4405-87ae-ec293b1abd9a">
-            <con:settings/>
-            <con:testStep type="request" name="search_membership_by_provider">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>Hpd_Plus_ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_membership_by_provider" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+    </con:testCase>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="search_membership_by_provider" searchProperties="true" id="37d87fb5-6488-4405-87ae-ec293b1abd9a">
+      <con:settings/>
+      <con:testStep type="request" name="search_membership_by_provider">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HpdPlusProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_membership_by_provider" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdRequest xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -199,36 +210,40 @@
       </hpdplus:hpdRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration/>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep>
-        <con:properties/></con:testCase>
-        <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="search_service_by_id" searchProperties="true" id="97bf4c7b-4e40-42a9-a8c2-b4646c2d4593">
-            <con:settings/>
-            <con:testStep type="request" name="search_service_by_id">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>Hpd_Plus_ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_service_by_id" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+    </con:testCase>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="search_service_by_id" searchProperties="true" id="97bf4c7b-4e40-42a9-a8c2-b4646c2d4593">
+      <con:settings/>
+      <con:testStep type="request" name="search_service_by_id">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HpdPlusProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_service_by_id" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdRequest xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
       <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -251,36 +266,40 @@
       </hpdplus:hpdRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration/>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep>
-        <con:properties/></con:testCase>
-        <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="search_credential_by_id" searchProperties="true" id="e9222d91-45e5-45dd-bcab-356d80d22fd5">
-            <con:settings/>
-            <con:testStep type="request" name="search_credential_by_id">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>Hpd_Plus_ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_credential_by_id" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+    </con:testCase>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="search_credential_by_id" searchProperties="true" id="e9222d91-45e5-45dd-bcab-356d80d22fd5">
+      <con:settings/>
+      <con:testStep type="request" name="search_credential_by_id">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HpdPlusProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_credential_by_id" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdRequest xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -304,37 +323,45 @@
       </hpdplus:hpdRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration/>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep>
-            <con:properties/>
-        </con:testCase>
-        <con:properties/>
-    </con:testSuite>
-    <con:testSuite name="Workflows"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="IWG_Workflow" searchProperties="true" id="7cfda747-50ee-41e8-a20b-a9bd1708718b"><con:settings/><con:testStep type="request" name="search_org_by_id">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>Hpd_Plus_ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_org_by_id" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+    </con:testCase>
+    <con:properties/>
+  </con:testSuite>
+  <con:testSuite name="Workflows">
+    <con:settings/>
+    <con:runType>SEQUENTIAL</con:runType>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="IWG_Workflow" searchProperties="true" id="7cfda747-50ee-41e8-a20b-a9bd1708718b">
+      <con:settings/>
+      <con:testStep type="request" name="search_org_by_id">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HpdPlusProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_org_by_id" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdRequest xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -371,32 +398,36 @@
       </hpdplus:hpdRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration/>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep><con:testStep type="request" name="search_membership_by_org">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>Hpd_Plus_ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_membership_by_org" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="request" name="search_membership_by_org">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HpdPlusProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_membership_by_org" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
     <soap-env:Body>
         <hpdplus:hpdRequest xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
             <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -425,32 +456,36 @@
         </hpdplus:hpdRequest>
     </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration/>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep><con:testStep type="request" name="search_provider_by_hcidentifier">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>Hpd_Plus_ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_provider_by_hcidentifier" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="request" name="search_provider_by_hcidentifier">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HpdPlusProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_provider_by_hcidentifier" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdRequest xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -496,32 +531,38 @@
       </hpdplus:hpdRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration><definition/></con:configuration>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep><con:testStep type="request" name="search_membership_by_provider">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>Hpd_Plus_ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_membership_by_provider" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration>
+                <definition/>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="request" name="search_membership_by_provider">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HpdPlusProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_membership_by_provider" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdRequest xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -539,32 +580,36 @@
       </hpdplus:hpdRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration/>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep><con:testStep type="request" name="search_service_by_id">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>Hpd_Plus_ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_service_by_id" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="request" name="search_service_by_id">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HpdPlusProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_service_by_id" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdRequest xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -590,32 +635,40 @@
       </hpdplus:hpdRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration/>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="WSC_Workflow_1" searchProperties="true" id="9a0dd776-689d-4b7a-9f74-0847d5966d95"><con:settings/><con:testStep type="request" name="search_provider_by_name">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>Hpd_Plus_ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_provider_by_name" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+    </con:testCase>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="WSC_Workflow_1" searchProperties="true" id="9a0dd776-689d-4b7a-9f74-0847d5966d95">
+      <con:settings/>
+      <con:testStep type="request" name="search_provider_by_name">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HpdPlusProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_provider_by_name" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdRequest xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -664,32 +717,38 @@
       </hpdplus:hpdRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration><definition/></con:configuration>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep><con:testStep type="request" name="search_membership_by_provider">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>Hpd_Plus_ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_membership_by_provider" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration>
+                <definition/>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="request" name="search_membership_by_provider">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HpdPlusProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_membership_by_provider" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdRequest xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -707,32 +766,36 @@
       </hpdplus:hpdRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration/>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep><con:testStep type="request" name="search_service_by_id">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>Hpd_Plus_ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_service_by_id" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="request" name="search_service_by_id">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HpdPlusProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_service_by_id" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdRequest xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
       <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -758,32 +821,40 @@
       </hpdplus:hpdRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration/>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="WSC_Workflow_2" searchProperties="true" id="e712a3a2-a1d7-4c21-8c6f-c3e43d242508"><con:settings/><con:testStep type="request" name="search_org_by_o">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>Hpd_Plus_ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_org_by_o" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+    </con:testCase>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="WSC_Workflow_2" searchProperties="true" id="e712a3a2-a1d7-4c21-8c6f-c3e43d242508">
+      <con:settings/>
+      <con:testStep type="request" name="search_org_by_o">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HpdPlusProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_org_by_o" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdRequest xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -820,32 +891,36 @@
       </hpdplus:hpdRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration/>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep><con:testStep type="request" name="search_membership_by_org">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>Hpd_Plus_ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_membership_by_org" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="request" name="search_membership_by_org">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HpdPlusProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_membership_by_org" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdRequest xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -863,32 +938,36 @@
       </hpdplus:hpdRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration/>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep><con:testStep type="request" name="search_provider_by_hcidentifier">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>Hpd_Plus_ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_provider_by_hcidentifier" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="request" name="search_provider_by_hcidentifier">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HpdPlusProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_provider_by_hcidentifier" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdRequest xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -934,32 +1013,38 @@
       </hpdplus:hpdRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration><definition/></con:configuration>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep><con:testStep type="request" name="search_membership_by_provider">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>Hpd_Plus_ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_membership_by_provider" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration>
+                <definition/>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="request" name="search_membership_by_provider">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HpdPlusProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_membership_by_provider" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdRequest xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -977,32 +1062,36 @@
       </hpdplus:hpdRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration/>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep><con:testStep type="request" name="search_service_by_id">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>Hpd_Plus_ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_service_by_id" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="request" name="search_service_by_id">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HpdPlusProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_service_by_id" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdRequest xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -1028,32 +1117,40 @@
       </hpdplus:hpdRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration/>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="WSC_Workflow_3" searchProperties="true" id="59bb8da9-6653-41cc-a53b-25feae4738a5"><con:settings/><con:testStep type="request" name="search_provider_by_name">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>Hpd_Plus_ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_provider_by_name" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+    </con:testCase>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="WSC_Workflow_3" searchProperties="true" id="59bb8da9-6653-41cc-a53b-25feae4738a5">
+      <con:settings/>
+      <con:testStep type="request" name="search_provider_by_name">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HpdPlusProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_provider_by_name" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdRequest xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -1102,32 +1199,38 @@
       </hpdplus:hpdRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration><definition/></con:configuration>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep><con:testStep type="request" name="search_membership_by_provider">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>Hpd_Plus_ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_membership_by_provider" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration>
+                <definition/>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="request" name="search_membership_by_provider">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HpdPlusProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_membership_by_provider" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdRequest xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -1145,32 +1248,36 @@
       </hpdplus:hpdRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration/>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep><con:testStep type="request" name="search_org_by_id">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>Hpd_Plus_ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_org_by_id" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="request" name="search_org_by_id">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HpdPlusProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_org_by_id" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdRequest xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -1191,32 +1298,36 @@
       </hpdplus:hpdRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration/>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep><con:testStep type="request" name="search_membership_by_org">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>Hpd_Plus_ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_membership_by_org" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="request" name="search_membership_by_org">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HpdPlusProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_membership_by_org" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdRequest xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -1234,32 +1345,36 @@
       </hpdplus:hpdRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration/>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep><con:testStep type="request" name="search_service_by_id">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>Hpd_Plus_ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_service_by_id" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="request" name="search_service_by_id">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HpdPlusProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_service_by_id" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdRequest xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -1285,32 +1400,45 @@
       </hpdplus:hpdRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration/>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite name="RTM_Use_Cases"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Find_Individual" searchProperties="true"><con:settings/><con:testStep type="request" name="search_provider_by_name">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>Hpd_Plus_ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_provider_by_name" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+    </con:testCase>
+    <con:properties/>
+  </con:testSuite>
+  <con:testSuite name="RTM_Use_Cases">
+    <con:settings/>
+    <con:runType>SEQUENTIAL</con:runType>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Find_Individual" searchProperties="true">
+      <con:settings/>
+      <con:testStep type="request" name="search_provider_by_name">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HpdPlusProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_provider_by_name" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdRequest xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -1359,32 +1487,42 @@
       </hpdplus:hpdRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration><definition/></con:configuration>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Find_Organization" searchProperties="true"><con:settings/><con:testStep type="request" name="search_org_by_o">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>Hpd_Plus_ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_org_by_o" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration>
+                <definition/>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+    </con:testCase>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Find_Organization" searchProperties="true">
+      <con:settings/>
+      <con:testStep type="request" name="search_org_by_o">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>HpdPlusProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_org_by_o" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdRequest xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -1421,20 +1559,41 @@
       </hpdplus:hpdRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration/>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Find_Organizations_for_Unique_Individual" searchProperties="true"><con:settings/><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Find_Individuals_for_Unique_Organization" searchProperties="true"><con:settings/><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Find_Individuals_and_Organizations" searchProperties="true"><con:settings/><con:properties/></con:testCase><con:properties/></con:testSuite>
-    <con:wssContainer/>
-<con:sensitiveInformation/></con:soapui-project>
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+    </con:testCase>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Find_Organizations_for_Unique_Individual" searchProperties="true">
+      <con:settings/>
+      <con:properties/>
+    </con:testCase>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Find_Individuals_for_Unique_Organization" searchProperties="true">
+      <con:settings/>
+      <con:properties/>
+    </con:testCase>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Find_Individuals_and_Organizations" searchProperties="true">
+      <con:settings/>
+      <con:properties/>
+    </con:testCase>
+    <con:properties/>
+  </con:testSuite>
+  <con:properties/>
+  <con:wssContainer/>
+  <con:sensitiveInformation/>
+</con:soapui-project>

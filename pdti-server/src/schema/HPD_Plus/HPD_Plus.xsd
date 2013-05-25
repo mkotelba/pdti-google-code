@@ -118,10 +118,10 @@
                 A HPD Plus request.
             </xsd:documentation>
         </xsd:annotation>
-        <xsd:choice minOccurs="0" maxOccurs="unbounded">
-            <xsd:element name="hpdRequestMetadata" type="HpdRequestMetadata" maxOccurs="1"/>
-            <xsd:element name="batchRequest" type="dsml:BatchRequest"/>
-        </xsd:choice>
+        <xsd:sequence>
+            <xsd:element name="hpdRequestMetadata" type="HpdRequestMetadata" minOccurs="0"/>
+            <xsd:element name="batchRequest" type="dsml:BatchRequest" minOccurs="0"/>
+        </xsd:sequence>
     </xsd:complexType>
     
     <xsd:complexType name="HpdResponseMetadata">
@@ -135,18 +135,29 @@
         </xsd:complexContent>
     </xsd:complexType>
     
+    <xsd:group name="HpdResponseItems">
+        <xsd:annotation>
+            <xsd:documentation>
+                A HPD Plus response items container.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+            <xsd:element name="batchResponse" type="dsml:BatchResponse"/>
+            <xsd:element name="hpdResponse" type="HpdResponse"/>
+        </xsd:choice>
+    </xsd:group>
+    
     <xsd:complexType name="HpdResponse">
         <xsd:annotation>
             <xsd:documentation>
                 A HPD Plus response.
             </xsd:documentation>
         </xsd:annotation>
-        <xsd:choice minOccurs="0" maxOccurs="unbounded">
-            <xsd:element name="hpdError" type="HpdError"/>
-            <xsd:element name="hpdResponseMetadata" type="HpdResponseMetadata" maxOccurs="1"/>
-            <xsd:element name="batchResponse" type="dsml:BatchResponse"/>
-            <xsd:element name="hpdResponse" type="HpdResponse"/>
-        </xsd:choice>
+        <xsd:sequence>
+            <xsd:element name="hpdResponseMetadata" type="HpdResponseMetadata" minOccurs="0"/>
+            <xsd:element name="hpdErrors" type="HpdError" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:group ref="HpdResponseItems" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
     </xsd:complexType>
     
     <xsd:element name="hpdRequest" type="HpdRequest"/>

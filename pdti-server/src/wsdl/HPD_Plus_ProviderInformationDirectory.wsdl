@@ -1,68 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<definitions
+<wsdl:definitions
     name="HPDPlusProviderInformationDirectory"
     targetNamespace="urn:gov:hhs:onc:hpdplus:2013"
     xmlns="http://schemas.xmlsoap.org/wsdl/"
     xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013"
     xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
     xmlns:tns="urn:gov:hhs:onc:hpdplus:2013"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <documentation>HPD Plus Provider Information Directory</documentation>
-    <types>
+    <wsdl:documentation>HPD Plus Provider Information Directory</wsdl:documentation>
+    <wsdl:types>
         <xsd:schema targetNamespace="urn:gov:hhs:onc:hpdplus:2013" xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
             <xsd:include schemaLocation="../schema/HPD_Plus/HPD_Plus.xsd"/>
         </xsd:schema>
-    </types>
-    <message name="Hpd_Plus_ProviderInformationQueryRequestMessage">
-        <documentation>HPD Plus Provider Information Query Request Message</documentation>
-        <part name="body" element="hpdplus:hpdRequest"/>
-    </message>
-    <message name="Hpd_Plus_ProviderInformationQueryResponseMessage">
-        <documentation>HPD Plus Provider Information Query Response Message</documentation>
-        <part name="body" element="hpdplus:hpdResponse"/>
-    </message>
-    <message name="Hpd_Plus_ProviderInformationFeedRequestMessage">
-        <documentation>HPD Plus Provider Information Feed Request Message</documentation>
-        <part name="body" element="hpdplus:hpdRequest"/>
-    </message>
-    <message name="Hpd_Plus_ProviderInformationFeedResponseMessage">
-        <documentation>HPD Plus Provider Information Feed Response Message</documentation>
-        <part name="body" element="hpdplus:hpdResponse"/>
-    </message>
-    <portType name="Hpd_Plus_ProviderInformationDirectory_PortType">
-        <operation name="Hpd_Plus_ProviderInformationQueryRequest">
-            <input message="tns:Hpd_Plus_ProviderInformationQueryRequestMessage"/>
-            <output message="tns:Hpd_Plus_ProviderInformationQueryResponseMessage"/>
-        </operation>
-        <operation name="Hpd_Plus_ProviderInformationFeedRequest">
-            <input message="tns:Hpd_Plus_ProviderInformationFeedRequestMessage"/>
-            <output message="tns:Hpd_Plus_ProviderInformationFeedResponseMessage"/>
-        </operation>
-    </portType>
-    <binding name="Hpd_Plus_ProviderInformationDirectory_Binding" type="tns:Hpd_Plus_ProviderInformationDirectory_PortType">
+    </wsdl:types>
+    <wsdl:message name="Hpd_Plus_ProviderInformationQueryRequestMessage">
+        <wsdl:documentation>HPD Plus Provider Information Query Request Message</wsdl:documentation>
+        <wsdl:part name="body" element="hpdplus:hpdRequest"/>
+    </wsdl:message>
+    <wsdl:message name="Hpd_Plus_ProviderInformationQueryResponseMessage">
+        <wsdl:documentation>HPD Plus Provider Information Query Response Message</wsdl:documentation>
+        <wsdl:part name="body" element="hpdplus:hpdResponse"/>
+    </wsdl:message>
+    <wsdl:message name="Hpd_Plus_ProviderInformationFeedRequestMessage">
+        <wsdl:documentation>HPD Plus Provider Information Feed Request Message</wsdl:documentation>
+        <wsdl:part name="body" element="hpdplus:hpdRequest"/>
+    </wsdl:message>
+    <wsdl:message name="Hpd_Plus_ProviderInformationFeedResponseMessage">
+        <wsdl:documentation>HPD Plus Provider Information Feed Response Message</wsdl:documentation>
+        <wsdl:part name="body" element="hpdplus:hpdResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="Hpd_Plus_ProviderInformationDirectory_PortType">
+        <wsdl:operation name="Hpd_Plus_ProviderInformationQueryRequest">
+            <wsdl:input message="tns:Hpd_Plus_ProviderInformationQueryRequestMessage"/>
+            <wsdl:output message="tns:Hpd_Plus_ProviderInformationQueryResponseMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="Hpd_Plus_ProviderInformationFeedRequest">
+            <wsdl:input message="tns:Hpd_Plus_ProviderInformationFeedRequestMessage"/>
+            <wsdl:output message="tns:Hpd_Plus_ProviderInformationFeedResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="Hpd_Plus_ProviderInformationDirectory_Binding" type="tns:Hpd_Plus_ProviderInformationDirectory_PortType">
         <soap12:binding style="document" transport="http://www.w3.org/2003/05/soap/bindings/HTTP/"/>
-        <operation name="Hpd_Plus_ProviderInformationQueryRequest">
+        <wsdl:operation name="Hpd_Plus_ProviderInformationQueryRequest">
             <soap12:operation soapAction="urn:gov:hhs:onc:hpdplus:2013:Hpd_Plus_ProviderInformationQueryRequest"/>
-            <input>
+            <wsdl:input>
                 <soap12:body use="literal"/>
-            </input>
-            <output name="response">
+            </wsdl:input>
+            <wsdl:output name="response">
                 <soap12:body use="literal"/>
-            </output>
-        </operation>
-        <operation name="Hpd_Plus_ProviderInformationFeedRequest">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Hpd_Plus_ProviderInformationFeedRequest">
             <soap12:operation soapAction="urn:gov:hhs:onc:hpdplus:2013:Hpd_Plus_ProviderInformationFeedRequest"/>
-            <input>
+            <wsdl:input>
                 <soap12:body use="literal"/>
-            </input>
-            <output name="response">
+            </wsdl:input>
+            <wsdl:output name="response">
                 <soap12:body use="literal"/>
-            </output>
-        </operation>
-    </binding>
-    <service name="Hpd_Plus_ProviderInformationDirectory_Service">
-        <port name="Hpd_Plus_ProviderInformationDirectory_Port_Soap" binding="tns:Hpd_Plus_ProviderInformationDirectory_Binding">
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="Hpd_Plus_ProviderInformationDirectory_Service">
+        <wsdl:port name="Hpd_Plus_ProviderInformationDirectory_Port_Soap" binding="tns:Hpd_Plus_ProviderInformationDirectory_Binding">
             <soap12:address location="http://localhost/Hpd_Plus_ProviderInformationDirectoryService"/>
-        </port>
-    </service>
-</definitions>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
