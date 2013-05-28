@@ -3,6 +3,7 @@ package gov.hhs.onc.pdti.data.impl;
 import gov.hhs.onc.pdti.data.DirectoryDataException;
 import gov.hhs.onc.pdti.data.DirectoryDataService;
 import gov.hhs.onc.pdti.data.DirectoryDataSource;
+import gov.hhs.onc.pdti.util.DirectoryUtils;
 import gov.hhs.onc.pdti.ws.api.BatchRequest;
 import gov.hhs.onc.pdti.ws.api.BatchResponse;
 import gov.hhs.onc.pdti.ws.api.DsmlMessage;
@@ -14,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.ClassUtils;
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.directory.api.dsmlv2.reponse.ErrorResponse.ErrorResponseType;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,12 +72,11 @@ public abstract class AbstractDataService<T extends DirectoryDataSource> impleme
     private ErrorResponse buildErrorResponse(String reqId, ErrorResponseType errRespType, Throwable th) {
         ErrorResponse errResp = this.objectFactory.createErrorResponse();
         errResp.setRequestID(reqId);
-        errResp.setType(new org.apache.directory.api.dsmlv2.reponse.ErrorResponse(-1, null, null)
-                .getTypeDescr(errRespType));
+        errResp.setType(DirectoryUtils.getErrorResponseTypeDesc(errRespType));
         errResp.setMessage(th.getMessage());
 
         Detail errRespDetail = this.objectFactory.createErrorResponseDetail();
-        errRespDetail.setAny(ExceptionUtils.getStackTrace(th));
+        errRespDetail.setAny(DirectoryUtils.getStackTraceJaxbElement(th));
         errResp.setDetail(errRespDetail);
 
         return errResp;

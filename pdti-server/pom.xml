@@ -17,6 +17,7 @@
     </pluginRepositories>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.testScriptSourceDirectory>${project.basedir}/src/test/scripts</project.build.testScriptSourceDirectory>
         <project.deploy.server.host>localhost</project.deploy.server.host>
         <project.deploy.server.port>8080</project.deploy.server.port>
         <project.service>ProviderInformationDirectoryService</project.service>
@@ -142,6 +143,39 @@
                         </executions>
                     </plugin>
                     <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.7</version>
+                        <executions>
+                            <execution>
+                                <id>start-apacheds</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <target>
+                                        <property name="maven.test.classpath.value" refid="maven.test.classpath"/>
+                                        <ant antfile="${project.build.testScriptSourceDirectory}/test-apacheds.xml" target="start-apacheds" inheritRefs="true"/>
+                                    </target>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>stop-apacheds</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <target>
+                                        <property name="maven.test.classpath.value" refid="maven.test.classpath"/>
+                                        <ant antfile="${project.build.testScriptSourceDirectory}/test-apacheds.xml" target="stop-apacheds" inheritRefs="true"/>
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
                         <groupId>org.codehaus.cargo</groupId>
                         <artifactId>cargo-maven2-plugin</artifactId>
                         <!-- Do not update to 1.4.1 due to https://bugs.eclipse.org/bugs/show_bug.cgi?id=408720 -->
@@ -175,6 +209,7 @@
                                     <groupId>${project.groupId}</groupId>
                                     <artifactId>${project.artifactId}</artifactId>
                                     <type>${project.packaging}</type>
+                                    <classifier>test</classifier>
                                     <properties>
                                         <context>/${project.build.finalName}</context>
                                     </properties>
@@ -182,7 +217,7 @@
                             </deployables>
                             <configuration>
                                 <properties>
-                                    <cargo.jvmargs>-XX:PermSize=512m -XX:MaxPermSize=1024 -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:+CMSPermGenSweepingEnabled</cargo.jvmargs>
+                                    <cargo.jvmargs>-XX:PermSize=512m -XX:MaxPermSize=1024m -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:+CMSPermGenSweepingEnabled</cargo.jvmargs>
                                     <cargo.hostname>${project.test.server.host}</cargo.hostname>
                                     <cargo.servlet.port>${project.test.server.port}</cargo.servlet.port>
                                 </properties>
@@ -267,11 +302,22 @@
             <groupId>org.apache.directory.api</groupId>
             <artifactId>api-dsml-engine</artifactId>
             <version>1.0.0-M17</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.directory.api</groupId>
+                    <artifactId>api-ldap-schema-data</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.directory.api</groupId>
             <artifactId>api-ldap-client-all</artifactId>
             <version>1.0.0-M17</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.directory.jdbm</groupId>
+            <artifactId>apacheds-jdbm2</artifactId>
+            <version>2.0.0-M2</version>
         </dependency>
         <dependency>
             <groupId>org.jvnet.jaxb2_commons</groupId>
@@ -342,6 +388,22 @@
             <version>2.1.3.RELEASE</version>
         </dependency>
         <dependency>
+            <groupId>org.apache.directory.server</groupId>
+            <artifactId>apacheds-test-framework</artifactId>
+            <version>2.0.0-M12</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.directory.api</groupId>
+                    <artifactId>api-ldap-schema-data</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.directory.jdbm</groupId>
+                    <artifactId>apacheds-jdbm1</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>6.8.1</version>
@@ -367,7 +429,31 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>war</goal>
+                        </goals>
+                        <configuration>
+                            <classesClassifier>test-classes</classesClassifier>
+                            <classifier>test</classifier>
+                            <primaryArtifact>false</primaryArtifact>
+                            <webappDirectory>${project.build.directory}/${project.build.finalName}-test</webappDirectory>
+                            <webResources>
+                                <webResource>
+                                    <directory>${project.basedir}/src/test/webapp/META-INF</directory>
+                                    <includes>
+                                        <include>**/*</include>
+                                    </includes>
+                                    <targetPath>META-INF</targetPath>
+                                </webResource>
+                            </webResources>
+                        </configuration>
+                    </execution>
+                </executions>
                 <configuration>
+                    <archiveClasses>true</archiveClasses>
                     <webResources>
                         <webResource>
                             <directory>${project.basedir}/src/schema</directory>

@@ -35,7 +35,7 @@
         <param name="threshold" value="all"/>
 
         <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
-            <param name="fileNamePattern" value="${pdti.log.dir}/pdti-server.%d{yyyy-MM-dd}.log"/>
+            <param name="fileNamePattern" value="${pdti.log.dir}/pdti-apacheds.%d{yyyy-MM-dd}.log"/>
         </rollingPolicy>
         
         <triggeringPolicy class="org.apache.log4j.rolling.SizeBasedTriggeringPolicy">
@@ -43,20 +43,25 @@
         </triggeringPolicy>
 
         <layout class="org.apache.log4j.EnhancedPatternLayout">
-            <param name="conversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%C %t] %p - %m%throwable%n"/>
+            <param name="conversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%C %t] %p - %m%throwable{full}%n"/>
         </layout>
     </appender>
     
     <!--==================================================
     = LOGGERS: DEPENDENCIES
     ===================================================-->
+    <logger name="jdbm" additivity="false">
+        <level value="warn"/>
+        <appender-ref ref="consoleApp"/>
+        <appender-ref ref="fileApp"/>
+    </logger>
     <logger name="org.apache" additivity="false">
         <level value="info"/>
         <appender-ref ref="consoleApp"/>
         <appender-ref ref="fileApp"/>
     </logger>
-    <logger name="org.springframework" additivity="false">
-        <level value="info"/>
+    <logger name="org.apache.directory.api" additivity="false">
+        <level value="warn"/>
         <appender-ref ref="consoleApp"/>
         <appender-ref ref="fileApp"/>
     </logger>

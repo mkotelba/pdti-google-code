@@ -2,6 +2,7 @@ package gov.hhs.onc.pdti.service.impl;
 
 import gov.hhs.onc.pdti.data.DirectoryDataService;
 import gov.hhs.onc.pdti.service.DirectoryService;
+import gov.hhs.onc.pdti.util.DirectoryUtils;
 import gov.hhs.onc.pdti.ws.api.BatchRequest;
 import gov.hhs.onc.pdti.ws.api.HpdError;
 import gov.hhs.onc.pdti.ws.api.HpdErrorDetail;
@@ -13,7 +14,6 @@ import gov.hhs.onc.pdti.ws.api.HpdResponseMetadata;
 import gov.hhs.onc.pdti.ws.api.ObjectFactory;
 import java.util.List;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -32,16 +32,14 @@ public class DirectoryServiceImpl implements DirectoryService {
 
     @Override
     public HpdResponse processRequest(HpdRequest hpdReq) {
-        HpdResponse hpdResp = this.objectFactory.createHpdResponse();
-
+        BatchRequest batchReq = hpdReq.getBatchRequest();
         HpdRequestMetadata reqMeta = ObjectUtils.defaultIfNull(hpdReq.getHpdRequestMetadata(),
                 this.objectFactory.createHpdRequestMetadata());
 
+        HpdResponse hpdResp = this.objectFactory.createHpdResponse();
         HpdResponseMetadata respMeta = this.objectFactory.createHpdResponseMetadata();
         respMeta.setProperties(reqMeta.getProperties());
         hpdResp.setHpdResponseMetadata(respMeta);
-
-        BatchRequest batchReq = hpdReq.getBatchRequest();
 
         for (DirectoryDataService<?> dataService : this.dataServices) {
             try {
@@ -64,7 +62,7 @@ public class DirectoryServiceImpl implements DirectoryService {
         err.setMessage(th.getMessage());
 
         HpdErrorDetail errDetail = this.objectFactory.createHpdErrorDetail();
-        errDetail.setAny(ExceptionUtils.getStackTrace(th));
+        errDetail.setAny(DirectoryUtils.getStackTraceJaxbElement(th));
         err.setDetail(errDetail);
 
         return err;
