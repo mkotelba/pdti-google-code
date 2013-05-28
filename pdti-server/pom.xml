@@ -217,7 +217,7 @@
                             </deployables>
                             <configuration>
                                 <properties>
-                                    <cargo.jvmargs>-XX:PermSize=512m -XX:MaxPermSize=1024m -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:+CMSPermGenSweepingEnabled</cargo.jvmargs>
+                                    <cargo.jvmargs>-XX:PermSize=512m -XX:MaxPermSize=1024m -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled</cargo.jvmargs>
                                     <cargo.hostname>${project.test.server.host}</cargo.hostname>
                                     <cargo.servlet.port>${project.test.server.port}</cargo.servlet.port>
                                 </properties>
@@ -516,6 +516,7 @@
                             </args>
                             <bindingFiles>
                                 <bindingFile>DSMLv2.xjb</bindingFile>
+                                <bindingFile>HPD_ProviderInformationDirectory.xjb</bindingFile>
                             </bindingFiles>
                             <wsdlFiles>
                                 <wsdlFile>HPD_ProviderInformationDirectory.wsdl</wsdlFile>
@@ -539,6 +540,7 @@
                             <bindingFiles>
                                 <bindingFile>DSMLv2.xjb</bindingFile>
                                 <bindingFile>HPD_Plus.xjb</bindingFile>
+                                <bindingFile>HPD_Plus_ProviderInformationDirectory.xjb</bindingFile>
                             </bindingFiles>
                             <wsdlFiles>
                                 <wsdlFile>HPD_Plus_ProviderInformationDirectory.wsdl</wsdlFile>
@@ -548,13 +550,12 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <extension>true</extension>
+                    <xadditionalHeaders>true</xadditionalHeaders>
                     <xjcArgs>
                         <xjcArg>-Xannotate</xjcArg>
                         <xjcArg>-Xinheritance</xjcArg>
                     </xjcArgs>
-                    <extension>true</extension>
-                    <packageName>gov.hhs.onc.pdti.ws.api</packageName>
-                    <xadditionalHeaders>true</xadditionalHeaders>
                 </configuration>
             </plugin>
         </plugins>

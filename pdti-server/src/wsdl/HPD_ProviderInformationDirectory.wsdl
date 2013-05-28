@@ -10,7 +10,7 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <wsdl:documentation>HPD Provider Information Directory</wsdl:documentation>
     <wsdl:types>
-        <xsd:schema targetNamespace="urn:oasis:names:tc:DSML:2:0:core" xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core">
+        <xsd:schema targetNamespace="urn:oasis:names:tc:DSML:2:0:core">
             <xsd:include schemaLocation="../schema/DSML/DSMLv2.xsd"/>
         </xsd:schema>
     </wsdl:types>

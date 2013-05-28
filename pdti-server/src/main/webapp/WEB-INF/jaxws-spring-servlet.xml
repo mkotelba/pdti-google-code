@@ -22,9 +22,15 @@
     <sws:annotation-driven/>
     
     <beans:bean id="objectFactory" class="gov.hhs.onc.pdti.ws.api.ObjectFactory"/>
+    <beans:bean id="hpdPlusObjectFactory" class="gov.hhs.onc.pdti.ws.api.hpdplus.ObjectFactory"/>
     
-    <beans:bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller"
-        p:contextPath="gov.hhs.onc.pdti.ws.api">
+    <beans:bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+        <beans:property name="contextPaths">
+            <util:list>
+                <beans:value>gov.hhs.onc.pdti.ws.api</beans:value>
+                <beans:value>gov.hhs.onc.pdti.ws.api.hpdplus</beans:value>
+            </util:list>
+        </beans:property>
         <beans:property name="marshallerProperties">
             <util:map>
                 <beans:entry>

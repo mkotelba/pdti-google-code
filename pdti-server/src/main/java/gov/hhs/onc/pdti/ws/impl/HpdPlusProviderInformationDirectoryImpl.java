@@ -1,8 +1,8 @@
 package gov.hhs.onc.pdti.ws.impl;
 
-import gov.hhs.onc.pdti.ws.api.HpdPlusProviderInformationDirectoryPortType;
-import gov.hhs.onc.pdti.ws.api.HpdRequest;
-import gov.hhs.onc.pdti.ws.api.HpdResponse;
+import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusProviderInformationDirectoryPortType;
+import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusRequest;
+import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusResponse;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -20,20 +20,20 @@ public class HpdPlusProviderInformationDirectoryImpl extends AbstractProviderInf
 
     @Override
     @WebMethod(operationName = "Hpd_Plus_ProviderInformationQueryRequest", action = "urn:gov:hhs:onc:hpdplus:2013:Hpd_Plus_ProviderInformationQueryRequest")
-    @WebResult(name = "hpdResponse", targetNamespace = "urn:gov:hhs:onc:hpdplus:2013", partName = "body")
-    public HpdResponse hpdPlusProviderInformationQueryRequest(
-            @WebParam(name = "hpdRequest", targetNamespace = "urn:gov:hhs:onc:hpdplus:2013", partName = "body") HpdRequest body) {
+    @WebResult(name = "hpdPlusResponse", targetNamespace = "urn:gov:hhs:onc:hpdplus:2013", partName = "body")
+    public HpdPlusResponse hpdPlusProviderInformationQueryRequest(
+            @WebParam(name = "hpdPlusRequest", targetNamespace = "urn:gov:hhs:onc:hpdplus:2013", partName = "body") HpdPlusRequest body) {
 
         return this.dirService.processRequest(body);
     }
 
     @Override
     @WebMethod(operationName = "Hpd_Plus_ProviderInformationFeedRequest", action = "urn:gov:hhs:onc:hpdplus:2013:Hpd_Plus_ProviderInformationFeedRequest")
-    @WebResult(name = "hpdResponse", targetNamespace = "urn:gov:hhs:onc:hpdplus:2013", partName = "body")
-    public HpdResponse hpdPlusProviderInformationFeedRequest(
-            @WebParam(name = "hpdRequest", targetNamespace = "urn:gov:hhs:onc:hpdplus:2013", partName = "body") HpdRequest body) {
+    @WebResult(name = "hpdPlusResponse", targetNamespace = "urn:gov:hhs:onc:hpdplus:2013", partName = "body")
+    public HpdPlusResponse hpdPlusProviderInformationFeedRequest(
+            @WebParam(name = "hpdRequest", targetNamespace = "urn:gov:hhs:onc:hpdplus:2013", partName = "body") HpdPlusRequest body) {
 
         // TODO: implement
-        return this.objectFactory.createHpdResponse();
+        return this.hpdPlusObjectFactory.createHpdPlusResponse();
     }
 }

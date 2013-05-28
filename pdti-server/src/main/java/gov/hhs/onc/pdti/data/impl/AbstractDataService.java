@@ -9,13 +9,13 @@ import gov.hhs.onc.pdti.ws.api.BatchResponse;
 import gov.hhs.onc.pdti.ws.api.DsmlMessage;
 import gov.hhs.onc.pdti.ws.api.ErrorResponse;
 import gov.hhs.onc.pdti.ws.api.ErrorResponse.Detail;
+import gov.hhs.onc.pdti.ws.api.ErrorResponse.ErrorType;
 import gov.hhs.onc.pdti.ws.api.ObjectFactory;
 import gov.hhs.onc.pdti.ws.api.SearchRequest;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.ClassUtils;
-import org.apache.directory.api.dsmlv2.reponse.ErrorResponse.ErrorResponseType;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -31,6 +31,7 @@ public abstract class AbstractDataService<T extends DirectoryDataSource> impleme
 
     @Override
     public List<BatchResponse> processData(BatchRequest batchReq) throws DirectoryDataException {
+        String reqId = batchReq.getRequestID();
         List<BatchResponse> batchResps = new ArrayList<>();
         BatchResponse batchResp;
 
@@ -46,10 +47,11 @@ public abstract class AbstractDataService<T extends DirectoryDataSource> impleme
                 LOGGER.error(th);
 
                 batchResp.getBatchResponses().add(
-                        this.objectFactory.createBatchResponseErrorResponse(this.buildErrorResponse(
-                                batchReq.getRequestID(), ErrorResponseType.OTHER, th)));
+                        this.objectFactory.createBatchResponseErrorResponse(this.buildErrorResponse(reqId,
+                                ErrorType.OTHER, th)));
             }
 
+            batchResp.setRequestID(reqId);
             batchResps.add(batchResp);
         }
 
@@ -69,10 +71,10 @@ public abstract class AbstractDataService<T extends DirectoryDataSource> impleme
         }
     }
 
-    private ErrorResponse buildErrorResponse(String reqId, ErrorResponseType errRespType, Throwable th) {
+    private ErrorResponse buildErrorResponse(String reqId, ErrorType errType, Throwable th) {
         ErrorResponse errResp = this.objectFactory.createErrorResponse();
         errResp.setRequestID(reqId);
-        errResp.setType(DirectoryUtils.getErrorResponseTypeDesc(errRespType));
+        errResp.setType(errType);
         errResp.setMessage(th.getMessage());
 
         Detail errRespDetail = this.objectFactory.createErrorResponseDetail();

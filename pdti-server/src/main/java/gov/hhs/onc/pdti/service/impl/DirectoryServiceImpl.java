@@ -4,16 +4,15 @@ import gov.hhs.onc.pdti.data.DirectoryDataService;
 import gov.hhs.onc.pdti.service.DirectoryService;
 import gov.hhs.onc.pdti.util.DirectoryUtils;
 import gov.hhs.onc.pdti.ws.api.BatchRequest;
-import gov.hhs.onc.pdti.ws.api.HpdError;
-import gov.hhs.onc.pdti.ws.api.HpdErrorDetail;
-import gov.hhs.onc.pdti.ws.api.HpdErrorType;
-import gov.hhs.onc.pdti.ws.api.HpdRequest;
-import gov.hhs.onc.pdti.ws.api.HpdRequestMetadata;
-import gov.hhs.onc.pdti.ws.api.HpdResponse;
-import gov.hhs.onc.pdti.ws.api.HpdResponseMetadata;
 import gov.hhs.onc.pdti.ws.api.ObjectFactory;
+import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusError;
+import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusErrorDetail;
+import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusErrorType;
+import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusRequest;
+import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusRequestMetadata;
+import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusResponse;
+import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusResponseMetadata;
 import java.util.List;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -28,40 +27,48 @@ public class DirectoryServiceImpl implements DirectoryService {
     private ObjectFactory objectFactory;
 
     @Autowired
+    private gov.hhs.onc.pdti.ws.api.hpdplus.ObjectFactory hpdPlusObjectFactory;
+
+    @Autowired
     private List<DirectoryDataService<?>> dataServices;
 
     @Override
-    public HpdResponse processRequest(HpdRequest hpdReq) {
-        BatchRequest batchReq = hpdReq.getBatchRequest();
-        HpdRequestMetadata reqMeta = ObjectUtils.defaultIfNull(hpdReq.getHpdRequestMetadata(),
-                this.objectFactory.createHpdRequestMetadata());
+    public HpdPlusResponse processRequest(HpdPlusRequest hpdPlusReq) {
+        String reqId = hpdPlusReq.getRequestID();
 
-        HpdResponse hpdResp = this.objectFactory.createHpdResponse();
-        HpdResponseMetadata respMeta = this.objectFactory.createHpdResponseMetadata();
-        respMeta.setProperties(reqMeta.getProperties());
-        hpdResp.setHpdResponseMetadata(respMeta);
+        BatchRequest batchReq = hpdPlusReq.getBatchRequest();
+        batchReq.setRequestID(reqId);
+
+        HpdPlusRequestMetadata reqMeta = hpdPlusReq.getRequestMetadata();
+
+        HpdPlusResponse hpdPlusResp = this.hpdPlusObjectFactory.createHpdPlusResponse();
+        hpdPlusResp.setRequestID(reqId);
+
+        HpdPlusResponseMetadata respMeta = this.hpdPlusObjectFactory.createHpdPlusResponseMetadata();
+        respMeta.setRequestMetadata(reqMeta);
+        hpdPlusResp.setResponseMetadata(respMeta);
 
         for (DirectoryDataService<?> dataService : this.dataServices) {
             try {
-                hpdResp.getHpdResponseItems().addAll(dataService.processData(batchReq));
+                hpdPlusResp.getResponseItems().addAll(dataService.processData(batchReq));
             } catch (Throwable th) {
                 // TODO: improve error handling
                 LOGGER.error(th);
 
-                hpdResp.getHpdErrors().add(this.buildError(batchReq.getRequestID(), HpdErrorType.OTHER, th));
+                hpdPlusResp.getErrors().add(this.buildError(reqId, HpdPlusErrorType.OTHER, th));
             }
         }
 
-        return hpdResp;
+        return hpdPlusResp;
     }
 
-    private HpdError buildError(String reqId, HpdErrorType errType, Throwable th) {
-        HpdError err = this.objectFactory.createHpdError();
+    private HpdPlusError buildError(String reqId, HpdPlusErrorType errType, Throwable th) {
+        HpdPlusError err = this.hpdPlusObjectFactory.createHpdPlusError();
         err.setRequestID(reqId);
         err.setType(errType);
         err.setMessage(th.getMessage());
 
-        HpdErrorDetail errDetail = this.objectFactory.createHpdErrorDetail();
+        HpdPlusErrorDetail errDetail = this.hpdPlusObjectFactory.createHpdPlusErrorDetail();
         errDetail.setAny(DirectoryUtils.getStackTraceJaxbElement(th));
         err.setDetail(errDetail);
 

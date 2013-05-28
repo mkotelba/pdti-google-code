@@ -2,9 +2,9 @@ package gov.hhs.onc.pdti.ws.impl;
 
 import gov.hhs.onc.pdti.ws.api.BatchRequest;
 import gov.hhs.onc.pdti.ws.api.BatchResponse;
-import gov.hhs.onc.pdti.ws.api.HpdRequest;
-import gov.hhs.onc.pdti.ws.api.HpdResponse;
 import gov.hhs.onc.pdti.ws.api.ProviderInformationDirectoryPortType;
+import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusRequest;
+import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusResponse;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -27,12 +27,12 @@ public class ProviderInformationDirectoryImpl extends AbstractProviderInformatio
     public BatchResponse providerInformationQueryRequest(
             @WebParam(name = "batchRequest", targetNamespace = "urn:oasis:names:tc:DSML:2:0:core", partName = "body") BatchRequest body) {
 
-        HpdRequest hpdReq = this.objectFactory.createHpdRequest();
-        hpdReq.setBatchRequest(body);
+        HpdPlusRequest hpdPlusReq = this.hpdPlusObjectFactory.createHpdPlusRequest();
+        hpdPlusReq.setBatchRequest(body);
 
-        HpdResponse hpdResp = this.dirService.processRequest(hpdReq);
+        HpdPlusResponse hpdPlusResp = this.dirService.processRequest(hpdPlusReq);
 
-        return (BatchResponse) CollectionUtils.find(hpdResp.getHpdResponseItems(),
+        return (BatchResponse) CollectionUtils.find(hpdPlusResp.getResponseItems(),
                 InstanceofPredicate.getInstance(BatchResponse.class));
     }
 

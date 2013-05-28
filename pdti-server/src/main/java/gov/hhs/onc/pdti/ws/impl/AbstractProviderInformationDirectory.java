@@ -14,5 +14,8 @@ public abstract class AbstractProviderInformationDirectory {
     protected ObjectFactory objectFactory;
 
     @Autowired
+    protected gov.hhs.onc.pdti.ws.api.hpdplus.ObjectFactory hpdPlusObjectFactory;
+
+    @Autowired
     protected DirectoryService dirService;
 }

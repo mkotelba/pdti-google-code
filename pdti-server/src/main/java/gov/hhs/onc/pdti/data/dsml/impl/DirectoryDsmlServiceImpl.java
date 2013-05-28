@@ -24,6 +24,9 @@ public class DirectoryDsmlServiceImpl implements DirectoryDsmlService {
     private ObjectFactory objectFactory;
 
     @Autowired
+    private gov.hhs.onc.pdti.ws.api.hpdplus.ObjectFactory hpdPlusObjectFactory;
+
+    @Autowired
     private DirectoryJaxb2Marshaller jaxb2Marshaller;
 
     @Override
