@@ -1,6 +1,7 @@
 package gov.hhs.onc.pdti.service.impl;
 
 import gov.hhs.onc.pdti.data.DirectoryDataService;
+import gov.hhs.onc.pdti.data.federation.FederationService;
 import gov.hhs.onc.pdti.service.DirectoryService;
 import gov.hhs.onc.pdti.util.DirectoryUtils;
 import gov.hhs.onc.pdti.ws.api.BatchRequest;
@@ -29,8 +30,11 @@ public class DirectoryServiceImpl implements DirectoryService {
     @Autowired
     private gov.hhs.onc.pdti.ws.api.hpdplus.ObjectFactory hpdPlusObjectFactory;
 
-    @Autowired
+    @Autowired(required = false)
     private List<DirectoryDataService<?>> dataServices;
+
+    @Autowired
+    private FederationService federationService;
 
     @Override
     public HpdPlusResponse processRequest(HpdPlusRequest hpdPlusReq) {
@@ -48,15 +52,26 @@ public class DirectoryServiceImpl implements DirectoryService {
         respMeta.setRequestMetadata(reqMeta);
         hpdPlusResp.setResponseMetadata(respMeta);
 
-        for (DirectoryDataService<?> dataService : this.dataServices) {
-            try {
-                hpdPlusResp.getResponseItems().addAll(dataService.processData(batchReq));
-            } catch (Throwable th) {
-                // TODO: improve error handling
-                LOGGER.error(th);
+        if (this.dataServices != null) {
+            for (DirectoryDataService<?> dataService : this.dataServices) {
+                try {
+                    hpdPlusResp.getResponseItems().addAll(dataService.processData(batchReq));
+                } catch (Throwable th) {
+                    // TODO: improve error handling
+                    LOGGER.error(th);
 
-                hpdPlusResp.getErrors().add(this.buildError(reqId, HpdPlusErrorType.OTHER, th));
+                    hpdPlusResp.getErrors().add(this.buildError(reqId, HpdPlusErrorType.OTHER, th));
+                }
             }
+        }
+
+        try {
+            hpdPlusResp.getResponseItems().addAll(this.federationService.federate(hpdPlusReq));
+        } catch (Throwable th) {
+            // TODO: improve error handling
+            LOGGER.error(th);
+
+            hpdPlusResp.getErrors().add(this.buildError(reqId, HpdPlusErrorType.OTHER, th));
         }
 
         return hpdPlusResp;

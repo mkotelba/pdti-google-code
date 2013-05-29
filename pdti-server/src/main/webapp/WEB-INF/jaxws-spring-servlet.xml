@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <beans:beans
     xmlns:beans="http://www.springframework.org/schema/beans"
     xmlns:context="http://www.springframework.org/schema/context"
@@ -20,6 +21,16 @@
     <context:component-scan base-package="gov.hhs.onc.pdti"/>
     
     <sws:annotation-driven/>
+    
+    <beans:bean id="customEditorConfigurer" class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <beans:property name="customEditors">
+            <util:map>
+                <beans:entry key="org.apache.directory.api.ldap.model.name.Dn">
+                    <beans:bean class="gov.hhs.onc.pdti.data.ldap.DnPropertyEditor"/>
+                </beans:entry>
+            </util:map>
+        </beans:property>
+    </beans:bean>
     
     <beans:bean id="objectFactory" class="gov.hhs.onc.pdti.ws.api.ObjectFactory"/>
     <beans:bean id="hpdPlusObjectFactory" class="gov.hhs.onc.pdti.ws.api.hpdplus.ObjectFactory"/>

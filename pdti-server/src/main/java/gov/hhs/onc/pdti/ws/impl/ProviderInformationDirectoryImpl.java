@@ -11,7 +11,8 @@ import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.functors.InstanceofPredicate;
+import org.apache.commons.collections.PredicateUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -32,8 +33,10 @@ public class ProviderInformationDirectoryImpl extends AbstractProviderInformatio
 
         HpdPlusResponse hpdPlusResp = this.dirService.processRequest(hpdPlusReq);
 
-        return (BatchResponse) CollectionUtils.find(hpdPlusResp.getResponseItems(),
-                InstanceofPredicate.getInstance(BatchResponse.class));
+        return ObjectUtils.defaultIfNull(
+                (BatchResponse) CollectionUtils.find(hpdPlusResp.getResponseItems(),
+                        PredicateUtils.instanceofPredicate(BatchResponse.class)),
+                this.objectFactory.createBatchResponse());
     }
 
     @Override

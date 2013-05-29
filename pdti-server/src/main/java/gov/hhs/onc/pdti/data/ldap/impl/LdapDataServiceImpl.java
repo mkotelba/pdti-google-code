@@ -95,7 +95,7 @@ public class LdapDataServiceImpl extends AbstractDataService<LdapDataSource> imp
         return !ldapConn.isConnected();
     }
 
-    @Autowired
+    @Autowired(required = false)
     @Override
     public void setDataSources(List<LdapDataSource> dataSources) {
         this.dataSources = dataSources;

@@ -12,8 +12,10 @@ import gov.hhs.onc.pdti.ws.api.ErrorResponse.Detail;
 import gov.hhs.onc.pdti.ws.api.ErrorResponse.ErrorType;
 import gov.hhs.onc.pdti.ws.api.ObjectFactory;
 import gov.hhs.onc.pdti.ws.api.SearchRequest;
+import gov.hhs.onc.pdti.ws.api.SearchResponse;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.JAXBElement;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.log4j.Logger;
@@ -27,6 +29,9 @@ public abstract class AbstractDataService<T extends DirectoryDataSource> impleme
     @Autowired
     protected ObjectFactory objectFactory;
 
+    @Autowired
+    protected gov.hhs.onc.pdti.ws.api.hpdplus.ObjectFactory hpdPlusObjectFactory;
+
     protected List<T> dataSources;
 
     @Override
@@ -34,25 +39,45 @@ public abstract class AbstractDataService<T extends DirectoryDataSource> impleme
         String reqId = batchReq.getRequestID();
         List<BatchResponse> batchResps = new ArrayList<>();
         BatchResponse batchResp;
+        DsmlMessage batchRespMsg;
+        SearchResponse searchResp;
 
-        for (T dataSource : this.dataSources) {
-            batchResp = this.objectFactory.createBatchResponse();
+        if (this.dataSources != null) {
+            for (T dataSource : this.dataSources) {
+                batchResp = this.objectFactory.createBatchResponse();
 
-            try {
-                validateRequest(batchReq);
+                try {
+                    validateRequest(batchReq);
 
-                batchResp = this.processData(dataSource, batchReq);
-            } catch (Throwable th) {
-                // TODO: improve error handling
-                LOGGER.error(th);
+                    batchResp = this.processData(dataSource, batchReq);
+                } catch (Throwable th) {
+                    // TODO: improve error handling
+                    LOGGER.error(th);
 
-                batchResp.getBatchResponses().add(
-                        this.objectFactory.createBatchResponseErrorResponse(this.buildErrorResponse(reqId,
-                                ErrorType.OTHER, th)));
+                    batchResp.getBatchResponses().add(
+                            this.objectFactory.createBatchResponseErrorResponse(this.buildErrorResponse(reqId,
+                                    ErrorType.OTHER, th)));
+                }
+
+                batchResp.setRequestID(reqId);
+                
+                for (JAXBElement<?> batchRespItem : batchResp.getBatchResponses())
+                {
+                    if (DsmlMessage.class.isAssignableFrom(batchRespItem.getDeclaredType()))
+                    {
+                        batchRespMsg = (DsmlMessage)batchRespItem.getValue();
+                        batchRespMsg.setRequestID(reqId);
+                    }
+                    else if (SearchResponse.class.isAssignableFrom(batchRespItem.getDeclaredType()))
+                    {
+                        searchResp = (SearchResponse)batchRespItem.getValue();
+                        searchResp.setRequestID(reqId);
+                        searchResp.getSearchResultDone().setRequestID(reqId);
+                    }
+                }
+                
+                batchResps.add(batchResp);
             }
-
-            batchResp.setRequestID(reqId);
-            batchResps.add(batchResp);
         }
 
         return batchResps;
@@ -68,6 +93,8 @@ public abstract class AbstractDataService<T extends DirectoryDataSource> impleme
                 throw new DirectoryDataException("Invalid DSML batch request message type (class="
                         + batchReqMsgClass.getName() + ").");
             }
+
+            batchReqMsg.setRequestID(batchReq.getRequestID());
         }
     }
 

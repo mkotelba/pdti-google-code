@@ -31,7 +31,7 @@ public class HpdPlusProviderInformationDirectoryImpl extends AbstractProviderInf
     @WebMethod(operationName = "Hpd_Plus_ProviderInformationFeedRequest", action = "urn:gov:hhs:onc:hpdplus:2013:Hpd_Plus_ProviderInformationFeedRequest")
     @WebResult(name = "hpdPlusResponse", targetNamespace = "urn:gov:hhs:onc:hpdplus:2013", partName = "body")
     public HpdPlusResponse hpdPlusProviderInformationFeedRequest(
-            @WebParam(name = "hpdRequest", targetNamespace = "urn:gov:hhs:onc:hpdplus:2013", partName = "body") HpdPlusRequest body) {
+            @WebParam(name = "hpdPlusRequest", targetNamespace = "urn:gov:hhs:onc:hpdplus:2013", partName = "body") HpdPlusRequest body) {
 
         // TODO: implement
         return this.hpdPlusObjectFactory.createHpdPlusResponse();

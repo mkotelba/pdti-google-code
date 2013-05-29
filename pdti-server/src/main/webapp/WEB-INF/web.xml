@@ -28,4 +28,8 @@
             /WEB-INF/jaxws-spring-servlet.xml
         </param-value>
     </context-param>
+    <context-param>
+        <param-name>contextInitializerClasses</param-name>
+        <param-value>gov.hhs.onc.pdti.context.DirectoryContextInitializer</param-value>
+    </context-param>
 </web-app>

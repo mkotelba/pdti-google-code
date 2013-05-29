@@ -201,6 +201,8 @@
                                 <containerId>jetty9x</containerId>
                                 <type>embedded</type>
                                 <systemProperties>
+                                    <pdti.context.config.data.ldap>/META-INF/data/ldap/ldap-test.xml</pdti.context.config.data.ldap>
+                                    <pdti.context.config.data.federation>/META-INF/data/federation/federation-test.xml</pdti.context.config.data.federation>
                                     <pdti.log.dir>${project.test.log.dir}</pdti.log.dir>
                                 </systemProperties>
                             </container>
@@ -415,6 +417,28 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <delete quiet="true">
+                                    <fileset dir="${project.build.directory}/generated-sources/wsimport">
+                                        <include name="**/package-info.java"/>
+                                    </fileset>
+                                </delete>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
                 <configuration>
@@ -513,9 +537,13 @@
                             <args>
                                 <arg>-b</arg>
                                 <arg>file:${project.basedir}/src/schema/DSML/DSMLv2.xsd</arg>
+                                <arg>-b</arg>
+                                <arg>file:${project.basedir}/src/schema/HPD/HPD.xsd</arg>
                             </args>
                             <bindingFiles>
+                                <bindingFile>global.xjb</bindingFile>
                                 <bindingFile>DSMLv2.xjb</bindingFile>
+                                <bindingFile>HPD.xjb</bindingFile>
                                 <bindingFile>HPD_ProviderInformationDirectory.xjb</bindingFile>
                             </bindingFiles>
                             <wsdlFiles>
@@ -538,6 +566,7 @@
                                 <arg>file:${project.basedir}/src/schema/HPD_Plus/HPD_Plus.xsd</arg>
                             </args>
                             <bindingFiles>
+                                <bindingFile>global.xjb</bindingFile>
                                 <bindingFile>DSMLv2.xjb</bindingFile>
                                 <bindingFile>HPD_Plus.xjb</bindingFile>
                                 <bindingFile>HPD_Plus_ProviderInformationDirectory.xjb</bindingFile>
@@ -554,6 +583,7 @@
                     <xadditionalHeaders>true</xadditionalHeaders>
                     <xjcArgs>
                         <xjcArg>-Xannotate</xjcArg>
+                        <xjcArg>-Xcopyable</xjcArg>
                         <xjcArg>-Xinheritance</xjcArg>
                     </xjcArgs>
                 </configuration>
