@@ -40,7 +40,7 @@
             </dsml:filter>
             <dsml:attributes>
                <dsml:attribute name="uid"/>
-               <dsml:attribute name="hcIdentfier"/>
+               <dsml:attribute name="hcIdentifier"/>
                <dsml:attribute name="hcProfession"/>
                <dsml:attribute name="description"/>
                <dsml:attribute name="hpdProviderStatus"/>
@@ -64,7 +64,6 @@
                <dsml:attribute name="pager"/>
                <dsml:attribute name="facsimileTelephoneNumber"/>
                <dsml:attribute name="hcSpecialization"/>
-               <dsml:attribute name="memberOf"/>
                <dsml:attribute name="suffix"/>
                <dsml:attribute name="hpdHasAService"/>
                <dsml:attribute name="hpdProviderLegalAddress"/>
@@ -112,7 +111,7 @@
                </dsml:substrings>
             </dsml:filter>
             <dsml:attributes>
-               <dsml:attribute name="hcIdentfier"/>
+               <dsml:attribute name="hcIdentifier"/>
                <dsml:attribute name="o"/>
                <dsml:attribute name="businessCategory"/>
                <dsml:attribute name="hcRegisteredName"/>
@@ -127,7 +126,6 @@
                <dsml:attribute name="labeledUri"/>
                <dsml:attribute name="telephoneNumber"/>
                <dsml:attribute name="facsimileTelephoneNumber"/>
-               <dsml:attribute name="memberOf"/>
                <dsml:attribute name="hpdHasAService"/>
                <dsml:attribute name="mail"/>
                <dsml:attribute name="policyInformation"/>
@@ -334,7 +332,7 @@
                </dsml:equalityMatch>
             </dsml:filter>
             <dsml:attributes>
-               <dsml:attribute name="hcIdentfier"/>
+               <dsml:attribute name="hcIdentifier"/>
                <dsml:attribute name="o"/>
                <dsml:attribute name="businessCategory"/>
                <dsml:attribute name="hcRegisteredName"/>
@@ -349,7 +347,6 @@
                <dsml:attribute name="labeledUri"/>
                <dsml:attribute name="telephoneNumber"/>
                <dsml:attribute name="facsimileTelephoneNumber"/>
-               <dsml:attribute name="memberOf"/>
                <dsml:attribute name="hpdHasAService"/>
                <dsml:attribute name="mail"/>
                <dsml:attribute name="policyInformation"/>
@@ -447,7 +444,7 @@
             </dsml:filter>
             <dsml:attributes>
                <dsml:attribute name="uid"/>
-               <dsml:attribute name="hcIdentfier"/>
+               <dsml:attribute name="hcIdentifier"/>
                <dsml:attribute name="hcProfession"/>
                <dsml:attribute name="description"/>
                <dsml:attribute name="hpdProviderStatus"/>
@@ -471,7 +468,6 @@
                <dsml:attribute name="pager"/>
                <dsml:attribute name="facsimileTelephoneNumber"/>
                <dsml:attribute name="hcSpecialization"/>
-               <dsml:attribute name="memberOf"/>
                <dsml:attribute name="suffix"/>
                <dsml:attribute name="hpdHasAService"/>
                <dsml:attribute name="hpdProviderLegalAddress"/>
@@ -609,7 +605,7 @@
             </dsml:filter>
             <dsml:attributes>
                <dsml:attribute name="uid"/>
-               <dsml:attribute name="hcIdentfier"/>
+               <dsml:attribute name="hcIdentifier"/>
                <dsml:attribute name="hcProfession"/>
                <dsml:attribute name="description"/>
                <dsml:attribute name="hpdProviderStatus"/>
@@ -633,7 +629,6 @@
                <dsml:attribute name="pager"/>
                <dsml:attribute name="facsimileTelephoneNumber"/>
                <dsml:attribute name="hcSpecialization"/>
-               <dsml:attribute name="memberOf"/>
                <dsml:attribute name="suffix"/>
                <dsml:attribute name="hpdHasAService"/>
                <dsml:attribute name="hpdProviderLegalAddress"/>
@@ -767,7 +762,7 @@
                </dsml:substrings>
             </dsml:filter>
             <dsml:attributes>
-               <dsml:attribute name="hcIdentfier"/>
+               <dsml:attribute name="hcIdentifier"/>
                <dsml:attribute name="o"/>
                <dsml:attribute name="businessCategory"/>
                <dsml:attribute name="hcRegisteredName"/>
@@ -782,7 +777,6 @@
                <dsml:attribute name="labeledUri"/>
                <dsml:attribute name="telephoneNumber"/>
                <dsml:attribute name="facsimileTelephoneNumber"/>
-               <dsml:attribute name="memberOf"/>
                <dsml:attribute name="hpdHasAService"/>
                <dsml:attribute name="mail"/>
                <dsml:attribute name="policyInformation"/>
@@ -869,7 +863,7 @@
             </dsml:filter>
             <dsml:attributes>
                <dsml:attribute name="uid"/>
-               <dsml:attribute name="hcIdentfier"/>
+               <dsml:attribute name="hcIdentifier"/>
                <dsml:attribute name="hcProfession"/>
                <dsml:attribute name="description"/>
                <dsml:attribute name="hpdProviderStatus"/>
@@ -893,7 +887,6 @@
                <dsml:attribute name="pager"/>
                <dsml:attribute name="facsimileTelephoneNumber"/>
                <dsml:attribute name="hcSpecialization"/>
-               <dsml:attribute name="memberOf"/>
                <dsml:attribute name="suffix"/>
                <dsml:attribute name="hpdHasAService"/>
                <dsml:attribute name="hpdProviderLegalAddress"/>
@@ -1031,7 +1024,7 @@
             </dsml:filter>
             <dsml:attributes>
                <dsml:attribute name="uid"/>
-               <dsml:attribute name="hcIdentfier"/>
+               <dsml:attribute name="hcIdentifier"/>
                <dsml:attribute name="hcProfession"/>
                <dsml:attribute name="description"/>
                <dsml:attribute name="hpdProviderStatus"/>
@@ -1055,7 +1048,6 @@
                <dsml:attribute name="pager"/>
                <dsml:attribute name="facsimileTelephoneNumber"/>
                <dsml:attribute name="hcSpecialization"/>
-               <dsml:attribute name="memberOf"/>
                <dsml:attribute name="suffix"/>
                <dsml:attribute name="hpdHasAService"/>
                <dsml:attribute name="hpdProviderLegalAddress"/>
@@ -1253,138 +1245,1116 @@
                     <con:wsrmConfig version="1.2"/>
                 </con:request>
                 </con:config>
-            </con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite name="RTM_Use_Cases"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Find_Individual" searchProperties="true"><con:settings/><con:testStep type="request" name="search_provider_by_name">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_provider_by_name" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            </con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite>
+			<con:testSuite name="RTM_Use_Cases">
+    <con:settings/>
+    <con:runType>SEQUENTIAL</con:runType>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Find_Individual" searchProperties="true" id="c46d6e17-f483-46d2-babc-4d5bff7cfe86">
+      <con:settings/>
+      
+      <con:testStep type="request" name="search_provider_by_name">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_provider_by_name" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
-      <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-         <dsml:searchRequest dn="ou=Providers,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
-            <dsml:filter>
-               <dsml:equalityMatch name="givenName">
-                  <dsml:value>Thomas</dsml:value>
-               </dsml:equalityMatch>
-               <dsml:equalityMatch name="sn">
-                  <dsml:value>Jones</dsml:value>
-               </dsml:equalityMatch>
-            </dsml:filter>
-            <dsml:attributes>
-               <dsml:attribute name="uid"/>
-               <dsml:attribute name="hcIdentfier"/>
-               <dsml:attribute name="hcProfession"/>
-               <dsml:attribute name="description"/>
-               <dsml:attribute name="hpdProviderStatus"/>
-               <dsml:attribute name="displayName"/>
-               <dsml:attribute name="title"/>
-               <dsml:attribute name="givenName"/>
-               <dsml:attribute name="initials"/>
-               <dsml:attribute name="sn"/>
-               <dsml:attribute name="cn"/>
-               <dsml:attribute name="hpdProviderLanguageSupported"/>
-               <dsml:attribute name="gender"/>
-               <dsml:attribute name="mail"/>
-               <dsml:attribute name="labeledUri"/>
-               <dsml:attribute name="physicalDeliveryOfficeName"/>
-               <dsml:attribute name="hpdProviderMailingAddress"/>
-               <dsml:attribute name="hpdProviderBillingAddress"/>
-               <dsml:attribute name="hpdProviderPracticeAddress"/>
-               <dsml:attribute name="hpdProviderPracticeLocation"/>
-               <dsml:attribute name="telephoneNumber"/>
-               <dsml:attribute name="mobile"/>
-               <dsml:attribute name="pager"/>
-               <dsml:attribute name="facsimileTelephoneNumber"/>
-               <dsml:attribute name="hcSpecialization"/>
-               <dsml:attribute name="memberOf"/>
-               <dsml:attribute name="suffix"/>
-               <dsml:attribute name="hpdHasAService"/>
-               <dsml:attribute name="hpdProviderLegalAddress"/>
-            </dsml:attributes>
-         </dsml:searchRequest>
-      </dsml:batchRequest>
+        <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dsml:searchRequest dn="ou=Providers,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
+                <dsml:filter>
+                <dsml:equalityMatch name="givenName">
+                    <dsml:value>Thomas</dsml:value>
+                </dsml:equalityMatch>
+                <dsml:equalityMatch name="sn">
+                    <dsml:value>Jones</dsml:value>
+                </dsml:equalityMatch>
+                </dsml:filter>
+                <dsml:attributes>
+	               <dsml:attribute name="uid"/>
+	               <dsml:attribute name="hcIdentifier"/>
+	               <dsml:attribute name="hcProfession"/>
+	               <dsml:attribute name="description"/>
+	               <dsml:attribute name="hpdProviderStatus"/>
+	               <dsml:attribute name="displayName"/>
+	               <dsml:attribute name="title"/>
+	               <dsml:attribute name="givenName"/>
+	               <dsml:attribute name="initials"/>
+	               <dsml:attribute name="sn"/>
+	               <dsml:attribute name="cn"/>
+	               <dsml:attribute name="hpdProviderLanguageSupported"/>
+	               <dsml:attribute name="gender"/>
+	               <dsml:attribute name="mail"/>
+	               <dsml:attribute name="labeledUri"/>
+	               <dsml:attribute name="physicalDeliveryOfficeName"/>
+	               <dsml:attribute name="hpdProviderMailingAddress"/>
+	               <dsml:attribute name="hpdProviderBillingAddress"/>
+	               <dsml:attribute name="hpdProviderPracticeAddress"/>
+	               <dsml:attribute name="hpdProviderPracticeLocation"/>
+	               <dsml:attribute name="telephoneNumber"/>
+	               <dsml:attribute name="mobile"/>
+	               <dsml:attribute name="pager"/>
+	               <dsml:attribute name="facsimileTelephoneNumber"/>
+	               <dsml:attribute name="hcSpecialization"/>
+	               <dsml:attribute name="suffix"/>
+	               <dsml:attribute name="hpdHasAService"/>
+	               <dsml:attribute name="hpdProviderLegalAddress"/>
+                </dsml:attributes>
+            </dsml:searchRequest>
+        </dsml:batchRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration><definition/></con:configuration>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Find_Organization" searchProperties="true"><con:settings/><con:testStep type="request" name="search_org_by_o">
-                <con:settings/>
-                <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
-                <con:operation>ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_org_by_o" outgoingWss="" incomingWss="">
-                    <con:settings>
-                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-                    </con:settings>
-                    <con:encoding>UTF-8</con:encoding>
-                    <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
-                    <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration><definition/></con:configuration>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep><con:properties/>
+    </con:testCase>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Find_Organization" searchProperties="true" id="e707b458-4594-460d-ba73-2fb17d38366f">
+      <con:settings/>
+      <con:testStep type="request" name="search_org_by_o">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_org_by_o" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
-      <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-         <dsml:searchRequest dn="ou=Organizations,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
-            <dsml:filter>
-               <dsml:substrings name="o">
-                  <dsml:any>Thomas Jones</dsml:any>
-               </dsml:substrings>
-            </dsml:filter>
-            <dsml:attributes>
-               <dsml:attribute name="hcIdentfier"/>
-               <dsml:attribute name="o"/>
-               <dsml:attribute name="businessCategory"/>
-               <dsml:attribute name="hcRegisteredName"/>
-               <dsml:attribute name="description"/>
-               <dsml:attribute name="hpdProviderStatus"/>
-               <dsml:attribute name="clinicalInformationContact"/>
-               <dsml:attribute name="hpdProviderMailingAddress"/>
-               <dsml:attribute name="hpdProviderBillingAddress"/>
-               <dsml:attribute name="hpdProviderPracticeAddress"/>
-               <dsml:attribute name="hpdProviderLanguageSupported"/>
-               <dsml:attribute name="hcSpeciailization"/>
-               <dsml:attribute name="labeledUri"/>
-               <dsml:attribute name="telephoneNumber"/>
-               <dsml:attribute name="facsimileTelephoneNumber"/>
-               <dsml:attribute name="memberOf"/>
-               <dsml:attribute name="hpdHasAService"/>
-               <dsml:attribute name="mail"/>
-               <dsml:attribute name="policyInformation"/>
-               <dsml:attribute name="hpdOrgId"/>
-            </dsml:attributes>
-         </dsml:searchRequest>
-      </dsml:batchRequest>
+        <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dsml:searchRequest dn="ou=Organizations,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
+                <dsml:filter>
+                <dsml:equalityMatch name="o">
+                    <dsml:value>Northside Hospital Maternity Unit</dsml:value>
+                </dsml:equalityMatch>
+                </dsml:filter>
+                <dsml:attributes>
+	               <dsml:attribute name="hcIdentifier"/>
+	               <dsml:attribute name="o"/>
+	               <dsml:attribute name="businessCategory"/>
+	               <dsml:attribute name="hcRegisteredName"/>
+	               <dsml:attribute name="description"/>
+	               <dsml:attribute name="hpdProviderStatus"/>
+	               <dsml:attribute name="clinicalInformationContact"/>
+	               <dsml:attribute name="hpdProviderMailingAddress"/>
+	               <dsml:attribute name="hpdProviderBillingAddress"/>
+	               <dsml:attribute name="hpdProviderPracticeAddress"/>
+	               <dsml:attribute name="hpdProviderLanguageSupported"/>
+	               <dsml:attribute name="hcSpeciailization"/>
+	               <dsml:attribute name="labeledUri"/>
+	               <dsml:attribute name="telephoneNumber"/>
+	               <dsml:attribute name="facsimileTelephoneNumber"/>
+	               <dsml:attribute name="hpdHasAService"/>
+	               <dsml:attribute name="mail"/>
+	               <dsml:attribute name="policyInformation"/>
+	               <dsml:attribute name="hpdOrgId"/>
+                </dsml:attributes>
+            </dsml:searchRequest>
+        </dsml:batchRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
-                    <con:assertion type="SOAP Response"/>
-                    <con:assertion type="Schema Compliance">
-                    <con:configuration/>
-                    </con:assertion>
-                    <con:assertion type="SOAP Fault Assertion"/>
-                    <con:credentials>
-                    <con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType>
-                    </con:credentials>
-                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-                    <con:jmsPropertyConfig/>
-                    <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-                    <con:wsrmConfig version="1.2"/>
-                </con:request>
-                </con:config>
-            </con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Find_Organizations_for_Unique_Individual" searchProperties="true"><con:settings/><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Find_Individuals_for_Unique_Organization" searchProperties="true"><con:settings/><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Find_Individuals_and_Organizations" searchProperties="true"><con:settings/><con:properties/></con:testCase><con:properties/></con:testSuite>
-    <con:wssContainer/>
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="request" name="search_membership_by_hpdHasAnOrg">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_membership_by_hpdHasAnOrg" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+   <soap-env:Body>
+         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dsml:searchRequest dn="ou=Memberships,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
+               <dsml:filter>
+                  <dsml:and>
+                     <dsml:equalityMatch name="hpdHasAnOrg">
+                        <dsml:value>hpdOrgId=org4,ou=Organizations,o=dev.provider-directories.com,dc=hpd</dsml:value>
+                     </dsml:equalityMatch>
+                     <dsml:present name="hpdHasASubOrg"/>
+                  </dsml:and>
+               </dsml:filter>
+               <dsml:attributes>
+                  <dsml:attribute name="hpdHasAService"/>
+                  <dsml:attribute name="telephoneNumber"/>
+                  <dsml:attribute name="facsimileTelephoneNumber"/>
+                  <dsml:attribute name="mobile"/>
+                  <dsml:attribute name="pager"/>
+                  <dsml:attribute name="mail"/>
+                  <dsml:attribute name="hpdMemberName"/>
+                  <dsml:attribute name="hpdMemberStatus"/>
+                  <dsml:attribute name="hpdMemberType"/>
+                  <dsml:attribute name="hpdHasAProvider"/>
+                  <dsml:attribute name="hpdHasASubOrg"/>
+                  <dsml:attribute name="hpdMemberId"/>
+                  <dsml:attribute name="hpdHasAnOrg"/>
+               </dsml:attributes>
+            </dsml:searchRequest>
+         </dsml:batchRequest>
+   </soap-env:Body>
+</soap-env:Envelope>]]></con:request>
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasASubOrg">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_membership_by_hpdHasASubOrg" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+   <soap-env:Body>
+         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dsml:searchRequest dn="ou=Memberships,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
+               <dsml:filter>
+                  <dsml:equalityMatch name="hpdHasASubOrg">
+                     <dsml:value>hpdOrgId=org4,ou=Organizations,o=dev.provider-directories.com,dc=hpd</dsml:value>
+                  </dsml:equalityMatch>
+               </dsml:filter>
+               <dsml:attributes>
+                  <dsml:attribute name="hpdHasAService"/>
+                  <dsml:attribute name="telephoneNumber"/>
+                  <dsml:attribute name="facsimileTelephoneNumber"/>
+                  <dsml:attribute name="mobile"/>
+                  <dsml:attribute name="pager"/>
+                  <dsml:attribute name="mail"/>
+                  <dsml:attribute name="hpdMemberName"/>
+                  <dsml:attribute name="hpdMemberStatus"/>
+                  <dsml:attribute name="hpdMemberType"/>
+                  <dsml:attribute name="hpdHasAProvider"/>
+                  <dsml:attribute name="hpdHasASubOrg"/>
+                  <dsml:attribute name="hpdMemberId"/>
+                  <dsml:attribute name="hpdHasAnOrg"/>
+               </dsml:attributes>
+            </dsml:searchRequest>
+         </dsml:batchRequest>
+   </soap-env:Body>
+</soap-env:Envelope>]]></con:request>
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep><con:properties/>
+    </con:testCase>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Find_Organizations_for_Unique_Individual" searchProperties="true" id="1845cacc-7317-4c03-8c99-10cd886a3592">
+      <con:settings/>
+      <con:testStep type="request" name="search_provider_by_HcIdentifier">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_provider_by_HcIdentifier" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+   <soap-env:Body>
+        <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dsml:searchRequest dn="ou=Providers,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
+                <dsml:filter>
+                <dsml:equalityMatch name="HcIdentifier">
+                    <dsml:value>provider3</dsml:value>
+                </dsml:equalityMatch>
+                </dsml:filter>
+                <dsml:attributes>
+	               <dsml:attribute name="uid"/>
+	               <dsml:attribute name="hcIdentifier"/>
+	               <dsml:attribute name="hcProfession"/>
+	               <dsml:attribute name="description"/>
+	               <dsml:attribute name="hpdProviderStatus"/>
+	               <dsml:attribute name="displayName"/>
+	               <dsml:attribute name="title"/>
+	               <dsml:attribute name="givenName"/>
+	               <dsml:attribute name="initials"/>
+	               <dsml:attribute name="sn"/>
+	               <dsml:attribute name="cn"/>
+	               <dsml:attribute name="hpdProviderLanguageSupported"/>
+	               <dsml:attribute name="gender"/>
+	               <dsml:attribute name="mail"/>
+	               <dsml:attribute name="labeledUri"/>
+	               <dsml:attribute name="physicalDeliveryOfficeName"/>
+	               <dsml:attribute name="hpdProviderMailingAddress"/>
+	               <dsml:attribute name="hpdProviderBillingAddress"/>
+	               <dsml:attribute name="hpdProviderPracticeAddress"/>
+	               <dsml:attribute name="hpdProviderPracticeLocation"/>
+	               <dsml:attribute name="telephoneNumber"/>
+	               <dsml:attribute name="mobile"/>
+	               <dsml:attribute name="pager"/>
+	               <dsml:attribute name="facsimileTelephoneNumber"/>
+	               <dsml:attribute name="hcSpecialization"/>
+	               <dsml:attribute name="suffix"/>
+	               <dsml:attribute name="hpdHasAService"/>
+	               <dsml:attribute name="hpdProviderLegalAddress"/>
+                </dsml:attributes>
+            </dsml:searchRequest>
+        </dsml:batchRequest>
+   </soap-env:Body>
+</soap-env:Envelope>]]></con:request>
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration><definition/></con:configuration>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasAProvider">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_membership_by_hpdHasAProvider" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+   <soap-env:Body>
+         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dsml:searchRequest dn="ou=Memberships,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
+               <dsml:filter>
+                  <dsml:equalityMatch name="hpdHasAProvider">
+                     <dsml:value>HcIdentifier=provider3,ou=Providers,${#Project#project.test.server.dsml.dn.base}</dsml:value>
+                  </dsml:equalityMatch>
+               </dsml:filter>
+               <dsml:attributes>
+                  <dsml:attribute name="hpdHasAService"/>
+                  <dsml:attribute name="telephoneNumber"/>
+                  <dsml:attribute name="facsimileTelephoneNumber"/>
+                  <dsml:attribute name="mobile"/>
+                  <dsml:attribute name="pager"/>
+                  <dsml:attribute name="mail"/>
+                  <dsml:attribute name="hpdMemberName"/>
+                  <dsml:attribute name="hpdMemberStatus"/>
+                  <dsml:attribute name="hpdMemberType"/>
+                  <dsml:attribute name="hpdHasAProvider"/>
+                  <dsml:attribute name="hpdHasASubOrg"/>
+                  <dsml:attribute name="hpdMemberId"/>
+                  <dsml:attribute name="hpdHasAnOrg"/>
+               </dsml:attributes>
+            </dsml:searchRequest>
+         </dsml:batchRequest>
+   </soap-env:Body>
+</soap-env:Envelope>]]></con:request>
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasAnOrg">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_membership_by_hpdHasAnOrg" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+   <soap-env:Body>
+         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dsml:searchRequest dn="ou=Memberships,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
+               <dsml:filter>
+                  <dsml:and>
+                     <dsml:equalityMatch name="hpdHasAnOrg">
+                        <dsml:value>hpdOrgId=org4,ou=Organizations,o=dev.provider-directories.com,dc=hpd</dsml:value>
+                     </dsml:equalityMatch>
+                     <dsml:present name="hpdHasASubOrg"/>
+                  </dsml:and>
+               </dsml:filter>
+               <dsml:attributes>
+                  <dsml:attribute name="hpdMemberId"/>
+                  <dsml:attribute name="hpdMemberName"/>
+                  <dsml:attribute name="hpdHasAProvider"/>
+                  <dsml:attribute name="hpdHasAnOrg"/>
+                  <dsml:attribute name="hpdHasASubOrg"/>
+                  <dsml:attribute name="hpdMemberStatus"/>
+                  <dsml:attribute name="hpdMemberType"/>
+                  <dsml:attribute name="hpdHasAService"/>
+                  <dsml:attribute name="telephoneNumber"/>
+                  <dsml:attribute name="mail"/>
+                  <dsml:attribute name="facsimileTelephoneNumber"/>
+                  <dsml:attribute name="mobile"/>
+                  <dsml:attribute name="pager"/>
+               </dsml:attributes>
+            </dsml:searchRequest>
+         </dsml:batchRequest>
+   </soap-env:Body>
+</soap-env:Envelope>]]></con:request>
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasAnOrg_2">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_membership_by_hpdHasAnOrg_2" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+   <soap-env:Body>
+         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dsml:searchRequest dn="ou=Memberships,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
+               <dsml:filter>
+                  <dsml:and>
+                     <dsml:equalityMatch name="hpdHasAnOrg">
+                        <dsml:value>hpdOrgId=org2,ou=Organizations,o=dev.provider-directories.com,dc=hpd</dsml:value>
+                     </dsml:equalityMatch>
+                     <dsml:present name="hpdHasASubOrg"/>
+                  </dsml:and>
+               </dsml:filter>
+               <dsml:attributes>
+                  <dsml:attribute name="hpdMemberId"/>
+                  <dsml:attribute name="hpdMemberName"/>
+                  <dsml:attribute name="hpdHasAProvider"/>
+                  <dsml:attribute name="hpdHasAnOrg"/>
+                  <dsml:attribute name="hpdHasASubOrg"/>
+                  <dsml:attribute name="hpdMemberStatus"/>
+                  <dsml:attribute name="hpdMemberType"/>
+                  <dsml:attribute name="hpdHasAService"/>
+                  <dsml:attribute name="telephoneNumber"/>
+                  <dsml:attribute name="mail"/>
+                  <dsml:attribute name="facsimileTelephoneNumber"/>
+                  <dsml:attribute name="mobile"/>
+                  <dsml:attribute name="pager"/>
+               </dsml:attributes>
+            </dsml:searchRequest>
+         </dsml:batchRequest>
+   </soap-env:Body>
+</soap-env:Envelope>]]></con:request>
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasASubOrg">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_membership_by_hpdHasASubOrg" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+   <soap-env:Body>
+         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dsml:searchRequest dn="ou=Memberships,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
+               <dsml:filter>
+                  <dsml:equalityMatch name="hpdHasASubOrg">
+                     <dsml:value>hpdOrgId=org4,ou=Organizations,o=dev.provider-directories.com,dc=hpd</dsml:value>
+                  </dsml:equalityMatch>
+               </dsml:filter>
+               <dsml:attributes>
+                  <dsml:attribute name="hpdMemberId"/>
+                  <dsml:attribute name="hpdMemberName"/>
+                  <dsml:attribute name="hpdHasAProvider"/>
+                  <dsml:attribute name="hpdHasAnOrg"/>
+                  <dsml:attribute name="hpdHasASubOrg"/>
+                  <dsml:attribute name="hpdMemberStatus"/>
+                  <dsml:attribute name="hpdMemberType"/>
+                  <dsml:attribute name="hpdHasAService"/>
+                  <dsml:attribute name="telephoneNumber"/>
+                  <dsml:attribute name="mail"/>
+                  <dsml:attribute name="facsimileTelephoneNumber"/>
+                  <dsml:attribute name="mobile"/>
+                  <dsml:attribute name="pager"/>
+               </dsml:attributes>
+            </dsml:searchRequest>
+         </dsml:batchRequest>
+   </soap-env:Body>
+</soap-env:Envelope>]]></con:request>
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasASubOrg_2">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_membership_by_hpdHasASubOrg_2" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+   <soap-env:Body>
+         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dsml:searchRequest dn="ou=Memberships,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
+               <dsml:filter>
+                  <dsml:equalityMatch name="hpdHasASubOrg">
+                     <dsml:value>hpdOrgId=org2,ou=Organizations,o=dev.provider-directories.com,dc=hpd</dsml:value>
+                  </dsml:equalityMatch>
+               </dsml:filter>
+               <dsml:attributes>
+                  <dsml:attribute name="hpdMemberId"/>
+                  <dsml:attribute name="hpdMemberName"/>
+                  <dsml:attribute name="hpdHasAProvider"/>
+                  <dsml:attribute name="hpdHasAnOrg"/>
+                  <dsml:attribute name="hpdHasASubOrg"/>
+                  <dsml:attribute name="hpdMemberStatus"/>
+                  <dsml:attribute name="hpdMemberType"/>
+                  <dsml:attribute name="hpdHasAService"/>
+                  <dsml:attribute name="telephoneNumber"/>
+                  <dsml:attribute name="mail"/>
+                  <dsml:attribute name="facsimileTelephoneNumber"/>
+                  <dsml:attribute name="mobile"/>
+                  <dsml:attribute name="pager"/>
+               </dsml:attributes>
+            </dsml:searchRequest>
+         </dsml:batchRequest>
+   </soap-env:Body>
+</soap-env:Envelope>]]></con:request>
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep><con:properties/>
+    </con:testCase>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Find_Individuals_for_Unique_Organization" searchProperties="true" id="42cf1506-3027-46fa-9cb9-a6bca9e08454">
+      <con:settings/>
+      <con:testStep type="request" name="search_org_by_HcIdentifier">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_org_by_HcIdentifier" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+   <soap-env:Body>
+        <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dsml:searchRequest dn="ou=Organizations,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
+                <dsml:filter>
+                <dsml:substrings name="HcIdentifier">
+                    <dsml:any>org2</dsml:any>
+                </dsml:substrings>
+                </dsml:filter>
+                <dsml:attributes>
+	               <dsml:attribute name="hcIdentifier"/>
+	               <dsml:attribute name="o"/>
+	               <dsml:attribute name="businessCategory"/>
+	               <dsml:attribute name="hcRegisteredName"/>
+	               <dsml:attribute name="description"/>
+	               <dsml:attribute name="hpdProviderStatus"/>
+	               <dsml:attribute name="clinicalInformationContact"/>
+	               <dsml:attribute name="hpdProviderMailingAddress"/>
+	               <dsml:attribute name="hpdProviderBillingAddress"/>
+	               <dsml:attribute name="hpdProviderPracticeAddress"/>
+	               <dsml:attribute name="hpdProviderLanguageSupported"/>
+	               <dsml:attribute name="hcSpeciailization"/>
+	               <dsml:attribute name="labeledUri"/>
+	               <dsml:attribute name="telephoneNumber"/>
+	               <dsml:attribute name="facsimileTelephoneNumber"/>
+	               <dsml:attribute name="hpdHasAService"/>
+	               <dsml:attribute name="mail"/>
+	               <dsml:attribute name="policyInformation"/>
+	               <dsml:attribute name="hpdOrgId"/>
+                </dsml:attributes>
+            </dsml:searchRequest>
+        </dsml:batchRequest>
+   </soap-env:Body>
+</soap-env:Envelope>]]></con:request>
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasAnOrg">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_membership_by_hpdHasAnOrg" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+   <soap-env:Body>
+         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dsml:searchRequest dn="ou=Memberships,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
+               <dsml:filter>
+                  <dsml:and>
+                     <dsml:equalityMatch name="hpdHasAnOrg">
+                        <dsml:value>hpdOrgId=org2,ou=Organizations,o=dev.provider-directories.com,dc=hpd</dsml:value>
+                     </dsml:equalityMatch>
+                     <dsml:present name="hpdHasAProvider"/>
+                  </dsml:and>
+               </dsml:filter>
+               <dsml:attributes>
+                  <dsml:attribute name="hpdMemberId"/>
+                  <dsml:attribute name="hpdMemberName"/>
+                  <dsml:attribute name="hpdHasAProvider"/>
+                  <dsml:attribute name="hpdHasAnOrg"/>
+                  <dsml:attribute name="hpdHasASubOrg"/>
+                  <dsml:attribute name="hpdMemberStatus"/>
+                  <dsml:attribute name="hpdMemberType"/>
+                  <dsml:attribute name="hpdHasAService"/>
+                  <dsml:attribute name="telephoneNumber"/>
+                  <dsml:attribute name="mail"/>
+                  <dsml:attribute name="facsimileTelephoneNumber"/>
+                  <dsml:attribute name="mobile"/>
+                  <dsml:attribute name="pager"/>
+               </dsml:attributes>
+            </dsml:searchRequest>
+         </dsml:batchRequest>
+   </soap-env:Body>
+</soap-env:Envelope>]]></con:request>
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep><con:properties/>
+    </con:testCase>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Find_Individuals_and_Organizations" searchProperties="true" id="a3d93523-29a7-451b-825d-ef3b42890bbf">
+      <con:settings/>
+      <con:testStep type="request" name="search_provider_by_name">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_provider_by_name" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+   <soap-env:Body>
+        <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dsml:searchRequest dn="ou=Providers,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
+                <dsml:filter>
+                <dsml:equalityMatch name="givenName">
+                    <dsml:value>Thomas</dsml:value>
+                </dsml:equalityMatch>
+                <dsml:equalityMatch name="sn">
+                    <dsml:value>Jones</dsml:value>
+                </dsml:equalityMatch>
+                </dsml:filter>
+                <dsml:attributes>
+	               <dsml:attribute name="uid"/>
+	               <dsml:attribute name="hcIdentifier"/>
+	               <dsml:attribute name="hcProfession"/>
+	               <dsml:attribute name="description"/>
+	               <dsml:attribute name="hpdProviderStatus"/>
+	               <dsml:attribute name="displayName"/>
+	               <dsml:attribute name="title"/>
+	               <dsml:attribute name="givenName"/>
+	               <dsml:attribute name="initials"/>
+	               <dsml:attribute name="sn"/>
+	               <dsml:attribute name="cn"/>
+	               <dsml:attribute name="hpdProviderLanguageSupported"/>
+	               <dsml:attribute name="gender"/>
+	               <dsml:attribute name="mail"/>
+	               <dsml:attribute name="labeledUri"/>
+	               <dsml:attribute name="physicalDeliveryOfficeName"/>
+	               <dsml:attribute name="hpdProviderMailingAddress"/>
+	               <dsml:attribute name="hpdProviderBillingAddress"/>
+	               <dsml:attribute name="hpdProviderPracticeAddress"/>
+	               <dsml:attribute name="hpdProviderPracticeLocation"/>
+	               <dsml:attribute name="telephoneNumber"/>
+	               <dsml:attribute name="mobile"/>
+	               <dsml:attribute name="pager"/>
+	               <dsml:attribute name="facsimileTelephoneNumber"/>
+	               <dsml:attribute name="hcSpecialization"/>
+	               <dsml:attribute name="suffix"/>
+	               <dsml:attribute name="hpdHasAService"/>
+	               <dsml:attribute name="hpdProviderLegalAddress"/>
+                </dsml:attributes>
+            </dsml:searchRequest>
+        </dsml:batchRequest>
+   </soap-env:Body>
+</soap-env:Envelope>]]></con:request>
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration><definition/></con:configuration>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep><con:testStep type="request" name="search_membership_by_provider">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_membership_by_provider" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+   <soap-env:Body>
+        <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dsml:searchRequest dn="ou=Memberships,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
+                <dsml:filter>
+                <dsml:equalityMatch name="hpdHasAProvider">
+                    <dsml:value>HcIdentifier=provider1,ou=Providers,${#Project#project.test.server.dsml.dn.base}</dsml:value>
+                </dsml:equalityMatch>
+                </dsml:filter>
+                <dsml:attributes>
+                <dsml:attribute name="hpdHasAnOrg"/>
+                </dsml:attributes>
+            </dsml:searchRequest>
+        </dsml:batchRequest>
+   </soap-env:Body>
+</soap-env:Envelope>]]></con:request>
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasAnOrg">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_membership_by_hpdHasAnOrg" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+   <soap-env:Body>
+         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dsml:searchRequest dn="ou=Memberships,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
+               <dsml:filter>
+                  <dsml:and>
+                     <dsml:equalityMatch name="hpdHasAnOrg">
+                        <dsml:value>hpdOrgId=org4,ou=Organizations,o=dev.provider-directories.com,dc=hpd</dsml:value>
+                     </dsml:equalityMatch>
+                     <dsml:present name="hpdHasASubOrg"/>
+                  </dsml:and>
+               </dsml:filter>
+               <dsml:attributes>
+                  <dsml:attribute name="hpdHasAService"/>
+                  <dsml:attribute name="telephoneNumber"/>
+                  <dsml:attribute name="facsimileTelephoneNumber"/>
+                  <dsml:attribute name="mobile"/>
+                  <dsml:attribute name="pager"/>
+                  <dsml:attribute name="mail"/>
+                  <dsml:attribute name="hpdMemberName"/>
+                  <dsml:attribute name="hpdMemberStatus"/>
+                  <dsml:attribute name="hpdMemberType"/>
+                  <dsml:attribute name="hpdHasAProvider"/>
+                  <dsml:attribute name="hpdHasASubOrg"/>
+                  <dsml:attribute name="hpdMemberId"/>
+                  <dsml:attribute name="hpdHasAnOrg"/>
+               </dsml:attributes>
+            </dsml:searchRequest>
+         </dsml:batchRequest>
+   </soap-env:Body>
+</soap-env:Envelope>]]></con:request>
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasASubOrg_2">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_membership_by_hpdHasASubOrg_2" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+   <soap-env:Body>
+         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dsml:searchRequest dn="ou=Memberships,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
+               <dsml:filter>
+                  <dsml:equalityMatch name="hpdHasASubOrg">
+                     <dsml:value>hpdOrgId=org4,ou=Organizations,o=dev.provider-directories.com,dc=hpd</dsml:value>
+                  </dsml:equalityMatch>
+               </dsml:filter>
+               <dsml:attributes>
+                  <dsml:attribute name="hpdHasAService"/>
+                  <dsml:attribute name="telephoneNumber"/>
+                  <dsml:attribute name="facsimileTelephoneNumber"/>
+                  <dsml:attribute name="mobile"/>
+                  <dsml:attribute name="pager"/>
+                  <dsml:attribute name="mail"/>
+                  <dsml:attribute name="hpdMemberName"/>
+                  <dsml:attribute name="hpdMemberStatus"/>
+                  <dsml:attribute name="hpdMemberType"/>
+                  <dsml:attribute name="hpdHasAProvider"/>
+                  <dsml:attribute name="hpdHasASubOrg"/>
+                  <dsml:attribute name="hpdMemberId"/>
+                  <dsml:attribute name="hpdHasAnOrg"/>
+               </dsml:attributes>
+            </dsml:searchRequest>
+         </dsml:batchRequest>
+   </soap-env:Body>
+</soap-env:Envelope>]]></con:request>
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep><con:testStep type="request" name="search_org_by_HcIdentifier">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_org_by_HcIdentifier" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+   <soap-env:Body>
+        <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dsml:searchRequest dn="ou=Organizations,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
+                <dsml:filter>
+                <dsml:substrings name="HcIdentifier">
+                    <dsml:any>org2</dsml:any>
+                </dsml:substrings>
+                </dsml:filter>
+                <dsml:attributes>
+	               <dsml:attribute name="hcIdentifier"/>
+	               <dsml:attribute name="o"/>
+	               <dsml:attribute name="businessCategory"/>
+	               <dsml:attribute name="hcRegisteredName"/>
+	               <dsml:attribute name="description"/>
+	               <dsml:attribute name="hpdProviderStatus"/>
+	               <dsml:attribute name="clinicalInformationContact"/>
+	               <dsml:attribute name="hpdProviderMailingAddress"/>
+	               <dsml:attribute name="hpdProviderBillingAddress"/>
+	               <dsml:attribute name="hpdProviderPracticeAddress"/>
+	               <dsml:attribute name="hpdProviderLanguageSupported"/>
+	               <dsml:attribute name="hcSpeciailization"/>
+	               <dsml:attribute name="labeledUri"/>
+	               <dsml:attribute name="telephoneNumber"/>
+	               <dsml:attribute name="facsimileTelephoneNumber"/>
+	               <dsml:attribute name="hpdHasAService"/>
+	               <dsml:attribute name="mail"/>
+	               <dsml:attribute name="policyInformation"/>
+	               <dsml:attribute name="hpdOrgId"/>
+                </dsml:attributes>
+            </dsml:searchRequest>
+        </dsml:batchRequest>
+   </soap-env:Body>
+</soap-env:Envelope>]]></con:request>
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasAnOrg_3">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:operation>ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_membership_by_hpdHasAnOrg_3" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+   <soap-env:Body>
+         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dsml:searchRequest dn="ou=Memberships,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
+               <dsml:filter>
+                  <dsml:and>
+                     <dsml:equalityMatch name="hpdHasAnOrg">
+                        <dsml:value>hpdOrgId=org2,ou=Organizations,o=dev.provider-directories.com,dc=hpd</dsml:value>
+                     </dsml:equalityMatch>
+                     <dsml:present name="hpdHasAProvider"/>
+                  </dsml:and>
+               </dsml:filter>
+               <dsml:attributes>
+                  <dsml:attribute name="hpdMemberId"/>
+                  <dsml:attribute name="hpdMemberName"/>
+                  <dsml:attribute name="hpdHasAProvider"/>
+                  <dsml:attribute name="hpdHasAnOrg"/>
+                  <dsml:attribute name="hpdHasASubOrg"/>
+                  <dsml:attribute name="hpdMemberStatus"/>
+                  <dsml:attribute name="hpdMemberType"/>
+                  <dsml:attribute name="hpdHasAService"/>
+                  <dsml:attribute name="telephoneNumber"/>
+                  <dsml:attribute name="mail"/>
+                  <dsml:attribute name="facsimileTelephoneNumber"/>
+                  <dsml:attribute name="mobile"/>
+                  <dsml:attribute name="pager"/>
+               </dsml:attributes>
+            </dsml:searchRequest>
+         </dsml:batchRequest>
+   </soap-env:Body>
+</soap-env:Envelope>]]></con:request>
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+            <con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep><con:properties/>
+    </con:testCase>
+    <con:properties/>
+  </con:testSuite>
+  <con:properties><con:property><con:name>project.test.server.scheme</con:name><con:value>http</con:value></con:property><con:property><con:name>project.test.server.host</con:name><con:value>dev.provider-directories.com</con:value></con:property><con:property><con:name>project.test.server.port</con:name><con:value>80</con:value></con:property><con:property><con:name>project.test.server.context</con:name><con:value>pdti-server</con:value></con:property><con:property><con:name>project.test.server.service</con:name><con:value>ProviderInformationDirectoryService</con:value></con:property><con:property><con:name>project.test.server.dsml.dn.base</con:name><con:value>o=dev.provider-directories.com,dc=hpd</con:value></con:property></con:properties><con:wssContainer/>
 <con:sensitiveInformation/></con:soapui-project>

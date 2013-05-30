@@ -40,7 +40,7 @@ hpdProviderBillingAddress: Thomas Jones$01251 Chestnut Street$Panama City, DE 50
 hpdProviderPracticeAddress: Thomas Jones$01251 Chestnut Street$Panama City, DE 50369
 hpdProviderLanguageSupported: en
 uid: thomas.jones
-memberOf: hpdOrgId=org1,ou=Organizations,o=dev.provider-directories.com,dc=hpd
+#memberOf: hpdOrgId=org1,ou=Organizations,o=dev.provider-directories.com,dc=hpd
 hpdCredential: hpdCredentialId=1,ou=Credentials,o=dev.provider-directories.com,dc=hpd
 
 dn: HcIdentifier=provider2,ou=Providers,o=dev.provider-directories.com,dc=hpd
@@ -69,7 +69,7 @@ hpdProviderBillingAddress: John Smith$01251 Wallnut Street$Panama City, DE 50371
 hpdProviderPracticeAddress: John Smith$01251 Wallnut Street$Panama City, DE 50371
 hpdProviderLanguageSupported: en
 uid: john.smith
-memberOf: hpdOrgId=org2,ou=Organizations,o=dev.provider-directories.com,dc=hpd
+#memberOf: hpdOrgId=org2,ou=Organizations,o=dev.provider-directories.com,dc=hpd
 
 dn: HcIdentifier=provider3,ou=Providers,o=dev.provider-directories.com,dc=hpd
 objectClass: top
@@ -96,7 +96,7 @@ hpdProviderMailingAddress: Bob Jefferson$123 Oak Street$Panama City, DE 50371
 hpdProviderBillingAddress: Bob Jefferson$123 Oak Street$Panama City, DE 50371
 hpdProviderPracticeAddress: Bob Jefferson$123 Oak Street$Panama City, DE 50371
 uid: bob.jefferson
-memberOf: hpdOrgId=org2,ou=Organizations,o=dev.provider-directories.com,dc=hpd
+#memberOf: hpdOrgId=org2,ou=Organizations,o=dev.provider-directories.com,dc=hpd
 
 #==================================================
 # END: PROVIDER(S)
@@ -120,6 +120,22 @@ HcIdentifier: org1
 o: Dr. Thomas Jones' Private Practice
 hpdProviderMailingAddress: Dr. Thomas Jones Private Practice$01251 Chestnut Street$Panama City, DE 50369
 hpdOrgId: org1
+businessCategory: MRI
+description: Performs magnetic resonance imaging
+facsimileTelephoneNumber: +1 123 456 7899
+telephoneNumber: +1 123 456 7890
+HcRegisteredName: Dr. Thomas Jones' Private Practice
+ClinicalInformationContact: HcIdentifier=provider1,ou=Providers,o=dev.provider-directories.com,dc=hpd
+HcSpecialization: HL-7 specialization
+hpdProviderStatus: Active
+hpdProviderLanguageSupported: en
+hpdProviderBillingAddress: Thomas Jones$01251 Chestnut Street$Panama City, DE 50369
+hpdProviderPracticeAddress: Thomas Jones$01251 Chestnut Street$Panama City, DE 50369
+hpdProviderPracticeLocation: Thomas Jones$01251 Chestnut Street$Panama City, DE 50369
+hpdProviderLegalAddress: Thomas Jones$01251 Chestnut Street$Panama City, DE 50369
+#memberOf: to be removed
+hpdHasAService: hpdServiceId=4,ou=Services,o=dev.provider-directories.com,dc=hpd
+hpdCredential: hpdCredentialId=2,ou=Credentials,o=dev.provider-directories.com,dc=hpd
 
 dn: hpdOrgId=org2,ou=Organizations,o=dev.provider-directories.com,dc=hpd
 objectClass: top
@@ -130,6 +146,55 @@ HcIdentifier: org2
 o: Panama City Clinic
 hpdProviderMailingAddress: Panama City Clinic$01251 Wallnut Street$Panama City, DE 50371
 hpdOrgId: org2
+
+dn: hpdOrgId=org4,ou=Organizations,o=dev.provider-directories.com,dc=hpd
+objectClass: top
+objectClass: organization
+objectClass: HCRegulatedOrganization
+objectClass: HPDProvider
+HcIdentifier: org4
+o: Northside Hospital Maternity Unit
+hpdProviderMailingAddress: Mail$123 Peachtree Street$Atlanta, GA 30032
+hpdOrgId: org4
+businessCategory: Maternity
+description: Maternity care unit at Northside Hospital
+facsimileTelephoneNumber: +1 123 456 7890
+telephoneNumber: +1 123 456 7890
+HcRegisteredName: Northside Hospital Maternity Care
+ClinicalInformationContact: HcIdentifier=provider1,ou=Providers,o=dev.provider-directories.com,dc=hpd
+HcSpecialization: HL-7 specialization
+hpdProviderStatus: Active
+hpdProviderLanguageSupported: en sp jpn
+hpdProviderBillingAddress: Billing$123 Peachtree Street$Atlanta, GA 30032
+hpdProviderPracticeAddress: Practice$123 Peachtree Street$Atlanta, GA 30032
+hpdProviderPracticeLocation: PracticeLocation$123 Peachtree Street$Atlanta, GA 30032
+hpdProviderLegalAddress: Legal$123 Peachtree Street$Atlanta, GA 30032
+
+dn: hpdOrgId=org5,ou=Organizations,o=dev.provider-directories.com,dc=hpd
+objectClass: top
+objectClass: organization
+objectClass: HCRegulatedOrganization
+objectClass: HPDProvider
+HcIdentifier: org5
+o: Northside Hospital
+hpdProviderMailingAddress: Mail$123 Peachtree Street$Atlanta, GA 30032
+hpdOrgId: org5
+businessCategory: Hospital
+description: Hospital
+facsimileTelephoneNumber: +1 123 456 7890
+telephoneNumber: +1 123 456 7890
+HcRegisteredName: Northside Hospital of Georgia
+ClinicalInformationContact: HcIdentifier=provider1,ou=Providers,o=dev.provider-directories.com,dc=hpd
+HcSpecialization: HL-7 specialization
+hpdProviderStatus: Active
+hpdProviderLanguageSupported: en sp jpn
+hpdProviderBillingAddress: Billing$123 Peachtree Street$Atlanta, GA 30032
+hpdProviderPracticeAddress: Practice$123 Peachtree Street$Atlanta, GA 30032
+hpdProviderPracticeLocation: PracticeLocation$123 Peachtree Street$Atlanta, GA 30032
+hpdProviderLegalAddress: Legal$123 Peachtree Street$Atlanta, GA 30032
+#memberOf: to be removed
+hpdHasAService: hpdServiceId=4,ou=Services,o=dev.provider-directories.com,dc=hpd
+hpdCredential: hpdCredentialId=2,ou=Credentials,o=dev.provider-directories.com,dc=hpd
 
 #==================================================
 # END: ORGANIZATION(S)
@@ -168,6 +233,40 @@ hpdHasAnOrg: hpdOrgId=org2,ou=Organizations,o=dev.provider-directories.com,dc=hp
 hpdHasAProvider: HcIdentifier=provider3,ou=Providers,o=dev.provider-directories.com,dc=hpd
 hpdMemberId: 3
 
+dn: hpdMemberId=4,ou=Memberships,o=dev.provider-directories.com,dc=hpd
+objectClass: top
+objectClass: HPDProviderMembership
+hpdHasAnOrg: hpdOrgId=org5,ou=Organizations,o=dev.provider-directories.com,dc=hpd
+hpdHasASubOrg: hpdOrgId=org4,ou=Organizations,o=dev.provider-directories.com,dc=hpd
+#hpdHasAProvider: 
+#hpdHasAService: hpdServiceId=1,ou=Services,o=dev.provider-directories.com,dc=hpd^hpdServiceId=2,ou=Services,o=dev.provider-directories.com,dc=hpd^hpdServiceId=3,ou=Services,o=dev.provider-directories.com,dc=hpd
+hpdMemberId: 4
+hpdMemberName: Northside Maternity Unit Membership to Northside Hospital
+hpdMemberStatus: Active
+hpdMemberType: subOrgToOrg
+#mail:
+#mobile: 
+#pager: 
+#telephoneNumber: 
+#facsimileTelephoneNumber: 
+
+dn: hpdMemberId=5,ou=Memberships,o=dev.provider-directories.com,dc=hpd
+objectClass: top
+objectClass: HPDProviderMembership
+hpdHasAnOrg: hpdOrgId=org4,ou=Organizations,o=dev.provider-directories.com,dc=hpd
+#hpdHasASubOrg: 
+hpdHasAProvider: HcIdentifier=provider3,ou=Providers,o=dev.provider-directories.com,dc=hpd
+#hpdHasAService: hpdServiceId=5,ou=Services,o=dev.provider-directories.com,dc=hpd^hpdServiceId=2,ou=Services,o=dev.provider-directories.com,dc=hpd^hpdServiceId=3,ou=Services,o=dev.provider-directories.com,dc=hpd
+hpdMemberId: 5
+hpdMemberName: Bob Jefferson Membership to Northside Maternity Org
+hpdMemberStatus: Active
+hpdMemberType: individualToOrg
+#mail:
+#mobile: 
+#pager: 
+#telephoneNumber: 
+#facsimileTelephoneNumber: 
+
 #==================================================
 # END: MEMBERSHIP(S)
 #==================================================
@@ -188,7 +287,7 @@ hpdServiceAddress: thomas.jones@direct.service1.com
 hpdServiceProtocol: SMTP
 hpdServiceType: Direct
 hpdServiceId: 1
-hpdCertificate:: MIICqjCCAZKgAwIBAgIJAMd5Vfs3Eo6kMA0GCSqGSIb3DQEBBQUAMA0xCzAJBgNV
+hpdCertificate: MIICqjCCAZKgAwIBAgIJAMd5Vfs3Eo6kMA0GCSqGSIb3DQEBBQUAMA0xCzAJBgNV
  BAMTAm1rMB4XDTEzMDUwMjE0MzMyNVoXDTIzMDQzMDE0MzMyNVowDTELMAkGA1UE
  AxMCbWswggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDGHnk7g0gS4JmD
  s1mNjsHFFEMuHmTtIvIPWbjsnbZRcy4teJE4D5/EShMQiOaujNO1mg6ib4hnEXPQ
@@ -222,6 +321,54 @@ hpdServiceType: DocumentRegistry
 hpdServicePayload: CCD^PDF
 hpdServiceId: 3
 
+dn: hpdServiceId=4,ou=Services,o=dev.provider-directories.com,dc=hpd
+objectClass: top
+objectClass: HPDElectronicService
+hpdServiceAddress: thomas.jones@direct.service1.com
+hpdServiceProtocol: SMTP
+hpdServiceType: Direct
+hpdServiceId: 4
+hpdCertificate: MIICqjCCAZKgAwIBAgIJAMd5Vfs3Eo6kMA0GCSqGSIb3DQEBBQUAMA0xCzAJBgNV
+ BAMTAm1rMB4XDTEzMDUwMjE0MzMyNVoXDTIzMDQzMDE0MzMyNVowDTELMAkGA1UE
+ AxMCbWswggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDGHnk7g0gS4JmD
+ s1mNjsHFFEMuHmTtIvIPWbjsnbZRcy4teJE4D5/EShMQiOaujNO1mg6ib4hnEXPQ
+ 9q1sQhFg/5lC0Xwq3LGy7t9NlmRjrNKxejCYE04QptAK5vGg8dK3jcsfMEmHHxoo
+ nx38HpC24PvTJgY+efwBxTDQrZu3rMw2Jr/QERT6pbQEZbpsr0+ZizLv2C/mweE6
+ 2pGcKCA2WEffetL+qtoN3RWWagxSYx/jjJdT6UGn3KLEhoNSVm6LidmbKx4AwAys
+ YjfOPF8m06pF0khTlXMLyw6LyKwUYMpHSRmmlA6tyjUAsF9Cy+hY4VLPWXaNK6ru
+ zH+s5BBHAgMBAAGjDTALMAkGA1UdEwQCMAAwDQYJKoZIhvcNAQEFBQADggEBABPF
+ 45byPxZ9z78YBPE6IbYkxuY1dEt05ZP5YsKS76M7m9OYUryaPcWvt1ctdV2oJbJ+
+ 9vEVwDOKxD6gkLd1oIsw2nD9U3YYtHrcej2ytw3XcA+okzUoNVPblGTUSF7dMuc3
+ MyQPhnIt6iOZKuzRDG1Ruk4XHyXHc1sngsHp/THKsCjz+rZlgjlX4iatPAhz30Fn
+ BVZ7UVeAKftcDwpBdggJxvEAoEGvRpm7X8OlqQI2jmm/Oxlw70mjCZTzJFtOFOJf
+ homCEiQXSz/4tobOgw66ooBNWUd7f5MfAhquBV2/kDK5bnbOGJ30vzHBj9CUf8tT
+ flVoSO0cwbuGBddusEU=
+hpdServicePayload: C32
+
+dn: hpdServiceId=5,ou=Services,o=dev.provider-directories.com,dc=hpd
+objectClass: top
+objectClass: HPDElectronicService
+hpdServiceAddress: bob.jefferson@direct.northside.maternity.com
+hpdServiceProtocol: SMTP
+hpdServiceType: Direct
+hpdServiceId: 5
+hpdCertificate: MIICqjCCAZKgAwIBAgIJAMd5Vfs3Eo6kMA0GCSqGSIb3DQEBBQUAMA0xCzAJBgNV
+ BAMTAm1rMB4XDTEzMDUwMjE0MzMyNVoXDTIzMDQzMDE0MzMyNVowDTELMAkGA1UE
+ AxMCbWswggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDGHnk7g0gS4JmD
+ s1mNjsHFFEMuHmTtIvIPWbjsnbZRcy4teJE4D5/EShMQiOaujNO1mg6ib4hnEXPQ
+ 9q1sQhFg/5lC0Xwq3LGy7t9NlmRjrNKxejCYE04QptAK5vGg8dK3jcsfMEmHHxoo
+ nx38HpC24PvTJgY+efwBxTDQrZu3rMw2Jr/QERT6pbQEZbpsr0+ZizLv2C/mweE6
+ 2pGcKCA2WEffetL+qtoN3RWWagxSYx/jjJdT6UGn3KLEhoNSVm6LidmbKx4AwAys
+ YjfOPF8m06pF0khTlXMLyw6LyKwUYMpHSRmmlA6tyjUAsF9Cy+hY4VLPWXaNK6ru
+ zH+s5BBHAgMBAAGjDTALMAkGA1UdEwQCMAAwDQYJKoZIhvcNAQEFBQADggEBABPF
+ 45byPxZ9z78YBPE6IbYkxuY1dEt05ZP5YsKS76M7m9OYUryaPcWvt1ctdV2oJbJ+
+ 9vEVwDOKxD6gkLd1oIsw2nD9U3YYtHrcej2ytw3XcA+okzUoNVPblGTUSF7dMuc3
+ MyQPhnIt6iOZKuzRDG1Ruk4XHyXHc1sngsHp/THKsCjz+rZlgjlX4iatPAhz30Fn
+ BVZ7UVeAKftcDwpBdggJxvEAoEGvRpm7X8OlqQI2jmm/Oxlw70mjCZTzJFtOFOJf
+ homCEiQXSz/4tobOgw66ooBNWUd7f5MfAhquBV2/kDK5bnbOGJ30vzHBj9CUf8tT
+ flVoSO0cwbuGBddusEU=
+hpdServicePayload: C64
+
 #==================================================
 # END: SERVICE(S)
 #==================================================
@@ -243,6 +390,20 @@ credentialType: medicalLicense
 credentialNumber: 1
 hpdCredentialId: 1
 description: Thomas Jones' Delaware medical license
+
+dn: hpdCredentialId=2,ou=Credentials,o=dev.provider-directories.com,dc=hpd
+objectClass: top
+objectClass: HPDProviderCredential
+credentialName: Delaware organizational facility credential
+credentialType: credential
+credentialNumber: 2
+hpdCredentialId: 2
+description: Thomas Jones' organizational credential
+credentialIssueDate: 19851106210627.3-0500
+credentialRenewalDate: 19921106210627.3-0500
+credentialStatus: Active
+hpdHasAnOrg: hpdOrgId=org1,ou=Organizations,o=dev.provider-directories.com,dc=hpd
+#hpdHasAProvider: 
 
 #==================================================
 # END: CREDENTIAL(S)
