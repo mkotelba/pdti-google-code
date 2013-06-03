@@ -1,5 +1,7 @@
 package gov.hhs.onc.pdti.test.ldap;
 
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.directory.server.annotations.CreateLdapServer;
 import org.apache.directory.server.annotations.CreateTransport;
 import org.apache.directory.server.core.annotations.ApplyLdifFiles;
@@ -7,19 +9,23 @@ import org.apache.directory.server.core.annotations.CreateDS;
 import org.apache.directory.server.core.annotations.CreatePartition;
 import org.apache.directory.server.core.api.DirectoryService;
 import org.apache.directory.server.core.factory.DSAnnotationProcessor;
-import org.apache.directory.server.factory.ServerAnnotationProcessor;
 import org.apache.directory.server.ldap.LdapServer;
+import org.apache.directory.server.protocol.shared.transport.TcpTransport;
+import org.apache.directory.server.protocol.shared.transport.Transport;
 import org.apache.log4j.Logger;
 
-@ApplyLdifFiles({ "ldap/schema/hc.ldif", "ldap/schema/hpd_plus.ldif", "ldap/data/hpd_plus_test_data.ldif" })
+@ApplyLdifFiles({ "ldap/schema/hc.ldif", "ldap/schema/hpd_plus.ldif" })
 @CreateDS(name = "pdtiDs", allowAnonAccess = true, partitions = { @CreatePartition(name = "dev.provider-directories.com", suffix = "o=dev.provider-directories.com,dc=hpd") })
-@CreateLdapServer(name = "pdtiLdap", allowAnonymousAccess = true, transports = { @CreateTransport(protocol = "LDAP", port = 20389) })
+@CreateLdapServer(name = "pdtiLdap", allowAnonymousAccess = true, transports = { @CreateTransport(protocol = "LDAP") })
 public class ApacheDsInstance implements ApacheDsInstanceMBean {
     private final static String MBEAN_NAME = "ApacheDS Instance";
 
     private final static String APACHEDS_WORK_DIR_PROP_NAME = "workingDirectory";
 
-    private final static String PDTI_TEST_APACHEDS_DIR_PROP_NAME = "pdti.test.apacheds.dir";
+    private final static String PDTI_TEST_APACHEDS_INSTANCE_DIR_PROP_NAME = "pdti.test.apacheds.instance.dir";
+    private final static String PDTI_TEST_APACHEDS_LDAP_HOST_PROP_NAME = "pdti.test.apacheds.ldap.host";
+    private final static String PDTI_TEST_APACHEDS_LDAP_PORT_PROP_NAME = "pdti.test.apacheds.ldap.port";
+    private final static String PDTI_TEST_APACHEDS_DATA_LDIF_FILE_PROP_NAME = "pdti.test.apacheds.data.ldif.file";
 
     private final static Logger LOGGER = Logger.getLogger(ApacheDsInstance.class);
 
@@ -35,14 +41,33 @@ public class ApacheDsInstance implements ApacheDsInstanceMBean {
         Class<? extends ApacheDsInstance> clazz = this.getClass();
 
         try {
-            System.setProperty(APACHEDS_WORK_DIR_PROP_NAME, System.getProperty(PDTI_TEST_APACHEDS_DIR_PROP_NAME));
+            System.setProperty(APACHEDS_WORK_DIR_PROP_NAME,
+                    System.getProperty(PDTI_TEST_APACHEDS_INSTANCE_DIR_PROP_NAME));
 
             DirectoryService dirService = DSAnnotationProcessor.createDS(clazz.getAnnotation(CreateDS.class));
 
-            DSAnnotationProcessor.injectLdifFiles(clazz, dirService, clazz.getAnnotation(ApplyLdifFiles.class).value());
+            DSAnnotationProcessor.injectLdifFiles(
+                    clazz,
+                    dirService,
+                    ArrayUtils.add(clazz.getAnnotation(ApplyLdifFiles.class).value(),
+                            System.getProperty(PDTI_TEST_APACHEDS_DATA_LDIF_FILE_PROP_NAME)));
 
-            this.ldapServer = ServerAnnotationProcessor.instantiateLdapServer(
-                    clazz.getAnnotation(CreateLdapServer.class), dirService);
+            CreateLdapServer createLdapServer = clazz.getAnnotation(CreateLdapServer.class);
+            CreateTransport createLdapTransport = createLdapServer.transports()[0];
+
+            this.ldapServer = new LdapServer();
+            this.ldapServer.setDirectoryService(dirService);
+            this.ldapServer.setServiceName(createLdapServer.name());
+            
+            dirService.setAllowAnonymousAccess(createLdapServer.allowAnonymousAccess());
+            
+            Transport ldapTransport = new TcpTransport(StringUtils.defaultIfBlank(
+                    System.getProperty(PDTI_TEST_APACHEDS_LDAP_HOST_PROP_NAME), createLdapTransport.address()),
+                    Integer.parseInt(System.getProperty(PDTI_TEST_APACHEDS_LDAP_PORT_PROP_NAME)),
+                    createLdapTransport.nbThreads(), createLdapTransport.backlog());
+
+            this.ldapServer.setTransports(ldapTransport);
+
             this.ldapServer.start();
 
             LOGGER.info("ApacheDS instance started.");

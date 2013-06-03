@@ -2,12 +2,11 @@ package gov.hhs.onc.pdti.service.impl;
 
 import gov.hhs.onc.pdti.data.DirectoryDataService;
 import gov.hhs.onc.pdti.data.federation.FederationService;
+import gov.hhs.onc.pdti.error.DirectoryErrorBuilder;
+import gov.hhs.onc.pdti.jaxb.DirectoryJaxb2Marshaller;
 import gov.hhs.onc.pdti.service.DirectoryService;
-import gov.hhs.onc.pdti.util.DirectoryUtils;
 import gov.hhs.onc.pdti.ws.api.BatchRequest;
 import gov.hhs.onc.pdti.ws.api.ObjectFactory;
-import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusError;
-import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusErrorDetail;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusErrorType;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusRequest;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusRequestMetadata;
@@ -30,6 +29,12 @@ public class DirectoryServiceImpl implements DirectoryService {
     @Autowired
     private gov.hhs.onc.pdti.ws.api.hpdplus.ObjectFactory hpdPlusObjectFactory;
 
+    @Autowired
+    private DirectoryJaxb2Marshaller jaxb2Marshaller;
+
+    @Autowired
+    private DirectoryErrorBuilder errBuilder;
+
     @Autowired(required = false)
     private List<DirectoryDataService<?>> dataServices;
 
@@ -39,6 +44,10 @@ public class DirectoryServiceImpl implements DirectoryService {
     @Override
     public HpdPlusResponse processRequest(HpdPlusRequest hpdPlusReq) {
         String reqId = hpdPlusReq.getRequestID();
+
+        LOGGER.debug("Processing HPD Plus request (id=" + reqId + ").");
+        LOGGER.trace("Processing HPD Plus request (id=" + reqId + "):\n"
+                + this.jaxb2Marshaller.marshal(this.hpdPlusObjectFactory.createHpdPlusRequest(hpdPlusReq)));
 
         BatchRequest batchReq = hpdPlusReq.getBatchRequest();
         batchReq.setRequestID(reqId);
@@ -58,9 +67,7 @@ public class DirectoryServiceImpl implements DirectoryService {
                     hpdPlusResp.getResponseItems().addAll(dataService.processData(batchReq));
                 } catch (Throwable th) {
                     // TODO: improve error handling
-                    LOGGER.error(th);
-
-                    hpdPlusResp.getErrors().add(this.buildError(reqId, HpdPlusErrorType.OTHER, th));
+                    hpdPlusResp.getErrors().add(this.errBuilder.buildError(reqId, HpdPlusErrorType.OTHER, th));
                 }
             }
         }
@@ -69,24 +76,13 @@ public class DirectoryServiceImpl implements DirectoryService {
             hpdPlusResp.getResponseItems().addAll(this.federationService.federate(hpdPlusReq));
         } catch (Throwable th) {
             // TODO: improve error handling
-            LOGGER.error(th);
-
-            hpdPlusResp.getErrors().add(this.buildError(reqId, HpdPlusErrorType.OTHER, th));
+            hpdPlusResp.getErrors().add(this.errBuilder.buildError(reqId, HpdPlusErrorType.OTHER, th));
         }
 
+        LOGGER.debug("Processed HPD Plus request (id=" + reqId + ") into HPD Plus response.");
+        LOGGER.trace("Processed HPD Plus request (id=" + reqId + ") into HPD Plus response:\n"
+                + this.jaxb2Marshaller.marshal(this.hpdPlusObjectFactory.createHpdPlusResponse(hpdPlusResp)));
+
         return hpdPlusResp;
-    }
-
-    private HpdPlusError buildError(String reqId, HpdPlusErrorType errType, Throwable th) {
-        HpdPlusError err = this.hpdPlusObjectFactory.createHpdPlusError();
-        err.setRequestID(reqId);
-        err.setType(errType);
-        err.setMessage(th.getMessage());
-
-        HpdPlusErrorDetail errDetail = this.hpdPlusObjectFactory.createHpdPlusErrorDetail();
-        errDetail.setAny(DirectoryUtils.getStackTraceJaxbElement(th));
-        err.setDetail(errDetail);
-
-        return err;
     }
 }

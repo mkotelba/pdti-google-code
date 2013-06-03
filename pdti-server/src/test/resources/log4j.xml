@@ -2,13 +2,14 @@
 <!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
 <log4j:configuration
     debug="false"
+    reset="true"
     threshold="all"
     xmlns:log4j="http://jakarta.apache.org/log4j/">
     
     <!--==================================================
     = THROWABLE RENDERERS
     ===================================================-->
-    <throwableRenderer class="org.apache.log4j.EnhancedThrowableRenderer"/>
+    <throwableRenderer class="gov.hhs.onc.pdti.context.DirectoryThrowableRenderer"/>
     
     <!--==================================================
     = APPENDERS: CONSOLE
@@ -20,7 +21,7 @@
         <param name="threshold" value="all"/>
 
         <layout class="org.apache.log4j.EnhancedPatternLayout">
-            <param name="conversionPattern" value="%m%throwable{short}%n"/>
+            <param name="conversionPattern" value="%m%n"/>
         </layout>
     </appender>
     
@@ -35,7 +36,7 @@
         <param name="threshold" value="all"/>
 
         <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
-            <param name="fileNamePattern" value="${pdti.log.dir}/pdti-apacheds.%d{yyyy-MM-dd}.log"/>
+            <param name="fileNamePattern" value="${pdti.log.dir}/${pdti.log.file.basename}.%d{yyyy-MM-dd}.log"/>
         </rollingPolicy>
         
         <triggeringPolicy class="org.apache.log4j.rolling.SizeBasedTriggeringPolicy">
@@ -43,7 +44,7 @@
         </triggeringPolicy>
 
         <layout class="org.apache.log4j.EnhancedPatternLayout">
-            <param name="conversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%C %t] %p - %m%throwable{full}%n"/>
+            <param name="conversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%C:%L %t] %p - %m%n"/>
         </layout>
     </appender>
     
@@ -62,6 +63,11 @@
     </logger>
     <logger name="org.apache.directory.api" additivity="false">
         <level value="warn"/>
+        <appender-ref ref="consoleApp"/>
+        <appender-ref ref="fileApp"/>
+    </logger>
+    <logger name="org.springframework" additivity="false">
+        <level value="info"/>
         <appender-ref ref="consoleApp"/>
         <appender-ref ref="fileApp"/>
     </logger>

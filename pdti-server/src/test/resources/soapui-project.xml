@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <con:soapui-project activeEnvironment="Default" name="ProviderInformationDirectoryService" resourceRoot="" soapui-version="4.5.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config">
     <con:settings/>
-    <con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="ProviderInformationDirectoryImplPortBinding" type="wsdl" bindingName="{urn:ihe:iti:hpd:2010}ProviderInformationDirectoryImplPortBinding" soapVersion="1_2" anonymous="optional" definition="${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="ProviderInformationDirectory_Port_SoapBinding" type="wsdl" bindingName="{urn:ihe:iti:hpd:2010}ProviderInformationDirectory_Port_SoapBinding" soapVersion="1_2" anonymous="optional" definition="${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
         <con:settings/>
         <con:endpoints>
             <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
         </con:endpoints>
-        <con:operation isOneWay="false" action="urn:ihe:iti:hpd:2010:ProviderInformationFeedRequest" name="ProviderInformationFeedRequest" bindingOperationName="ProviderInformationFeedRequest" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional">
-            <con:settings/>
-        </con:operation>
         <con:operation isOneWay="false" action="urn:ihe:iti:hpd:2010:ProviderInformationQueryRequest" name="ProviderInformationQueryRequest" bindingOperationName="ProviderInformationQueryRequest" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional">
             <con:settings/>
         </con:operation>
@@ -21,7 +18,7 @@
             <con:testStep type="request" name="search_provider_by_name">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
                 <con:request name="search_provider_by_name" outgoingWss="" incomingWss="">
                     <con:settings>
@@ -93,7 +90,7 @@
             <con:testStep type="request" name="search_org_by_id">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
                 <con:request name="search_org_by_id" outgoingWss="" incomingWss="">
                     <con:settings>
@@ -156,7 +153,7 @@
             <con:testStep type="request" name="search_membership_by_provider">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
                 <con:request name="search_membership_by_provider" outgoingWss="" incomingWss="">
                     <con:settings>
@@ -212,7 +209,7 @@
             <con:testStep type="request" name="search_service_by_id">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
                 <con:request name="search_service_by_id" outgoingWss="" incomingWss="">
                     <con:settings>
@@ -262,7 +259,7 @@
             <con:testStep type="request" name="search_credential_by_id">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
                 <con:request name="search_credential_by_id" outgoingWss="" incomingWss="">
                     <con:settings>
@@ -314,7 +311,7 @@
     <con:testSuite name="Workflows"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="IWG_Workflow" searchProperties="true" id="7cfda747-50ee-41e8-a20b-a9bd1708718b"><con:settings/><con:testStep type="request" name="search_org_by_id">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
                 <con:request name="search_org_by_id" outgoingWss="" incomingWss="">
                     <con:settings>
@@ -373,7 +370,7 @@
             </con:testStep><con:testStep type="request" name="search_membership_by_org">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
                 <con:request name="search_membership_by_org" outgoingWss="" incomingWss="">
                     <con:settings>
@@ -425,7 +422,7 @@
             </con:testStep><con:testStep type="request" name="search_provider_by_hcidentifier">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
                 <con:request name="search_provider_by_hcidentifier" outgoingWss="" incomingWss="">
                     <con:settings>
@@ -493,7 +490,7 @@
             </con:testStep><con:testStep type="request" name="search_membership_by_provider">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
                 <con:request name="search_membership_by_provider" outgoingWss="" incomingWss="">
                     <con:settings>
@@ -534,7 +531,7 @@
             </con:testStep><con:testStep type="request" name="search_service_by_id">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
                 <con:request name="search_service_by_id" outgoingWss="" incomingWss="">
                     <con:settings>
@@ -583,7 +580,7 @@
             </con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="WSC_Workflow_1" searchProperties="true" id="9a0dd776-689d-4b7a-9f74-0847d5966d95"><con:settings/><con:testStep type="request" name="search_provider_by_name">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
                 <con:request name="search_provider_by_name" outgoingWss="" incomingWss="">
                     <con:settings>
@@ -654,7 +651,7 @@
             </con:testStep><con:testStep type="request" name="search_membership_by_provider">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
                 <con:request name="search_membership_by_provider" outgoingWss="" incomingWss="">
                     <con:settings>
@@ -695,7 +692,7 @@
             </con:testStep><con:testStep type="request" name="search_service_by_id">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
                 <con:request name="search_service_by_id" outgoingWss="" incomingWss="">
                     <con:settings>
@@ -744,7 +741,7 @@
             </con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="WSC_Workflow_2" searchProperties="true" id="e712a3a2-a1d7-4c21-8c6f-c3e43d242508"><con:settings/><con:testStep type="request" name="search_org_by_o">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
                 <con:request name="search_org_by_o" outgoingWss="" incomingWss="">
                     <con:settings>
@@ -803,7 +800,7 @@
             </con:testStep><con:testStep type="request" name="search_membership_by_org">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
                 <con:request name="search_membership_by_org" outgoingWss="" incomingWss="">
                     <con:settings>
@@ -844,7 +841,7 @@
             </con:testStep><con:testStep type="request" name="search_provider_by_hcidentifier">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
                 <con:request name="search_provider_by_hcidentifier" outgoingWss="" incomingWss="">
                     <con:settings>
@@ -912,7 +909,7 @@
             </con:testStep><con:testStep type="request" name="search_membership_by_provider">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
                 <con:request name="search_membership_by_provider" outgoingWss="" incomingWss="">
                     <con:settings>
@@ -953,7 +950,7 @@
             </con:testStep><con:testStep type="request" name="search_service_by_id">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
                 <con:request name="search_service_by_id" outgoingWss="" incomingWss="">
                     <con:settings>
@@ -1002,7 +999,7 @@
             </con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="WSC_Workflow_3" searchProperties="true" id="59bb8da9-6653-41cc-a53b-25feae4738a5"><con:settings/><con:testStep type="request" name="search_provider_by_name">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
                 <con:request name="search_provider_by_name" outgoingWss="" incomingWss="">
                     <con:settings>
@@ -1073,7 +1070,7 @@
             </con:testStep><con:testStep type="request" name="search_membership_by_provider">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
                 <con:request name="search_membership_by_provider" outgoingWss="" incomingWss="">
                     <con:settings>
@@ -1114,7 +1111,7 @@
             </con:testStep><con:testStep type="request" name="search_org_by_id">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
                 <con:request name="search_org_by_id" outgoingWss="" incomingWss="">
                     <con:settings>
@@ -1158,7 +1155,7 @@
             </con:testStep><con:testStep type="request" name="search_membership_by_org">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
                 <con:request name="search_membership_by_org" outgoingWss="" incomingWss="">
                     <con:settings>
@@ -1199,7 +1196,7 @@
             </con:testStep><con:testStep type="request" name="search_service_by_id">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+                <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
                 <con:request name="search_service_by_id" outgoingWss="" incomingWss="">
                     <con:settings>
@@ -1255,7 +1252,7 @@
       <con:testStep type="request" name="search_provider_by_name">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
           <con:operation>ProviderInformationQueryRequest</con:operation>
           <con:request name="search_provider_by_name" outgoingWss="" incomingWss="">
             <con:settings>
@@ -1333,7 +1330,7 @@
       <con:testStep type="request" name="search_org_by_o">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
           <con:operation>ProviderInformationQueryRequest</con:operation>
           <con:request name="search_org_by_o" outgoingWss="" incomingWss="">
             <con:settings>
@@ -1396,7 +1393,7 @@
       <con:testStep type="request" name="search_membership_by_hpdHasAnOrg">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
           <con:operation>ProviderInformationQueryRequest</con:operation>
           <con:request name="search_membership_by_hpdHasAnOrg" outgoingWss="" incomingWss="">
             <con:settings>
@@ -1455,7 +1452,7 @@
       </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasASubOrg">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
           <con:operation>ProviderInformationQueryRequest</con:operation>
           <con:request name="search_membership_by_hpdHasASubOrg" outgoingWss="" incomingWss="">
             <con:settings>
@@ -1515,7 +1512,7 @@
       <con:testStep type="request" name="search_provider_by_HcIdentifier">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
           <con:operation>ProviderInformationQueryRequest</con:operation>
           <con:request name="search_provider_by_HcIdentifier" outgoingWss="" incomingWss="">
             <con:settings>
@@ -1586,7 +1583,7 @@
       </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasAProvider">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
           <con:operation>ProviderInformationQueryRequest</con:operation>
           <con:request name="search_membership_by_hpdHasAProvider" outgoingWss="" incomingWss="">
             <con:settings>
@@ -1642,7 +1639,7 @@
       </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasAnOrg">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
           <con:operation>ProviderInformationQueryRequest</con:operation>
           <con:request name="search_membership_by_hpdHasAnOrg" outgoingWss="" incomingWss="">
             <con:settings>
@@ -1701,7 +1698,7 @@
       </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasAnOrg_2">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
           <con:operation>ProviderInformationQueryRequest</con:operation>
           <con:request name="search_membership_by_hpdHasAnOrg_2" outgoingWss="" incomingWss="">
             <con:settings>
@@ -1760,7 +1757,7 @@
       </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasASubOrg">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
           <con:operation>ProviderInformationQueryRequest</con:operation>
           <con:request name="search_membership_by_hpdHasASubOrg" outgoingWss="" incomingWss="">
             <con:settings>
@@ -1816,7 +1813,7 @@
       </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasASubOrg_2">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
           <con:operation>ProviderInformationQueryRequest</con:operation>
           <con:request name="search_membership_by_hpdHasASubOrg_2" outgoingWss="" incomingWss="">
             <con:settings>
@@ -1876,7 +1873,7 @@
       <con:testStep type="request" name="search_org_by_HcIdentifier">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
           <con:operation>ProviderInformationQueryRequest</con:operation>
           <con:request name="search_org_by_HcIdentifier" outgoingWss="" incomingWss="">
             <con:settings>
@@ -1938,7 +1935,7 @@
       </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasAnOrg">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
           <con:operation>ProviderInformationQueryRequest</con:operation>
           <con:request name="search_membership_by_hpdHasAnOrg" outgoingWss="" incomingWss="">
             <con:settings>
@@ -2001,7 +1998,7 @@
       <con:testStep type="request" name="search_provider_by_name">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
           <con:operation>ProviderInformationQueryRequest</con:operation>
           <con:request name="search_provider_by_name" outgoingWss="" incomingWss="">
             <con:settings>
@@ -2075,7 +2072,7 @@
       </con:testStep><con:testStep type="request" name="search_membership_by_provider">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
           <con:operation>ProviderInformationQueryRequest</con:operation>
           <con:request name="search_membership_by_provider" outgoingWss="" incomingWss="">
             <con:settings>
@@ -2119,7 +2116,7 @@
       </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasAnOrg">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
           <con:operation>ProviderInformationQueryRequest</con:operation>
           <con:request name="search_membership_by_hpdHasAnOrg" outgoingWss="" incomingWss="">
             <con:settings>
@@ -2178,7 +2175,7 @@
       </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasASubOrg_2">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
           <con:operation>ProviderInformationQueryRequest</con:operation>
           <con:request name="search_membership_by_hpdHasASubOrg_2" outgoingWss="" incomingWss="">
             <con:settings>
@@ -2234,7 +2231,7 @@
       </con:testStep><con:testStep type="request" name="search_org_by_HcIdentifier">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
           <con:operation>ProviderInformationQueryRequest</con:operation>
           <con:request name="search_org_by_HcIdentifier" outgoingWss="" incomingWss="">
             <con:settings>
@@ -2296,7 +2293,7 @@
       </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasAnOrg_3">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:interface>ProviderInformationDirectoryImplPortBinding</con:interface>
+          <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
           <con:operation>ProviderInformationQueryRequest</con:operation>
           <con:request name="search_membership_by_hpdHasAnOrg_3" outgoingWss="" incomingWss="">
             <con:settings>

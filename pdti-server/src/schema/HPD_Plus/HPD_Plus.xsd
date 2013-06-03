@@ -160,8 +160,8 @@
             </xsd:documentation>
         </xsd:annotation>
         <xsd:choice>
-            <xsd:element name="batchResponse" type="dsml:BatchResponse"/>
-            <xsd:element name="hpdPlusResponse" type="HpdPlusResponse"/>
+            <xsd:element ref="dsml:batchResponse"/>
+            <xsd:element ref="hpdPlusResponse"/>
         </xsd:choice>
     </xsd:group>
     

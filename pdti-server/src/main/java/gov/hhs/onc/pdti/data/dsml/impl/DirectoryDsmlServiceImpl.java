@@ -35,7 +35,6 @@ public class DirectoryDsmlServiceImpl implements DirectoryDsmlService {
             String batchReqStr = this.jaxb2Marshaller.marshal(this.objectFactory.createBatchRequest(batchReq));
 
             LOGGER.debug("Processing DSML batch request (id=" + batchReq.getRequestID() + ").");
-            LOGGER.trace("Processing DSML batch request string:\n" + batchReqStr);
 
             JAXBElement<BatchResponse> batchRespElement = (JAXBElement<BatchResponse>) this.jaxb2Marshaller
                     .unmarshal(dsmlEngine.processDSML(batchReqStr));
@@ -44,7 +43,6 @@ public class DirectoryDsmlServiceImpl implements DirectoryDsmlService {
 
             LOGGER.debug("Processed DSML batch request (id=" + batchReq.getRequestID()
                     + ") into DSML batch response (num=" + batchResp.getBatchResponses().size() + ").");
-            LOGGER.trace("Processed DSML batch request into DSML batch response string:\n" + batchRespStr);
 
             return batchResp;
         } catch (XmlMappingException | XmlPullParserException e) {

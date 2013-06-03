@@ -8,10 +8,4 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
     
-    <!-- TODO: implement federated directory deployment + configuration -->
-    <!--
-    <beans:bean id="federatedDirectoryTest" class="gov.hhs.onc.pdti.data.federation.impl.FederatedDirectoryImpl" parent="federatedDirectory"
-        p:wsdlLocation="http://localhost:18080/pdti-server2/Hpd_Plus_ProviderInformationDirectoryService?wsdl"
-        p:baseDn="o=dev.provider-directories.com,dc=hpd"/>
-    -->
 </beans:beans>

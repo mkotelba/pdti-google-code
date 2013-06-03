@@ -9,6 +9,6 @@
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
     
     <beans:bean id="ldapDataSourceTest" class="gov.hhs.onc.pdti.data.ldap.impl.LdapDataSourceImpl" parent="ldapDataSource"
-        p:host="localhost"
-        p:port="20389"/>
+        p:host="%{project.test.server.2.ldap.1.host}"
+        p:port="%{project.test.server.2.ldap.1.port}"/>
 </beans:beans>

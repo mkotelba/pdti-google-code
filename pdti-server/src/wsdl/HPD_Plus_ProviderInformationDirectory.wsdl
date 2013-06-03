@@ -18,47 +18,26 @@
     </wsdl:types>
     <wsdl:message name="Hpd_Plus_ProviderInformationQueryRequestMessage">
         <wsdl:documentation>HPD Plus Provider Information Query Request Message</wsdl:documentation>
-        <wsdl:part name="body" element="hpdplus:hpdPlusRequest"/>
+        <wsdl:part name="queryRequest" element="hpdplus:hpdPlusRequest"/>
     </wsdl:message>
     <wsdl:message name="Hpd_Plus_ProviderInformationQueryResponseMessage">
         <wsdl:documentation>HPD Plus Provider Information Query Response Message</wsdl:documentation>
-        <wsdl:part name="body" element="hpdplus:hpdPlusResponse"/>
-    </wsdl:message>
-    <wsdl:message name="Hpd_Plus_ProviderInformationFeedRequestMessage">
-        <wsdl:documentation>HPD Plus tns Information Feed Request Message</wsdl:documentation>
-        <wsdl:part name="body" element="hpdplus:hpdPlusRequest"/>
-    </wsdl:message>
-    <wsdl:message name="Hpd_Plus_ProviderInformationFeedResponseMessage">
-        <wsdl:documentation>HPD Plus Provider Information Feed Response Message</wsdl:documentation>
-        <wsdl:part name="body" element="hpdplus:hpdPlusResponse"/>
+        <wsdl:part name="queryResponse" element="hpdplus:hpdPlusResponse"/>
     </wsdl:message>
     <wsdl:portType name="Hpd_Plus_ProviderInformationDirectory_PortType">
         <wsdl:operation name="Hpd_Plus_ProviderInformationQueryRequest">
             <wsdl:input message="hpdplus:Hpd_Plus_ProviderInformationQueryRequestMessage"/>
             <wsdl:output message="hpdplus:Hpd_Plus_ProviderInformationQueryResponseMessage"/>
         </wsdl:operation>
-        <wsdl:operation name="Hpd_Plus_ProviderInformationFeedRequest">
-            <wsdl:input message="hpdplus:Hpd_Plus_ProviderInformationFeedRequestMessage"/>
-            <wsdl:output message="hpdplus:Hpd_Plus_ProviderInformationFeedResponseMessage"/>
-        </wsdl:operation>
     </wsdl:portType>
     <wsdl:binding name="Hpd_Plus_ProviderInformationDirectory_Binding" type="hpdplus:Hpd_Plus_ProviderInformationDirectory_PortType">
         <soap12:binding style="document" transport="http://www.w3.org/2003/05/soap/bindings/HTTP/"/>
         <wsdl:operation name="Hpd_Plus_ProviderInformationQueryRequest">
             <soap12:operation soapAction="urn:gov:hhs:onc:hpdplus:2013:Hpd_Plus_ProviderInformationQueryRequest"/>
-            <wsdl:input>
+            <wsdl:input name="queryRequest">
                 <soap12:body use="literal"/>
             </wsdl:input>
-            <wsdl:output name="response">
-                <soap12:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="Hpd_Plus_ProviderInformationFeedRequest">
-            <soap12:operation soapAction="urn:gov:hhs:onc:hpdplus:2013:Hpd_Plus_ProviderInformationFeedRequest"/>
-            <wsdl:input>
-                <soap12:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output name="response">
+            <wsdl:output name="queryResponse">
                 <soap12:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>

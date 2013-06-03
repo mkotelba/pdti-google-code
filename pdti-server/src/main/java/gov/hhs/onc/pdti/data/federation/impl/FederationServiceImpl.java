@@ -3,9 +3,11 @@ package gov.hhs.onc.pdti.data.federation.impl;
 import gov.hhs.onc.pdti.data.federation.DirectoryFederationException;
 import gov.hhs.onc.pdti.data.federation.FederatedDirectory;
 import gov.hhs.onc.pdti.data.federation.FederationService;
+import gov.hhs.onc.pdti.error.DirectoryErrorBuilder;
 import gov.hhs.onc.pdti.util.DirectoryUtils;
 import gov.hhs.onc.pdti.ws.api.ObjectFactory;
 import gov.hhs.onc.pdti.ws.api.SearchRequest;
+import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusErrorType;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusProviderInformationDirectoryService;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusRequest;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusResponse;
@@ -33,6 +35,9 @@ public class FederationServiceImpl implements FederationService {
 
     @Autowired(required = false)
     private List<FederatedDirectory> federatedDirs;
+
+    @Autowired
+    private DirectoryErrorBuilder errBuilder;
 
     @Override
     public List<HpdPlusResponse> federate(HpdPlusRequest hpdPlusReq) throws DirectoryFederationException {
@@ -66,7 +71,8 @@ public class FederationServiceImpl implements FederationService {
                     .hpdPlusProviderInformationQueryRequest(fedHpdPlusReq);
         } catch (Throwable th) {
             // TODO: improve error handling
-            throw new DirectoryFederationException(th);
+            fedHpdPlusResp.getErrors().add(
+                    this.errBuilder.buildError(fedHpdPlusReq.getRequestID(), HpdPlusErrorType.OTHER, th));
         }
 
         fedHpdPlusResp.setRequestID(fedHpdPlusReq.getRequestID());
@@ -80,8 +86,9 @@ public class FederationServiceImpl implements FederationService {
             try {
                 searchReq.setDn(DirectoryUtils.replaceAncestorDn(new Dn(searchReq.getDn()), fedDirBaseDn).toString());
             } catch (LdapInvalidDnException e) {
-                // TODO: improve error handling
-                throw new DirectoryFederationException(e);
+                throw new DirectoryFederationException(
+                        "Unable to target DSML search request at federated directory Distinguished Name: "
+                                + fedDirBaseDn.getName(), e);
             }
         }
     }

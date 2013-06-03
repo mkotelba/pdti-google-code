@@ -12,28 +12,18 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 @Scope("singleton")
-@Service("hpdPlusProviderInformationDirectory")
+@Service("hpdPlusProviderInfoDir")
 @SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
-@WebService(serviceName = "Hpd_Plus_ProviderInformationDirectory_Service", targetNamespace = "urn:gov:hhs:onc:hpdplus:2013")
+@WebService(portName = "Hpd_Plus_ProviderInformationDirectory_Port_Soap", serviceName = "Hpd_Plus_ProviderInformationDirectory_Service", targetNamespace = "urn:gov:hhs:onc:hpdplus:2013")
 public class HpdPlusProviderInformationDirectoryImpl extends AbstractProviderInformationDirectory implements
         HpdPlusProviderInformationDirectoryPortType {
 
     @Override
     @WebMethod(operationName = "Hpd_Plus_ProviderInformationQueryRequest", action = "urn:gov:hhs:onc:hpdplus:2013:Hpd_Plus_ProviderInformationQueryRequest")
-    @WebResult(name = "hpdPlusResponse", targetNamespace = "urn:gov:hhs:onc:hpdplus:2013", partName = "body")
+    @WebResult(name = "hpdPlusResponse", targetNamespace = "urn:gov:hhs:onc:hpdplus:2013", partName = "queryResponse")
     public HpdPlusResponse hpdPlusProviderInformationQueryRequest(
-            @WebParam(name = "hpdPlusRequest", targetNamespace = "urn:gov:hhs:onc:hpdplus:2013", partName = "body") HpdPlusRequest body) {
+            @WebParam(name = "hpdPlusRequest", targetNamespace = "urn:gov:hhs:onc:hpdplus:2013", partName = "queryRequest") HpdPlusRequest queryRequest) {
 
-        return this.dirService.processRequest(body);
-    }
-
-    @Override
-    @WebMethod(operationName = "Hpd_Plus_ProviderInformationFeedRequest", action = "urn:gov:hhs:onc:hpdplus:2013:Hpd_Plus_ProviderInformationFeedRequest")
-    @WebResult(name = "hpdPlusResponse", targetNamespace = "urn:gov:hhs:onc:hpdplus:2013", partName = "body")
-    public HpdPlusResponse hpdPlusProviderInformationFeedRequest(
-            @WebParam(name = "hpdPlusRequest", targetNamespace = "urn:gov:hhs:onc:hpdplus:2013", partName = "body") HpdPlusRequest body) {
-
-        // TODO: implement
-        return this.hpdPlusObjectFactory.createHpdPlusResponse();
+        return this.dirService.processRequest(queryRequest);
     }
 }

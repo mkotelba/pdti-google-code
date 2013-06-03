@@ -19,47 +19,26 @@
     </wsdl:types>
     <wsdl:message name="ProviderInformationQueryRequestMessage">
         <wsdl:documentation>Provider Information Query Request Message</wsdl:documentation>
-        <wsdl:part name="body" element="dsml:batchRequest"/>
+        <wsdl:part name="queryRequest" element="dsml:batchRequest"/>
     </wsdl:message>
     <wsdl:message name="ProviderInformationQueryResponseMessage">
         <wsdl:documentation>Provider Information Query Response Message</wsdl:documentation>
-        <wsdl:part name="body" element="dsml:batchResponse"/>
-    </wsdl:message>
-    <wsdl:message name="ProviderInformationFeedRequestMessage">
-        <wsdl:documentation>Provider Information Feed Request Message</wsdl:documentation>
-        <wsdl:part name="body" element="dsml:batchRequest"/>
-    </wsdl:message>
-    <wsdl:message name="ProviderInformationFeedResponseMessage">
-        <wsdl:documentation>Provider Information Feed Response Message</wsdl:documentation>
-        <wsdl:part name="body" element="dsml:batchResponse"/>
+        <wsdl:part name="queryResponse" element="dsml:batchResponse"/>
     </wsdl:message>
     <wsdl:portType name="ProviderInformationDirectory_PortType">
         <wsdl:operation name="ProviderInformationQueryRequest">
             <wsdl:input message="hpd:ProviderInformationQueryRequestMessage"/>
             <wsdl:output message="hpd:ProviderInformationQueryResponseMessage"/>
         </wsdl:operation>
-        <wsdl:operation name="ProviderInformationFeedRequest">
-            <wsdl:input message="hpd:ProviderInformationFeedRequestMessage"/>
-            <wsdl:output message="hpd:ProviderInformationFeedResponseMessage"/>
-        </wsdl:operation>
     </wsdl:portType>
     <wsdl:binding name="ProviderInformationDirectory_Binding" type="hpd:ProviderInformationDirectory_PortType">
         <soap12:binding style="document" transport="http://www.w3.org/2003/05/soap/bindings/HTTP/"/>
         <wsdl:operation name="ProviderInformationQueryRequest">
             <soap12:operation soapAction="urn:ihe:iti:hpd:2010:ProviderInformationQueryRequest"/>
-            <wsdl:input>
+            <wsdl:input name="queryRequest">
                 <soap12:body use="literal"/>
             </wsdl:input>
-            <wsdl:output name="response">
-                <soap12:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="ProviderInformationFeedRequest">
-            <soap12:operation soapAction="urn:ihe:iti:hpd:2010:ProviderInformationFeedRequest"/>
-            <wsdl:input>
-                <soap12:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output name="response">
+            <wsdl:output name="queryResponse">
                 <soap12:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>

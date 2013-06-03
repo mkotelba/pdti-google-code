@@ -15,7 +15,8 @@ import javax.management.remote.JMXServiceURL;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.log4j.Logger;
 
-public class TestApacheDsService {
+public class ApacheDsInstanceRunner
+{
     private final static String CMD_START = "start";
     private final static String CMD_STOP = "stop";
 
@@ -24,8 +25,10 @@ public class TestApacheDsService {
 
     private final static int THREAD_SLEEP_MS = 1000;
 
-    private final static int JMX_SERVICE_PORT = 29999;
-    private final static String JMX_SERVICE_URL_STR = "service:jmx:rmi:///jndi/rmi://:" + JMX_SERVICE_PORT + "/jmxrmi";
+    private final static String PDTI_TEST_APACHEDS_JMX_PORT_PROP_NAME = "pdti.test.apacheds.jmx.port";
+
+    private final static String JMX_SERVICE_URL_PREFIX = "service:jmx:rmi:///jndi/rmi://:";
+    private final static String JMX_SERVICE_URL_SUFFIX = "/jmxrmi";
 
     private final static Logger LOGGER = Logger.getLogger(ApacheDsInstance.class);
 
@@ -46,7 +49,8 @@ public class TestApacheDsService {
         }
 
         try {
-            jmxServiceUrl = new JMXServiceURL(JMX_SERVICE_URL_STR);
+            jmxServiceUrl = new JMXServiceURL(JMX_SERVICE_URL_PREFIX
+                    + System.getProperty(PDTI_TEST_APACHEDS_JMX_PORT_PROP_NAME) + JMX_SERVICE_URL_SUFFIX);
         } catch (MalformedURLException e) {
             // TODO: improve error handling
             LOGGER.error(e);
@@ -55,7 +59,7 @@ public class TestApacheDsService {
         }
     }
 
-    private TestApacheDsService() {
+    private ApacheDsInstanceRunner() {
     }
 
     public static void main(String... args) {
@@ -70,11 +74,11 @@ public class TestApacheDsService {
         try {
             switch (cmd) {
                 case CMD_START:
-                    new TestApacheDsService().start();
+                    new ApacheDsInstanceRunner().start();
                     break;
 
                 case CMD_STOP:
-                    new TestApacheDsService().stop();
+                    new ApacheDsInstanceRunner().stop();
                     break;
 
                 default:
