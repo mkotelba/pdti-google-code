@@ -214,7 +214,7 @@
    </soap:Body>
 </soap:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:gov:hhs:onc:hpdplus:2013:Hpd_Plus_ProviderInformationQueryRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation>
   </con:interface>
-  <con:testSuite name="Hpd_Plus_ProviderInformationQueryRequestTestSuite">
+  <con:testSuite name="ProviderInformationQueryRequestTestSuite_Plus">
     <con:settings/>
     <con:runType>SEQUENTIAL</con:runType>
     <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="search_provider_by_name" searchProperties="true" id="c32cf9e5-f39b-4ab7-a71e-e1198c61ad97">
@@ -541,7 +541,7 @@
     </con:testCase>
     <con:properties/>
   </con:testSuite>
-  <con:testSuite name="Workflows">
+  <con:testSuite name="Workflows_Plus">
     <con:settings/>
     <con:runType>SEQUENTIAL</con:runType>
     <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="IWG_Workflow" searchProperties="true" id="7cfda747-50ee-41e8-a20b-a9bd1708718b">
@@ -1612,7 +1612,7 @@
     </con:testCase>
     <con:properties/>
   </con:testSuite>
-  <con:testSuite name="RTM_Use_Cases">
+  <con:testSuite name="RTM_Use_Cases_Plus">
     <con:settings/>
     <con:runType>SEQUENTIAL</con:runType>
     <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Find_Individual" searchProperties="true" id="c46d6e17-f483-46d2-babc-4d5bff7cfe86">
