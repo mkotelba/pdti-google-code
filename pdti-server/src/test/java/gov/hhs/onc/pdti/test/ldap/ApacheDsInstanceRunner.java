@@ -15,8 +15,7 @@ import javax.management.remote.JMXServiceURL;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.log4j.Logger;
 
-public class ApacheDsInstanceRunner
-{
+public class ApacheDsInstanceRunner {
     private final static String CMD_START = "start";
     private final static String CMD_STOP = "stop";
 
@@ -49,8 +48,7 @@ public class ApacheDsInstanceRunner
         }
 
         try {
-            jmxServiceUrl = new JMXServiceURL(JMX_SERVICE_URL_PREFIX
-                    + System.getProperty(PDTI_TEST_APACHEDS_JMX_PORT_PROP_NAME) + JMX_SERVICE_URL_SUFFIX);
+            jmxServiceUrl = new JMXServiceURL(JMX_SERVICE_URL_PREFIX + System.getProperty(PDTI_TEST_APACHEDS_JMX_PORT_PROP_NAME) + JMX_SERVICE_URL_SUFFIX);
         } catch (MalformedURLException e) {
             // TODO: improve error handling
             LOGGER.error(e);
@@ -106,8 +104,7 @@ public class ApacheDsInstanceRunner
         }
     }
 
-    private void start() throws InstanceAlreadyExistsException, IOException, MBeanRegistrationException,
-            NotCompliantMBeanException {
+    private void start() throws InstanceAlreadyExistsException, IOException, MBeanRegistrationException, NotCompliantMBeanException {
         ApacheDsInstanceMBean mbean = new ApacheDsInstance(Thread.currentThread());
 
         ManagementFactory.getPlatformMBeanServer().registerMBean(mbean, mbeanName);
@@ -132,8 +129,7 @@ public class ApacheDsInstanceRunner
     }
 
     private ApacheDsInstanceMBean getMbeanProxy() throws IOException {
-        return JMX.newMBeanProxy(
-                (this.jmxConn = JMXConnectorFactory.connect(jmxServiceUrl, null)).getMBeanServerConnection(),
-                mbeanName, ApacheDsInstanceMBean.class, true);
+        return JMX.newMBeanProxy((this.jmxConn = JMXConnectorFactory.connect(jmxServiceUrl, null)).getMBeanServerConnection(), mbeanName,
+                ApacheDsInstanceMBean.class, true);
     }
 }

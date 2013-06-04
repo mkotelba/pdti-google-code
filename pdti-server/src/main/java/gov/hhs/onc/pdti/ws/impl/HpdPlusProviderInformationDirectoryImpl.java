@@ -15,8 +15,7 @@ import org.springframework.stereotype.Service;
 @Service("hpdPlusProviderInfoDir")
 @SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
 @WebService(portName = "Hpd_Plus_ProviderInformationDirectory_Port_Soap", serviceName = "Hpd_Plus_ProviderInformationDirectory_Service", targetNamespace = "urn:gov:hhs:onc:hpdplus:2013")
-public class HpdPlusProviderInformationDirectoryImpl extends AbstractProviderInformationDirectory implements
-        HpdPlusProviderInformationDirectoryPortType {
+public class HpdPlusProviderInformationDirectoryImpl extends AbstractProviderInformationDirectory implements HpdPlusProviderInformationDirectoryPortType {
 
     @Override
     @WebMethod(operationName = "Hpd_Plus_ProviderInformationQueryRequest", action = "urn:gov:hhs:onc:hpdplus:2013:Hpd_Plus_ProviderInformationQueryRequest")

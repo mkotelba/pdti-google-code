@@ -20,8 +20,7 @@ import org.springframework.stereotype.Service;
 @Service("providerInfoDir")
 @SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
 @WebService(portName = "ProviderInformationDirectory_Port_Soap", serviceName = "ProviderInformationDirectory_Service", targetNamespace = "urn:ihe:iti:hpd:2010")
-public class ProviderInformationDirectoryImpl extends AbstractProviderInformationDirectory implements
-        ProviderInformationDirectoryPortType {
+public class ProviderInformationDirectoryImpl extends AbstractProviderInformationDirectory implements ProviderInformationDirectoryPortType {
     @Override
     @WebMethod(operationName = "ProviderInformationQueryRequest", action = "urn:ihe:iti:hpd:2010:ProviderInformationQueryRequest")
     @WebResult(name = "batchResponse", targetNamespace = "urn:oasis:names:tc:DSML:2:0:core", partName = "queryResponse")
@@ -34,8 +33,7 @@ public class ProviderInformationDirectoryImpl extends AbstractProviderInformatio
         HpdPlusResponse hpdPlusResp = this.dirService.processRequest(hpdPlusReq);
 
         return ObjectUtils.defaultIfNull(
-                (BatchResponse) CollectionUtils.find(hpdPlusResp.getResponseItems(),
-                        PredicateUtils.instanceofPredicate(BatchResponse.class)),
+                (BatchResponse) CollectionUtils.find(hpdPlusResp.getResponseItems(), PredicateUtils.instanceofPredicate(BatchResponse.class)),
                 this.objectFactory.createBatchResponse());
     }
 }

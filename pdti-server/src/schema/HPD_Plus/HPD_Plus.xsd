@@ -19,6 +19,15 @@
         </xsd:restriction>
     </xsd:simpleType>
     
+    <xsd:simpleType name="HpdPlusDirectoryId">
+        <xsd:annotation>
+            <xsd:documentation>
+                A non-blank HPD Plus directory ID.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:union memberTypes="xsd:token NotBlank"/>
+    </xsd:simpleType>
+    
     <xsd:simpleType name="HpdPlusRequestId">
         <xsd:annotation>
             <xsd:documentation>
@@ -70,9 +79,21 @@
             <xsd:element name="message" type="xsd:token" minOccurs="0"/>
             <xsd:element name="detail" type="HpdPlusErrorDetail" minOccurs="0"/>
         </xsd:sequence>
+        <xsd:attribute name="directoryID" type="HpdPlusDirectoryId" use="required"/>
         <xsd:attribute name="requestID" type="HpdPlusRequestId" use="required"/>
         <xsd:attribute name="type" type="HpdPlusErrorType"/>
     </xsd:complexType>
+    
+    <xsd:group name="HpdPlusErrors">
+        <xsd:annotation>
+            <xsd:documentation>
+                A HPD Plus errors container.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="hpdPlusError" type="HpdPlusError"/>
+        </xsd:sequence>
+    </xsd:group>
     
     <xsd:complexType name="HpdPlusMetadataProperty">
         <xsd:annotation>
@@ -135,6 +156,7 @@
             <xsd:element name="requestMetadata" type="HpdPlusRequestMetadata" minOccurs="0"/>
             <xsd:element name="batchRequest" type="dsml:BatchRequest" minOccurs="0"/>
         </xsd:sequence>
+        <xsd:attribute name="directoryID" type="HpdPlusDirectoryId"/>
         <xsd:attribute name="requestID" type="HpdPlusRequestId" use="required"/>
     </xsd:complexType>
     
@@ -173,9 +195,10 @@
         </xsd:annotation>
         <xsd:sequence>
             <xsd:element name="responseMetadata" type="HpdPlusResponseMetadata" minOccurs="0"/>
-            <xsd:element name="errors" type="HpdPlusError" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:group ref="HpdPlusErrors" minOccurs="0" maxOccurs="unbounded"/>
             <xsd:group ref="HpdPlusResponseItems" minOccurs="0" maxOccurs="unbounded"/>
         </xsd:sequence>
+        <xsd:attribute name="directoryID" type="HpdPlusDirectoryId" use="required"/>
         <xsd:attribute name="requestID" type="HpdPlusRequestId" use="required"/>
     </xsd:complexType>
     

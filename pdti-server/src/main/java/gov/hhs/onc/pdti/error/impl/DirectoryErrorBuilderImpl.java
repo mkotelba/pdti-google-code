@@ -2,6 +2,9 @@ package gov.hhs.onc.pdti.error.impl;
 
 import gov.hhs.onc.pdti.error.DirectoryErrorBuilder;
 import gov.hhs.onc.pdti.util.DirectoryUtils;
+import gov.hhs.onc.pdti.ws.api.ErrorResponse;
+import gov.hhs.onc.pdti.ws.api.ErrorResponse.Detail;
+import gov.hhs.onc.pdti.ws.api.ErrorResponse.ErrorType;
 import gov.hhs.onc.pdti.ws.api.ObjectFactory;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusError;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusErrorDetail;
@@ -20,9 +23,10 @@ public class DirectoryErrorBuilderImpl implements DirectoryErrorBuilder {
     private gov.hhs.onc.pdti.ws.api.hpdplus.ObjectFactory hpdPlusObjectFactory;
 
     @Override
-    public HpdPlusError buildError(String reqId, HpdPlusErrorType errType, Throwable th) {
+    public HpdPlusError buildError(String dirId, String reqId, HpdPlusErrorType errType, Throwable th) {
         HpdPlusError err = this.hpdPlusObjectFactory.createHpdPlusError();
-        err.setRequestID(reqId);
+        err.setDirectoryId(dirId);
+        err.setRequestId(reqId);
         err.setType(errType);
         err.setMessage(th.getMessage());
 
@@ -31,5 +35,19 @@ public class DirectoryErrorBuilderImpl implements DirectoryErrorBuilder {
         err.setDetail(errDetail);
 
         return err;
+    }
+
+    @Override
+    public ErrorResponse buildErrorResponse(String reqId, ErrorType errType, Throwable th) {
+        ErrorResponse errResp = this.objectFactory.createErrorResponse();
+        errResp.setRequestId(reqId);
+        errResp.setType(errType);
+        errResp.setMessage(th.getMessage());
+
+        Detail errRespDetail = this.objectFactory.createErrorResponseDetail();
+        errRespDetail.setAny(DirectoryUtils.getStackTraceJaxbElement(th));
+        errResp.setDetail(errRespDetail);
+
+        return errResp;
     }
 }

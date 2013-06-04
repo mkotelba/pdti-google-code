@@ -167,10 +167,12 @@
                     </webResources>
                 </configuration>
             </plugin>
+            <!--
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
             </plugin>
+            -->
             <plugin>
                 <groupId>org.jvnet.jax-ws-commons</groupId>
                 <artifactId>jaxws-maven-plugin</artifactId>
@@ -263,7 +265,6 @@
                                         <value>project.test.server.port=${project.test.server.1.port}</value>
                                         <value>project.test.server.context=${project.test.server.1.context}</value>
                                         <value>project.test.server.service=${project.service}</value>
-                                        <value>project.test.server.dsml.dn.base=${project.test.server.1.dsml.dn.base}</value>
                                     </projectProperties>
                                 </configuration>
                             </execution>
@@ -281,7 +282,6 @@
                                         <value>project.test.server.port=${project.test.server.1.port}</value>
                                         <value>project.test.server.context=${project.test.server.1.context}</value>
                                         <value>project.test.server.service=${project.service.hpdplus}</value>
-                                        <value>project.test.server.dsml.dn.base=${project.test.server.1.dsml.dn.base}</value>
                                     </projectProperties>
                                 </configuration>
                             </execution>
@@ -313,6 +313,8 @@
                                             <property name="jmxPort" value="${project.test.server.1.ldap.1.jmx.port}"/>
                                             <property name="ldapHost" value="${project.test.server.1.ldap.1.host}"/>
                                             <property name="ldapPort" value="${project.test.server.1.ldap.1.port}"/>
+                                            <property name="dataPartName" value="${project.test.server.1.ldap.1.data.partition.name}"/>
+                                            <property name="dataPartSuffix" value="${project.test.server.1.ldap.1.data.partition.suffix}"/>
                                             <property name="dataLdifFile" value="${project.test.server.1.ldap.1.data.ldif.file}"/>
                                         </ant>
                                         <ant antfile="${project.build.testScriptSourceDirectory}/apacheds-run.xml" target="apacheds-start" inheritRefs="true">
@@ -320,7 +322,8 @@
                                             <property name="jmxPort" value="${project.test.server.2.ldap.1.jmx.port}"/>
                                             <property name="ldapHost" value="${project.test.server.2.ldap.1.host}"/>
                                             <property name="ldapPort" value="${project.test.server.2.ldap.1.port}"/>
-                                            <!-- TODO: create LDAP test data for second instance -->
+                                            <property name="dataPartName" value="${project.test.server.2.ldap.1.data.partition.name}"/>
+                                            <property name="dataPartSuffix" value="${project.test.server.2.ldap.1.data.partition.suffix}"/>
                                             <property name="dataLdifFile" value="${project.test.server.2.ldap.1.data.ldif.file}"/>
                                         </ant>
                                     </target>
@@ -370,6 +373,7 @@
                                 <configuration>
                                     <container>
                                         <systemProperties>
+                                            <pdti.context.config.data.directory>${project.test.server.1.context.config.data.directory}</pdti.context.config.data.directory>
                                             <pdti.context.config.data.ldap>${project.test.server.1.context.config.data.ldap}</pdti.context.config.data.ldap>
                                             <pdti.context.config.data.federation>${project.test.server.1.context.config.data.federation}</pdti.context.config.data.federation>
                                             <pdti.log.file.basename>${project.test.server.1.log.file.basename}</pdti.log.file.basename>
@@ -401,6 +405,7 @@
                                 <configuration>
                                     <container>
                                         <systemProperties>
+                                            <pdti.context.config.data.directory>${project.test.server.2.context.config.data.directory}</pdti.context.config.data.directory>
                                             <pdti.context.config.data.ldap>${project.test.server.2.context.config.data.ldap}</pdti.context.config.data.ldap>
                                             <pdti.context.config.data.federation>${project.test.server.2.context.config.data.federation}</pdti.context.config.data.federation>
                                             <pdti.log.file.basename>${project.test.server.2.log.file.basename}</pdti.log.file.basename>
@@ -457,6 +462,47 @@
                                     </configuration>
                                 </configuration>
                             </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>deploy-server</id>
+            <activation>
+                <property>
+                    <name>!skipTests</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.tomcat.maven</groupId>
+                        <artifactId>tomcat7-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>tomcat7-deploy1</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>deploy</goal>
+                                </goals>
+                                <configuration>
+                                    <path>/${project.deploy.server.context.1}</path>
+                                </configuration>
+                            </execution>
+                            <!-- TODO: implement multi-context federation handling -->
+                            <!--
+                            <execution>
+                                <id>tomcat7-deploy2</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>deploy</goal>
+                                </goals>
+                                <configuration>
+                                    <path>/${project.deploy.server.context.2}</path>
+                                </configuration>
+                            </execution>
+                            -->
                         </executions>
                     </plugin>
                 </plugins>

@@ -37,8 +37,9 @@ public class LdapDataSourceImpl implements LdapDataSource {
     @Override
     public String toString() {
         StrBuilder builder = new StrBuilder();
-        builder.appendWithSeparators(ArrayUtils.toArray("host=" + this.getHost(), "port=" + this.getPort(), "ssl={"
-                + this.getSsl() + "}", "credentials={" + this.getCredentials() + "}"), ",");
+        builder.appendWithSeparators(
+                ArrayUtils.toArray("host=" + this.getHost(), "port=" + this.getPort(), "ssl={" + this.getSsl() + "}", "credentials={" + this.getCredentials()
+                        + "}"), ",");
 
         return builder.toString();
     }
@@ -65,8 +66,7 @@ public class LdapDataSourceImpl implements LdapDataSource {
 
     @Override
     public int getPort() {
-        return (this.port > 0) ? this.port : (this.getSsl().isSsl() ? LdapConnectionConfig.DEFAULT_LDAPS_PORT
-                : LdapConnectionConfig.DEFAULT_LDAP_PORT);
+        return (this.port > 0) ? this.port : (this.getSsl().isSsl() ? LdapConnectionConfig.DEFAULT_LDAPS_PORT : LdapConnectionConfig.DEFAULT_LDAP_PORT);
     }
 
     @Override

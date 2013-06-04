@@ -25,9 +25,7 @@
     <beans:bean id="customEditorConfigurer" class="org.springframework.beans.factory.config.CustomEditorConfigurer">
         <beans:property name="customEditors">
             <util:map>
-                <beans:entry key="org.apache.directory.api.ldap.model.name.Dn">
-                    <beans:bean class="gov.hhs.onc.pdti.data.ldap.DnPropertyEditor"/>
-                </beans:entry>
+                <beans:entry key="org.apache.directory.api.ldap.model.name.Dn" value="#{ dnPropEditor.class.name }"/>
             </util:map>
         </beans:property>
     </beans:bean>

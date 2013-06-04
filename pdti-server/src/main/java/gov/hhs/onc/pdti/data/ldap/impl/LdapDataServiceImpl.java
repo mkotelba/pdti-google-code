@@ -40,8 +40,7 @@ public class LdapDataServiceImpl extends AbstractDataService<LdapDataSource> imp
 
             connectAndBind(dataSource, ldapConn);
 
-            return this.dsmlService.processDsml(
-                    new Dsmlv2Engine(ldapConn, ldapConnConfig.getName(), ldapConnConfig.getCredentials()), batchReq);
+            return this.dsmlService.processDsml(new Dsmlv2Engine(ldapConn, ldapConnConfig.getName(), ldapConnConfig.getCredentials()), batchReq);
         } finally {
             if (ldapConn != null) {
                 unbindAndDisconnect(dataSource, ldapConn);
@@ -49,8 +48,7 @@ public class LdapDataServiceImpl extends AbstractDataService<LdapDataSource> imp
         }
     }
 
-    private static boolean connectAndBind(LdapDataSource dataSource, LdapConnection ldapConn)
-            throws DirectoryLdapException {
+    private static boolean connectAndBind(LdapDataSource dataSource, LdapConnection ldapConn) throws DirectoryLdapException {
         try {
             ldapConn.connect();
         } catch (IOException | LdapException e) {
@@ -74,8 +72,7 @@ public class LdapDataServiceImpl extends AbstractDataService<LdapDataSource> imp
         return ldapConn.isAuthenticated();
     }
 
-    private static boolean unbindAndDisconnect(LdapDataSource dataSource, LdapConnection ldapConn)
-            throws DirectoryLdapException {
+    private static boolean unbindAndDisconnect(LdapDataSource dataSource, LdapConnection ldapConn) throws DirectoryLdapException {
         if (ldapConn.isAuthenticated()) {
             try {
                 ldapConn.unBind();

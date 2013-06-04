@@ -8,7 +8,10 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
     
-    <beans:bean id="federatedDirectoryTest2" class="gov.hhs.onc.pdti.data.federation.impl.FederatedDirectoryImpl" parent="federatedDirectory"
-        p:wsdlLocation="%{project.test.server.2.scheme}://%{project.test.server.2.host}:%{project.test.server.2.port}/%{project.test.server.2.context}/%{project.service.hpdplus}?wsdl"
-        p:baseDn="%{project.test.server.2.dsml.dn.base}"/>
+    <beans:bean id="federatedDirTest2" class="gov.hhs.onc.pdti.data.impl.DirectoryDescriptorImpl" parent="federatedDir"
+        p:directoryId="%{project.test.server.2.dir.id}"
+        p:baseDn="%{project.test.server.2.dir.dn.base}"
+        p:wsdlLocation="%{project.test.server.2.dir.wsdl.location.hpdplus}">
+        <beans:qualifier value="federated"/>
+    </beans:bean>
 </beans:beans>
