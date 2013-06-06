@@ -987,48 +987,50 @@ Request a list of individuals by specifying one or more individual attributes.</
             <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdPlusRequest requestID="${=(int)(Math.random()*1000)}" xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
-        <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <dsml:searchRequest dn="ou=Providers,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
-                <dsml:filter>
-                <dsml:equalityMatch name="givenName">
-                    <dsml:value>Thomas</dsml:value>
-                </dsml:equalityMatch>
-                <dsml:equalityMatch name="sn">
-                    <dsml:value>Jones</dsml:value>
-                </dsml:equalityMatch>
-                </dsml:filter>
-                <dsml:attributes>
-	               <dsml:attribute name="uid"/>
-	               <dsml:attribute name="hcIdentifier"/>
-	               <dsml:attribute name="hcProfession"/>
-	               <dsml:attribute name="description"/>
-	               <dsml:attribute name="hpdProviderStatus"/>
-	               <dsml:attribute name="displayName"/>
-	               <dsml:attribute name="title"/>
-	               <dsml:attribute name="givenName"/>
-	               <dsml:attribute name="initials"/>
-	               <dsml:attribute name="sn"/>
-	               <dsml:attribute name="cn"/>
-	               <dsml:attribute name="hpdProviderLanguageSupported"/>
-	               <dsml:attribute name="gender"/>
-	               <dsml:attribute name="mail"/>
-	               <dsml:attribute name="labeledUri"/>
-	               <dsml:attribute name="physicalDeliveryOfficeName"/>
-	               <dsml:attribute name="hpdProviderMailingAddress"/>
-	               <dsml:attribute name="hpdProviderBillingAddress"/>
-	               <dsml:attribute name="hpdProviderPracticeAddress"/>
-	               <dsml:attribute name="hpdProviderPracticeLocation"/>
-	               <dsml:attribute name="telephoneNumber"/>
-	               <dsml:attribute name="mobile"/>
-	               <dsml:attribute name="pager"/>
-	               <dsml:attribute name="facsimileTelephoneNumber"/>
-	               <dsml:attribute name="hcSpecialization"/>
-	               <dsml:attribute name="suffix"/>
-	               <dsml:attribute name="hpdHasAService"/>
-	               <dsml:attribute name="hpdProviderLegalAddress"/>
-                </dsml:attributes>
+               <dsml:filter>
+                  <dsml:and>
+                     <dsml:equalityMatch name="givenName">
+                        <dsml:value>Thomas</dsml:value>
+                     </dsml:equalityMatch>
+                     <dsml:equalityMatch name="sn">
+                        <dsml:value>Jones</dsml:value>
+                     </dsml:equalityMatch>
+                  </dsml:and>
+               </dsml:filter>
+               <!--dsml:attributes>
+                  <dsml:attribute name="uid"/>
+                  <dsml:attribute name="hcIdentifier"/>
+                  <dsml:attribute name="hcProfession"/>
+                  <dsml:attribute name="description"/>
+                  <dsml:attribute name="hpdProviderStatus"/>
+                  <dsml:attribute name="displayName"/>
+                  <dsml:attribute name="title"/>
+                  <dsml:attribute name="givenName"/>
+                  <dsml:attribute name="initials"/>
+                  <dsml:attribute name="sn"/>
+                  <dsml:attribute name="cn"/>
+                  <dsml:attribute name="hpdProviderLanguageSupported"/>
+                  <dsml:attribute name="gender"/>
+                  <dsml:attribute name="mail"/>
+                  <dsml:attribute name="labeledUri"/>
+                  <dsml:attribute name="physicalDeliveryOfficeName"/>
+                  <dsml:attribute name="hpdProviderMailingAddress"/>
+                  <dsml:attribute name="hpdProviderBillingAddress"/>
+                  <dsml:attribute name="hpdProviderPracticeAddress"/>
+                  <dsml:attribute name="hpdProviderPracticeLocation"/>
+                  <dsml:attribute name="telephoneNumber"/>
+                  <dsml:attribute name="mobile"/>
+                  <dsml:attribute name="pager"/>
+                  <dsml:attribute name="facsimileTelephoneNumber"/>
+                  <dsml:attribute name="hcSpecialization"/>
+                  <dsml:attribute name="suffix"/>
+                  <dsml:attribute name="hpdHasAService"/>
+                  <dsml:attribute name="hpdProviderLegalAddress"/>
+               </dsml:attributes-->
             </dsml:searchRequest>
-        </dsml:batchRequest>
+         </dsml:batchRequest>
       </hpdplus:hpdPlusRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
@@ -1104,7 +1106,7 @@ organization attributes.</con:description><con:settings/>
 </soap-env:Envelope>]]></con:request>
             <con:assertion type="SOAP Response"/>
             <con:assertion type="Schema Compliance">
-              <con:configuration/>
+              <con:configuration><definition/></con:configuration>
             </con:assertion>
             <con:assertion type="SOAP Fault Assertion"/>
             <con:credentials>
