@@ -69,6 +69,7 @@ hpdProviderBillingAddress: John Smith$01251 Wallnut Street$Panama City, DE 50371
 hpdProviderPracticeAddress: John Smith$01251 Wallnut Street$Panama City, DE 50371
 hpdProviderLanguageSupported: en
 uid: john.smith
+hpdHasAService: hpdServiceId=6,ou=Services,o=dev.provider-directories.com,dc=hpd
 #memberOf: hpdOrgId=org2,ou=Organizations,o=dev.provider-directories.com,dc=hpd
 
 dn: HcIdentifier=provider3,ou=Providers,o=dev.provider-directories.com,dc=hpd
@@ -256,7 +257,7 @@ objectClass: HPDProviderMembership
 hpdHasAnOrg: hpdOrgId=org4,ou=Organizations,o=dev.provider-directories.com,dc=hpd
 #hpdHasASubOrg: 
 hpdHasAProvider: HcIdentifier=provider3,ou=Providers,o=dev.provider-directories.com,dc=hpd
-#hpdHasAService: hpdServiceId=5,ou=Services,o=dev.provider-directories.com,dc=hpd^hpdServiceId=2,ou=Services,o=dev.provider-directories.com,dc=hpd^hpdServiceId=3,ou=Services,o=dev.provider-directories.com,dc=hpd
+hpdHasAService: hpdServiceId=5,ou=Services,o=dev.provider-directories.com,dc=hpd^hpdServiceId=2,ou=Services,o=dev.provider-directories.com,dc=hpd^hpdServiceId=3,ou=Services,o=dev.provider-directories.com,dc=hpd
 hpdMemberId: 5
 hpdMemberName: Bob Jefferson Membership to Northside Maternity Org
 hpdMemberStatus: Active
@@ -352,6 +353,30 @@ hpdServiceAddress: bob.jefferson@direct.northside.maternity.com
 hpdServiceProtocol: SMTP
 hpdServiceType: Direct
 hpdServiceId: 5
+hpdCertificate: MIICqjCCAZKgAwIBAgIJAMd5Vfs3Eo6kMA0GCSqGSIb3DQEBBQUAMA0xCzAJBgNV
+ BAMTAm1rMB4XDTEzMDUwMjE0MzMyNVoXDTIzMDQzMDE0MzMyNVowDTELMAkGA1UE
+ AxMCbWswggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDGHnk7g0gS4JmD
+ s1mNjsHFFEMuHmTtIvIPWbjsnbZRcy4teJE4D5/EShMQiOaujNO1mg6ib4hnEXPQ
+ 9q1sQhFg/5lC0Xwq3LGy7t9NlmRjrNKxejCYE04QptAK5vGg8dK3jcsfMEmHHxoo
+ nx38HpC24PvTJgY+efwBxTDQrZu3rMw2Jr/QERT6pbQEZbpsr0+ZizLv2C/mweE6
+ 2pGcKCA2WEffetL+qtoN3RWWagxSYx/jjJdT6UGn3KLEhoNSVm6LidmbKx4AwAys
+ YjfOPF8m06pF0khTlXMLyw6LyKwUYMpHSRmmlA6tyjUAsF9Cy+hY4VLPWXaNK6ru
+ zH+s5BBHAgMBAAGjDTALMAkGA1UdEwQCMAAwDQYJKoZIhvcNAQEFBQADggEBABPF
+ 45byPxZ9z78YBPE6IbYkxuY1dEt05ZP5YsKS76M7m9OYUryaPcWvt1ctdV2oJbJ+
+ 9vEVwDOKxD6gkLd1oIsw2nD9U3YYtHrcej2ytw3XcA+okzUoNVPblGTUSF7dMuc3
+ MyQPhnIt6iOZKuzRDG1Ruk4XHyXHc1sngsHp/THKsCjz+rZlgjlX4iatPAhz30Fn
+ BVZ7UVeAKftcDwpBdggJxvEAoEGvRpm7X8OlqQI2jmm/Oxlw70mjCZTzJFtOFOJf
+ homCEiQXSz/4tobOgw66ooBNWUd7f5MfAhquBV2/kDK5bnbOGJ30vzHBj9CUf8tT
+ flVoSO0cwbuGBddusEU=
+hpdServicePayload: C64
+
+dn: hpdServiceId=6,ou=Services,o=dev.provider-directories.com,dc=hpd
+objectClass: top
+objectClass: HPDElectronicService
+hpdServiceAddress: john.smith@direct.panama_city_clinic.com
+hpdServiceProtocol: SMTP
+hpdServiceType: Direct
+hpdServiceId: 6
 hpdCertificate: MIICqjCCAZKgAwIBAgIJAMd5Vfs3Eo6kMA0GCSqGSIb3DQEBBQUAMA0xCzAJBgNV
  BAMTAm1rMB4XDTEzMDUwMjE0MzMyNVoXDTIzMDQzMDE0MzMyNVowDTELMAkGA1UE
  AxMCbWswggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDGHnk7g0gS4JmD
