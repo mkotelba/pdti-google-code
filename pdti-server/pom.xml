@@ -265,6 +265,7 @@
                                         <value>project.test.server.port=${project.test.server.1.port}</value>
                                         <value>project.test.server.context=${project.test.server.1.context}</value>
                                         <value>project.test.server.service=${project.service}</value>
+                                        <value>project.test.server.dsml.dn.base=${project.test.server.1.dir.dn.base}</value>
                                     </projectProperties>
                                 </configuration>
                             </execution>
@@ -282,6 +283,7 @@
                                         <value>project.test.server.port=${project.test.server.1.port}</value>
                                         <value>project.test.server.context=${project.test.server.1.context}</value>
                                         <value>project.test.server.service=${project.service.hpdplus}</value>
+                                        <value>project.test.server.dsml.dn.base=${project.test.server.1.dir.dn.base}</value>
                                     </projectProperties>
                                 </configuration>
                             </execution>
@@ -484,7 +486,7 @@
                                 <id>tomcat7-deploy1</id>
                                 <phase>install</phase>
                                 <goals>
-                                    <goal>deploy</goal>
+                                    <goal>deploy-only</goal>
                                 </goals>
                                 <configuration>
                                     <path>/${project.deploy.server.context.1}</path>
