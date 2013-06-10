@@ -78,7 +78,7 @@
             <con:assertion type="SOAP Fault Assertion"/>
             <con:assertion type="XPath Match" name="directoryID XPath Match"><con:configuration><path>declare namespace hpdplus='urn:gov:hhs:onc:hpdplus:2013';
 
-//hpdplus:hpdPlusResponse[1]/@directoryID</path><content>pdti-dir_1370866275387</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
+//hpdplus:hpdPlusResponse[1]/@directoryID</path><content>pdti-*</content><allowWildcards>true</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
               <con:username xsi:nil="true"/>
               <con:password xsi:nil="true"/>
               <con:domain xsi:nil="true"/>
