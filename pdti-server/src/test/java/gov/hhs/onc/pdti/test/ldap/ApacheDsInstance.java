@@ -18,7 +18,7 @@ import org.apache.directory.server.protocol.shared.transport.TcpTransport;
 import org.apache.directory.server.protocol.shared.transport.Transport;
 import org.apache.log4j.Logger;
 
-@ApplyLdifFiles({ "ldap/schema/hc.ldif", "ldap/schema/hpd_plus.ldif" })
+@ApplyLdifFiles({ "ldap/schema/pkcs9.ldif", "ldap/schema/hc.ldif", "ldap/schema/hpd_plus.ldif" })
 @CreateDS(name = "pdtiDs", allowAnonAccess = true)
 @CreateLdapServer(name = "pdtiLdap", allowAnonymousAccess = true, transports = { @CreateTransport(protocol = "LDAP") })
 public class ApacheDsInstance implements ApacheDsInstanceMBean {
