@@ -96,6 +96,18 @@
         </xsd:sequence>
     </xsd:group>
     
+    <xsd:simpleType name="HpdPlusMetadataPropertyName">
+        <xsd:annotation>
+            <xsd:documentation>
+                A HPD Plus metadata property name.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="NotBlank">
+            <xsd:enumeration value="doNotFederate"/>
+            <xsd:enumeration value="flattenResponse"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
     <xsd:complexType name="HpdPlusMetadataProperty">
         <xsd:annotation>
             <xsd:documentation>
@@ -104,7 +116,7 @@
         </xsd:annotation>
         <xsd:simpleContent>
             <xsd:extension base="xsd:token">
-                <xsd:attribute name="name" type="NotBlank"/>
+                <xsd:attribute name="name" type="HpdPlusMetadataPropertyName"/>
             </xsd:extension>
         </xsd:simpleContent>
     </xsd:complexType>
