@@ -19,6 +19,7 @@ objectClass: top
 objectClass: person
 objectClass: organizationalperson
 objectClass: inetorgperson
+objectClass: naturalPerson
 objectClass: HCProfessional
 objectClass: HPDProvider
 HcIdentifier: provider1
@@ -41,6 +42,7 @@ hpdProviderPracticeAddress: Albert Johnson$532 Maple Drive$Austin, TX 78610
 hpdProviderLanguageSupported: en
 uid: albert.johnson
 hpdCredential: hpdCredentialId=1,ou=Credentials,o=dev2.provider-directories.com,dc=hpd
+gender: m
 
 #==================================================
 # END: PROVIDER(S)

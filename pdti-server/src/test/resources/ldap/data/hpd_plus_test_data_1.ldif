@@ -19,6 +19,7 @@ objectClass: top
 objectClass: person
 objectClass: organizationalperson
 objectClass: inetorgperson
+objectClass: naturalPerson
 objectClass: HCProfessional
 objectClass: HPDProvider
 HcIdentifier: provider1
@@ -42,12 +43,14 @@ hpdProviderLanguageSupported: en
 uid: thomas.jones
 #memberOf: hpdOrgId=org1,ou=Organizations,o=dev.provider-directories.com,dc=hpd
 hpdCredential: hpdCredentialId=1,ou=Credentials,o=dev.provider-directories.com,dc=hpd
+gender: m
 
 dn: HcIdentifier=provider2,ou=Providers,o=dev.provider-directories.com,dc=hpd
 objectClass: top
 objectClass: person
 objectClass: organizationalperson
 objectClass: inetorgperson
+objectClass: naturalPerson
 objectClass: HCProfessional
 objectClass: HPDProvider
 HcIdentifier: provider2
@@ -71,12 +74,14 @@ hpdProviderLanguageSupported: en
 uid: john.smith
 hpdHasAService: hpdServiceId=6,ou=Services,o=dev.provider-directories.com,dc=hpd
 #memberOf: hpdOrgId=org2,ou=Organizations,o=dev.provider-directories.com,dc=hpd
+gender: m
 
 dn: HcIdentifier=provider3,ou=Providers,o=dev.provider-directories.com,dc=hpd
 objectClass: top
 objectClass: person
 objectClass: organizationalperson
 objectClass: inetorgperson
+objectClass: naturalPerson
 objectClass: HCProfessional
 objectClass: HPDProvider
 HcIdentifier: provider3
@@ -98,6 +103,7 @@ hpdProviderBillingAddress: Bob Jefferson$123 Oak Street$Panama City, DE 50371
 hpdProviderPracticeAddress: Bob Jefferson$123 Oak Street$Panama City, DE 50371
 uid: bob.jefferson
 #memberOf: hpdOrgId=org2,ou=Organizations,o=dev.provider-directories.com,dc=hpd
+gender: m
 
 #==================================================
 # END: PROVIDER(S)
