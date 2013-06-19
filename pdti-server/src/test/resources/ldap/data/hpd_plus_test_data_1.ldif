@@ -22,28 +22,34 @@ objectClass: inetorgperson
 objectClass: naturalPerson
 objectClass: HCProfessional
 objectClass: HPDProvider
-HcIdentifier: provider1
-HcProfession: Doctor
-HCSpecialization: Orthopedic Surgeon
 cn: Thomas Jones
-description: This is the description for Thomas Jones.
-givenName: Thomas
 sn: Jones
+description: This is the description for Thomas Jones.
+telephoneNumber: +1 685 622 6202
 facsimileTelephoneNumber: +1 225 216 5900
-initials: ASA
+title: Thomas Jones' title
+givenName: Thomas
+labeledURI: http://www.jonespracticewebsite.com The website of the practice
 mail: thomas.jones@mail1.com
 mobile: +1 010 154 3228
 pager: +1 779 041 6341
-telephoneNumber: +1 685 622 6202
+uid: thomas.jones
+initials: ASA
+gender: m
+HcIdentifier: provider1
+HcProfession: Doctor
+HcRole: HL-7 code for role
+#HcSigningCertificate: syntax is BER-encoded "Public key and certificate for the users non- repudiation signing certificate used for health transactions"
+HcSpecialization: Orthopedic Surgeon
+hpdCredential: hpdCredentialId=1,ou=Credentials,o=dev.provider-directories.com,dc=hpd
+hpdHasAService: hpdServiceId=6,ou=Services,o=dev.provider-directories.com,dc=hpd
+hpdProviderBillingAddress: Thomas Jones$01251 Chestnut Street$Panama City, DE 50369
+hpdProviderLanguageSupported: en
 hpdProviderLegalAddress: Thomas Jones$01251 Chestnut Street$Panama City, DE 50369
 hpdProviderMailingAddress: Thomas Jones$01251 Chestnut Street$Panama City, DE 50369
-hpdProviderBillingAddress: Thomas Jones$01251 Chestnut Street$Panama City, DE 50369
 hpdProviderPracticeAddress: Thomas Jones$01251 Chestnut Street$Panama City, DE 50369
-hpdProviderLanguageSupported: en
-uid: thomas.jones
-#memberOf: hpdOrgId=org1,ou=Organizations,o=dev.provider-directories.com,dc=hpd
-hpdCredential: hpdCredentialId=1,ou=Credentials,o=dev.provider-directories.com,dc=hpd
-gender: m
+hpdProviderPracticeLocation: HPD Plus hpdProviderPracticeLocation attributeType
+hpdProviderStatus: Active
 
 dn: HcIdentifier=provider2,ou=Providers,o=dev.provider-directories.com,dc=hpd
 objectClass: top
@@ -73,7 +79,6 @@ hpdProviderPracticeAddress: John Smith$01251 Wallnut Street$Panama City, DE 5037
 hpdProviderLanguageSupported: en
 uid: john.smith
 hpdHasAService: hpdServiceId=6,ou=Services,o=dev.provider-directories.com,dc=hpd
-#memberOf: hpdOrgId=org2,ou=Organizations,o=dev.provider-directories.com,dc=hpd
 gender: m
 
 dn: HcIdentifier=provider3,ou=Providers,o=dev.provider-directories.com,dc=hpd
@@ -102,7 +107,6 @@ hpdProviderMailingAddress: Bob Jefferson$123 Oak Street$Panama City, DE 50371
 hpdProviderBillingAddress: Bob Jefferson$123 Oak Street$Panama City, DE 50371
 hpdProviderPracticeAddress: Bob Jefferson$123 Oak Street$Panama City, DE 50371
 uid: bob.jefferson
-#memberOf: hpdOrgId=org2,ou=Organizations,o=dev.provider-directories.com,dc=hpd
 gender: m
 
 #==================================================
@@ -123,26 +127,25 @@ objectClass: top
 objectClass: organization
 objectClass: HCRegulatedOrganization
 objectClass: HPDProvider
-HcIdentifier: org1
 o: Dr. Thomas Jones' Private Practice
-hpdProviderMailingAddress: Dr. Thomas Jones Private Practice$01251 Chestnut Street$Panama City, DE 50369
-hpdOrgId: org1
 businessCategory: MRI
 description: Performs magnetic resonance imaging
 facsimileTelephoneNumber: +1 123 456 7899
 telephoneNumber: +1 123 456 7890
-HcRegisteredName: Dr. Thomas Jones' Private Practice
+HcIdentifier: org1
+hpdOrgId: org1
 ClinicalInformationContact: HcIdentifier=provider1,ou=Providers,o=dev.provider-directories.com,dc=hpd
+HcRegisteredName: Dr. Thomas Jones' Private Practice
 HcSpecialization: HL-7 specialization
-hpdProviderStatus: Active
-hpdProviderLanguageSupported: en
+hpdCredential: hpdCredentialId=2,ou=Credentials,o=dev.provider-directories.com,dc=hpd
+hpdHasAService: hpdServiceId=4,ou=Services,o=dev.provider-directories.com,dc=hpd
 hpdProviderBillingAddress: Thomas Jones$01251 Chestnut Street$Panama City, DE 50369
+hpdProviderLanguageSupported: en
+hpdProviderLegalAddress: Thomas Jones$01251 Chestnut Street$Panama City, DE 50369
+hpdProviderMailingAddress: Dr. Thomas Jones Private Practice$01251 Chestnut Street$Panama City, DE 50369
 hpdProviderPracticeAddress: Thomas Jones$01251 Chestnut Street$Panama City, DE 50369
 hpdProviderPracticeLocation: Thomas Jones$01251 Chestnut Street$Panama City, DE 50369
-hpdProviderLegalAddress: Thomas Jones$01251 Chestnut Street$Panama City, DE 50369
-#memberOf: to be removed
-hpdHasAService: hpdServiceId=4,ou=Services,o=dev.provider-directories.com,dc=hpd
-hpdCredential: hpdCredentialId=2,ou=Credentials,o=dev.provider-directories.com,dc=hpd
+hpdProviderStatus: Active
 
 dn: hpdOrgId=org2,ou=Organizations,o=dev.provider-directories.com,dc=hpd
 objectClass: top
@@ -199,7 +202,6 @@ hpdProviderBillingAddress: Billing$123 Peachtree Street$Atlanta, GA 30032
 hpdProviderPracticeAddress: Practice$123 Peachtree Street$Atlanta, GA 30032
 hpdProviderPracticeLocation: PracticeLocation$123 Peachtree Street$Atlanta, GA 30032
 hpdProviderLegalAddress: Legal$123 Peachtree Street$Atlanta, GA 30032
-#memberOf: to be removed
 hpdHasAService: hpdServiceId=4,ou=Services,o=dev.provider-directories.com,dc=hpd
 hpdCredential: hpdCredentialId=2,ou=Credentials,o=dev.provider-directories.com,dc=hpd
 
@@ -216,14 +218,24 @@ objectClass: organizationalunit
 objectClass: top
 ou: Memberships
 
+
 dn: hpdMemberId=1,ou=Memberships,o=dev.provider-directories.com,dc=hpd
 objectClass: top
 objectClass: HPDProviderMembership
 hpdHasAnOrg: hpdOrgId=org1,ou=Organizations,o=dev.provider-directories.com,dc=hpd
-hpdHasAProvider: HcIdentifier=provider1,ou=Providers,o=dev.provider-directories.com,dc=hpd
-hpdHasAService: hpdServiceId=1,ou=Services,o=dev.provider-directories.com,dc=hpd^hpdServiceId=2,ou=Services,o=dev.provider-directories.com,dc=hpd^hpdServiceId=3,ou=Services,o=dev.provider-directories.com,dc=hpd
 hpdMemberId: 1
+hpdHasAService: hpdServiceId=1,ou=Services,o=dev.provider-directories.com,dc=hpd^hpdServiceId=2,ou=Services,o=dev.provider-directories.com,dc=hpd^hpdServiceId=3,ou=Services,o=dev.provider-directories.com,dc=hpd
+hpdHasAProvider: HcIdentifier=provider1,ou=Providers,o=dev.provider-directories.com,dc=hpd
+#hpdHasASubOrg: should only have hpdHasAProvider OR hpdHasASubOrg. See membership hpdMemberId=5 for an example that does contain this attribute.
 hpdMemberName: Dr Thomas Jones' Private Practice
+hpdMemberStatus: Active
+hpdMemberType: individualToOrg
+mail: hpdmemberid1@direct.direct.org
+mobile: +1 123 456 7890
+pager: +1 123 456 7890
+telephoneNumber: +1 123 456 7890
+facsimileTelephoneNumber: +1 123 456 7890
+
 
 dn: hpdMemberId=2,ou=Memberships,o=dev.provider-directories.com,dc=hpd
 objectClass: top
@@ -268,11 +280,6 @@ hpdMemberId: 5
 hpdMemberName: Bob Jefferson Membership to Northside Maternity Org
 hpdMemberStatus: Active
 hpdMemberType: individualToOrg
-#mail:
-#mobile: 
-#pager: 
-#telephoneNumber: 
-#facsimileTelephoneNumber: 
 
 #==================================================
 # END: MEMBERSHIP(S)
@@ -291,8 +298,6 @@ dn: hpdServiceId=1,ou=Services,o=dev.provider-directories.com,dc=hpd
 objectClass: top
 objectClass: HPDElectronicService
 hpdServiceAddress: thomas.jones@direct.service1.com
-hpdServiceProtocol: SMTP
-hpdServiceType: Direct
 hpdServiceId: 1
 hpdCertificate: MIICqjCCAZKgAwIBAgIJAMd5Vfs3Eo6kMA0GCSqGSIb3DQEBBQUAMA0xCzAJBgNV
  BAMTAm1rMB4XDTEzMDUwMjE0MzMyNVoXDTIzMDQzMDE0MzMyNVowDTELMAkGA1UE
@@ -309,6 +314,9 @@ hpdCertificate: MIICqjCCAZKgAwIBAgIJAMd5Vfs3Eo6kMA0GCSqGSIb3DQEBBQUAMA0xCzAJBgNV
  BVZ7UVeAKftcDwpBdggJxvEAoEGvRpm7X8OlqQI2jmm/Oxlw70mjCZTzJFtOFOJf
  homCEiQXSz/4tobOgw66ooBNWUd7f5MfAhquBV2/kDK5bnbOGJ30vzHBj9CUf8tT
  flVoSO0cwbuGBddusEU=
+hpdServicePayload: hpdServicePayload
+hpdServiceProtocol: SMTP
+hpdServiceType: Direct
 
 dn: hpdServiceId=2,ou=Services,o=dev.provider-directories.com,dc=hpd
 objectClass: top
@@ -425,16 +433,16 @@ description: Thomas Jones' Delaware medical license
 dn: hpdCredentialId=2,ou=Credentials,o=dev.provider-directories.com,dc=hpd
 objectClass: top
 objectClass: HPDProviderCredential
-credentialName: Delaware organizational facility credential
-credentialType: credential
-credentialNumber: 2
 hpdCredentialId: 2
+credentialName: Delaware organizational facility credential
+credentialNumber: 2
+credentialType: credential
 description: Thomas Jones' organizational credential
 credentialIssueDate: 19851106210627.3-0500
 credentialRenewalDate: 19921106210627.3-0500
 credentialStatus: Active
 hpdHasAnOrg: hpdOrgId=org1,ou=Organizations,o=dev.provider-directories.com,dc=hpd
-#hpdHasAProvider: 
+hpdHasAProvider: HcIdentifier=provider3,ou=Providers,o=dev.provider-directories.com,dc=hpd
 
 #==================================================
 # END: CREDENTIAL(S)
