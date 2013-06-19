@@ -279,18 +279,6 @@ m-syntax: 1.3.6.1.4.1.1466.115.121.1.41
 # m-singlevalue: TRUE
 # m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
 
-# dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1.6,ou=attributeTypes,cn=hpd,ou=schema
-# objectclass: metaTop
-# objectclass: metaAttributeType
-# objectclass: top
-# m-oid: 1.3.6.1.4.1.19376.1.2.4.1.6
-# m-description: Group to which provider is a member of. A provider can be a m
-#  ember of zero, one or many groups.
-# m-equality: distinguishedNameMatch
-# m-length: 0
-# m-name: memberOf
-# m-syntax: 1.3.6.1.4.1.1466.115.121.1.12
-
 dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1.7,ou=attributeTypes,cn=hpd,ou=schema
 objectclass: metaTop
 objectclass: metaAttributeType
@@ -419,7 +407,6 @@ m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
 # m-may: hpdProviderMailingAddress
 # m-may: hpdProviderPracticeAddress
 # m-may: hpdMedicalRecordsDeliveryEmailAddress
-# m-may: memberOf
 # m-may: hpdProviderLegalAddress
 # m-may: hpdHasAService
 # m-may: hpdCredential
@@ -643,7 +630,6 @@ m-may: hpdProviderBillingAddress
 m-may: hpdProviderMailingAddress
 m-may: hpdProviderPracticeAddress
 # m-may: hpdMedicalRecordsDeliveryEmailAddress
-# m-may: memberOf
 m-may: hpdProviderLegalAddress
 m-may: hpdHasAService
 m-may: hpdCredential
