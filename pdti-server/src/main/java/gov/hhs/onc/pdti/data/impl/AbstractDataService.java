@@ -10,17 +10,11 @@ import gov.hhs.onc.pdti.ws.api.ErrorResponse.ErrorType;
 import gov.hhs.onc.pdti.ws.api.ObjectFactory;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class AbstractDataService<T extends DirectoryDataSource> implements DirectoryDataService<T> {
-    private final static Logger LOGGER = Logger.getLogger(AbstractDataService.class);
-
     @Autowired
     protected ObjectFactory objectFactory;
-
-    @Autowired
-    protected gov.hhs.onc.pdti.ws.api.hpdplus.ObjectFactory hpdPlusObjectFactory;
 
     @Autowired
     protected DirectoryErrorBuilder errBuilder;
@@ -52,5 +46,5 @@ public abstract class AbstractDataService<T extends DirectoryDataSource> impleme
         return batchResps;
     }
 
-    public abstract void setDataSources(List<T> dataSources);
+    protected abstract void setDataSources(List<T> dataSources);
 }

@@ -31,7 +31,13 @@ public class IdInterceptor extends AbstractDirectoryInterceptor implements Direc
 
         hpdPlusReq.setDirectoryId(dirId);
 
-        BatchRequest batchReq = hpdPlusReq.getBatchRequest();
+        this.interceptRequest(dirDesc, hpdPlusReq.getBatchRequest());
+    }
+
+    @Override
+    public void interceptRequest(DirectoryDescriptor dirDesc, BatchRequest batchReq) throws DirectoryServiceException {
+        String reqId = batchReq.getRequestId();
+
         batchReq.setRequestId(reqId);
 
         for (DsmlMessage batchReqMsg : batchReq.getBatchRequests()) {
@@ -55,23 +61,30 @@ public class IdInterceptor extends AbstractDirectoryInterceptor implements Direc
 
         if (hpdPlusResp.isSetResponseItems()) {
             List<Object> respItems = hpdPlusResp.getResponseItems();
-            SearchResponse searchRespMsg;
 
             for (BatchResponse batchResp : (Collection<BatchResponse>) CollectionUtils.select(respItems,
                     PredicateUtils.instanceofPredicate(BatchResponse.class))) {
-                batchResp.setRequestId(reqId);
+                this.interceptResponse(dirDesc, hpdPlusReq.getBatchRequest(), batchResp);
+            }
+        }
+    }
 
-                for (JAXBElement<?> batchRespItem : batchResp.getBatchResponses()) {
-                    if (DsmlMessage.class.isAssignableFrom(batchRespItem.getDeclaredType())) {
-                        ((DsmlMessage) batchRespItem.getValue()).setRequestId(reqId);
-                    } else if (ErrorResponse.class.isAssignableFrom(batchRespItem.getDeclaredType())) {
-                        ((ErrorResponse) batchRespItem.getValue()).setRequestId(reqId);
-                    } else if (SearchResponse.class.isAssignableFrom(batchRespItem.getDeclaredType())) {
-                        searchRespMsg = (SearchResponse) batchRespItem.getValue();
-                        searchRespMsg.setRequestId(reqId);
-                        searchRespMsg.getSearchResultDone().setRequestId(reqId);
-                    }
-                }
+    @Override
+    public void interceptResponse(DirectoryDescriptor dirDesc, BatchRequest batchReq, BatchResponse batchResp) throws DirectoryServiceException {
+        String reqId = batchReq.getRequestId();
+        SearchResponse searchRespMsg;
+
+        batchResp.setRequestId(reqId);
+
+        for (JAXBElement<?> batchRespItem : batchResp.getBatchResponses()) {
+            if (DsmlMessage.class.isAssignableFrom(batchRespItem.getDeclaredType())) {
+                ((DsmlMessage) batchRespItem.getValue()).setRequestId(reqId);
+            } else if (ErrorResponse.class.isAssignableFrom(batchRespItem.getDeclaredType())) {
+                ((ErrorResponse) batchRespItem.getValue()).setRequestId(reqId);
+            } else if (SearchResponse.class.isAssignableFrom(batchRespItem.getDeclaredType())) {
+                searchRespMsg = (SearchResponse) batchRespItem.getValue();
+                searchRespMsg.setRequestId(reqId);
+                searchRespMsg.getSearchResultDone().setRequestId(reqId);
             }
         }
     }

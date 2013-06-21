@@ -237,20 +237,12 @@
                     <artifactId>maven-soapui-extension-plugin</artifactId>
                     <version>4.5.1.4</version>
                     <inherited>true</inherited>
-                    <configuration>
+                    <configuration combine.children="merge">
                         <coverage>true</coverage>
                         <exportAll>true</exportAll>
                         <junitReport>true</junitReport>
-                        <outputFolder>${project.build.directory}/soapui-reports</outputFolder>
                         <printReport>true</printReport>
                         <saveAfterRun>true</saveAfterRun>
-                        <settingsFile>${project.build.testOutputDirectory}/soapui-settings.xml</settingsFile>
-                        <soapuiProperties>
-                            <property>
-                                <name>soapui.logroot</name>
-                                <value>${project.test.log.dir}/</value>
-                            </property>
-                        </soapuiProperties>
                         <testFailIgnore>true</testFailIgnore>
                     </configuration>
                 </plugin>
@@ -336,18 +328,7 @@
                         <container>
                             <containerId>jetty9x</containerId>
                             <type>embedded</type>
-                            <systemProperties>
-                                <pdti.log.dir>${project.test.log.dir}</pdti.log.dir>
-                            </systemProperties>
                         </container>
-                        <deployables>
-                            <deployable>
-                                <groupId>${project.groupId}</groupId>
-                                <artifactId>${project.artifactId}</artifactId>
-                                <type>${project.packaging}</type>
-                                <classifier>test</classifier>
-                            </deployable>
-                        </deployables>
                         <configuration>
                             <properties>
                                 <cargo.jvmargs>-XX:PermSize=512m -XX:MaxPermSize=1024m -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled</cargo.jvmargs>

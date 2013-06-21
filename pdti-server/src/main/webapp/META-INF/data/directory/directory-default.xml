@@ -11,7 +11,16 @@
     <beans:bean id="dirDefault" class="gov.hhs.onc.pdti.data.impl.DirectoryDescriptorImpl" parent="mainDir"
         p:directoryId="pdti-dir_#{ new java.util.Date().time }"
         p:baseDn="o=dev.provider-directories.com,dc=hpd"
+        p:wsdlLocation="http://localhost:8080#{ servletContext.contextPath }/ProviderInformationDirectoryService?wsdl">
+        <beans:qualifier value="main"/>
+        <beans:qualifier type="gov.hhs.onc.pdti.springframework.beans.factory.annotation.DirectoryTypeQualifier" value="IHE"/>
+    </beans:bean>
+    
+    <beans:bean id="hpdPlusDirDefault" class="gov.hhs.onc.pdti.data.impl.DirectoryDescriptorImpl" parent="mainDir"
+        p:directoryId="pdti-hpdplus-dir_#{ new java.util.Date().time }"
+        p:baseDn="o=dev.provider-directories.com,dc=hpd"
         p:wsdlLocation="http://localhost:8080#{ servletContext.contextPath }/Hpd_Plus_ProviderInformationDirectoryService?wsdl">
         <beans:qualifier value="main"/>
+        <beans:qualifier type="gov.hhs.onc.pdti.springframework.beans.factory.annotation.DirectoryTypeQualifier" value="HPD_PLUS_PROPOSED"/>
     </beans:bean>
 </beans:beans>

@@ -11,7 +11,16 @@
     <beans:bean id="federatedDirTest2" class="gov.hhs.onc.pdti.data.impl.DirectoryDescriptorImpl" parent="federatedDir"
         p:directoryId="%{project.test.server.2.dir.id}"
         p:baseDn="%{project.test.server.2.dir.dn.base}"
+        p:wsdlLocation="%{project.test.server.2.dir.wsdl.location}">
+        <beans:qualifier value="federated"/>
+        <beans:qualifier type="gov.hhs.onc.pdti.springframework.beans.factory.annotation.DirectoryTypeQualifier" value="IHE"/>
+    </beans:bean>
+    
+    <beans:bean id="hpdPlusFederatedDirTest2" class="gov.hhs.onc.pdti.data.impl.DirectoryDescriptorImpl" parent="federatedDir"
+        p:directoryId="%{project.test.server.2.dir.id}"
+        p:baseDn="%{project.test.server.2.dir.dn.base}"
         p:wsdlLocation="%{project.test.server.2.dir.wsdl.location.hpdplus}">
         <beans:qualifier value="federated"/>
+        <beans:qualifier type="gov.hhs.onc.pdti.springframework.beans.factory.annotation.DirectoryTypeQualifier" value="HPD_PLUS_PROPOSED"/>
     </beans:bean>
 </beans:beans>

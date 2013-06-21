@@ -1,4 +1,4 @@
-package gov.hhs.onc.pdti.data.ldap;
+package gov.hhs.onc.pdti.springframework.beans.factory.config;
 
 import java.beans.PropertyEditorSupport;
 import org.apache.directory.api.ldap.model.exception.LdapInvalidDnException;
