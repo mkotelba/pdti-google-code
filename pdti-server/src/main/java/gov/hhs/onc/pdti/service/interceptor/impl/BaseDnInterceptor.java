@@ -4,6 +4,7 @@ import gov.hhs.onc.pdti.data.DirectoryDescriptor;
 import gov.hhs.onc.pdti.service.DirectoryServiceException;
 import gov.hhs.onc.pdti.service.interceptor.DirectoryRequestInterceptor;
 import gov.hhs.onc.pdti.util.DirectoryUtils;
+import gov.hhs.onc.pdti.ws.api.BatchRequest;
 import gov.hhs.onc.pdti.ws.api.SearchRequest;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusRequest;
 import java.util.Collection;
@@ -21,9 +22,14 @@ import org.springframework.stereotype.Component;
 public class BaseDnInterceptor extends AbstractDirectoryInterceptor implements DirectoryRequestInterceptor {
     @Override
     public void interceptRequest(DirectoryDescriptor dirDesc, HpdPlusRequest hpdPlusReq) throws DirectoryServiceException {
+        this.interceptRequest(dirDesc, hpdPlusReq.getBatchRequest());
+    }
+
+    @Override
+    public void interceptRequest(DirectoryDescriptor dirDesc, BatchRequest batchReq) throws DirectoryServiceException {
         Dn dirBaseDn = dirDesc.getBaseDn();
 
-        for (SearchRequest searchReqMsg : (Collection<SearchRequest>) CollectionUtils.select(hpdPlusReq.getBatchRequest().getBatchRequests(),
+        for (SearchRequest searchReqMsg : (Collection<SearchRequest>) CollectionUtils.select(batchReq.getBatchRequests(),
                 PredicateUtils.instanceofPredicate(SearchRequest.class))) {
             try {
                 searchReqMsg.setDn(DirectoryUtils.replaceAncestorDn(new Dn(searchReqMsg.getDn()), dirBaseDn).toString());

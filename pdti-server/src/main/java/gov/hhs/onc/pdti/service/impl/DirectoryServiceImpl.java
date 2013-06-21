@@ -2,119 +2,115 @@ package gov.hhs.onc.pdti.service.impl;
 
 import gov.hhs.onc.pdti.data.DirectoryDataService;
 import gov.hhs.onc.pdti.data.DirectoryDescriptor;
+import gov.hhs.onc.pdti.data.DirectoryType;
 import gov.hhs.onc.pdti.data.federation.FederationService;
-import gov.hhs.onc.pdti.error.DirectoryErrorBuilder;
-import gov.hhs.onc.pdti.jaxb.DirectoryJaxb2Marshaller;
 import gov.hhs.onc.pdti.service.DirectoryService;
 import gov.hhs.onc.pdti.service.interceptor.DirectoryRequestInterceptor;
 import gov.hhs.onc.pdti.service.interceptor.DirectoryResponseInterceptor;
+import gov.hhs.onc.pdti.springframework.beans.factory.annotation.DirectoryTypeQualifier;
 import gov.hhs.onc.pdti.ws.api.BatchRequest;
-import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusErrorType;
-import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusRequest;
-import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusRequestMetadata;
-import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusResponse;
-import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusResponseMetadata;
+import gov.hhs.onc.pdti.ws.api.BatchResponse;
+import gov.hhs.onc.pdti.ws.api.ErrorResponse.ErrorType;
+import gov.hhs.onc.pdti.ws.api.ObjectFactory;
 import java.util.List;
-import java.util.SortedSet;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+@DirectoryTypeQualifier(DirectoryType.IHE)
 @Scope("singleton")
 @Service("dirService")
-public class DirectoryServiceImpl implements DirectoryService {
+public class DirectoryServiceImpl extends AbstractDirectoryService<BatchRequest, BatchResponse> implements DirectoryService<BatchRequest, BatchResponse> {
     private final static Logger LOGGER = Logger.getLogger(DirectoryServiceImpl.class);
 
     @Autowired
-    private gov.hhs.onc.pdti.ws.api.hpdplus.ObjectFactory hpdPlusObjectFactory;
-
-    @Autowired
-    private DirectoryJaxb2Marshaller jaxb2Marshaller;
-
-    @Autowired
-    private DirectoryErrorBuilder errBuilder;
-
-    @Autowired
-    @Qualifier("main")
-    private DirectoryDescriptor dirDesc;
-
-    @Autowired(required = false)
-    private SortedSet<DirectoryRequestInterceptor> reqInterceptors;
-
-    @Autowired(required = false)
-    private SortedSet<DirectoryResponseInterceptor> respInterceptors;
-
-    @Autowired(required = false)
-    private List<DirectoryDataService<?>> dataServices;
-
-    @Autowired
-    private FederationService federationService;
+    @DirectoryTypeQualifier(DirectoryType.IHE)
+    private ObjectFactory objectFactory;
 
     @Override
-    public HpdPlusResponse processRequest(HpdPlusRequest hpdPlusReq) {
-        String dirId = this.dirDesc.getDirectoryId(), reqId = hpdPlusReq.getRequestId();
-        BatchRequest batchReq = hpdPlusReq.getBatchRequest();
-        HpdPlusRequestMetadata reqMeta = hpdPlusReq.getRequestMetadata();
-        HpdPlusResponse hpdPlusResp = this.hpdPlusObjectFactory.createHpdPlusResponse();
-
-        HpdPlusResponseMetadata respMeta = this.hpdPlusObjectFactory.createHpdPlusResponseMetadata();
-        respMeta.setRequestMetadata(reqMeta);
-        hpdPlusResp.setResponseMetadata(respMeta);
+    public BatchResponse processRequest(BatchRequest batchReq) {
+        String reqId = batchReq.getRequestId();
+        BatchResponse batchResp = this.objectFactory.createBatchResponse();
 
         if (this.reqInterceptors != null) {
             for (DirectoryRequestInterceptor reqInterceptor : this.reqInterceptors) {
-                LOGGER.trace("Intercepting directory (id=" + dirId + ") HPD Plus request (class=" + reqInterceptor.getClass().getName() + ").");
+                LOGGER.trace("Intercepting DSML batch request (class=" + reqInterceptor.getClass().getName() + ").");
 
                 try {
-                    reqInterceptor.interceptRequest(this.dirDesc, hpdPlusReq);
+                    reqInterceptor.interceptRequest(this.dirDesc, batchReq);
                 } catch (Throwable th) {
                     // TODO: improve error handling
-                    hpdPlusResp.getErrors().add(this.errBuilder.buildError(dirId, reqId, HpdPlusErrorType.OTHER, th));
+                    batchResp.getBatchResponses().add(
+                            this.objectFactory.createBatchResponseErrorResponse(this.errBuilder.buildErrorResponse(reqId, ErrorType.OTHER, th)));
                 }
             }
         }
 
-        LOGGER.debug("Processing HPD Plus request (directoryId=" + dirId + ", requestId=" + reqId + ").");
-        LOGGER.trace("Processing HPD Plus request (directoryId=" + dirId + ", requestId=" + reqId + "):\n"
-                + this.jaxb2Marshaller.marshal(this.hpdPlusObjectFactory.createHpdPlusRequest(hpdPlusReq)));
+        LOGGER.debug("Processing DSML batch request (requestId=" + reqId + ").");
+        LOGGER.trace("Processing DSML batch request (requestId=" + reqId + "):\n"
+                + this.jaxb2Marshaller.marshal(this.objectFactory.createBatchRequest(batchReq)));
 
         if (this.dataServices != null) {
             for (DirectoryDataService<?> dataService : this.dataServices) {
                 try {
-                    hpdPlusResp.getResponseItems().addAll(dataService.processData(batchReq));
+                    combineBatchResponses(batchResp, dataService.processData(batchReq));
                 } catch (Throwable th) {
                     // TODO: improve error handling
-                    hpdPlusResp.getErrors().add(this.errBuilder.buildError(dirId, reqId, HpdPlusErrorType.OTHER, th));
+                    batchResp.getBatchResponses().add(
+                            this.objectFactory.createBatchResponseErrorResponse(this.errBuilder.buildErrorResponse(reqId, ErrorType.OTHER, th)));
                 }
             }
         }
 
         try {
-            hpdPlusResp.getResponseItems().addAll(this.federationService.federate(hpdPlusReq));
+            combineBatchResponses(batchResp, this.fedService.federate(batchReq));
         } catch (Throwable th) {
             // TODO: improve error handling
-            hpdPlusResp.getErrors().add(this.errBuilder.buildError(dirId, reqId, HpdPlusErrorType.OTHER, th));
+            batchResp.getBatchResponses().add(
+                    this.objectFactory.createBatchResponseErrorResponse(this.errBuilder.buildErrorResponse(reqId, ErrorType.OTHER, th)));
         }
 
         if (this.respInterceptors != null) {
             for (DirectoryResponseInterceptor respInterceptor : this.respInterceptors) {
-                LOGGER.trace("Intercepting directory (id=" + dirId + ") HPD Plus response (class=" + respInterceptor.getClass().getName() + ").");
+                LOGGER.trace("Intercepting DSML batch response (class=" + respInterceptor.getClass().getName() + ").");
 
                 try {
-                    respInterceptor.interceptResponse(this.dirDesc, hpdPlusReq, hpdPlusResp);
+                    respInterceptor.interceptResponse(this.dirDesc, batchReq, batchResp);
                 } catch (Throwable th) {
                     // TODO: improve error handling
-                    hpdPlusResp.getErrors().add(this.errBuilder.buildError(dirId, reqId, HpdPlusErrorType.OTHER, th));
+                    batchResp.getBatchResponses().add(
+                            this.objectFactory.createBatchResponseErrorResponse(this.errBuilder.buildErrorResponse(reqId, ErrorType.OTHER, th)));
                 }
             }
         }
 
-        LOGGER.debug("Processed HPD Plus request (directoryId=" + dirId + ", requestId=" + reqId + ") into HPD Plus response.");
-        LOGGER.trace("Processed HPD Plus request (directoryId=" + dirId + ", requestId=" + reqId + ") into HPD Plus response:\n"
-                + this.jaxb2Marshaller.marshal(this.hpdPlusObjectFactory.createHpdPlusResponse(hpdPlusResp)));
+        LOGGER.debug("Processed DSML batch request (requestId=" + reqId + ") into DSML batch response.");
+        LOGGER.trace("Processed DSML batch request (requestId=" + reqId + ") into DSML batch response:\n"
+                + this.jaxb2Marshaller.marshal(this.objectFactory.createBatchResponse(batchResp)));
 
-        return hpdPlusResp;
+        return batchResp;
+    }
+
+    private static void combineBatchResponses(BatchResponse batchResp, List<BatchResponse> batchRespCombine) {
+        for (BatchResponse batchRespCombineItem : batchRespCombine) {
+            batchResp.getBatchResponses().addAll(batchRespCombineItem.getBatchResponses());
+        }
+    }
+
+    @Autowired
+    @DirectoryTypeQualifier(DirectoryType.IHE)
+    @Override
+    @Qualifier("main")
+    protected void setDirectoryDescriptor(DirectoryDescriptor dirDesc) {
+        this.dirDesc = dirDesc;
+    }
+
+    @Autowired
+    @DirectoryTypeQualifier(DirectoryType.IHE)
+    @Override
+    protected void setFederationService(FederationService<BatchRequest, BatchResponse> fedService) {
+        this.fedService = fedService;
     }
 }

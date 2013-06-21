@@ -94,7 +94,7 @@ public class LdapDataServiceImpl extends AbstractDataService<LdapDataSource> imp
 
     @Autowired(required = false)
     @Override
-    public void setDataSources(List<LdapDataSource> dataSources) {
+    protected void setDataSources(List<LdapDataSource> dataSources) {
         this.dataSources = dataSources;
     }
 }

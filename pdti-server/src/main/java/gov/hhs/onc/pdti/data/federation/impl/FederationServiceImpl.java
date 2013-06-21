@@ -1,100 +1,85 @@
 package gov.hhs.onc.pdti.data.federation.impl;
 
 import gov.hhs.onc.pdti.data.DirectoryDescriptor;
+import gov.hhs.onc.pdti.data.DirectoryType;
 import gov.hhs.onc.pdti.data.federation.DirectoryFederationException;
 import gov.hhs.onc.pdti.data.federation.FederationService;
-import gov.hhs.onc.pdti.error.DirectoryErrorBuilder;
 import gov.hhs.onc.pdti.service.interceptor.DirectoryRequestInterceptor;
 import gov.hhs.onc.pdti.service.interceptor.DirectoryResponseInterceptor;
-import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusErrorType;
-import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusProviderInformationDirectoryService;
-import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusRequest;
-import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusResponse;
-import java.util.ArrayList;
+import gov.hhs.onc.pdti.springframework.beans.factory.annotation.DirectoryTypeQualifier;
+import gov.hhs.onc.pdti.ws.api.BatchRequest;
+import gov.hhs.onc.pdti.ws.api.BatchResponse;
+import gov.hhs.onc.pdti.ws.api.ErrorResponse.ErrorType;
+import gov.hhs.onc.pdti.ws.api.ObjectFactory;
+import gov.hhs.onc.pdti.ws.api.ProviderInformationDirectoryService;
 import java.util.List;
-import java.util.SortedSet;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+@DirectoryTypeQualifier(DirectoryType.IHE)
 @Scope("singleton")
-@Service("federationService")
-public class FederationServiceImpl implements FederationService {
+@Service("fedService")
+public class FederationServiceImpl extends AbstractFederationService<BatchRequest, BatchResponse> implements FederationService<BatchRequest, BatchResponse> {
     private final static Logger LOGGER = Logger.getLogger(FederationServiceImpl.class);
 
     @Autowired
-    private gov.hhs.onc.pdti.ws.api.hpdplus.ObjectFactory hpdPlusObjectFactory;
-
-    @Autowired(required = false)
-    @Qualifier("federated")
-    private List<DirectoryDescriptor> federatedDirs;
-
-    @Autowired(required = false)
-    private SortedSet<DirectoryRequestInterceptor> reqInterceptors;
-
-    @Autowired(required = false)
-    private SortedSet<DirectoryResponseInterceptor> respInterceptors;
-
-    @Autowired
-    private DirectoryErrorBuilder errBuilder;
+    private ObjectFactory objectFactory;
 
     @Override
-    public List<HpdPlusResponse> federate(HpdPlusRequest hpdPlusReq) throws DirectoryFederationException {
-        List<HpdPlusResponse> hpdPlusResps = new ArrayList<>();
-
-        if (this.federatedDirs != null) {
-            for (DirectoryDescriptor fedDir : this.federatedDirs) {
-                hpdPlusResps.add(this.federate(fedDir, hpdPlusReq));
-            }
-        }
-
-        return hpdPlusResps;
-    }
-
-    @Override
-    public HpdPlusResponse federate(DirectoryDescriptor fedDir, HpdPlusRequest hpdPlusReq) throws DirectoryFederationException {
-        String fedDirId = fedDir.getDirectoryId(), reqId = hpdPlusReq.getRequestId();
-        HpdPlusRequest fedHpdPlusReq = (HpdPlusRequest) hpdPlusReq.clone();
-        HpdPlusResponse fedHpdPlusResp = this.hpdPlusObjectFactory.createHpdPlusResponse();
+    public BatchResponse federate(DirectoryDescriptor fedDir, BatchRequest batchReq) throws DirectoryFederationException {
+        String fedDirId = fedDir.getDirectoryId(), reqId = batchReq.getRequestId();
+        BatchRequest fedBatchReq = (BatchRequest) batchReq.clone();
+        BatchResponse fedBatchResp = this.objectFactory.createBatchResponse();
 
         if (this.reqInterceptors != null) {
             for (DirectoryRequestInterceptor reqInterceptor : this.reqInterceptors) {
-                LOGGER.trace("Intercepting federated directory (id=" + fedDirId + ") HPD Plus request (class=" + reqInterceptor.getClass().getName() + ").");
+                LOGGER.trace("Intercepting federated directory (id=" + fedDirId + ") DSML batch request (class=" + reqInterceptor.getClass().getName() + ").");
 
                 try {
-                    reqInterceptor.interceptRequest(fedDir, fedHpdPlusReq);
+                    reqInterceptor.interceptRequest(fedDir, fedBatchReq);
                 } catch (Throwable th) {
                     // TODO: improve error handling
-                    fedHpdPlusResp.getErrors().add(this.errBuilder.buildError(fedDirId, reqId, HpdPlusErrorType.OTHER, th));
+                    fedBatchResp.getBatchResponses().add(
+                            this.objectFactory.createBatchResponseErrorResponse(this.errBuilder.buildErrorResponse(reqId, ErrorType.OTHER, th)));
                 }
             }
         }
 
         try {
-            HpdPlusProviderInformationDirectoryService fedDirService = new HpdPlusProviderInformationDirectoryService(fedDir.getWsdlLocation());
+            ProviderInformationDirectoryService fedDirService = new ProviderInformationDirectoryService(fedDir.getWsdlLocation());
 
-            fedHpdPlusResp = fedDirService.getHpdPlusProviderInformationDirectoryPortSoap().hpdPlusProviderInformationQueryRequest(fedHpdPlusReq);
+            fedBatchResp = fedDirService.getProviderInformationDirectoryPortSoap().providerInformationQueryRequest(fedBatchReq);
         } catch (Throwable th) {
             // TODO: improve error handling
-            fedHpdPlusResp.getErrors()
-                    .add(this.errBuilder.buildError(fedHpdPlusReq.getDirectoryId(), fedHpdPlusReq.getRequestId(), HpdPlusErrorType.OTHER, th));
+            fedBatchResp.getBatchResponses().add(
+                    this.objectFactory.createBatchResponseErrorResponse(this.errBuilder.buildErrorResponse(reqId, ErrorType.OTHER, th)));
         }
 
         if (this.respInterceptors != null) {
             for (DirectoryResponseInterceptor respInterceptor : this.respInterceptors) {
-                LOGGER.trace("Intercepting federated directory (id=" + fedDirId + ") HPD Plus response (class=" + respInterceptor.getClass().getName() + ").");
+                LOGGER.trace("Intercepting federated directory (id=" + fedDirId + ") DSML batch response (class=" + respInterceptor.getClass().getName() + ").");
 
                 try {
-                    respInterceptor.interceptResponse(fedDir, fedHpdPlusReq, fedHpdPlusResp);
+                    respInterceptor.interceptResponse(fedDir, fedBatchReq, fedBatchResp);
                 } catch (Throwable th) {
                     // TODO: improve error handling
-                    fedHpdPlusResp.getErrors().add(this.errBuilder.buildError(fedDirId, reqId, HpdPlusErrorType.OTHER, th));
+                    fedBatchResp.getBatchResponses().add(
+                            this.objectFactory.createBatchResponseErrorResponse(this.errBuilder.buildErrorResponse(reqId, ErrorType.OTHER, th)));
                 }
             }
         }
 
-        return fedHpdPlusResp;
+        return fedBatchResp;
+    }
+
+    @Autowired(required = false)
+    @DirectoryTypeQualifier(DirectoryType.IHE)
+    @Qualifier("federated")
+    @Override
+    protected void setFederatedDirs(List<DirectoryDescriptor> federatedDirs) {
+        this.federatedDirs = federatedDirs;
     }
 }

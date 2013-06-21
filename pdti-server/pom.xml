@@ -192,7 +192,6 @@
                         <goals>
                             <goal>read-project-properties</goal>
                         </goals>
-                        <inherited>true</inherited>
                         <configuration>
                             <locations>
                                 <location>${project.basedir}/pom.properties</location>
@@ -226,6 +225,7 @@
                                     <goal>test</goal>
                                 </goals>
                                 <configuration>
+                                    <outputFolder>${project.build.directory}/soapui-reports</outputFolder>
                                     <projectFile>${project.build.testOutputDirectory}/soapui-project.xml</projectFile>
                                     <projectProperties>
                                         <value>project.test.server.scheme=${project.test.server.1.scheme}</value>
@@ -235,6 +235,13 @@
                                         <value>project.test.server.service=${project.service}</value>
                                         <value>project.test.server.dsml.dn.base=${project.test.server.1.dir.dn.base}</value>
                                     </projectProperties>
+                                    <settingsFile>${project.build.testOutputDirectory}/soapui-settings.xml</settingsFile>
+                                    <soapuiProperties>
+                                        <property>
+                                            <name>soapui.logroot</name>
+                                            <value>${project.test.log.dir}/</value>
+                                        </property>
+                                    </soapuiProperties>
                                 </configuration>
                             </execution>
                             <execution>
@@ -244,6 +251,7 @@
                                     <goal>test</goal>
                                 </goals>
                                 <configuration>
+                                    <outputFolder>${project.build.directory}/soapui-reports</outputFolder>
                                     <projectFile>${project.build.testOutputDirectory}/soapui-project_hpdplus.xml</projectFile>
                                     <projectProperties>
                                         <value>project.test.server.scheme=${project.test.server.1.scheme}</value>
@@ -253,6 +261,13 @@
                                         <value>project.test.server.service=${project.service.hpdplus}</value>
                                         <value>project.test.server.dsml.dn.base=${project.test.server.1.dir.dn.base}</value>
                                     </projectProperties>
+                                    <settingsFile>${project.build.testOutputDirectory}/soapui-settings.xml</settingsFile>
+                                    <soapuiProperties>
+                                        <property>
+                                            <name>soapui.logroot</name>
+                                            <value>${project.test.log.dir}/</value>
+                                        </property>
+                                    </soapuiProperties>
                                 </configuration>
                             </execution>
                             <execution>
@@ -350,6 +365,8 @@
                                             <pdti.context.config.data.directory>${project.test.server.1.context.config.data.directory}</pdti.context.config.data.directory>
                                             <pdti.context.config.data.ldap>${project.test.server.1.context.config.data.ldap}</pdti.context.config.data.ldap>
                                             <pdti.context.config.data.federation>${project.test.server.1.context.config.data.federation}</pdti.context.config.data.federation>
+                                            <pdti.debug>true</pdti.debug>
+                                            <pdti.log.dir>${project.test.log.dir}</pdti.log.dir>
                                             <pdti.log.file.basename>${project.test.server.1.log.file.basename}</pdti.log.file.basename>
                                         </systemProperties>
                                     </container>
@@ -363,6 +380,10 @@
                                     </configuration>
                                     <deployables>
                                         <deployable>
+                                            <groupId>${project.groupId}</groupId>
+                                            <artifactId>${project.artifactId}</artifactId>
+                                            <type>${project.packaging}</type>
+                                            <classifier>test</classifier>
                                             <properties>
                                                 <context>/${project.test.server.1.context}</context>
                                             </properties>
@@ -382,6 +403,8 @@
                                             <pdti.context.config.data.directory>${project.test.server.2.context.config.data.directory}</pdti.context.config.data.directory>
                                             <pdti.context.config.data.ldap>${project.test.server.2.context.config.data.ldap}</pdti.context.config.data.ldap>
                                             <pdti.context.config.data.federation>${project.test.server.2.context.config.data.federation}</pdti.context.config.data.federation>
+                                            <pdti.debug>true</pdti.debug>
+                                            <pdti.log.dir>${project.test.log.dir}</pdti.log.dir>
                                             <pdti.log.file.basename>${project.test.server.2.log.file.basename}</pdti.log.file.basename>
                                         </systemProperties>
                                     </container>
@@ -395,6 +418,10 @@
                                     </configuration>
                                     <deployables>
                                         <deployable>
+                                            <groupId>${project.groupId}</groupId>
+                                            <artifactId>${project.artifactId}</artifactId>
+                                            <type>${project.packaging}</type>
+                                            <classifier>test</classifier>
                                             <properties>
                                                 <context>/${project.test.server.2.context}</context>
                                             </properties>

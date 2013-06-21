@@ -1,8 +1,10 @@
 package gov.hhs.onc.pdti.data.dsml.impl;
 
+import gov.hhs.onc.pdti.data.DirectoryType;
 import gov.hhs.onc.pdti.data.dsml.DirectoryDsmlException;
 import gov.hhs.onc.pdti.data.dsml.DirectoryDsmlService;
 import gov.hhs.onc.pdti.jaxb.DirectoryJaxb2Marshaller;
+import gov.hhs.onc.pdti.springframework.beans.factory.annotation.DirectoryTypeQualifier;
 import gov.hhs.onc.pdti.ws.api.BatchRequest;
 import gov.hhs.onc.pdti.ws.api.BatchResponse;
 import gov.hhs.onc.pdti.ws.api.ObjectFactory;
@@ -21,9 +23,11 @@ public class DirectoryDsmlServiceImpl implements DirectoryDsmlService {
     private final static Logger LOGGER = Logger.getLogger(DirectoryDsmlServiceImpl.class);
 
     @Autowired
+    @DirectoryTypeQualifier(DirectoryType.IHE)
     private ObjectFactory objectFactory;
 
     @Autowired
+    @DirectoryTypeQualifier(DirectoryType.HPD_PLUS_PROPOSED)
     private gov.hhs.onc.pdti.ws.api.hpdplus.ObjectFactory hpdPlusObjectFactory;
 
     @Autowired

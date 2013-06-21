@@ -1,21 +1,14 @@
 package gov.hhs.onc.pdti.ws.impl;
 
 import gov.hhs.onc.pdti.service.DirectoryService;
-import gov.hhs.onc.pdti.ws.api.ObjectFactory;
 import javax.annotation.Resource;
 import javax.xml.ws.WebServiceContext;
-import org.springframework.beans.factory.annotation.Autowired;
 
-public abstract class AbstractProviderInformationDirectory {
+public abstract class AbstractProviderInformationDirectory<T, U> {
     @Resource
     private WebServiceContext context;
 
-    @Autowired
-    protected ObjectFactory objectFactory;
+    protected DirectoryService<T, U> dirService;
 
-    @Autowired
-    protected gov.hhs.onc.pdti.ws.api.hpdplus.ObjectFactory hpdPlusObjectFactory;
-
-    @Autowired
-    protected DirectoryService dirService;
+    protected abstract void setDirectoryService(DirectoryService<T, U> dirService);
 }

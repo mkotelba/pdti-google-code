@@ -22,6 +22,7 @@
     
     <sws:annotation-driven/>
     
+    <!-- Defining custom Spring configuration property editors -->
     <beans:bean id="customEditorConfigurer" class="org.springframework.beans.factory.config.CustomEditorConfigurer">
         <beans:property name="customEditors">
             <util:map>
@@ -30,9 +31,15 @@
         </beans:property>
     </beans:bean>
     
-    <beans:bean id="objectFactory" class="gov.hhs.onc.pdti.ws.api.ObjectFactory"/>
-    <beans:bean id="hpdPlusObjectFactory" class="gov.hhs.onc.pdti.ws.api.hpdplus.ObjectFactory"/>
+    <!-- Defining JAXB object factories as beans -->
+    <beans:bean id="objectFactory" class="gov.hhs.onc.pdti.ws.api.ObjectFactory">
+        <beans:qualifier type="gov.hhs.onc.pdti.springframework.beans.factory.annotation.DirectoryTypeQualifier" value="IHE"/>
+    </beans:bean>
+    <beans:bean id="hpdPlusObjectFactory" class="gov.hhs.onc.pdti.ws.api.hpdplus.ObjectFactory">
+        <beans:qualifier type="gov.hhs.onc.pdti.springframework.beans.factory.annotation.DirectoryTypeQualifier" value="HPD_PLUS_PROPOSED"/>
+    </beans:bean>
     
+    <!-- Defining custom JAXB v2 marshaller -->
     <beans:bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
         <beans:property name="contextPaths">
             <util:list>
@@ -52,12 +59,15 @@
         </beans:property>
     </beans:bean>
     
+    <!-- Defining custom SOAP message factory -->
     <beans:bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory">
+        <!-- Forcing the use of SOAP v1.2 -->
         <beans:property name="soapVersion">
             <util:constant static-field="org.springframework.ws.soap.SoapVersion.SOAP_12"/>
         </beans:property>
     </beans:bean>
     
+    <!-- Defining web services -->
     <wss:binding url="/ProviderInformationDirectoryService">
         <wss:service>
             <ws:service 

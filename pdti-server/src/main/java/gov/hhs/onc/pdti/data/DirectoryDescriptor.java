@@ -6,11 +6,11 @@ import org.apache.directory.api.ldap.model.name.Dn;
 public interface DirectoryDescriptor {
     public String getDirectoryId();
 
-    public void setDirectoryId(String directoryId);
+    public void setDirectoryId(String dirId);
 
     public URL getWsdlLocation();
 
-    public void setWsdlLocation(URL wsdlLocation);
+    public void setWsdlLocation(URL wsdlLoc);
 
     public Dn getBaseDn();
 

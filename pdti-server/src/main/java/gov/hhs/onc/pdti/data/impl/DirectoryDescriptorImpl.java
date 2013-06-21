@@ -5,8 +5,8 @@ import java.net.URL;
 import org.apache.directory.api.ldap.model.name.Dn;
 
 public class DirectoryDescriptorImpl implements DirectoryDescriptor {
-    private String directoryId;
-    private URL wsdlLocation;
+    private String dirId;
+    private URL wsdlLoc;
     private Dn baseDn;
 
     @Override
@@ -19,21 +19,23 @@ public class DirectoryDescriptorImpl implements DirectoryDescriptor {
         this.baseDn = baseDn;
     }
 
+    @Override
     public String getDirectoryId() {
-        return this.directoryId;
+        return this.dirId;
     }
 
-    public void setDirectoryId(String directoryId) {
-        this.directoryId = directoryId;
+    @Override
+    public void setDirectoryId(String dirId) {
+        this.dirId = dirId;
     }
 
     @Override
     public URL getWsdlLocation() {
-        return this.wsdlLocation;
+        return this.wsdlLoc;
     }
 
     @Override
-    public void setWsdlLocation(URL wsdlLocation) {
-        this.wsdlLocation = wsdlLocation;
+    public void setWsdlLocation(URL wsdlLoc) {
+        this.wsdlLoc = wsdlLoc;
     }
 }
