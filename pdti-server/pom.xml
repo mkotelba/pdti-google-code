@@ -2,35 +2,30 @@
     xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
     <modelVersion>4.0.0</modelVersion>
+    
     <parent>
         <groupId>gov.hhs.onc.pdti</groupId>
         <artifactId>pdti-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pdti-parent</relativePath>
     </parent>
+    
+    <groupId>gov.hhs.onc.pdti</groupId>
     <artifactId>pdti-server</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
+    
     <name>pdti-server</name>
     <description>Provider Directories Test Implementation (PDTI) server webapp.</description>
     <url>http://dev.provider-directories.com/pdti-server/</url>
+    
     <dependencies>
         <dependency>
             <groupId>gov.hhs.onc.pdti</groupId>
             <artifactId>pdti-ws</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jvnet.jaxb2_commons</groupId>
-            <artifactId>jaxb2-basics-annotate</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jvnet.jaxb2_commons</groupId>
-            <artifactId>jaxb2-basics-runtime</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jvnet.jax-ws-commons.spring</groupId>
-            <artifactId>jaxws-spring</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
@@ -82,6 +77,18 @@
             <artifactId>apacheds-jdbm2</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.jvnet.jaxb2_commons</groupId>
+            <artifactId>jaxb2-basics-annotate</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jvnet.jaxb2_commons</groupId>
+            <artifactId>jaxb2-basics-runtime</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jvnet.jax-ws-commons.spring</groupId>
+            <artifactId>jaxws-spring</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
@@ -120,8 +127,10 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    
     <build>
         <finalName>pdti-server</finalName>
+        
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -134,10 +143,8 @@
                         </goals>
                         <configuration>
                             <target>
-                                <ant
-                                    antfile="${project.build.scriptSourceDirectory}/wsimport-fix.xml"
-                                    target="remove-package-descriptors"
-                                    inheritRefs="true" />
+                                <ant antfile="${project.build.scriptSourceDirectory}/wsimport-fix.xml"
+                                    target="remove-package-descriptors" inheritRefs="true"/>
                             </target>
                         </configuration>
                     </execution>
@@ -145,32 +152,78 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <webResources>
-                        <webResource>
-                            <directory>${project.basedir}/target/schema</directory>
-                            <includes>
-                                <include>**/*.xsd</include>
-                            </includes>
-                            <targetPath>META-INF/schema</targetPath>
-                        </webResource>
-                        <webResource>
-                            <directory>${project.basedir}/target/wsdl</directory>
-                            <includes>
-                                <include>**/*.wsdl</include>
-                            </includes>
-                            <targetPath>META-INF/wsdl</targetPath>
-                        </webResource>
-                    </webResources>
-                </configuration>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>generate-test-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/${project.build.finalName}-test</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/src/test/webapp</directory>
+                                    <filtering>true</filtering>
+                                    <includes>
+                                        <include>**/*.xml</include>
+                                    </includes>
+                                </resource>
+                                <resource>
+                                    <directory>${project.basedir}/src/test/webapp</directory>
+                                    <excludes>
+                                        <exclude>**/*.xml</exclude>
+                                    </excludes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>war</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>test</classifier>
+                            <primaryArtifact>false</primaryArtifact>
+                            <webappDirectory>${project.build.directory}/${project.build.finalName}-test</webappDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+            </plugin>
+            -->
             <plugin>
                 <groupId>org.kuali.maven.plugins</groupId>
                 <artifactId>properties-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <inherited>true</inherited>
+                        <configuration>
+                            <locations>
+                                <location>${project.basedir}/pom.properties</location>
+                            </locations>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
+    
     <profiles>
         <!-- Allow for optional running of integration tests against temporary LDAP and server instances -->
         <profile>
@@ -182,37 +235,6 @@
             </activation>
             <build>
                 <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-dependency-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>unpack</id>
-                                <phase>generate-sources</phase>
-                                <goals>
-                                    <goal>unpack</goal>
-                                </goals>
-                                <configuration>
-                                    <artifactItems>
-                                        <artifactItem>
-                                            <groupId>gov.hhs.onc.pdti</groupId>
-                                            <artifactId>pdti-ws</artifactId>
-                                            <version>${project.parent.version}</version>
-                                            <outputDirectory>${project.build.directory}/wsdl</outputDirectory>
-                                            <includes>**\/*.wsdl</includes>
-                                        </artifactItem>
-                                        <artifactItem>
-                                            <groupId>gov.hhs.onc.pdti</groupId>
-                                            <artifactId>pdti-ws</artifactId>
-                                            <version>${project.parent.version}</version>
-                                            <outputDirectory>${project.build.directory}/schema</outputDirectory>
-                                            <includes>**\/*.xsd</includes>
-                                        </artifactItem>
-                                    </artifactItems>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
                     <plugin>
                         <groupId>com.github.redfish4ktc.soapui</groupId>
                         <artifactId>maven-soapui-extension-plugin</artifactId>
@@ -255,6 +277,10 @@
                             </execution>
                             <execution>
                                 <id>test-verify</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>test-verify</goal>
+                                </goals>
                             </execution>
                         </executions>
                     </plugin>
@@ -271,62 +297,28 @@
                                 <configuration>
                                     <target>
                                         <path id="maven.classpath">
-                                            <path refid="maven.compile.classpath" />
-                                            <path refid="maven.plugin.classpath" />
-                                            <path refid="maven.runtime.classpath" />
-                                            <path refid="maven.test.classpath" />
+                                            <path refid="maven.compile.classpath"/>
+                                            <path refid="maven.plugin.classpath"/>
+                                            <path refid="maven.runtime.classpath"/>
+                                            <path refid="maven.test.classpath"/>
                                         </path>
-                                        <ant
-                                            antfile="${project.build.testScriptSourceDirectory}/apacheds-run.xml"
-                                            target="apacheds-start"
-                                            inheritRefs="true">
-                                            <property
-                                                name="instance"
-                                                value="1" />
-                                            <property
-                                                name="jmxPort"
-                                                value="${project.test.server.1.ldap.1.jmx.port}" />
-                                            <property
-                                                name="ldapHost"
-                                                value="${project.test.server.1.ldap.1.host}" />
-                                            <property
-                                                name="ldapPort"
-                                                value="${project.test.server.1.ldap.1.port}" />
-                                            <property
-                                                name="dataPartName"
-                                                value="${project.test.server.1.ldap.1.data.partition.name}" />
-                                            <property
-                                                name="dataPartSuffix"
-                                                value="${project.test.server.1.ldap.1.data.partition.suffix}" />
-                                            <property
-                                                name="dataLdifFile"
-                                                value="${project.test.server.1.ldap.1.data.ldif.file}" />
+                                        <ant antfile="${project.build.testScriptSourceDirectory}/apacheds-run.xml" target="apacheds-start" inheritRefs="true">
+                                            <property name="instance" value="1"/>
+                                            <property name="jmxPort" value="${project.test.server.1.ldap.1.jmx.port}"/>
+                                            <property name="ldapHost" value="${project.test.server.1.ldap.1.host}"/>
+                                            <property name="ldapPort" value="${project.test.server.1.ldap.1.port}"/>
+                                            <property name="dataPartName" value="${project.test.server.1.ldap.1.data.partition.name}"/>
+                                            <property name="dataPartSuffix" value="${project.test.server.1.ldap.1.data.partition.suffix}"/>
+                                            <property name="dataLdifFile" value="${project.test.server.1.ldap.1.data.ldif.file}"/>
                                         </ant>
-                                        <ant
-                                            antfile="${project.build.testScriptSourceDirectory}/apacheds-run.xml"
-                                            target="apacheds-start"
-                                            inheritRefs="true">
-                                            <property
-                                                name="instance"
-                                                value="2" />
-                                            <property
-                                                name="jmxPort"
-                                                value="${project.test.server.2.ldap.1.jmx.port}" />
-                                            <property
-                                                name="ldapHost"
-                                                value="${project.test.server.2.ldap.1.host}" />
-                                            <property
-                                                name="ldapPort"
-                                                value="${project.test.server.2.ldap.1.port}" />
-                                            <property
-                                                name="dataPartName"
-                                                value="${project.test.server.2.ldap.1.data.partition.name}" />
-                                            <property
-                                                name="dataPartSuffix"
-                                                value="${project.test.server.2.ldap.1.data.partition.suffix}" />
-                                            <property
-                                                name="dataLdifFile"
-                                                value="${project.test.server.2.ldap.1.data.ldif.file}" />
+                                        <ant antfile="${project.build.testScriptSourceDirectory}/apacheds-run.xml" target="apacheds-start" inheritRefs="true">
+                                            <property name="instance" value="2"/>
+                                            <property name="jmxPort" value="${project.test.server.2.ldap.1.jmx.port}"/>
+                                            <property name="ldapHost" value="${project.test.server.2.ldap.1.host}"/>
+                                            <property name="ldapPort" value="${project.test.server.2.ldap.1.port}"/>
+                                            <property name="dataPartName" value="${project.test.server.2.ldap.1.data.partition.name}"/>
+                                            <property name="dataPartSuffix" value="${project.test.server.2.ldap.1.data.partition.suffix}"/>
+                                            <property name="dataLdifFile" value="${project.test.server.2.ldap.1.data.ldif.file}"/>
                                         </ant>
                                     </target>
                                 </configuration>
@@ -340,44 +332,22 @@
                                 <configuration>
                                     <target>
                                         <path id="maven.classpath">
-                                            <path refid="maven.compile.classpath" />
-                                            <path refid="maven.plugin.classpath" />
-                                            <path refid="maven.runtime.classpath" />
-                                            <path refid="maven.test.classpath" />
+                                            <path refid="maven.compile.classpath"/>
+                                            <path refid="maven.plugin.classpath"/>
+                                            <path refid="maven.runtime.classpath"/>
+                                            <path refid="maven.test.classpath"/>
                                         </path>
-                                        <ant
-                                            antfile="${project.build.testScriptSourceDirectory}/apacheds-run.xml"
-                                            target="apacheds-stop"
-                                            inheritRefs="true">
-                                            <property
-                                                name="instance"
-                                                value="1" />
-                                            <property
-                                                name="jmxPort"
-                                                value="${project.test.server.1.ldap.1.jmx.port}" />
-                                            <property
-                                                name="ldapHost"
-                                                value="${project.test.server.1.ldap.1.host}" />
-                                            <property
-                                                name="ldapPort"
-                                                value="${project.test.server.1.ldap.1.port}" />
+                                        <ant antfile="${project.build.testScriptSourceDirectory}/apacheds-run.xml" target="apacheds-stop" inheritRefs="true">
+                                            <property name="instance" value="1"/>
+                                            <property name="jmxPort" value="${project.test.server.1.ldap.1.jmx.port}"/>
+                                            <property name="ldapHost" value="${project.test.server.1.ldap.1.host}"/>
+                                            <property name="ldapPort" value="${project.test.server.1.ldap.1.port}"/>
                                         </ant>
-                                        <ant
-                                            antfile="${project.build.testScriptSourceDirectory}/apacheds-run.xml"
-                                            target="apacheds-stop"
-                                            inheritRefs="true">
-                                            <property
-                                                name="instance"
-                                                value="2" />
-                                            <property
-                                                name="jmxPort"
-                                                value="${project.test.server.2.ldap.1.jmx.port}" />
-                                            <property
-                                                name="ldapHost"
-                                                value="${project.test.server.2.ldap.1.host}" />
-                                            <property
-                                                name="ldapPort"
-                                                value="${project.test.server.2.ldap.1.port}" />
+                                        <ant antfile="${project.build.testScriptSourceDirectory}/apacheds-run.xml" target="apacheds-stop" inheritRefs="true">
+                                            <property name="instance" value="2"/>
+                                            <property name="jmxPort" value="${project.test.server.2.ldap.1.jmx.port}"/>
+                                            <property name="ldapHost" value="${project.test.server.2.ldap.1.host}"/>
+                                            <property name="ldapPort" value="${project.test.server.2.ldap.1.port}"/>
                                         </ant>
                                     </target>
                                 </configuration>
@@ -515,8 +485,18 @@
                                 </configuration>
                             </execution>
                             <!-- TODO: implement multi-context federation handling -->
-                            <!-- <execution> <id>tomcat7-deploy2</id> <phase>install</phase> <goals> <goal>deploy</goal> 
-                                </goals> <configuration> <path>/${project.deploy.server.context.2}</path> </configuration> </execution> -->
+                            <!--
+                            <execution>
+                                <id>tomcat7-deploy2</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>deploy</goal>
+                                </goals>
+                                <configuration>
+                                    <path>/${project.deploy.server.context.2}</path>
+                                </configuration>
+                            </execution>
+                            -->
                         </executions>
                     </plugin>
                 </plugins>
