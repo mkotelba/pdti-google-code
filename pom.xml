@@ -5,9 +5,14 @@
     
     <modelVersion>4.0.0</modelVersion>
     
-    <groupId>gov.hhs.onc.pdti</groupId>
+    <parent>
+        <groupId>gov.hhs.onc.pdti</groupId>
+        <artifactId>pdti-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>pdti-parent</relativePath>
+    </parent>
+    
     <artifactId>pdti-all</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     
     <name>pdti-all</name>
