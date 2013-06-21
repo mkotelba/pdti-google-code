@@ -8,6 +8,7 @@ import gov.hhs.onc.pdti.service.DirectoryService;
 import gov.hhs.onc.pdti.service.interceptor.DirectoryRequestInterceptor;
 import gov.hhs.onc.pdti.service.interceptor.DirectoryResponseInterceptor;
 import gov.hhs.onc.pdti.springframework.beans.factory.annotation.DirectoryTypeQualifier;
+import gov.hhs.onc.pdti.util.DirectoryUtils;
 import gov.hhs.onc.pdti.ws.api.BatchRequest;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusErrorType;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusRequest;
@@ -34,7 +35,7 @@ public class HpdPlusDirectoryServiceImpl extends AbstractDirectoryService<HpdPlu
 
     @Override
     public HpdPlusResponse processRequest(HpdPlusRequest hpdPlusReq) {
-        String dirId = this.dirDesc.getDirectoryId(), reqId = hpdPlusReq.getRequestId();
+        String dirId = this.dirDesc.getDirectoryId(), reqId = DirectoryUtils.defaultRequestId(hpdPlusReq.getRequestId());
         BatchRequest batchReq = hpdPlusReq.getBatchRequest();
         HpdPlusRequestMetadata reqMeta = hpdPlusReq.getRequestMetadata();
         HpdPlusResponse hpdPlusResp = this.hpdPlusObjectFactory.createHpdPlusResponse();
@@ -45,10 +46,11 @@ public class HpdPlusDirectoryServiceImpl extends AbstractDirectoryService<HpdPlu
 
         if (this.reqInterceptors != null) {
             for (DirectoryRequestInterceptor reqInterceptor : this.reqInterceptors) {
-                LOGGER.trace("Intercepting directory (id=" + dirId + ") HPD Plus request (class=" + reqInterceptor.getClass().getName() + ").");
+                LOGGER.trace("Intercepting HPD Plus request (directoryId=" + dirId + ", requestId=" + reqId + ", class=" + reqInterceptor.getClass().getName()
+                        + ").");
 
                 try {
-                    reqInterceptor.interceptRequest(this.dirDesc, hpdPlusReq);
+                    reqInterceptor.interceptRequest(this.dirDesc, reqId, hpdPlusReq);
                 } catch (Throwable th) {
                     // TODO: improve error handling
                     hpdPlusResp.getErrors().add(this.errBuilder.buildError(dirId, reqId, HpdPlusErrorType.OTHER, th));
@@ -80,10 +82,11 @@ public class HpdPlusDirectoryServiceImpl extends AbstractDirectoryService<HpdPlu
 
         if (this.respInterceptors != null) {
             for (DirectoryResponseInterceptor respInterceptor : this.respInterceptors) {
-                LOGGER.trace("Intercepting directory (id=" + dirId + ") HPD Plus response (class=" + respInterceptor.getClass().getName() + ").");
+                LOGGER.trace("Intercepting HPD Plus response (directoryId=" + dirId + ", requestId=" + reqId + ", class="
+                        + respInterceptor.getClass().getName() + ").");
 
                 try {
-                    respInterceptor.interceptResponse(this.dirDesc, hpdPlusReq, hpdPlusResp);
+                    respInterceptor.interceptResponse(this.dirDesc, reqId, hpdPlusReq, hpdPlusResp);
                 } catch (Throwable th) {
                     // TODO: improve error handling
                     hpdPlusResp.getErrors().add(this.errBuilder.buildError(dirId, reqId, HpdPlusErrorType.OTHER, th));

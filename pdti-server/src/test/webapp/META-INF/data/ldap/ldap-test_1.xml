@@ -8,7 +8,8 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
     
-    <beans:bean id="ldapDataSourceTest" class="gov.hhs.onc.pdti.data.ldap.impl.LdapDataSourceImpl" parent="ldapDataSource"
+    <beans:bean id="ldapDataSourceTest1" class="gov.hhs.onc.pdti.data.ldap.impl.LdapDataSourceImpl" parent="ldapDataSource"
+        p:type="%{project.test.server.1.ldap.1.type}"
         p:host="%{project.test.server.1.ldap.1.host}"
         p:port="%{project.test.server.1.ldap.1.port}"/>
 </beans:beans>

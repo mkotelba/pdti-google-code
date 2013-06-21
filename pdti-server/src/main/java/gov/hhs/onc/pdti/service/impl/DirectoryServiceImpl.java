@@ -8,6 +8,7 @@ import gov.hhs.onc.pdti.service.DirectoryService;
 import gov.hhs.onc.pdti.service.interceptor.DirectoryRequestInterceptor;
 import gov.hhs.onc.pdti.service.interceptor.DirectoryResponseInterceptor;
 import gov.hhs.onc.pdti.springframework.beans.factory.annotation.DirectoryTypeQualifier;
+import gov.hhs.onc.pdti.util.DirectoryUtils;
 import gov.hhs.onc.pdti.ws.api.BatchRequest;
 import gov.hhs.onc.pdti.ws.api.BatchResponse;
 import gov.hhs.onc.pdti.ws.api.ErrorResponse.ErrorType;
@@ -31,15 +32,16 @@ public class DirectoryServiceImpl extends AbstractDirectoryService<BatchRequest,
 
     @Override
     public BatchResponse processRequest(BatchRequest batchReq) {
-        String reqId = batchReq.getRequestId();
+        String dirId = this.dirDesc.getDirectoryId(), reqId = DirectoryUtils.defaultRequestId(batchReq.getRequestId());
         BatchResponse batchResp = this.objectFactory.createBatchResponse();
 
         if (this.reqInterceptors != null) {
             for (DirectoryRequestInterceptor reqInterceptor : this.reqInterceptors) {
-                LOGGER.trace("Intercepting DSML batch request (class=" + reqInterceptor.getClass().getName() + ").");
+                LOGGER.trace("Intercepting DSML batch request (directoryId=" + dirId + ", requestId=" + reqId + ", class="
+                        + reqInterceptor.getClass().getName() + ").");
 
                 try {
-                    reqInterceptor.interceptRequest(this.dirDesc, batchReq);
+                    reqInterceptor.interceptRequest(this.dirDesc, reqId, batchReq);
                 } catch (Throwable th) {
                     // TODO: improve error handling
                     batchResp.getBatchResponses().add(
@@ -48,8 +50,8 @@ public class DirectoryServiceImpl extends AbstractDirectoryService<BatchRequest,
             }
         }
 
-        LOGGER.debug("Processing DSML batch request (requestId=" + reqId + ").");
-        LOGGER.trace("Processing DSML batch request (requestId=" + reqId + "):\n"
+        LOGGER.debug("Processing DSML batch request (directoryId=" + dirId + ", requestId=" + reqId + ").");
+        LOGGER.trace("Processing DSML batch request (directoryId=" + dirId + ", requestId=" + reqId + "):\n"
                 + this.jaxb2Marshaller.marshal(this.objectFactory.createBatchRequest(batchReq)));
 
         if (this.dataServices != null) {
@@ -74,10 +76,11 @@ public class DirectoryServiceImpl extends AbstractDirectoryService<BatchRequest,
 
         if (this.respInterceptors != null) {
             for (DirectoryResponseInterceptor respInterceptor : this.respInterceptors) {
-                LOGGER.trace("Intercepting DSML batch response (class=" + respInterceptor.getClass().getName() + ").");
+                LOGGER.trace("Intercepting DSML batch response (directoryId=" + dirId + ", requestId=" + reqId + ", class="
+                        + respInterceptor.getClass().getName() + ").");
 
                 try {
-                    respInterceptor.interceptResponse(this.dirDesc, batchReq, batchResp);
+                    respInterceptor.interceptResponse(this.dirDesc, reqId, batchReq, batchResp);
                 } catch (Throwable th) {
                     // TODO: improve error handling
                     batchResp.getBatchResponses().add(
@@ -86,8 +89,8 @@ public class DirectoryServiceImpl extends AbstractDirectoryService<BatchRequest,
             }
         }
 
-        LOGGER.debug("Processed DSML batch request (requestId=" + reqId + ") into DSML batch response.");
-        LOGGER.trace("Processed DSML batch request (requestId=" + reqId + ") into DSML batch response:\n"
+        LOGGER.debug("Processed DSML batch request (directoryId=" + dirId + ", requestId=" + reqId + ") into DSML batch response.");
+        LOGGER.trace("Processed DSML batch request (directoryId=" + dirId + ", requestId=" + reqId + ") into DSML batch response:\n"
                 + this.jaxb2Marshaller.marshal(this.objectFactory.createBatchResponse(batchResp)));
 
         return batchResp;
