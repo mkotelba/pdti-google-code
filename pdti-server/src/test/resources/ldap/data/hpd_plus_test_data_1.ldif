@@ -61,7 +61,7 @@ objectClass: HCProfessional
 objectClass: HPDProvider
 HcIdentifier: provider2
 HcProfession: Doctor
-HCSpecialization: Ear Nose Throat
+HcSpecialization: Ear Nose Throat
 cn: John Smith
 description: This is the description for John Smith.
 givenName: John
@@ -91,7 +91,7 @@ objectClass: HCProfessional
 objectClass: HPDProvider
 HcIdentifier: provider3
 HcProfession: Doctor
-HCSpecialization: OBGYN
+HcSpecialization: OBGYN
 cn: Bob Jefferson
 description: This is the description for Bob Jefferson.
 givenName: Bob
