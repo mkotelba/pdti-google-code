@@ -24,7 +24,7 @@ objectClass: HCProfessional
 objectClass: HPDProvider
 HcIdentifier: provider1
 HcProfession: Doctor
-HCSpecialization: Neurosurgeon
+HcSpecialization: Neurosurgeon
 cn: Albert Johnson
 description: This is the description for Albert Johnson.
 givenName: Albert
