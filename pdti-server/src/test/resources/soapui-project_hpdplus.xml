@@ -29,17 +29,17 @@
             <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdPlusRequest requestID="${=project.name}_${=testSuite.name}_${=testCase.name}_${=testStep.name}_${=request.name}_${=UUID.randomUUID()}" xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
-        <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <dsml:searchRequest dn="ou=Providers,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
-                <dsml:filter>
-                    <dsml:equalityMatch name="givenName">
-                        <dsml:value>Thomas</dsml:value>
-                    </dsml:equalityMatch>
-                </dsml:filter>
-                <!--dsml:attributes>
+               <dsml:filter>
+                  <dsml:equalityMatch name="givenName">
+                     <dsml:value>Thomas</dsml:value>
+                  </dsml:equalityMatch>
+               </dsml:filter>
+               <!--dsml:attributes>
                 </dsml:attributes-->
             </dsml:searchRequest>
-        </dsml:batchRequest>
+         </dsml:batchRequest>
       </hpdplus:hpdPlusRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
@@ -48,66 +48,66 @@
               <con:configuration><definition/></con:configuration>
             </con:assertion>
             <con:assertion type="SOAP Fault Assertion"/>
-			<con:assertion type="XPath Match" name="directoryID XPath Match"><con:configuration><path>declare namespace hpdplus='urn:gov:hhs:onc:hpdplus:2013';
-//hpdplus:hpdPlusResponse[1]/@directoryID</path><content>pdti-*</content><allowWildcards>true</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+			
 <con:assertion type="XPath Match" name="attr pager XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"pager","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="pager"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr uid XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"uid","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="uid"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr mail XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"mail","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="mail"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr sn XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"sn","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="sn"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdProviderLegalAddress XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdProviderLegalAddress","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdproviderlegaladdress"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr HCSpecialization XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"HcSpecialization","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hcspecialization"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr givenName XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"givenName","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="givenname"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdProviderLanguageSupported XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdProviderLanguageSupported","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdproviderlanguagesupported"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdProviderPracticeAddress XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdProviderPracticeAddress","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdproviderpracticeaddress"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr telephoneNumber XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"telephoneNumber","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="telephonenumber"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr facsimileTelephoneNumber XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"facsimileTelephoneNumber","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="facsimiletelephonenumber"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr cn XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"cn","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="cn"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr initials XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"initials","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="initials"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr description XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"description","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="description"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr HcProfession XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"HcProfession","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hcprofession"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdProviderBillingAddress XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdProviderBillingAddress","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdproviderbillingaddress"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr objectClass XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"objectClass","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="objectclass"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdHasAService XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdHasAService","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdhasaservice"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdProviderMailingAddress XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdProviderMailingAddress","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdprovidermailingaddress"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr HcIdentifier XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"HcIdentifier","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hcidentifier"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr mobile XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"mobile","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="mobile"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr labeledURI XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"labeledURI","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="labeleduri"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr title XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"title","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="title"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdProviderPracticeLocation XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdProviderPracticeLocation","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdproviderpracticelocation"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr gender XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"gender","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="gender"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdCredential XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdCredential","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdcredential"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdProviderStatus XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdProviderStatus","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdproviderstatus"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr HcRole XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"HcRole","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hcrole"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="count attr XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
 count(//dsml:attr)</path><content>28</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+
 <con:credentials>
               <con:username xsi:nil="true"/>
               <con:password xsi:nil="true"/>
@@ -159,45 +159,45 @@ count(//dsml:attr)</path><content>28</content><allowWildcards>false</allowWildca
             </con:assertion>
             <con:assertion type="SOAP Fault Assertion"/>
 <con:assertion type="XPath Match" name="attr objectClass XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"objectClass","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="objectclass"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr o XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"o","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="o"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr businessCategory XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"businessCategory","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="businesscategory"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr description XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"description","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="description"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr facsimileTelephoneNumber XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"facsimileTelephoneNumber","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="facsimiletelephonenumber"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr telephoneNumber XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"telephoneNumber","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="telephonenumber"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr HcIdentifier XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"HcIdentifier","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hcidentifier"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdOrgId XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdOrgId","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdorgid"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr ClinicalInformationContact XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"ClinicalInformationContact","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="clinicalinformationcontact"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr HcRegisteredName XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"HcRegisteredName","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hcregisteredname"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr HcSpecialization XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"HcSpecialization","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hcspecialization"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdCredential XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdCredential","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdcredential"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdHasAService XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdHasAService","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdhasaservice"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdProviderBillingAddress XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdProviderBillingAddress","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdproviderbillingaddress"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdProviderLanguageSupported XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdProviderLanguageSupported","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdproviderlanguagesupported"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdProviderLegalAddress XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdProviderLegalAddress","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdproviderlegaladdress"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdProviderMailingAddress XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdProviderMailingAddress","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdprovidermailingaddress"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdProviderPracticeAddress XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdProviderPracticeAddress","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdproviderpracticeaddress"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdProviderPracticeLocation XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdProviderPracticeLocation","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdproviderpracticelocation"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdProviderStatus XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdProviderStatus","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdproviderstatus"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="count attr XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
 count(//dsml:attr)</path><content>20</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:credentials>
@@ -251,31 +251,31 @@ count(//dsml:attr)</path><content>20</content><allowWildcards>false</allowWildca
             </con:assertion>
             <con:assertion type="SOAP Fault Assertion"/>
 			<con:assertion type="XPath Match" name="attr objectClass XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"objectClass","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="objectclass"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdHasAnOrg XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdHasAnOrg","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdhasanorg"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdMemberId XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdMemberId","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdmemberid"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdHasAService XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdHasAService","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdhasaservice"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdHasAProvider XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdHasAProvider","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdhasaprovider"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdMemberName XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdMemberName","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdmembername"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdMemberStatus XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdMemberStatus","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdmemberstatus"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdMemberType XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdMemberType","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdmembertype"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr mail XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"mail","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="mail"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr mobile XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"mobile","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="mobile"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr pager XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"pager","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="pager"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr telephoneNumber XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"telephoneNumber","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="telephonenumber"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr facsimileTelephoneNumber XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"facsimileTelephoneNumber","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="facsimiletelephonenumber"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="count attr XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
 count(//dsml:attr)</path><content>13</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
             <con:credentials>
@@ -329,19 +329,19 @@ count(//dsml:attr)</path><content>13</content><allowWildcards>false</allowWildca
             </con:assertion>
             <con:assertion type="SOAP Fault Assertion"/>
 			<con:assertion type="XPath Match" name="attr objectClass XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"objectClass","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="objectclass"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdServiceAddress XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdServiceAddress","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdserviceaddress"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdServiceId XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdServiceId","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdserviceid"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdCertificate XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdCertificate","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdcertificate"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdServicePayload XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdServicePayload","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdservicepayload"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdServiceProtocol XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdServiceProtocol","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdserviceprotocol"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdServiceType XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdServiceType","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdservicetype"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="count attr XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
 count(//dsml:attr)</path><content>7</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
             <con:credentials>
@@ -395,25 +395,25 @@ count(//dsml:attr)</path><content>7</content><allowWildcards>false</allowWildcar
             </con:assertion>
             <con:assertion type="SOAP Fault Assertion"/>
 <con:assertion type="XPath Match" name="attr hpdCredentialId XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdCredentialId","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdcredentialid"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr credentialName XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"credentialName","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="credentialname"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr credentialNumber XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"credentialNumber","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="credentialnumber"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr credentialType XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"credentialType","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="credentialtype"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr description XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"description","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="description"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr credentialIssueDate XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"credentialIssueDate","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="credentialissuedate"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr credentialRenewalDate XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"credentialRenewalDate","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="credentialrenewaldate"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr credentialStatus XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"credentialStatus","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="credentialstatus"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdHasAnOrg XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdHasAnOrg","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdhasanorg"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdHasAProvider XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdHasAProvider","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdhasaprovider"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="count attr XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
 count(//dsml:attr)</path><content>11</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
             <con:credentials>
@@ -480,7 +480,7 @@ count(//dsml:attr)</path><content>11</content><allowWildcards>false</allowWildca
             <con:assertion type="SOAP Fault Assertion"/>
             <con:assertion type="XPath Match" name="attr hpdHasAService XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
 
-not(empty(//dsml:searchResultEntry[1]/dsml:attr[@name[matches(.,"hpdHasAService","i")]]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="count attr XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdhasaservice"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="count attr XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
 
 count(//dsml:attr)</path><content>1</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
               <con:username xsi:nil="true"/>
@@ -548,7 +548,7 @@ count(//dsml:attr)</path><content>1</content><allowWildcards>false</allowWildcar
       </con:testStep><con:properties/>
     </con:testCase>
     
-    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="WSC_2_and_IWG" searchProperties="true">
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="WSC_2_and_IWG" searchProperties="true" id="f42973ce-ef2c-4bc5-9a7d-224688a0c4e4">
       <con:settings/>
       <con:testStep type="request" name="search_org_by_id">
         <con:settings/>
@@ -2211,7 +2211,7 @@ other organizations are returned. </con:description><con:settings/>
     </con:testCase>
     <con:properties/>
   </con:testSuite>
-  <con:testSuite name="Requirement_7 _Plus"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Retrieve_Service_via_Membership" searchProperties="true"><con:settings/><con:testStep type="request" name="search_membership_by_hpdHasAnOrg">
+  <con:testSuite name="Requirement_7 _Plus"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Retrieve_Service_via_Membership" searchProperties="true" id="e5c0c8af-3610-4959-8244-6b95f150907e"><con:settings/><con:testStep type="request" name="search_membership_by_hpdHasAnOrg">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:interface>Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding</con:interface>
@@ -2323,6 +2323,203 @@ other organizations are returned. </con:description><con:settings/>
             <con:wsrmConfig version="1.2"/>
           </con:request>
         </con:config>
-      </con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:wssContainer/>
+      </con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite name="Message_Compliance_Plus"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="RequestIDs_Equal" searchProperties="true" id="0815e6ca-486e-41dd-ba1f-86701778f6db"><con:settings/><con:testStep type="request" name="search_provider_by_name">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_provider_by_name" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+   <soap-env:Body>
+      <hpdplus:hpdPlusRequest requestID="${=project.name}_${=testSuite.name}_${=testCase.name}_${=testStep.name}_${=request.name}_${=UUID.randomUUID()}" xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
+         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dsml:searchRequest dn="ou=Providers,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
+               <dsml:filter>
+                  <dsml:equalityMatch name="givenName">
+                     <dsml:value>Thomas</dsml:value>
+                  </dsml:equalityMatch>
+               </dsml:filter>
+               <dsml:attributes>
+                  <dsml:attribute name="cn"/>
+               </dsml:attributes>
+            </dsml:searchRequest>
+         </dsml:batchRequest>
+      </hpdplus:hpdPlusRequest>
+   </soap-env:Body>
+</soap-env:Envelope>]]></con:request>
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration><definition/></con:configuration>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<con:assertion type="GroovyScriptAssertion" name="requestID match in response Script Assertion"><con:configuration><scriptText>def groovyUtils = new com.eviware.soapui.support.GroovyUtils(context);
+def request = groovyUtils.getXmlHolder(messageExchange.getRequestContentAsXml());
+def response = groovyUtils.getXmlHolder(messageExchange.getResponseContentAsXml());
+
+def requestID = request["//@requestID"];
+
+def responseIDs = response["//@requestID"];
+
+for (i in responseIDs){
+	assert (requestID == i);
+}</scriptText></con:configuration></con:assertion><con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Unallowed_Metadata" searchProperties="true" disabled="true"><con:settings/><con:testStep type="request" name="search_provider_by_name">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding</con:interface>
+          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
+          <con:request name="search_provider_by_name" outgoingWss="" incomingWss="">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>${#Project#project.test.server.scheme}://${#Project#project.test.server.host}:${#Project#project.test.server.port}/${#Project#project.test.server.context}/${#Project#project.test.server.service}</con:endpoint>
+            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
+   <soap-env:Body>
+      <hpdplus:hpdPlusRequest requestID="${=project.name}_${=testSuite.name}_${=testCase.name}_${=testStep.name}_${=request.name}_${=UUID.randomUUID()}" xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
+         <hpdplus:requestMetadata>
+            <hpdplus:properties>
+               <hpdplus:property name="s">s</hpdplus:property>
+            </hpdplus:properties>
+         </hpdplus:requestMetadata>
+         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dsml:searchRequest dn="ou=Providers,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
+               <dsml:filter>
+                  <dsml:equalityMatch name="givenName">
+                     <dsml:value>Thomas</dsml:value>
+                  </dsml:equalityMatch>
+               </dsml:filter>
+               <!--dsml:attributes>
+                </dsml:attributes-->
+            </dsml:searchRequest>
+         </dsml:batchRequest>
+      </hpdplus:hpdPlusRequest>
+   </soap-env:Body>
+</soap-env:Envelope>]]></con:request>
+            <con:assertion type="SOAP Response"/>
+            <con:assertion type="Schema Compliance">
+              <con:configuration><definition/></con:configuration>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion"/>
+			<con:assertion type="XPath Match" name="directoryID XPath Match"><con:configuration><path>declare namespace hpdplus='urn:gov:hhs:onc:hpdplus:2013';
+//hpdplus:hpdPlusResponse[1]/@directoryID</path><content>pdti-*</content><allowWildcards>true</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr pager XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="pager"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr uid XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="uid"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr mail XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="mail"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr sn XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="sn"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr hpdProviderLegalAddress XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdproviderlegaladdress"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr HCSpecialization XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hcspecialization"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr givenName XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="givenname"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr hpdProviderLanguageSupported XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdproviderlanguagesupported"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr hpdProviderPracticeAddress XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdproviderpracticeaddress"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr telephoneNumber XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="telephonenumber"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr facsimileTelephoneNumber XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="facsimiletelephonenumber"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr cn XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="cn"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr initials XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="initials"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr description XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="description"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr HcProfession XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hcprofession"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr hpdProviderBillingAddress XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdproviderbillingaddress"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr objectClass XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="objectclass"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr hpdHasAService XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdhasaservice"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr hpdProviderMailingAddress XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdprovidermailingaddress"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr HcIdentifier XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hcidentifier"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr mobile XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="mobile"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr labeledURI XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="labeleduri"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr title XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="title"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr hpdProviderPracticeLocation XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdproviderpracticelocation"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr gender XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="gender"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr hpdCredential XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdcredential"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr hpdProviderStatus XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdproviderstatus"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr HcRole XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hcrole"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="count attr XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+count(//dsml:attr)</path><content>28</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:credentials>
+              <con:username xsi:nil="true"/>
+              <con:password xsi:nil="true"/>
+              <con:domain xsi:nil="true"/>
+              <con:authType>Global HTTP Settings</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite name="Federation_Plus"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:properties/></con:testSuite><con:properties><con:property><con:name>project.test.server.scheme</con:name><con:value>http</con:value></con:property><con:property><con:name>project.test.server.host</con:name><con:value>localhost</con:value></con:property><con:property><con:name>project.test.server.port</con:name><con:value>8080</con:value></con:property><con:property><con:name>project.test.server.context</con:name><con:value>pdti-server</con:value></con:property><con:property><con:name>project.test.server.service</con:name><con:value>Hpd_Plus_ProviderInformationDirectoryService</con:value></con:property><con:property><con:name>project.test.server.dsml.dn.base</con:name><con:value>o=dev.provider-directories.com,dc=hpd</con:value></con:property></con:properties><con:wssContainer/>
   <con:sensitiveInformation/>
 </con:soapui-project>
