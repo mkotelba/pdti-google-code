@@ -20,19 +20,20 @@ public class ValidityInterceptor extends AbstractDirectoryInterceptor implements
     private final static Class<? extends DsmlMessage>[] VALID_REQ_MSG_CLASSES = ArrayUtils.toArray(SearchRequest.class);
 
     @Override
-    public void interceptRequest(DirectoryDescriptor dirDesc, HpdPlusRequest hpdPlusReq) throws DirectoryServiceException {
-        this.interceptRequest(dirDesc, hpdPlusReq.getBatchRequest());
+    public void interceptRequest(DirectoryDescriptor dirDesc, String reqId, HpdPlusRequest hpdPlusReq) throws DirectoryServiceException {
+        this.interceptRequest(dirDesc, reqId, hpdPlusReq.getBatchRequest());
     }
 
     @Override
-    public void interceptRequest(DirectoryDescriptor dirDesc, BatchRequest batchReq) throws DirectoryServiceException {
+    public void interceptRequest(DirectoryDescriptor dirDesc, String reqId, BatchRequest batchReq) throws DirectoryServiceException {
         Class<? extends DsmlMessage> batchReqMsgClass;
 
         for (DsmlMessage batchReqMsg : batchReq.getBatchRequests()) {
             batchReqMsgClass = batchReqMsg.getClass();
 
             if (!ClassUtils.isAssignable(new Class<?>[] { batchReqMsgClass }, VALID_REQ_MSG_CLASSES)) {
-                throw new DirectoryServiceException("Invalid DSML batch request message (class=" + batchReqMsgClass.getName() + ").");
+                throw new DirectoryServiceException("Invalid DSML batch request message (directoryId=" + dirDesc.getDirectoryId() + ", requestId=" + reqId
+                        + ", class=" + batchReqMsgClass.getName() + ").");
             }
         }
     }

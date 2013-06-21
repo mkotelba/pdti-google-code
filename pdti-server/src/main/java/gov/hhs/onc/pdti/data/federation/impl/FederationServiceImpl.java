@@ -36,10 +36,11 @@ public class FederationServiceImpl extends AbstractFederationService<BatchReques
 
         if (this.reqInterceptors != null) {
             for (DirectoryRequestInterceptor reqInterceptor : this.reqInterceptors) {
-                LOGGER.trace("Intercepting federated directory (id=" + fedDirId + ") DSML batch request (class=" + reqInterceptor.getClass().getName() + ").");
+                LOGGER.trace("Intercepting federated DSML batch request (directoryId=" + fedDirId + ", requestId=" + reqId + ", class="
+                        + reqInterceptor.getClass().getName() + ").");
 
                 try {
-                    reqInterceptor.interceptRequest(fedDir, fedBatchReq);
+                    reqInterceptor.interceptRequest(fedDir, reqId, fedBatchReq);
                 } catch (Throwable th) {
                     // TODO: improve error handling
                     fedBatchResp.getBatchResponses().add(
@@ -60,10 +61,11 @@ public class FederationServiceImpl extends AbstractFederationService<BatchReques
 
         if (this.respInterceptors != null) {
             for (DirectoryResponseInterceptor respInterceptor : this.respInterceptors) {
-                LOGGER.trace("Intercepting federated directory (id=" + fedDirId + ") DSML batch response (class=" + respInterceptor.getClass().getName() + ").");
+                LOGGER.trace("Intercepting federated DSML batch response (directoryId=" + fedDirId + ", requestId=" + reqId + ", class="
+                        + respInterceptor.getClass().getName() + ").");
 
                 try {
-                    respInterceptor.interceptResponse(fedDir, fedBatchReq, fedBatchResp);
+                    respInterceptor.interceptResponse(fedDir, reqId, fedBatchReq, fedBatchResp);
                 } catch (Throwable th) {
                     // TODO: improve error handling
                     fedBatchResp.getBatchResponses().add(

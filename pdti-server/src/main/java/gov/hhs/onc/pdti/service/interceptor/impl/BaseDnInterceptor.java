@@ -21,12 +21,12 @@ import org.springframework.stereotype.Component;
 @Scope("singleton")
 public class BaseDnInterceptor extends AbstractDirectoryInterceptor implements DirectoryRequestInterceptor {
     @Override
-    public void interceptRequest(DirectoryDescriptor dirDesc, HpdPlusRequest hpdPlusReq) throws DirectoryServiceException {
-        this.interceptRequest(dirDesc, hpdPlusReq.getBatchRequest());
+    public void interceptRequest(DirectoryDescriptor dirDesc, String reqId, HpdPlusRequest hpdPlusReq) throws DirectoryServiceException {
+        this.interceptRequest(dirDesc, reqId, hpdPlusReq.getBatchRequest());
     }
 
     @Override
-    public void interceptRequest(DirectoryDescriptor dirDesc, BatchRequest batchReq) throws DirectoryServiceException {
+    public void interceptRequest(DirectoryDescriptor dirDesc, String reqId, BatchRequest batchReq) throws DirectoryServiceException {
         Dn dirBaseDn = dirDesc.getBaseDn();
 
         for (SearchRequest searchReqMsg : (Collection<SearchRequest>) CollectionUtils.select(batchReq.getBatchRequests(),

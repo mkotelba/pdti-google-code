@@ -37,10 +37,11 @@ public class HpdPlusFederationServiceImpl extends AbstractFederationService<HpdP
 
         if (this.reqInterceptors != null) {
             for (DirectoryRequestInterceptor reqInterceptor : this.reqInterceptors) {
-                LOGGER.trace("Intercepting federated directory (id=" + fedDirId + ") HPD Plus request (class=" + reqInterceptor.getClass().getName() + ").");
+                LOGGER.trace("Intercepting federated HPD Plus request (directoryId=" + fedDirId + ", requestId=" + reqId + ", class="
+                        + reqInterceptor.getClass().getName() + ").");
 
                 try {
-                    reqInterceptor.interceptRequest(fedDir, fedHpdPlusReq);
+                    reqInterceptor.interceptRequest(fedDir, reqId, fedHpdPlusReq);
                 } catch (Throwable th) {
                     // TODO: improve error handling
                     fedHpdPlusResp.getErrors().add(this.errBuilder.buildError(fedDirId, reqId, HpdPlusErrorType.OTHER, th));
@@ -60,10 +61,11 @@ public class HpdPlusFederationServiceImpl extends AbstractFederationService<HpdP
 
         if (this.respInterceptors != null) {
             for (DirectoryResponseInterceptor respInterceptor : this.respInterceptors) {
-                LOGGER.trace("Intercepting federated directory (id=" + fedDirId + ") HPD Plus response (class=" + respInterceptor.getClass().getName() + ").");
+                LOGGER.trace("Intercepting federated HPD Plus response (directoryId=" + fedDirId + ", requestId=" + reqId + ", class="
+                        + respInterceptor.getClass().getName() + ").");
 
                 try {
-                    respInterceptor.interceptResponse(fedDir, fedHpdPlusReq, fedHpdPlusResp);
+                    respInterceptor.interceptResponse(fedDir, reqId, fedHpdPlusReq, fedHpdPlusResp);
                 } catch (Throwable th) {
                     // TODO: improve error handling
                     fedHpdPlusResp.getErrors().add(this.errBuilder.buildError(fedDirId, reqId, HpdPlusErrorType.OTHER, th));

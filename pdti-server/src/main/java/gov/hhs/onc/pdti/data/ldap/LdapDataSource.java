@@ -6,6 +6,10 @@ import org.apache.directory.ldap.client.api.LdapConnectionConfig;
 public interface LdapDataSource extends DirectoryDataSource {
     public LdapConnectionConfig toConfig();
 
+    public LdapServerType getType();
+
+    public void setType(LdapServerType type);
+
     public String getHost();
 
     public void setHost(String host);

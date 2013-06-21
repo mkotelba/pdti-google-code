@@ -2,6 +2,7 @@ package gov.hhs.onc.pdti.data.ldap.impl;
 
 import gov.hhs.onc.pdti.data.ldap.LdapCredentials;
 import gov.hhs.onc.pdti.data.ldap.LdapDataSource;
+import gov.hhs.onc.pdti.data.ldap.LdapServerType;
 import gov.hhs.onc.pdti.data.ldap.LdapSslProtocol;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.ObjectUtils;
@@ -10,6 +11,7 @@ import org.apache.commons.lang3.text.StrBuilder;
 import org.apache.directory.ldap.client.api.LdapConnectionConfig;
 
 public class LdapDataSourceImpl implements LdapDataSource {
+    private LdapServerType type = LdapServerType.OTHER;
     private String host;
     private int port;
     private LdapCredentials credentials;
@@ -72,6 +74,16 @@ public class LdapDataSourceImpl implements LdapDataSource {
     @Override
     public void setPort(int port) {
         this.port = port;
+    }
+
+    @Override
+    public LdapServerType getType() {
+        return this.type;
+    }
+
+    @Override
+    public void setType(LdapServerType type) {
+        this.type = type;
     }
 
     @Override
