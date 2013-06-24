@@ -23,5 +23,6 @@
         <module>pdti-parent</module>
         <module>pdti-ws</module>
         <module>pdti-server</module>
+        <module>pdti-client</module>
     </modules>
 </project>
