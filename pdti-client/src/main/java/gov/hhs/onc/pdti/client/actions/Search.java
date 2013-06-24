@@ -18,17 +18,10 @@ import java.util.List;
 import javax.xml.bind.JAXBElement;
 
 import org.apache.log4j.Logger;
-import org.apache.struts2.convention.annotation.Result;
-import org.apache.struts2.convention.annotation.Results;
 
-@Results({
-    @Result(name="success", location="results.jsp"),
-    @Result(name="input", location="results.jsp"),
-    @Result(name="error", location="results.jsp")
-  })
-public class SearchAction extends BaseAction {
+public class Search extends BaseAction {
 
-    private static final Logger LOGGER = Logger.getLogger(SearchAction.class);
+    private static final Logger LOGGER = Logger.getLogger(Search.class);
     private static final String NEWLINE = "\n";
     private static final String OU = "ou=";
     private static final String COMMA = ",";
@@ -56,7 +49,7 @@ public class SearchAction extends BaseAction {
         BatchResponse batchResponse = fedDirService.getProviderInformationDirectoryPortSoap()
                 .providerInformationQueryRequest(buildBatchRequest());
         List<JAXBElement<?>> batchResponseJAXBElements = batchResponse.getBatchResponses();
-        for(JAXBElement batchResponseJAXBElement : batchResponseJAXBElements) {
+        for(JAXBElement<?> batchResponseJAXBElement : batchResponseJAXBElements) {
             Object value = batchResponseJAXBElement.getValue();
             if(value instanceof SearchResponse) {
                 SearchResponse searchResponse = (SearchResponse)value;
@@ -88,7 +81,7 @@ public class SearchAction extends BaseAction {
         AttributeValueAssertion attributeValueAssertion = objectFactory.createAttributeValueAssertion();
         attributeValueAssertion.setName(searchAttribute);
         attributeValueAssertion.setValue(searchString);
-        filter.setEqualityMatch(attributeValueAssertion);
+        filter.setApproxMatch(attributeValueAssertion);
         searchRequest.setFilter(filter);
         batchRequest.getBatchRequests().add(searchRequest);
         return batchRequest;

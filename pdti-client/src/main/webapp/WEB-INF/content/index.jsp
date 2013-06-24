@@ -4,7 +4,7 @@
 <html>
 <%@ include file="head.jsp"%>
 <body>
-	<s:form action="/search">
+	<s:form action="search">
 		<s:textfield key="typeToSearch" />
 		<s:textfield key="searchAttribute" />
 		<s:textfield key="searchString" />
