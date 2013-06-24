@@ -1,4 +1,4 @@
-package gov.hhs.onc.pdti.actions;
+package gov.hhs.onc.pdti.client.actions;
 
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.convention.annotation.InterceptorRef;

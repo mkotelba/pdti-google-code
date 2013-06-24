@@ -75,6 +75,11 @@
                 <version>2.2.7</version>
             </dependency>
             <dependency>
+                <groupId>com.sun.xml.stream</groupId>
+                <artifactId>sjsxp</artifactId>
+                <version>1.0.2</version>
+            </dependency>
+            <dependency>
                 <groupId>com.sun.xml.stream.buffer</groupId>
                 <artifactId>streambuffer</artifactId>
                 <version>1.5.1</version>
@@ -187,17 +192,17 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
-                <version>3.2.2.RELEASE</version>
+                <version>3.2.3.RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
-                <version>3.2.2.RELEASE</version>
+                <version>3.2.3.RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-oxm</artifactId>
-                <version>3.2.2.RELEASE</version>
+                <version>3.2.3.RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.ws</groupId>
@@ -232,23 +237,6 @@
     <build>
         <pluginManagement>
             <plugins>
-                <plugin>
-                    <groupId>org.kuali.maven.plugins</groupId>
-                    <artifactId>properties-maven-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <phase>initialize</phase>
-                            <goals>
-                                <goal>read-project-properties</goal>
-                            </goals>
-                            <configuration>
-                                <locations>
-                                    <location>${project.basedir}/pom.properties</location>
-                                </locations>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
                 <plugin>
                     <groupId>com.github.redfish4ktc.soapui</groupId>
                     <artifactId>maven-soapui-extension-plugin</artifactId>
@@ -302,6 +290,25 @@
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>2.4</version>
+                    <inherited>true</inherited>
+                    <executions>
+                        <execution>
+                            <id>test-jar</id>
+                            <phase>generate-test-resources</phase>
+                            <goals>
+                                <goal>test-jar</goal>
+                            </goals>
+                            <inherited>true</inherited>
+                            <configuration>
+                                <finalName>${project.artifactId}-${project.version}</finalName>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>2.6</version>
                     <inherited>true</inherited>
@@ -311,6 +318,15 @@
                         </delimiters>
                         <includeEmptyDirs>true</includeEmptyDirs>
                         <useDefaultDelimiters>false</useDefaultDelimiters>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.3</version>
+                    <inherited>true</inherited>
+                    <configuration combine.children="append">
+                        <archiveClasses>true</archiveClasses>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -377,6 +393,22 @@
                     <artifactId>properties-maven-plugin</artifactId>
                     <version>2.0.1</version>
                     <inherited>true</inherited>
+                    <executions>
+                        <execution>
+                            <id>read-pom-properties</id>
+                            <phase>initialize</phase>
+                            <goals>
+                                <goal>read-project-properties</goal>
+                            </goals>
+                            <inherited>true</inherited>
+                            <configuration>
+                                <locations>
+                                    <location>${project.parent.basedir}/pom.properties</location>
+                                    <location>${project.basedir}/pom.properties</location>
+                                </locations>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -418,34 +450,6 @@
             <properties>
                 <tomcat.manager.password />
             </properties>
-        </profile>
-        <profile>
-            <id>deploy-server</id>
-            <activation>
-                <property>
-                    <name>!skipTests</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.tomcat.maven</groupId>
-                        <artifactId>tomcat7-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>tomcat7-deploy1</id>
-                                <phase>install</phase>
-                                <goals>
-                                    <goal>deploy-only</goal>
-                                </goals>
-                                <configuration>
-                                    <path>/${project.deploy.server.context.1}</path>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
         </profile>
     </profiles>
 </project>
