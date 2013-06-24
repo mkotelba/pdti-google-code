@@ -1,4 +1,4 @@
-package gov.hhs.onc.pdti.actions;
+package gov.hhs.onc.pdti.client.actions;
 
 import gov.hhs.onc.pdti.ws.api.AttributeValueAssertion;
 import gov.hhs.onc.pdti.ws.api.BatchRequest;

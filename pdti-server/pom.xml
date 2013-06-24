@@ -38,6 +38,10 @@
             <artifactId>jaxb-impl</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.sun.xml.stream</groupId>
+            <artifactId>sjsxp</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.sun.xml.stream.buffer</groupId>
             <artifactId>streambuffer</artifactId>
         </dependency>
@@ -127,9 +131,18 @@
     </dependencies>
     
     <build>
-        <finalName>pdti-server</finalName>
+        <finalName>${project.artifactId}</finalName>
         
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>test-jar</id>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -174,6 +187,15 @@
                             <primaryArtifact>false</primaryArtifact>
                             <webappDirectory>${project.build.directory}/${project.build.finalName}-test</webappDirectory>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.kuali.maven.plugins</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>read-pom-properties</id>
                     </execution>
                 </executions>
             </plugin>
@@ -442,14 +464,46 @@
                             </execution>
                         </executions>
                     </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>deploy-server</id>
+            <activation>
+                <property>
+                    <name>!skipTests</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
                     <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-war-plugin</artifactId>
-                        <version>2.3</version>
-                        <inherited>true</inherited>
-                        <configuration combine.children="append">
-                            <archiveClasses>true</archiveClasses>
-                        </configuration>
+                        <groupId>org.apache.tomcat.maven</groupId>
+                        <artifactId>tomcat7-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>tomcat7-deploy1</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>deploy-only</goal>
+                                </goals>
+                                <configuration>
+                                    <path>/${project.deploy.server.context.1}</path>
+                                </configuration>
+                            </execution>
+                            <!-- TODO: implement multi-context federation handling -->
+                            <!--
+                            <execution>
+                                <id>tomcat7-deploy2</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>deploy</goal>
+                                </goals>
+                                <configuration>
+                                    <path>/${project.deploy.server.context.2}</path>
+                                </configuration>
+                            </execution>
+                            -->
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
