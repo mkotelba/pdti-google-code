@@ -1,8 +1,8 @@
 package gov.hhs.onc.pdti.ws.impl;
 
-import gov.hhs.onc.pdti.data.DirectoryType;
+import gov.hhs.onc.pdti.DirectoryStandard;
+import gov.hhs.onc.pdti.DirectoryStandardId;
 import gov.hhs.onc.pdti.service.DirectoryService;
-import gov.hhs.onc.pdti.springframework.beans.factory.annotation.DirectoryTypeQualifier;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusProviderInformationDirectoryPortType;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusRequest;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusResponse;
@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-@DirectoryTypeQualifier(DirectoryType.HPD_PLUS_PROPOSED)
+@DirectoryStandard(DirectoryStandardId.HPD_PLUS_PROPOSED)
 @Scope("singleton")
 @Service("hpdPlusProviderInfoDir")
 @SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
@@ -32,7 +32,7 @@ public class HpdPlusProviderInformationDirectoryImpl extends AbstractProviderInf
     }
 
     @Autowired
-    @DirectoryTypeQualifier(DirectoryType.HPD_PLUS_PROPOSED)
+    @DirectoryStandard(DirectoryStandardId.HPD_PLUS_PROPOSED)
     @Override
     protected void setDirectoryService(DirectoryService<HpdPlusRequest, HpdPlusResponse> dirService) {
         this.dirService = dirService;

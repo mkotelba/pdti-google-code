@@ -11,6 +11,7 @@ import org.apache.commons.lang3.text.StrBuilder;
 import org.apache.directory.ldap.client.api.LdapConnectionConfig;
 
 public class LdapDataSourceImpl implements LdapDataSource {
+    private boolean enabled = true;
     private LdapServerType type = LdapServerType.OTHER;
     private String host;
     private int port;
@@ -54,6 +55,16 @@ public class LdapDataSourceImpl implements LdapDataSource {
     @Override
     public void setCredentials(LdapCredentials credentials) {
         this.credentials = credentials;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.enabled;
+    }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override

@@ -1,8 +1,8 @@
 package gov.hhs.onc.pdti.error.impl;
 
-import gov.hhs.onc.pdti.data.DirectoryType;
+import gov.hhs.onc.pdti.DirectoryStandard;
+import gov.hhs.onc.pdti.DirectoryStandardId;
 import gov.hhs.onc.pdti.error.DirectoryErrorBuilder;
-import gov.hhs.onc.pdti.springframework.beans.factory.annotation.DirectoryTypeQualifier;
 import gov.hhs.onc.pdti.util.DirectoryUtils;
 import gov.hhs.onc.pdti.ws.api.ErrorResponse;
 import gov.hhs.onc.pdti.ws.api.ErrorResponse.Detail;
@@ -25,11 +25,11 @@ public class DirectoryErrorBuilderImpl implements DirectoryErrorBuilder {
     private final static boolean PDTI_DEBUG_DEFAULT = false;
 
     @Autowired
-    @DirectoryTypeQualifier(DirectoryType.IHE)
+    @DirectoryStandard(DirectoryStandardId.IHE)
     private ObjectFactory objectFactory;
 
     @Autowired
-    @DirectoryTypeQualifier(DirectoryType.HPD_PLUS_PROPOSED)
+    @DirectoryStandard(DirectoryStandardId.HPD_PLUS_PROPOSED)
     private gov.hhs.onc.pdti.ws.api.hpdplus.ObjectFactory hpdPlusObjectFactory;
 
     @Override

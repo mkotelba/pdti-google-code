@@ -1,31 +1,31 @@
 package gov.hhs.onc.pdti.data.federation.impl;
 
+import gov.hhs.onc.pdti.DirectoryStandard;
+import gov.hhs.onc.pdti.DirectoryStandardId;
+import gov.hhs.onc.pdti.DirectoryType;
+import gov.hhs.onc.pdti.DirectoryTypeId;
 import gov.hhs.onc.pdti.data.DirectoryDescriptor;
-import gov.hhs.onc.pdti.data.DirectoryType;
 import gov.hhs.onc.pdti.data.federation.DirectoryFederationException;
 import gov.hhs.onc.pdti.data.federation.FederationService;
-import gov.hhs.onc.pdti.service.interceptor.DirectoryRequestInterceptor;
-import gov.hhs.onc.pdti.service.interceptor.DirectoryResponseInterceptor;
-import gov.hhs.onc.pdti.springframework.beans.factory.annotation.DirectoryTypeQualifier;
+import gov.hhs.onc.pdti.interceptor.DirectoryRequestInterceptor;
+import gov.hhs.onc.pdti.interceptor.DirectoryResponseInterceptor;
 import gov.hhs.onc.pdti.ws.api.BatchRequest;
 import gov.hhs.onc.pdti.ws.api.BatchResponse;
 import gov.hhs.onc.pdti.ws.api.ErrorResponse.ErrorType;
 import gov.hhs.onc.pdti.ws.api.ObjectFactory;
 import gov.hhs.onc.pdti.ws.api.ProviderInformationDirectoryService;
 import java.util.List;
-import org.apache.log4j.Logger;
+import java.util.SortedSet;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-@DirectoryTypeQualifier(DirectoryType.IHE)
+@DirectoryStandard(DirectoryStandardId.IHE)
 @Scope("singleton")
 @Service("fedService")
 public class FederationServiceImpl extends AbstractFederationService<BatchRequest, BatchResponse> implements FederationService<BatchRequest, BatchResponse> {
-    private final static Logger LOGGER = Logger.getLogger(FederationServiceImpl.class);
-
     @Autowired
+    @DirectoryStandard(DirectoryStandardId.IHE)
     private ObjectFactory objectFactory;
 
     @Override
@@ -34,20 +34,7 @@ public class FederationServiceImpl extends AbstractFederationService<BatchReques
         BatchRequest fedBatchReq = (BatchRequest) batchReq.clone();
         BatchResponse fedBatchResp = this.objectFactory.createBatchResponse();
 
-        if (this.reqInterceptors != null) {
-            for (DirectoryRequestInterceptor reqInterceptor : this.reqInterceptors) {
-                LOGGER.trace("Intercepting federated DSML batch request (directoryId=" + fedDirId + ", requestId=" + reqId + ", class="
-                        + reqInterceptor.getClass().getName() + ").");
-
-                try {
-                    reqInterceptor.interceptRequest(fedDir, reqId, fedBatchReq);
-                } catch (Throwable th) {
-                    // TODO: improve error handling
-                    fedBatchResp.getBatchResponses().add(
-                            this.objectFactory.createBatchResponseErrorResponse(this.errBuilder.buildErrorResponse(reqId, ErrorType.OTHER, th)));
-                }
-            }
-        }
+        this.interceptRequests(fedDir, fedDirId, reqId, fedBatchReq, fedBatchResp);
 
         try {
             ProviderInformationDirectoryService fedDirService = new ProviderInformationDirectoryService(fedDir.getWsdlLocation());
@@ -59,29 +46,37 @@ public class FederationServiceImpl extends AbstractFederationService<BatchReques
                     this.objectFactory.createBatchResponseErrorResponse(this.errBuilder.buildErrorResponse(reqId, ErrorType.OTHER, th)));
         }
 
-        if (this.respInterceptors != null) {
-            for (DirectoryResponseInterceptor respInterceptor : this.respInterceptors) {
-                LOGGER.trace("Intercepting federated DSML batch response (directoryId=" + fedDirId + ", requestId=" + reqId + ", class="
-                        + respInterceptor.getClass().getName() + ").");
-
-                try {
-                    respInterceptor.interceptResponse(fedDir, reqId, fedBatchReq, fedBatchResp);
-                } catch (Throwable th) {
-                    // TODO: improve error handling
-                    fedBatchResp.getBatchResponses().add(
-                            this.objectFactory.createBatchResponseErrorResponse(this.errBuilder.buildErrorResponse(reqId, ErrorType.OTHER, th)));
-                }
-            }
-        }
+        this.interceptResponses(fedDir, fedDirId, reqId, fedBatchReq, fedBatchResp);
 
         return fedBatchResp;
     }
 
-    @Autowired(required = false)
-    @DirectoryTypeQualifier(DirectoryType.IHE)
-    @Qualifier("federated")
     @Override
-    protected void setFederatedDirs(List<DirectoryDescriptor> federatedDirs) {
-        this.federatedDirs = federatedDirs;
+    protected void addError(String fedDirId, String reqId, BatchResponse fedBatchResp, Throwable th) {
+        // TODO: improve error handling
+        fedBatchResp.getBatchResponses().add(
+                this.objectFactory.createBatchResponseErrorResponse(this.errBuilder.buildErrorResponse(reqId, ErrorType.OTHER, th)));
+    }
+
+    @Autowired(required = false)
+    @DirectoryStandard(DirectoryStandardId.IHE)
+    @DirectoryType(DirectoryTypeId.FEDERATED)
+    @Override
+    protected void setFederatedDirs(List<DirectoryDescriptor> fedDirs) {
+        this.fedDirs = fedDirs;
+    }
+
+    @Autowired(required = false)
+    @DirectoryStandard(DirectoryStandardId.IHE)
+    @Override
+    protected void setFederatedRequestInterceptors(SortedSet<DirectoryRequestInterceptor<BatchRequest>> fedReqInterceptors) {
+        this.fedReqInterceptors = fedReqInterceptors;
+    }
+
+    @Autowired(required = false)
+    @DirectoryStandard(DirectoryStandardId.IHE)
+    @Override
+    protected void setFederatedResponseInterceptors(SortedSet<DirectoryResponseInterceptor<BatchRequest, BatchResponse>> fedRespInterceptors) {
+        this.fedRespInterceptors = fedRespInterceptors;
     }
 }

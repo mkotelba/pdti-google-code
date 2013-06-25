@@ -4,6 +4,10 @@ import java.net.URL;
 import org.apache.directory.api.ldap.model.name.Dn;
 
 public interface DirectoryDescriptor {
+    public boolean isEnabled();
+
+    public void setEnabled(boolean enabled);
+
     public String getDirectoryId();
 
     public void setDirectoryId(String dirId);

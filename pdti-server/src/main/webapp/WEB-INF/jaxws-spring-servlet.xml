@@ -33,28 +33,19 @@
     
     <!-- Defining JAXB object factories as beans -->
     <beans:bean id="objectFactory" class="gov.hhs.onc.pdti.ws.api.ObjectFactory">
-        <beans:qualifier type="gov.hhs.onc.pdti.springframework.beans.factory.annotation.DirectoryTypeQualifier" value="IHE"/>
+        <beans:qualifier type="gov.hhs.onc.pdti.DirectoryStandard" value="IHE"/>
     </beans:bean>
     <beans:bean id="hpdPlusObjectFactory" class="gov.hhs.onc.pdti.ws.api.hpdplus.ObjectFactory">
-        <beans:qualifier type="gov.hhs.onc.pdti.springframework.beans.factory.annotation.DirectoryTypeQualifier" value="HPD_PLUS_PROPOSED"/>
+        <beans:qualifier type="gov.hhs.onc.pdti.DirectoryStandard" value="HPD_PLUS_PROPOSED"/>
     </beans:bean>
     
     <!-- Defining custom JAXB v2 marshaller -->
-    <beans:bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
-        <beans:property name="contextPaths">
-            <util:list>
-                <beans:value>gov.hhs.onc.pdti.ws.api</beans:value>
-                <beans:value>gov.hhs.onc.pdti.ws.api.hpdplus</beans:value>
-            </util:list>
-        </beans:property>
+    <beans:bean id="dirJaxb2Marshaller" class="gov.hhs.onc.pdti.jaxb.impl.DirectoryJaxb2MarshallerImpl"
+        p:checkForXmlRootElement="false"
+        p:contextPackages="#{ { objectFactory.class.package, hpdPlusObjectFactory.class.package } }">
         <beans:property name="marshallerProperties">
             <util:map>
-                <beans:entry>
-                    <beans:key>
-                        <util:constant static-field="javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT"/>
-                    </beans:key>
-                    <beans:value type="java.lang.Boolean">true</beans:value>
-                </beans:entry>
+                <beans:entry key="#{ T(javax.xml.bind.Marshaller).JAXB_FORMATTED_OUTPUT }" value="#{ true }"/>
             </util:map>
         </beans:property>
     </beans:bean>
@@ -70,16 +61,24 @@
     <!-- Defining web services -->
     <wss:binding url="/ProviderInformationDirectoryService">
         <wss:service>
-            <ws:service 
+            <ws:service
                 bean="#providerInfoDir"
-                bindingID="http://www.w3.org/2003/05/soap/bindings/HTTP/"/>
+                bindingID="http://www.w3.org/2003/05/soap/bindings/HTTP/">
+                <ws:handlers>
+                    <beans:ref bean="dirHandler"/>
+                </ws:handlers>
+            </ws:service>
         </wss:service>
     </wss:binding>
     <wss:binding url="/Hpd_Plus_ProviderInformationDirectoryService">
         <wss:service>
-            <ws:service 
+            <ws:service
                 bean="#hpdPlusProviderInfoDir"
-                bindingID="http://www.w3.org/2003/05/soap/bindings/HTTP/"/>
+                bindingID="http://www.w3.org/2003/05/soap/bindings/HTTP/">
+                <ws:handlers>
+                    <beans:ref bean="hpdPlusDirHandler"/>
+                </ws:handlers>
+            </ws:service>
         </wss:service>
     </wss:binding>
 </beans:beans>

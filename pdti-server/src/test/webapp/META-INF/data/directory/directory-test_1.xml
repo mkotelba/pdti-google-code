@@ -12,15 +12,15 @@
         p:directoryId="%{project.test.server.1.dir.id}"
         p:baseDn="%{project.test.server.1.dir.dn.base}"
         p:wsdlLocation="%{project.test.server.1.dir.wsdl.location}">
-        <beans:qualifier value="main"/>
-        <beans:qualifier type="gov.hhs.onc.pdti.springframework.beans.factory.annotation.DirectoryTypeQualifier" value="IHE"/>
+        <beans:qualifier type="gov.hhs.onc.pdti.DirectoryStandard" value="IHE"/>
+        <beans:qualifier type="gov.hhs.onc.pdti.DirectoryType" value="MAIN"/>
     </beans:bean>
     
     <beans:bean id="hpdPlusDirTest1" class="gov.hhs.onc.pdti.data.impl.DirectoryDescriptorImpl" parent="mainDir"
         p:directoryId="%{project.test.server.1.dir.id}"
         p:baseDn="%{project.test.server.1.dir.dn.base}"
         p:wsdlLocation="%{project.test.server.1.dir.wsdl.location.hpdplus}">
-        <beans:qualifier value="main"/>
-        <beans:qualifier type="gov.hhs.onc.pdti.springframework.beans.factory.annotation.DirectoryTypeQualifier" value="HPD_PLUS_PROPOSED"/>
+        <beans:qualifier type="gov.hhs.onc.pdti.DirectoryStandard" value="HPD_PLUS_PROPOSED"/>
+        <beans:qualifier type="gov.hhs.onc.pdti.DirectoryType" value="MAIN"/>
     </beans:bean>
 </beans:beans>

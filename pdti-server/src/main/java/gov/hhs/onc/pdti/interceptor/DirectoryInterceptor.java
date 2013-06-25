@@ -1,4 +1,4 @@
-package gov.hhs.onc.pdti.service.interceptor;
+package gov.hhs.onc.pdti.interceptor;
 
 public interface DirectoryInterceptor extends Comparable<DirectoryInterceptor> {
 }

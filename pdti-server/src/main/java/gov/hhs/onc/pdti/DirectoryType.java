@@ -1,6 +1,5 @@
-package gov.hhs.onc.pdti.springframework.beans.factory.annotation;
+package gov.hhs.onc.pdti;
 
-import gov.hhs.onc.pdti.data.DirectoryType;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
@@ -12,6 +11,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD, ElementType.METHOD, ElementType.TYPE })
-public @interface DirectoryTypeQualifier {
-    DirectoryType value() default DirectoryType.IHE;
+public @interface DirectoryType {
+    DirectoryTypeId value() default DirectoryTypeId.MAIN;
 }
