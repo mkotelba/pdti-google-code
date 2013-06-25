@@ -1,0 +1,4 @@
+.DS_Store
+target
+soapui.log
+soapui-errors.log

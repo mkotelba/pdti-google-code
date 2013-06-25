@@ -1,0 +1,28 @@
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>gov.hhs.onc.pdti</groupId>
+        <artifactId>pdti-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>pdti-parent</relativePath>
+    </parent>
+    
+    <artifactId>pdti-all</artifactId>
+    <packaging>pom</packaging>
+    
+    <name>pdti-all</name>
+    <description>Provider Directories Test Implementation (PDTI) aggregate project.</description>
+    <url>http://dev.provider-directories.com/pdti-all/</url>
+    
+    <modules>
+        <module>pdti-parent</module>
+        <module>pdti-ws</module>
+        <module>pdti-server</module>
+        <module>pdti-client</module>
+    </modules>
+</project>
