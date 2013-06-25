@@ -30,6 +30,10 @@
             <artifactId>annotations</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.ibm.icu</groupId>
             <artifactId>icu4j</artifactId>
         </dependency>
@@ -140,6 +144,26 @@
                 <executions>
                     <execution>
                         <id>test-jar</id>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/${project.build.finalName}-test/WEB-INF/lib</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>process-test-sources</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includeScope>test</includeScope>
+                            <outputDirectory>${project.build.directory}/${project.build.finalName}-test/WEB-INF/lib</outputDirectory>
+                            <silent>true</silent>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -148,7 +172,7 @@
                 <artifactId>maven-resources-plugin</artifactId>
                 <executions>
                     <execution>
-                        <phase>generate-test-resources</phase>
+                        <phase>process-test-resources</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>

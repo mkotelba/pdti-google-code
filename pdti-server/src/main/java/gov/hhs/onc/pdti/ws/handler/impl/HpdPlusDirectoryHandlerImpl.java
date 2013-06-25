@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component("hpdPlusDirHandler")
 @DirectoryStandard(DirectoryStandardId.HPD_PLUS_PROPOSED)
-@Scope("singleton")
+@Scope("prototype")
 public class HpdPlusDirectoryHandlerImpl extends AbstractDirectoryHandler<HpdPlusRequest, HpdPlusResponse> implements
         DirectoryHandler<HpdPlusRequest, HpdPlusResponse> {
 }

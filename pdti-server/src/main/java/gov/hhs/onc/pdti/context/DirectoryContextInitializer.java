@@ -40,6 +40,7 @@ public class DirectoryContextInitializer implements ApplicationContextInitialize
         CONTEXT_DATA_CONFIG_LOCS.put(new ImmutablePair<>("pdti.context.config.data.ldap", "pdtiContextConfigDataLdap"), "/META-INF/data/ldap/*.xml");
         CONTEXT_DATA_CONFIG_LOCS
                 .put(new ImmutablePair<>("pdti.context.config.data.federation", "pdtiContextDataFederation"), "/META-INF/data/federation/*.xml");
+        CONTEXT_DATA_CONFIG_LOCS.put(new ImmutablePair<>("pdti.context.config.ws.service", "pdtiContextWsService"), "/META-INF/ws/service/*.xml");
     }
 
     @Override

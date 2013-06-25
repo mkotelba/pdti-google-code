@@ -8,6 +8,13 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
     
+    <beans:bean id="dirReqCacheDefault" class="gov.hhs.onc.pdti.ws.handler.impl.DirectoryRequestCacheDescriptorImpl" parent="dirReqCacheDescriptor"
+        p:concurrencyLevel="10"
+        p:initialCapacity="50"
+        p:maximumSize="150">
+        <beans:qualifier type="gov.hhs.onc.pdti.DirectoryType" value="MAIN"/>
+    </beans:bean>
+    
     <beans:bean id="dirDefault" class="gov.hhs.onc.pdti.data.impl.DirectoryDescriptorImpl" parent="mainDir"
         p:directoryId="pdti-dir_#{ new java.util.Date().time }"
         p:baseDn="o=dev.provider-directories.com,dc=hpd"

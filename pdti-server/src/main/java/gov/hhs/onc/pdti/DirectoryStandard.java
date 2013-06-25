@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 @Inherited
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.TYPE })
+@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE })
 public @interface DirectoryStandard {
     DirectoryStandardId value() default DirectoryStandardId.IHE;
 }

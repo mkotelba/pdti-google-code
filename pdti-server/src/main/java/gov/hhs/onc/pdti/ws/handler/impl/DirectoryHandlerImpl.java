@@ -10,6 +10,6 @@ import org.springframework.stereotype.Component;
 
 @Component("dirHandler")
 @DirectoryStandard(DirectoryStandardId.IHE)
-@Scope("singleton")
+@Scope("prototype")
 public class DirectoryHandlerImpl extends AbstractDirectoryHandler<BatchRequest, BatchResponse> implements DirectoryHandler<BatchRequest, BatchResponse> {
 }
