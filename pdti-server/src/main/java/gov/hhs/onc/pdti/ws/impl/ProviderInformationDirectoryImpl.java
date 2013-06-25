@@ -1,8 +1,8 @@
 package gov.hhs.onc.pdti.ws.impl;
 
-import gov.hhs.onc.pdti.data.DirectoryType;
+import gov.hhs.onc.pdti.DirectoryStandard;
+import gov.hhs.onc.pdti.DirectoryStandardId;
 import gov.hhs.onc.pdti.service.DirectoryService;
-import gov.hhs.onc.pdti.springframework.beans.factory.annotation.DirectoryTypeQualifier;
 import gov.hhs.onc.pdti.ws.api.BatchRequest;
 import gov.hhs.onc.pdti.ws.api.BatchResponse;
 import gov.hhs.onc.pdti.ws.api.ProviderInformationDirectoryPortType;
@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-@DirectoryTypeQualifier(DirectoryType.IHE)
+@DirectoryStandard(DirectoryStandardId.IHE)
 @Scope("singleton")
 @Service("providerInfoDir")
 @SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
@@ -31,7 +31,7 @@ public class ProviderInformationDirectoryImpl extends AbstractProviderInformatio
     }
 
     @Autowired
-    @DirectoryTypeQualifier(DirectoryType.IHE)
+    @DirectoryStandard(DirectoryStandardId.IHE)
     @Override
     protected void setDirectoryService(DirectoryService<BatchRequest, BatchResponse> dirService) {
         this.dirService = dirService;

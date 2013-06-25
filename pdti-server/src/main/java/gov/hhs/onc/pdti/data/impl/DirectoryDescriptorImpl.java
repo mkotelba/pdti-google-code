@@ -5,6 +5,7 @@ import java.net.URL;
 import org.apache.directory.api.ldap.model.name.Dn;
 
 public class DirectoryDescriptorImpl implements DirectoryDescriptor {
+    private boolean enabled = true;
     private String dirId;
     private URL wsdlLoc;
     private Dn baseDn;
@@ -27,6 +28,16 @@ public class DirectoryDescriptorImpl implements DirectoryDescriptor {
     @Override
     public void setDirectoryId(String dirId) {
         this.dirId = dirId;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.enabled;
+    }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override

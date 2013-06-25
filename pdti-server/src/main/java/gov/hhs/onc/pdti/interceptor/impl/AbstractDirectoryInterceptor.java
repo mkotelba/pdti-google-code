@@ -1,6 +1,6 @@
-package gov.hhs.onc.pdti.service.interceptor.impl;
+package gov.hhs.onc.pdti.interceptor.impl;
 
-import gov.hhs.onc.pdti.service.interceptor.DirectoryInterceptor;
+import gov.hhs.onc.pdti.interceptor.DirectoryInterceptor;
 import org.springframework.core.annotation.Order;
 
 public class AbstractDirectoryInterceptor implements DirectoryInterceptor {

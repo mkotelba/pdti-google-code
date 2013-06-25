@@ -1,10 +1,10 @@
 package gov.hhs.onc.pdti.data.dsml.impl;
 
-import gov.hhs.onc.pdti.data.DirectoryType;
+import gov.hhs.onc.pdti.DirectoryStandard;
+import gov.hhs.onc.pdti.DirectoryStandardId;
 import gov.hhs.onc.pdti.data.dsml.DirectoryDsmlException;
 import gov.hhs.onc.pdti.data.dsml.DirectoryDsmlService;
 import gov.hhs.onc.pdti.jaxb.DirectoryJaxb2Marshaller;
-import gov.hhs.onc.pdti.springframework.beans.factory.annotation.DirectoryTypeQualifier;
 import gov.hhs.onc.pdti.ws.api.BatchRequest;
 import gov.hhs.onc.pdti.ws.api.BatchResponse;
 import gov.hhs.onc.pdti.ws.api.ObjectFactory;
@@ -23,24 +23,20 @@ public class DirectoryDsmlServiceImpl implements DirectoryDsmlService {
     private final static Logger LOGGER = Logger.getLogger(DirectoryDsmlServiceImpl.class);
 
     @Autowired
-    @DirectoryTypeQualifier(DirectoryType.IHE)
+    @DirectoryStandard(DirectoryStandardId.IHE)
     private ObjectFactory objectFactory;
 
     @Autowired
-    @DirectoryTypeQualifier(DirectoryType.HPD_PLUS_PROPOSED)
-    private gov.hhs.onc.pdti.ws.api.hpdplus.ObjectFactory hpdPlusObjectFactory;
-
-    @Autowired
-    private DirectoryJaxb2Marshaller jaxb2Marshaller;
+    private DirectoryJaxb2Marshaller dirJaxb2Marshaller;
 
     @Override
     public BatchResponse processDsml(Dsmlv2Engine dsmlEngine, BatchRequest batchReq) throws DirectoryDsmlException {
         try {
-            String batchReqStr = this.jaxb2Marshaller.marshal(this.objectFactory.createBatchRequest(batchReq));
+            String batchReqStr = this.dirJaxb2Marshaller.marshal(this.objectFactory.createBatchRequest(batchReq));
 
             LOGGER.debug("Processing DSML batch request (id=" + batchReq.getRequestId() + ").");
 
-            JAXBElement<BatchResponse> batchRespElement = (JAXBElement<BatchResponse>) this.jaxb2Marshaller.unmarshal(dsmlEngine.processDSML(batchReqStr));
+            JAXBElement<BatchResponse> batchRespElement = (JAXBElement<BatchResponse>) this.dirJaxb2Marshaller.unmarshal(dsmlEngine.processDSML(batchReqStr));
             BatchResponse batchResp = batchRespElement.getValue();
 
             LOGGER.debug("Processed DSML batch request (id=" + batchReq.getRequestId() + ") into DSML batch response (num="

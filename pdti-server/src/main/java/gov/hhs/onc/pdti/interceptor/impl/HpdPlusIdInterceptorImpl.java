@@ -1,11 +1,11 @@
-package gov.hhs.onc.pdti.service.interceptor.impl;
+package gov.hhs.onc.pdti.interceptor.impl;
 
+import gov.hhs.onc.pdti.DirectoryStandard;
+import gov.hhs.onc.pdti.DirectoryStandardId;
 import gov.hhs.onc.pdti.data.DirectoryDescriptor;
-import gov.hhs.onc.pdti.service.DirectoryServiceException;
-import gov.hhs.onc.pdti.service.interceptor.DirectoryRequestInterceptor;
-import gov.hhs.onc.pdti.service.interceptor.DirectoryResponseInterceptor;
-import gov.hhs.onc.pdti.util.DirectoryUtils;
-import gov.hhs.onc.pdti.ws.api.BatchRequest;
+import gov.hhs.onc.pdti.interceptor.DirectoryInterceptorException;
+import gov.hhs.onc.pdti.interceptor.DirectoryRequestInterceptor;
+import gov.hhs.onc.pdti.interceptor.DirectoryResponseInterceptor;
 import gov.hhs.onc.pdti.ws.api.BatchResponse;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusError;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusRequest;
@@ -14,31 +14,32 @@ import java.util.Collection;
 import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.PredicateUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-@Component("idInterceptor")
-@Order(0)
+@Component("hpdPlusIdInterceptor")
+@DirectoryStandard(DirectoryStandardId.HPD_PLUS_PROPOSED)
+@Order(100)
 @Scope("singleton")
-public class IdInterceptor extends AbstractDirectoryInterceptor implements DirectoryRequestInterceptor, DirectoryResponseInterceptor {
+public class HpdPlusIdInterceptorImpl extends AbstractDirectoryInterceptor implements DirectoryRequestInterceptor<HpdPlusRequest>,
+        DirectoryResponseInterceptor<HpdPlusRequest, HpdPlusResponse> {
+    @Autowired
+    private IdInterceptorImpl idInterceptor;
+
     @Override
-    public void interceptRequest(DirectoryDescriptor dirDesc, String reqId, HpdPlusRequest hpdPlusReq) throws DirectoryServiceException {
+    public void interceptRequest(DirectoryDescriptor dirDesc, String reqId, HpdPlusRequest hpdPlusReq) throws DirectoryInterceptorException {
         String dirId = dirDesc.getDirectoryId();
 
         hpdPlusReq.setDirectoryId(dirId);
 
-        this.interceptRequest(dirDesc, reqId, hpdPlusReq.getBatchRequest());
-    }
-
-    @Override
-    public void interceptRequest(DirectoryDescriptor dirDesc, String reqId, BatchRequest batchReq) throws DirectoryServiceException {
-        DirectoryUtils.setRequestId(batchReq, reqId);
+        this.idInterceptor.interceptRequest(dirDesc, reqId, hpdPlusReq.getBatchRequest());
     }
 
     @Override
     public void interceptResponse(DirectoryDescriptor dirDesc, String reqId, HpdPlusRequest hpdPlusReq, HpdPlusResponse hpdPlusResp)
-            throws DirectoryServiceException {
+            throws DirectoryInterceptorException {
         String dirId = dirDesc.getDirectoryId();
 
         hpdPlusResp.setDirectoryId(dirId);
@@ -56,13 +57,8 @@ public class IdInterceptor extends AbstractDirectoryInterceptor implements Direc
 
             for (BatchResponse batchResp : (Collection<BatchResponse>) CollectionUtils.select(respItems,
                     PredicateUtils.instanceofPredicate(BatchResponse.class))) {
-                this.interceptResponse(dirDesc, reqId, hpdPlusReq.getBatchRequest(), batchResp);
+                this.idInterceptor.interceptResponse(dirDesc, reqId, hpdPlusReq.getBatchRequest(), batchResp);
             }
         }
-    }
-
-    @Override
-    public void interceptResponse(DirectoryDescriptor dirDesc, String reqId, BatchRequest batchReq, BatchResponse batchResp) throws DirectoryServiceException {
-        DirectoryUtils.setRequestId(batchResp, reqId);
     }
 }
