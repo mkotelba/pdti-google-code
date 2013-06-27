@@ -27,6 +27,7 @@ public class ApacheDsInstance implements ApacheDsInstanceMBean {
     private final static String APACHEDS_READY_FILE_NAME = "apacheds.ready";
 
     private final static String APACHEDS_WORK_DIR_PROP_NAME = "workingDirectory";
+    private final static String APACHEDS_PART_FACTORY_CLASS_NAME_PROP_NAME = "apacheds.partition.factory";
 
     private final static String PDTI_TEST_APACHEDS_INSTANCE_DIR_PROP_NAME = "pdti.test.apacheds.instance.dir";
     private final static String PDTI_TEST_APACHEDS_LDAP_HOST_PROP_NAME = "pdti.test.apacheds.ldap.host";
@@ -52,6 +53,7 @@ public class ApacheDsInstance implements ApacheDsInstanceMBean {
 
         try {
             System.setProperty(APACHEDS_WORK_DIR_PROP_NAME, System.getProperty(PDTI_TEST_APACHEDS_INSTANCE_DIR_PROP_NAME));
+            System.setProperty(APACHEDS_PART_FACTORY_CLASS_NAME_PROP_NAME, JdbmPartitionFactory.class.getName());
 
             this.dirService = DSAnnotationProcessor.createDS(clazz.getAnnotation(CreateDS.class));
             PartitionFactory partFactory = new JdbmPartitionFactory();
@@ -126,5 +128,12 @@ public class ApacheDsInstance implements ApacheDsInstanceMBean {
     @Override
     public String getName() {
         return MBEAN_NAME;
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        this.stop();
+
+        super.finalize();
     }
 }

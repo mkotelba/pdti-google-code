@@ -22,6 +22,7 @@
             <var name="readyFile" value="${instanceDir}/run/apacheds.ready"/>
             <var name="logDir" value="${project.test.log.dir}"/>
             <var name="logFileBasename" value="pdti-apacheds-@{ldapHost}-@{ldapPort}_@{instance}"/>
+            <mkdir dir="${project.build.directory}/apacheds"/>
             <mkdir dir="${logDir}"/>
             <java
                 classname="gov.hhs.onc.pdti.test.ldap.ApacheDsInstanceRunner"

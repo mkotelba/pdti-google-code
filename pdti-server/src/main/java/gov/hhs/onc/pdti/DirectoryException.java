@@ -5,15 +5,15 @@ public class DirectoryException extends Exception {
         super();
     }
 
-    public DirectoryException(String str) {
-        super(str);
+    public DirectoryException(String msg) {
+        super(msg);
     }
 
-    public DirectoryException(String str, Throwable throwable) {
-        super(str, throwable);
+    public DirectoryException(String msg, Throwable cause) {
+        super(msg, cause);
     }
 
-    public DirectoryException(Throwable throwable) {
-        super(throwable);
+    public DirectoryException(Throwable cause) {
+        super(cause);
     }
 }

@@ -1,6 +1,6 @@
 package gov.hhs.onc.pdti;
 
-public enum DirectoryTypeId {
+public enum DirectoryTypeId implements DirectoryEnumId {
     MAIN("main"), FEDERATED("federated");
 
     private String id;
@@ -14,6 +14,7 @@ public enum DirectoryTypeId {
         return this.id;
     }
 
+    @Override
     public String getId() {
         return this.id;
     }
