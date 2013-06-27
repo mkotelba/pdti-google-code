@@ -97,7 +97,7 @@ public class LdapDataServiceImpl extends AbstractDataService<LdapDataSource> imp
     private static boolean connectAndBind(LdapDataSource dataSource, LdapConnection ldapConn) throws DirectoryLdapException {
         try {
             ldapConn.connect();
-        } catch (IOException | LdapException e) {
+        } catch (LdapException e) {
             throw new DirectoryLdapException("Unable to connect to LDAP data source (" + dataSource + ").", e);
         }
 
@@ -111,7 +111,7 @@ public class LdapDataServiceImpl extends AbstractDataService<LdapDataSource> imp
 
                 ldapConn.bind();
             }
-        } catch (IOException | LdapException e) {
+        } catch (LdapException e) {
             throw new DirectoryLdapException("Unable to bind to LDAP data source (" + dataSource + ").", e);
         }
 

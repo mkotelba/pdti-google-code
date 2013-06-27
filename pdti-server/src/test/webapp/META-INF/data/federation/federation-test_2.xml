@@ -15,6 +15,7 @@
         p:wsdlLocation="%{project.test.server.1.dir.wsdl.location}">
         <beans:qualifier type="gov.hhs.onc.pdti.DirectoryStandard" value="IHE"/>
         <beans:qualifier type="gov.hhs.onc.pdti.DirectoryType" value="FEDERATED"/>
+        <beans:qualifier type="gov.hhs.onc.pdti.test.DirectoryTestType" value="FEDERATION_LOOP"/>
     </beans:bean>
     
     <beans:bean id="hpdPlusFederatedDirTest2" class="gov.hhs.onc.pdti.data.impl.DirectoryDescriptorImpl" parent="federatedDir"
@@ -24,5 +25,6 @@
         p:wsdlLocation="%{project.test.server.1.dir.wsdl.location.hpdplus}">
         <beans:qualifier type="gov.hhs.onc.pdti.DirectoryStandard" value="HPD_PLUS_PROPOSED"/>
         <beans:qualifier type="gov.hhs.onc.pdti.DirectoryType" value="FEDERATED"/>
+        <beans:qualifier type="gov.hhs.onc.pdti.test.DirectoryTestType" value="FEDERATION_LOOP"/>
     </beans:bean>
 </beans:beans>

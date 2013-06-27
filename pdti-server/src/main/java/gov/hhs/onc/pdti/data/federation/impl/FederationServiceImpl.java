@@ -11,11 +11,13 @@ import gov.hhs.onc.pdti.interceptor.DirectoryRequestInterceptor;
 import gov.hhs.onc.pdti.interceptor.DirectoryResponseInterceptor;
 import gov.hhs.onc.pdti.ws.api.BatchRequest;
 import gov.hhs.onc.pdti.ws.api.BatchResponse;
+import gov.hhs.onc.pdti.ws.api.ErrorResponse;
 import gov.hhs.onc.pdti.ws.api.ErrorResponse.ErrorType;
 import gov.hhs.onc.pdti.ws.api.ObjectFactory;
 import gov.hhs.onc.pdti.ws.api.ProviderInformationDirectoryService;
 import java.util.List;
 import java.util.SortedSet;
+import javax.xml.ws.soap.SOAPFaultException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -41,9 +43,7 @@ public class FederationServiceImpl extends AbstractFederationService<BatchReques
 
             fedBatchResp = fedDirService.getProviderInformationDirectoryPortSoap().providerInformationQueryRequest(fedBatchReq);
         } catch (Throwable th) {
-            // TODO: improve error handling
-            fedBatchResp.getBatchResponses().add(
-                    this.objectFactory.createBatchResponseErrorResponse(this.errBuilder.buildErrorResponse(reqId, ErrorType.OTHER, th)));
+            this.addError(fedDirId, reqId, fedBatchResp, th);
         }
 
         this.interceptResponses(fedDir, fedDirId, reqId, fedBatchReq, fedBatchResp);
@@ -51,11 +51,24 @@ public class FederationServiceImpl extends AbstractFederationService<BatchReques
         return fedBatchResp;
     }
 
+    // TODO: improve error handling
     @Override
     protected void addError(String fedDirId, String reqId, BatchResponse fedBatchResp, Throwable th) {
-        // TODO: improve error handling
-        fedBatchResp.getBatchResponses().add(
-                this.objectFactory.createBatchResponseErrorResponse(this.errBuilder.buildErrorResponse(reqId, ErrorType.OTHER, th)));
+        Class<? extends Throwable> thClass = th.getClass();
+        ErrorResponse errResp = null;
+
+        if (SOAPFaultException.class.isAssignableFrom(thClass)) {
+            if (this.isFederationLoopSoapFault((SOAPFaultException) th)) {
+                // TODO: add error customization
+                errResp = this.errBuilder.buildErrorResponse(reqId, ErrorType.OTHER, th);
+            }
+        }
+
+        if (errResp == null) {
+            errResp = this.errBuilder.buildErrorResponse(reqId, ErrorType.OTHER, th);
+        }
+
+        fedBatchResp.getBatchResponses().add(this.objectFactory.createBatchResponseErrorResponse(errResp));
     }
 
     @Autowired(required = false)

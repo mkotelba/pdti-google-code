@@ -11,8 +11,10 @@ import gov.hhs.onc.pdti.jaxb.DirectoryJaxb2Marshaller;
 import gov.hhs.onc.pdti.ws.handler.DirectoryHandler;
 import gov.hhs.onc.pdti.ws.handler.DirectoryHandlerException;
 import gov.hhs.onc.pdti.ws.handler.DirectoryRequestCacheDescriptor;
+import gov.hhs.onc.pdti.ws.handler.FederationLoopException;
 import java.util.Date;
 import java.util.concurrent.Semaphore;
+import javax.xml.bind.JAXBElement;
 import javax.xml.ws.LogicalMessage;
 import javax.xml.ws.handler.LogicalMessageContext;
 import javax.xml.ws.handler.MessageContext;
@@ -23,47 +25,64 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.ws.soap.server.endpoint.annotation.SoapFault;
 
-public abstract class AbstractDirectoryHandler<T, U> implements DirectoryHandler<T, U>, RemovalListener<MessageContext, Date> {
+public abstract class AbstractDirectoryHandler<T, U> implements DirectoryHandler<T, U>, RemovalListener<String, Date> {
     protected final static Semaphore DIR_REQ_CACHE_LOCK = new Semaphore(1, true);
 
-    protected static Cache<MessageContext, Date> dirReqCache;
+    protected static Cache<String, Date> dirReqCache;
 
     @Autowired
     protected DirectoryJaxb2Marshaller dirJaxb2Marshaller;
 
     @Autowired
     @DirectoryType(DirectoryTypeId.MAIN)
-    DirectoryRequestCacheDescriptor dirReqCacheDesc;
+    protected DirectoryRequestCacheDescriptor dirReqCacheDesc;
+
+    protected Class<T> reqClass;
+    protected Class<U> respClass;
 
     private final static Logger LOGGER = Logger.getLogger(AbstractDirectoryHandler.class);
 
-    public synchronized void registerRequest(MessageContext msgContext) throws DirectoryHandlerException {
-        this.checkDirectoryRequestCache(msgContext);
+    protected AbstractDirectoryHandler(Class<T> reqClass, Class<U> respClass) {
+        this.reqClass = reqClass;
+        this.respClass = respClass;
+    }
+
+    public synchronized void registerRequest(String reqId) throws DirectoryHandlerException {
+        if (StringUtils.isBlank(reqId)) {
+            return;
+        }
+
+        this.checkDirectoryRequestCache();
 
         Date reqDate;
 
-        if ((reqDate = dirReqCache.getIfPresent(msgContext)) != null) {
-            throw new DirectoryHandlerException("Directory federation loop detected - request (msgContext=" + msgContext + ", requestDate=" + reqDate
+        if ((reqDate = dirReqCache.getIfPresent(reqId)) != null) {
+            throw new FederationLoopException("Directory federation loop detected - request (requestId=" + reqId + ", requestDate=" + reqDate
                     + ") was already registered.");
         }
 
         reqDate = new Date();
 
-        dirReqCache.put(msgContext, reqDate);
+        dirReqCache.put(reqId, reqDate);
 
-        LOGGER.trace("Registered directory request (msgContext=" + msgContext + ", requestDate=" + reqDate + ").");
+        LOGGER.trace("Registered directory request (requestId=" + reqId + ", requestDate=" + reqDate + ").");
     }
 
-    public synchronized void releaseRequest(MessageContext msgContext) {
-        this.checkDirectoryRequestCache(msgContext);
+    public synchronized void releaseRequest(String reqId) {
+        if (StringUtils.isBlank(reqId)) {
+            return;
+        }
 
-        dirReqCache.invalidate(msgContext);
+        this.checkDirectoryRequestCache();
+
+        dirReqCache.invalidate(reqId);
     }
 
     @Scheduled(fixedDelayString = "#{ dirReqCacheDescriptor.cleanUpInterval }")
-    public synchronized void cleanUpRequests(MessageContext msgContext) {
-        this.checkDirectoryRequestCache(msgContext);
+    public synchronized void cleanUpRequests() {
+        this.checkDirectoryRequestCache();
 
         dirReqCache.cleanUp();
 
@@ -75,8 +94,8 @@ public abstract class AbstractDirectoryHandler<T, U> implements DirectoryHandler
         dirReqCacheStats.minus(dirReqCacheStats);
     }
 
-    public synchronized void onRemoval(RemovalNotification<MessageContext, Date> notification) {
-        LOGGER.trace("Released directory request (msgContext=" + notification.getKey() + ", requestDate=" + notification.getValue() + ") from registry: cause="
+    public synchronized void onRemoval(RemovalNotification<String, Date> notification) {
+        LOGGER.trace("Released directory request (requestId=" + notification.getKey() + ", requestDate=" + notification.getValue() + ") from registry: cause="
                 + notification.getCause());
     }
 
@@ -84,13 +103,24 @@ public abstract class AbstractDirectoryHandler<T, U> implements DirectoryHandler
     public boolean handleMessage(LogicalMessageContext logicalMsgContext) {
         try {
             if (this.isRequest(logicalMsgContext)) {
-                this.registerRequest(logicalMsgContext);
+                this.registerRequest(this.getRequestId(logicalMsgContext, logicalMsgContext.getMessage(), this.reqClass));
             } else if (this.isResponse(logicalMsgContext)) {
-                // TODO: implement
+                this.releaseRequest(this.getRequestId(logicalMsgContext, logicalMsgContext.getMessage(), this.respClass));
+            }
+        } catch (RuntimeException e) {
+            if (e.getClass().getAnnotation(SoapFault.class) != null) {
+                throw e;
+            } else {
+                // TODO: improve error handling
+                LOGGER.error("Unable to handle directory message in context: {" + StringUtils.join(logicalMsgContext) + "}", e);
+
+                return false;
             }
         } catch (Throwable th) {
             // TODO: improve error handling
             LOGGER.error("Unable to handle directory message in context: {" + StringUtils.join(logicalMsgContext) + "}", th);
+
+            return false;
         }
 
         return true;
@@ -107,15 +137,14 @@ public abstract class AbstractDirectoryHandler<T, U> implements DirectoryHandler
     public void close(MessageContext msgContext) {
         LOGGER.trace("Closing directory handler message context: {" + StringUtils.join(msgContext) + "}");
 
-        this.releaseRequest(msgContext);
-        this.cleanUpRequests(msgContext);
+        this.cleanUpRequests();
     }
 
-    protected synchronized void checkDirectoryRequestCache(MessageContext msgContext) {
+    protected synchronized void checkDirectoryRequestCache() {
         try {
             DIR_REQ_CACHE_LOCK.acquire();
 
-            dirReqCache = this.createCache(msgContext);
+            dirReqCache = (dirReqCache != null) ? dirReqCache : this.createCache();
         } catch (InterruptedException e) {
             LOGGER.error("Directory request handler thread interrupted.", e);
 
@@ -125,8 +154,8 @@ public abstract class AbstractDirectoryHandler<T, U> implements DirectoryHandler
         }
     }
 
-    protected synchronized Cache<MessageContext, Date> createCache(MessageContext msgContext) {
-        Cache<MessageContext, Date> dirReqCache = CacheBuilder.from(dirReqCacheDesc.toCacheBuilderSpecString()).recordStats().removalListener(this).build();
+    protected synchronized Cache<String, Date> createCache() {
+        Cache<String, Date> dirReqCache = CacheBuilder.from(dirReqCacheDesc.toCacheBuilderSpecString()).recordStats().removalListener(this).build();
 
         LOGGER.debug("Directory request cache initialized: " + dirReqCache);
 
@@ -169,6 +198,11 @@ public abstract class AbstractDirectoryHandler<T, U> implements DirectoryHandler
 
             Class<?> payloadClass = payload.getClass();
 
+            if (JAXBElement.class.isAssignableFrom(payloadClass)) {
+                payloadClass = ((JAXBElement<?>) payload).getDeclaredType();
+                payload = ((JAXBElement<?>) payload).getValue();
+            }
+
             if (!payloadMsgClass.isAssignableFrom(payloadClass)) {
                 throw new DirectoryHandlerException("Directory message payload is an unknown type (expected=" + payloadMsgClass.getName() + "): "
                         + payloadClass.getName());
@@ -176,7 +210,11 @@ public abstract class AbstractDirectoryHandler<T, U> implements DirectoryHandler
 
             return payloadMsgClass.cast(payload);
         } catch (Throwable th) {
-            throw new DirectoryHandlerException("");
+            // TODO: improve error handling
+            throw new DirectoryHandlerException(th);
         }
     }
+
+    protected abstract <V> String getRequestId(LogicalMessageContext logicalMsgContext, LogicalMessage logicalMsg, Class<V> payloadClass)
+            throws DirectoryHandlerException;
 }

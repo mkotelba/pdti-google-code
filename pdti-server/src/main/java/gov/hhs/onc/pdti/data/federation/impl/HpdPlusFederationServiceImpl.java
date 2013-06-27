@@ -9,6 +9,7 @@ import gov.hhs.onc.pdti.data.federation.DirectoryFederationException;
 import gov.hhs.onc.pdti.data.federation.FederationService;
 import gov.hhs.onc.pdti.interceptor.DirectoryRequestInterceptor;
 import gov.hhs.onc.pdti.interceptor.DirectoryResponseInterceptor;
+import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusError;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusErrorType;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusProviderInformationDirectoryService;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusRequest;
@@ -16,6 +17,7 @@ import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusResponse;
 import gov.hhs.onc.pdti.ws.api.hpdplus.ObjectFactory;
 import java.util.List;
 import java.util.SortedSet;
+import javax.xml.ws.soap.SOAPFaultException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -42,9 +44,7 @@ public class HpdPlusFederationServiceImpl extends AbstractFederationService<HpdP
 
             fedHpdPlusResp = fedHpdPlusDirService.getHpdPlusProviderInformationDirectoryPortSoap().hpdPlusProviderInformationQueryRequest(fedHpdPlusReq);
         } catch (Throwable th) {
-            // TODO: improve error handling
-            fedHpdPlusResp.getErrors()
-                    .add(this.errBuilder.buildError(fedHpdPlusReq.getDirectoryId(), fedHpdPlusReq.getRequestId(), HpdPlusErrorType.OTHER, th));
+            this.addError(fedDirId, reqId, fedHpdPlusResp, th);
         }
 
         this.interceptResponses(fedDir, fedDirId, reqId, fedHpdPlusReq, fedHpdPlusResp);
@@ -52,10 +52,23 @@ public class HpdPlusFederationServiceImpl extends AbstractFederationService<HpdP
         return fedHpdPlusResp;
     }
 
+    // TODO: improve error handling
     @Override
     protected void addError(String fedDirId, String reqId, HpdPlusResponse fedHpdPlusResp, Throwable th) {
-        // TODO: improve error handling
-        fedHpdPlusResp.getErrors().add(this.errBuilder.buildError(fedDirId, reqId, HpdPlusErrorType.OTHER, th));
+        Class<? extends Throwable> thClass = th.getClass();
+        HpdPlusError hpdPlusErr = null;
+
+        if (SOAPFaultException.class.isAssignableFrom(thClass)) {
+            if (this.isFederationLoopSoapFault((SOAPFaultException) th)) {
+                hpdPlusErr = this.errBuilder.buildError(fedDirId, reqId, HpdPlusErrorType.FEDERATION_LOOP, th);
+            }
+        }
+
+        if (hpdPlusErr == null) {
+            hpdPlusErr = this.errBuilder.buildError(fedDirId, reqId, HpdPlusErrorType.OTHER, th);
+        }
+
+        fedHpdPlusResp.getErrors().add(hpdPlusErr);
     }
 
     @Autowired(required = false)

@@ -1,6 +1,6 @@
 package gov.hhs.onc.pdti;
 
-public enum DirectoryStandardId {
+public enum DirectoryStandardId implements DirectoryEnumId {
     IHE("ihe"), HPD_PLUS_PROPOSED("hpd_plus_proposed");
 
     private String id;
@@ -14,6 +14,7 @@ public enum DirectoryStandardId {
         return this.id;
     }
 
+    @Override
     public String getId() {
         return this.id;
     }
