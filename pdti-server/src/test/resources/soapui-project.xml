@@ -2656,7 +2656,7 @@ for (i in responseIDs){
                         <con:configuration><scriptText>def groovyUtils = new com.eviware.soapui.support.GroovyUtils(context);
 def response = groovyUtils.getXmlHolder(messageExchange.getResponseContentAsXml());
 
-assert(response["//dsml:errorResponse/dsml:message/text()"].contains("Directory federation loop detected"));
+assert(response["//dsml:errorResponse/dsml:message/text()"].join("\n").contains("Directory federation loop detected"));
                         </scriptText></con:configuration>
                     </con:assertion>
 <con:credentials>

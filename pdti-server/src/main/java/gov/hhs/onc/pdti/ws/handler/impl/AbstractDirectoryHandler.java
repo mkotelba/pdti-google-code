@@ -190,7 +190,7 @@ public abstract class AbstractDirectoryHandler<T, U> implements DirectoryHandler
 
     protected <V> V getPayload(LogicalMessageContext logicalMsgContext, LogicalMessage logicalMsg, Class<V> payloadMsgClass) throws DirectoryHandlerException {
         try {
-            Object payload = this.dirJaxb2Marshaller.unmarshal(logicalMsg.getPayload());
+            Object payload = logicalMsg.getPayload(dirJaxb2Marshaller.getJaxbContext());
 
             if (payload == null) {
                 throw new DirectoryHandlerException("Directory message payload is empty: {" + StringUtils.join(logicalMsgContext) + "}");

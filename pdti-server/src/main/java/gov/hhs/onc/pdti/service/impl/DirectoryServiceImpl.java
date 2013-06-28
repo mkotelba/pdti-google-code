@@ -20,6 +20,7 @@ import java.util.SortedSet;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.oxm.XmlMappingException;
 import org.springframework.stereotype.Service;
 
 @DirectoryStandard(DirectoryStandardId.IHE)
@@ -39,44 +40,55 @@ public class DirectoryServiceImpl extends AbstractDirectoryService<BatchRequest,
 
         this.interceptRequests(dirDesc, dirId, reqId, batchReq, batchResp);
 
-        LOGGER.debug("Processing DSML batch request (directoryId=" + dirId + ", requestId=" + reqId + ").");
-        LOGGER.trace("Processing DSML batch request (directoryId=" + dirId + ", requestId=" + reqId + "):\n"
-                + this.dirJaxb2Marshaller.marshal(this.objectFactory.createBatchRequest(batchReq)));
+        try {
+            String batchReqStr = this.dirJaxb2Marshaller.marshal(this.objectFactory.createBatchRequest(batchReq));
 
-        if (this.dataServices != null) {
-            for (DirectoryDataService<?> dataService : this.dataServices) {
-                try {
-                    combineBatchResponses(batchResp, dataService.processData(batchReq));
-                } catch (Throwable th) {
-                    // TODO: improve error handling
-                    batchResp.getBatchResponses().add(
-                            this.objectFactory.createBatchResponseErrorResponse(this.errBuilder.buildErrorResponse(reqId, ErrorType.OTHER, th)));
+            if (LOGGER.isTraceEnabled()) {
+                LOGGER.trace("Processing DSML batch request (directoryId=" + dirId + ", requestId=" + reqId + "):\n" + batchReqStr);
+            } else if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Processing DSML batch request (directoryId=" + dirId + ", requestId=" + reqId + ").");
+            }
+
+            if (this.dataServices != null) {
+                for (DirectoryDataService<?> dataService : this.dataServices) {
+                    try {
+                        combineBatchResponses(batchResp, dataService.processData(batchReq));
+                    } catch (Throwable th) {
+                        this.addError(dirId, reqId, batchResp, th);
+                    }
                 }
             }
-        }
 
-        try {
-            combineBatchResponses(batchResp, this.fedService.federate(batchReq));
-        } catch (Throwable th) {
-            // TODO: improve error handling
-            batchResp.getBatchResponses().add(
-                    this.objectFactory.createBatchResponseErrorResponse(this.errBuilder.buildErrorResponse(reqId, ErrorType.OTHER, th)));
+            try {
+                combineBatchResponses(batchResp, this.fedService.federate(batchReq));
+            } catch (Throwable th) {
+                this.addError(dirId, reqId, batchResp, th);
+            }
+        } catch (XmlMappingException e) {
+            this.addError(dirId, reqId, batchResp, e);
         }
 
         this.interceptResponses(dirDesc, dirId, reqId, batchReq, batchResp);
 
-        LOGGER.debug("Processed DSML batch request (directoryId=" + dirId + ", requestId=" + reqId + ") into DSML batch response.");
-        LOGGER.trace("Processed DSML batch request (directoryId=" + dirId + ", requestId=" + reqId + ") into DSML batch response:\n"
-                + this.dirJaxb2Marshaller.marshal(this.objectFactory.createBatchResponse(batchResp)));
+        try {
+            String batchRespStr = this.dirJaxb2Marshaller.marshal(this.objectFactory.createBatchResponse(batchResp));
+
+            if (LOGGER.isTraceEnabled()) {
+                LOGGER.trace("Processed DSML batch request (directoryId=" + dirId + ", requestId=" + reqId + ") into DSML batch response:\n" + batchRespStr);
+            } else if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Processed DSML batch request (directoryId=" + dirId + ", requestId=" + reqId + ") into DSML batch response.");
+            }
+        } catch (XmlMappingException e) {
+            this.addError(dirId, reqId, batchResp, e);
+        }
 
         return batchResp;
     }
 
     @Override
-    protected void addError(String fedDirId, String reqId, BatchResponse fedBatchResp, Throwable th) {
+    protected void addError(String dirId, String reqId, BatchResponse batchResp, Throwable th) {
         // TODO: improve error handling
-        fedBatchResp.getBatchResponses().add(
-                this.objectFactory.createBatchResponseErrorResponse(this.errBuilder.buildErrorResponse(reqId, ErrorType.OTHER, th)));
+        batchResp.getBatchResponses().add(this.objectFactory.createBatchResponseErrorResponse(this.errBuilder.buildErrorResponse(reqId, ErrorType.OTHER, th)));
     }
 
     private static void combineBatchResponses(BatchResponse batchResp, List<BatchResponse> batchRespCombine) {

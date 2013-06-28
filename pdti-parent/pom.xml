@@ -393,6 +393,7 @@
                         <extension>true</extension>
                         <xadditionalHeaders>true</xadditionalHeaders>
                         <xjcArgs>
+                            <xjcArg>-npa</xjcArg>
                             <xjcArg>-Xannotate</xjcArg>
                             <xjcArg>-Xcopyable</xjcArg>
                             <xjcArg>-Xinheritance</xjcArg>

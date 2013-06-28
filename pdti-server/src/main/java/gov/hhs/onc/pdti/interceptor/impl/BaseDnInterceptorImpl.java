@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 
 @Component("baseDnInterceptor")
 @DirectoryStandard(DirectoryStandardId.IHE)
-@Order(200)
+@Order(101)
 @Scope("singleton")
 public class BaseDnInterceptorImpl extends AbstractDirectoryInterceptor implements DirectoryRequestInterceptor<BatchRequest> {
     @Override

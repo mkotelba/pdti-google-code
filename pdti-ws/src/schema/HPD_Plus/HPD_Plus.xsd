@@ -116,7 +116,7 @@
         </xsd:annotation>
         <xsd:simpleContent>
             <xsd:extension base="xsd:token">
-                <xsd:attribute name="name" type="HpdPlusMetadataPropertyName"/>
+                <xsd:attribute name="name" type="HpdPlusMetadataPropertyName" use="required"/>
             </xsd:extension>
         </xsd:simpleContent>
     </xsd:complexType>

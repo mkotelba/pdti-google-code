@@ -14,11 +14,11 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-@Component("validityInterceptor")
+@Component("policyInterceptor")
 @DirectoryStandard(DirectoryStandardId.IHE)
-@Order(300)
+@Order(200)
 @Scope("singleton")
-public class ValidityInterceptorImpl extends AbstractDirectoryInterceptor implements DirectoryRequestInterceptor<BatchRequest> {
+public class PolicyInterceptorImpl extends AbstractDirectoryInterceptor implements DirectoryRequestInterceptor<BatchRequest> {
     private final static Class<? extends DsmlMessage>[] VALID_REQ_MSG_CLASSES = ArrayUtils.toArray(SearchRequest.class);
 
     @Override
