@@ -97,11 +97,11 @@ public class ApacheDsInstanceRunner {
 
     @Override
     protected void finalize() throws Throwable {
-        super.finalize();
-
         if (this.jmxConn != null) {
             this.jmxConn.close();
         }
+
+        super.finalize();
     }
 
     private void start() throws InstanceAlreadyExistsException, IOException, MBeanRegistrationException, NotCompliantMBeanException {

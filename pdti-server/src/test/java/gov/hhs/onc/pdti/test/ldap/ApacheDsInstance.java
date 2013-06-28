@@ -18,7 +18,7 @@ import org.apache.directory.server.protocol.shared.transport.TcpTransport;
 import org.apache.directory.server.protocol.shared.transport.Transport;
 import org.apache.log4j.Logger;
 
-@ApplyLdifFiles({ "ldap/schema/pkcs9.ldif", "ldap/schema/hc.ldif", "ldap/schema/hpd_plus.ldif" })
+@ApplyLdifFiles({ "META-INF/ldap/schema/pkcs9.ldif", "META-INF/ldap/schema/hc.ldif", "META-INF/ldap/schema/hpd_plus.ldif" })
 @CreateDS(name = "pdtiDs", allowAnonAccess = true)
 @CreateLdapServer(name = "pdtiLdap", allowAnonymousAccess = true, transports = { @CreateTransport(protocol = "LDAP") })
 public class ApacheDsInstance implements ApacheDsInstanceMBean {
@@ -132,7 +132,12 @@ public class ApacheDsInstance implements ApacheDsInstanceMBean {
 
     @Override
     protected void finalize() throws Throwable {
-        this.stop();
+        try {
+            this.stop();
+        } catch (Throwable th) {
+            // TODO: improve error handling
+            LOGGER.error(th);
+        }
 
         super.finalize();
     }

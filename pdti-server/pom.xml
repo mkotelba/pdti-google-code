@@ -22,6 +22,18 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>pdti-ldap</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>pdti-ldap</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+            <type>test-jar</type>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>pdti-ws</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -140,18 +152,6 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>test-jar</id>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/${project.build.finalName}-test/WEB-INF/lib</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
@@ -163,6 +163,18 @@
                             <includeScope>test</includeScope>
                             <outputDirectory>${project.build.directory}/${project.build.finalName}-test/WEB-INF/lib</outputDirectory>
                             <silent>true</silent>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>test-jar</id>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/${project.build.finalName}-test/WEB-INF/lib</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>

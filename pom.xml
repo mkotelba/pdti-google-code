@@ -21,6 +21,7 @@
     
     <modules>
         <module>pdti-parent</module>
+        <module>pdti-ldap</module>
         <module>pdti-ws</module>
         <module>pdti-server</module>
         <module>pdti-client</module>
