@@ -22,6 +22,7 @@ import java.util.SortedSet;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.oxm.XmlMappingException;
 import org.springframework.stereotype.Service;
 
 @DirectoryStandard(DirectoryStandardId.HPD_PLUS_PROPOSED)
@@ -48,33 +49,47 @@ public class HpdPlusDirectoryServiceImpl extends AbstractDirectoryService<HpdPlu
 
         this.interceptRequests(dirDesc, dirId, reqId, hpdPlusReq, hpdPlusResp);
 
-        LOGGER.debug("Processing HPD Plus request (directoryId=" + dirId + ", requestId=" + reqId + ").");
-        LOGGER.trace("Processing HPD Plus request (directoryId=" + dirId + ", requestId=" + reqId + "):\n"
-                + this.dirJaxb2Marshaller.marshal(this.hpdPlusObjectFactory.createHpdPlusRequest(hpdPlusReq)));
+        try {
+            String hpdPlusReqStr = this.dirJaxb2Marshaller.marshal(this.hpdPlusObjectFactory.createHpdPlusRequest(hpdPlusReq));
 
-        if (this.dataServices != null) {
-            for (DirectoryDataService<?> dataService : this.dataServices) {
-                try {
-                    hpdPlusResp.getResponseItems().addAll(dataService.processData(batchReq));
-                } catch (Throwable th) {
-                    // TODO: improve error handling
-                    hpdPlusResp.getErrors().add(this.errBuilder.buildError(dirId, reqId, HpdPlusErrorType.OTHER, th));
+            if (LOGGER.isTraceEnabled()) {
+                LOGGER.trace("Processing HPD Plus request (directoryId=" + dirId + ", requestId=" + reqId + "):\n" + hpdPlusReqStr);
+            } else if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Processing HPD Plus request (directoryId=" + dirId + ", requestId=" + reqId + ").");
+            }
+
+            if (this.dataServices != null) {
+                for (DirectoryDataService<?> dataService : this.dataServices) {
+                    try {
+                        hpdPlusResp.getResponseItems().addAll(dataService.processData(batchReq));
+                    } catch (Throwable th) {
+                        this.addError(dirId, reqId, hpdPlusResp, th);
+                    }
                 }
             }
-        }
 
-        try {
-            hpdPlusResp.getResponseItems().addAll(this.fedService.federate(hpdPlusReq));
-        } catch (Throwable th) {
-            // TODO: improve error handling
-            hpdPlusResp.getErrors().add(this.errBuilder.buildError(dirId, reqId, HpdPlusErrorType.OTHER, th));
+            try {
+                hpdPlusResp.getResponseItems().addAll(this.fedService.federate(hpdPlusReq));
+            } catch (Throwable th) {
+                this.addError(dirId, reqId, hpdPlusResp, th);
+            }
+        } catch (XmlMappingException e) {
+            this.addError(dirId, reqId, hpdPlusResp, e);
         }
 
         this.interceptResponses(dirDesc, dirId, reqId, hpdPlusReq, hpdPlusResp);
 
-        LOGGER.debug("Processed HPD Plus request (directoryId=" + dirId + ", requestId=" + reqId + ") into HPD Plus response.");
-        LOGGER.trace("Processed HPD Plus request (directoryId=" + dirId + ", requestId=" + reqId + ") into HPD Plus response:\n"
-                + this.dirJaxb2Marshaller.marshal(this.hpdPlusObjectFactory.createHpdPlusResponse(hpdPlusResp)));
+        try {
+            String hpdPlusRespStr = this.dirJaxb2Marshaller.marshal(this.hpdPlusObjectFactory.createHpdPlusResponse(hpdPlusResp));
+
+            if (LOGGER.isTraceEnabled()) {
+                LOGGER.trace("Processed HPD Plus request (directoryId=" + dirId + ", requestId=" + reqId + ") into HPD Plus response:\n" + hpdPlusRespStr);
+            } else if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Processed HPD Plus request (directoryId=" + dirId + ", requestId=" + reqId + ") into HPD Plus response.");
+            }
+        } catch (XmlMappingException e) {
+            this.addError(dirId, reqId, hpdPlusResp, e);
+        }
 
         return hpdPlusResp;
     }

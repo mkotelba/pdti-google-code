@@ -16,7 +16,7 @@
     
     <context:component-scan base-package="gov.hhs.onc.pdti"/>
     
-    <sws:annotation-driven/>
+    <sws:annotation-driven marshaller="dirJaxb2Marshaller" unmarshaller="dirJaxb2Marshaller"/>
     
     <!-- Defining custom Spring conversion service -->
     <beans:bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
@@ -44,6 +44,13 @@
             <util:map>
                 <beans:entry key="#{ T(javax.xml.bind.Marshaller).JAXB_FORMATTED_OUTPUT }" value="#{ true }"/>
             </util:map>
+        </beans:property>
+        <beans:property name="schemas">
+            <util:list>
+                <beans:value>classpath*:META-INF/schema/DSML/DSMLv2.xsd</beans:value>
+                <beans:value>classpath*:META-INF/schema/HPD/HPD.xsd</beans:value>
+                <beans:value>classpath*:META-INF/schema/HPD_Plus/HPD_Plus.xsd</beans:value>
+            </util:list>
         </beans:property>
     </beans:bean>
     

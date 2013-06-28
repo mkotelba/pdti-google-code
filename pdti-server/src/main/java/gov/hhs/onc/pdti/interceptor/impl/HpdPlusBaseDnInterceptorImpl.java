@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Component("hpdPlusBaseDnInterceptor")
 @DirectoryStandard(DirectoryStandardId.HPD_PLUS_PROPOSED)
-@Order(200)
+@Order(101)
 @Scope("singleton")
 public class HpdPlusBaseDnInterceptorImpl extends AbstractDirectoryInterceptor implements DirectoryRequestInterceptor<HpdPlusRequest> {
     @Autowired

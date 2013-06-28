@@ -2851,7 +2851,7 @@ count(//dsml:attr)</path><content>28</content><allowWildcards>false</allowWildca
                         <con:configuration><scriptText>def groovyUtils = new com.eviware.soapui.support.GroovyUtils(context);
 def response = groovyUtils.getXmlHolder(messageExchange.getResponseContentAsXml());
 
-assert(response["//hpdplus:hpdPlusError/@type"].contains("federationLoop"));
+assert(response["//hpdplus:hpdPlusError/@type"].join("\n").contains("federationLoop"));
                         </scriptText></con:configuration>
                     </con:assertion>
 <con:credentials>
