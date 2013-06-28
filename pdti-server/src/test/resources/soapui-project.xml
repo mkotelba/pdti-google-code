@@ -2534,12 +2534,12 @@ other organizations are returned. </con:description><con:settings/>
             <con:wsrmConfig version="1.2"/>
           </con:request>
         </con:config>
-      </con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite name="Message_Compliance"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="RequestIDs_Equal" searchProperties="true" id="7630e26d-c4fe-4b96-800f-672e70358c3c"><con:settings/><con:testStep type="request" name="search_provider_by_name">
+      </con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite name="Message_Compliance"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="RequestIDs_Equal" searchProperties="true" id="7630e26d-c4fe-4b96-800f-672e70358c3c"><con:settings/><con:testStep type="request" name="RequestIDs_Equal">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
-                <con:request name="search_provider_by_name" outgoingWss="" incomingWss="">
+                <con:request name="RequestIDs_Equal" outgoingWss="" incomingWss="">
                     <con:settings>
                     <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
                     </con:settings>

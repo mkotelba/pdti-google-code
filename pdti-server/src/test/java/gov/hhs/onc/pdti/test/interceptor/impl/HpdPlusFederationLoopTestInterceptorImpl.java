@@ -8,8 +8,6 @@ import gov.hhs.onc.pdti.data.DirectoryDescriptor;
 import gov.hhs.onc.pdti.interceptor.DirectoryInterceptorException;
 import gov.hhs.onc.pdti.test.DirectoryTestType;
 import gov.hhs.onc.pdti.test.DirectoryTestTypeId;
-import gov.hhs.onc.pdti.ws.api.BatchRequest;
-import gov.hhs.onc.pdti.ws.api.BatchResponse;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusRequest;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusResponse;
 import java.util.List;
@@ -24,8 +22,7 @@ import org.springframework.stereotype.Component;
 @Scope("singleton")
 public class HpdPlusFederationLoopTestInterceptorImpl extends AbstractFederationLoopTestInterceptor<HpdPlusRequest, HpdPlusResponse> {
     @Override
-    public void interceptRequest(DirectoryDescriptor dirDesc, String reqId, HpdPlusRequest hpdPlusReq) throws DirectoryInterceptorException
-    {
+    public void interceptRequest(DirectoryDescriptor dirDesc, String reqId, HpdPlusRequest hpdPlusReq) throws DirectoryInterceptorException {
         this.setFederationLoopTest(reqId, true);
     }
 

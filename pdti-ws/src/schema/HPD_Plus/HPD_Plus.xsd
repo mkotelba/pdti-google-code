@@ -44,7 +44,7 @@
             </xsd:documentation>
         </xsd:annotation>
         <xsd:sequence>
-            <xsd:any/>
+            <xsd:any processContents="lax"/>
         </xsd:sequence>
     </xsd:complexType>
     

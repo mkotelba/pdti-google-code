@@ -13,6 +13,7 @@ import gov.hhs.onc.pdti.service.DirectoryService;
 import gov.hhs.onc.pdti.util.DirectoryUtils;
 import gov.hhs.onc.pdti.ws.api.BatchRequest;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusErrorType;
+import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusMetadataProperties;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusRequest;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusRequestMetadata;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusResponse;
@@ -43,10 +44,6 @@ public class HpdPlusDirectoryServiceImpl extends AbstractDirectoryService<HpdPlu
         HpdPlusRequestMetadata reqMeta = hpdPlusReq.getRequestMetadata();
         HpdPlusResponse hpdPlusResp = this.hpdPlusObjectFactory.createHpdPlusResponse();
 
-        HpdPlusResponseMetadata respMeta = this.hpdPlusObjectFactory.createHpdPlusResponseMetadata();
-        respMeta.setRequestMetadata(reqMeta);
-        hpdPlusResp.setResponseMetadata(respMeta);
-
         this.interceptRequests(dirDesc, dirId, reqId, hpdPlusReq, hpdPlusResp);
 
         try {
@@ -73,6 +70,8 @@ public class HpdPlusDirectoryServiceImpl extends AbstractDirectoryService<HpdPlu
             } catch (Throwable th) {
                 this.addError(dirId, reqId, hpdPlusResp, th);
             }
+
+            this.transferMetadata(reqMeta, hpdPlusResp);
         } catch (XmlMappingException e) {
             this.addError(dirId, reqId, hpdPlusResp, e);
         }
@@ -98,6 +97,19 @@ public class HpdPlusDirectoryServiceImpl extends AbstractDirectoryService<HpdPlu
     protected void addError(String dirId, String reqId, HpdPlusResponse hpdPlusResp, Throwable th) {
         // TODO: improve error handling
         hpdPlusResp.getErrors().add(this.errBuilder.buildError(dirId, reqId, HpdPlusErrorType.OTHER, th));
+    }
+
+    private void transferMetadata(HpdPlusRequestMetadata reqMeta, HpdPlusResponse hpdPlusResp) {
+        if (reqMeta != null) {
+            HpdPlusResponseMetadata respMeta = this.hpdPlusObjectFactory.createHpdPlusResponseMetadata();
+            respMeta.setRequestMetadata((HpdPlusRequestMetadata) reqMeta.clone());
+
+            if (reqMeta.isSetProperties()) {
+                respMeta.setProperties((HpdPlusMetadataProperties) respMeta.getRequestMetadata().getProperties().clone());
+            }
+
+            hpdPlusResp.setResponseMetadata(respMeta);
+        }
     }
 
     @Autowired

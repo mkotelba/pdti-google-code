@@ -8,6 +8,7 @@ import gov.hhs.onc.pdti.ws.api.SearchResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import org.apache.commons.lang3.StringUtils;
@@ -19,9 +20,7 @@ import org.apache.directory.api.ldap.model.name.Rdn;
 public abstract class DirectoryUtils {
     private final static String REQ_ID_DEFAULT_PREFIX = "pdti_";
 
-    private final static String XML_SCHEMA_NS = "http://www.w3.org/2001/XMLSchema";
-
-    private final static QName XML_SCHEMA_STRING = new QName(XML_SCHEMA_NS, "string");
+    private final static QName XML_SCHEMA_STR_QUAL_NAME = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "string", "xsd");
 
     public static BatchRequest setRequestId(BatchRequest batchReq, String reqId) {
         batchReq.setRequestId(reqId);
@@ -65,6 +64,6 @@ public abstract class DirectoryUtils {
     }
 
     public static JAXBElement<String> getStackTraceJaxbElement(Throwable th) {
-        return new JAXBElement<>(XML_SCHEMA_STRING, String.class, ExceptionUtils.getStackTrace(th));
+        return new JAXBElement<>(XML_SCHEMA_STR_QUAL_NAME, String.class, DirectoryUtils.class, ExceptionUtils.getStackTrace(th));
     }
 }

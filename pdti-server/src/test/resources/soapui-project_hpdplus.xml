@@ -2613,12 +2613,12 @@ other organizations are returned. </con:description><con:settings/>
             <con:wsrmConfig version="1.2"/>
           </con:request>
         </con:config>
-      </con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite name="Message_Compliance_Plus"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="RequestIDs_Equal" searchProperties="true" id="0815e6ca-486e-41dd-ba1f-86701778f6db"><con:settings/><con:testStep type="request" name="search_provider_by_name">
+      </con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite name="Message_Compliance_Plus"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="RequestIDs_Equal" searchProperties="true" id="0815e6ca-486e-41dd-ba1f-86701778f6db"><con:settings/><con:testStep type="request" name="RequestIDs_Equal">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:interface>Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding</con:interface>
           <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-          <con:request name="search_provider_by_name" outgoingWss="" incomingWss="">
+          <con:request name="RequestIDs_Equal" outgoingWss="" incomingWss="">
             <con:settings>
               <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
             </con:settings>
@@ -2700,12 +2700,12 @@ for (i in responseIDs){
             <con:wsrmConfig version="1.2"/>
           </con:request>
         </con:config>
-      </con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Unallowed_Metadata" searchProperties="true"><con:settings/><con:testStep type="request" name="search_provider_by_name">
+      </con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Unallowed_Metadata" searchProperties="true"><con:settings/><con:testStep type="request" name="Unallowed_Metadata">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:interface>Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding</con:interface>
           <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-          <con:request name="search_provider_by_name" outgoingWss="" incomingWss="">
+          <con:request name="Unallowed_Metadata" outgoingWss="" incomingWss="">
             <con:settings>
               <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
             </con:settings>
@@ -2735,7 +2735,7 @@ for (i in responseIDs){
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
             <con:assertion type="SOAP Response"/>
-            <con:assertion type="Schema Compliance" disabled="true">
+            <con:assertion type="Schema Compliance">
               <con:configuration><definition/></con:configuration>
             </con:assertion>
             <con:assertion type="SOAP Fault Assertion"/>
@@ -2795,12 +2795,12 @@ for (i in responseIDs){
             <con:wsrmConfig version="1.2"/>
           </con:request>
         </con:config>
-      </con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Allowed_Metadata" searchProperties="true"><con:settings/><con:testStep type="request" name="search_provider_by_name">
+      </con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Allowed_Metadata" searchProperties="true"><con:settings/><con:testStep type="request" name="Allowed_Metadata">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:interface>Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding</con:interface>
           <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-          <con:request name="search_provider_by_name" outgoingWss="" incomingWss="">
+          <con:request name="Allowed_Metadata" outgoingWss="" incomingWss="">
             <con:settings>
               <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
             </con:settings>
@@ -2812,8 +2812,6 @@ for (i in responseIDs){
          <hpdplus:requestMetadata>
             <hpdplus:properties>
                <hpdplus:property name="doNotFederate"/>
-            </hpdplus:properties>
-            <hpdplus:properties>
                <hpdplus:property name="flattenResponse"/>
             </hpdplus:properties>
          </hpdplus:requestMetadata>
@@ -2926,7 +2924,7 @@ count(//dsml:attr)</path><content>1</content><allowWildcards>false</allowWildcar
                         <con:configuration><scriptText>def groovyUtils = new com.eviware.soapui.support.GroovyUtils(context);
 def response = groovyUtils.getXmlHolder(messageExchange.getResponseContentAsXml());
 
-assert(response["//hpdplus:hpdPlusError/@type"].join("\n").contains("federationLoop"));
+assert(response["//hpdplus:hpdPlusError/@type"].contains("federationLoop"));
                         </scriptText></con:configuration>
                     </con:assertion>
 <con:credentials>
