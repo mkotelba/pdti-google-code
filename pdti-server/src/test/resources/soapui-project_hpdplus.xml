@@ -2735,7 +2735,7 @@ for (i in responseIDs){
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
             <con:assertion type="SOAP Response"/>
-            <con:assertion type="Schema Compliance">
+            <con:assertion type="Schema Compliance" disabled="true">
               <con:configuration><definition/></con:configuration>
             </con:assertion>
             <con:assertion type="SOAP Fault Assertion"/>
