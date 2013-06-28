@@ -39,7 +39,6 @@ gender: m
 HcIdentifier: provider1
 HcProfession: Doctor
 HcRole: HL-7 code for role
-#HcSigningCertificate: syntax is BER-encoded "Public key and certificate for the users non- repudiation signing certificate used for health transactions"
 HcSpecialization: Orthopedic Surgeon
 hpdCredential: hpdCredentialId=1,ou=Credentials,o=dev.provider-directories.com,dc=hpd
 hpdHasAService: hpdServiceId=6,ou=Services,o=dev.provider-directories.com,dc=hpd
