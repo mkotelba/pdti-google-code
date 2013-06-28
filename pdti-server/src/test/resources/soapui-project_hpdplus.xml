@@ -91,8 +91,6 @@
 //dsml:searchResultEntry/dsml:attr/lower-case(@name)="hcidentifier"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr mobile XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
 //dsml:searchResultEntry/dsml:attr/lower-case(@name)="mobile"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
-<con:assertion type="XPath Match" name="attr labeledURI XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-//dsml:searchResultEntry/dsml:attr/lower-case(@name)="labeleduri"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr title XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
 //dsml:searchResultEntry/dsml:attr/lower-case(@name)="title"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdProviderPracticeLocation XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
@@ -584,8 +582,7 @@ count(//dsml:attr)</path><content>1</content><allowWildcards>false</allowWildcar
 	               <dsml:attribute name="hpdProviderPracticeAddress"/>
 	               <dsml:attribute name="hpdProviderLanguageSupported"/>
 	               <dsml:attribute name="hcSpeciailization"/>
-	               <dsml:attribute name="labeledUri"/>
-	               <dsml:attribute name="telephoneNumber"/>
+	               <dsml::attribute name="telephoneNumber"/>
 	               <dsml:attribute name="facsimileTelephoneNumber"/>
 	               <dsml:attribute name="hpdHasAService"/>
 	               <dsml:attribute name="mail"/>
@@ -712,8 +709,7 @@ count(//dsml:attr)</path><content>1</content><allowWildcards>false</allowWildcar
 	               <dsml:attribute name="hpdProviderLanguageSupported"/>
 	               <dsml:attribute name="gender"/>
 	               <dsml:attribute name="mail"/>
-	               <dsml:attribute name="labeledUri"/>
-	               <dsml:attribute name="physicalDeliveryOfficeName"/>
+	               <dsml::attribute name="physicalDeliveryOfficeName"/>
 	               <dsml:attribute name="hpdProviderMailingAddress"/>
 	               <dsml:attribute name="hpdProviderBillingAddress"/>
 	               <dsml:attribute name="hpdProviderPracticeAddress"/>
@@ -848,8 +844,7 @@ count(//dsml:attr)</path><content>1</content><allowWildcards>false</allowWildcar
                   <dsml:attribute name="hpdProviderLanguageSupported"/>
                   <dsml:attribute name="gender"/>
                   <dsml:attribute name="mail"/>
-                  <dsml:attribute name="labeledUri"/>
-                  <dsml:attribute name="physicalDeliveryOfficeName"/>
+                     <dsml:attribute name="physicalDeliveryOfficeName"/>
                   <dsml:attribute name="hpdProviderMailingAddress"/>
                   <dsml:attribute name="hpdProviderBillingAddress"/>
                   <dsml:attribute name="hpdProviderPracticeAddress"/>
@@ -1133,8 +1128,7 @@ Request a specific individual by specifying the individual unique reference ID.<
 	               <dsml:attribute name="hpdProviderLanguageSupported"/>
 	               <dsml:attribute name="gender"/>
 	               <dsml:attribute name="mail"/>
-	               <dsml:attribute name="labeledUri"/>
-	               <dsml:attribute name="physicalDeliveryOfficeName"/>
+	               <dsml::attribute name="physicalDeliveryOfficeName"/>
 	               <dsml:attribute name="hpdProviderMailingAddress"/>
 	               <dsml:attribute name="hpdProviderBillingAddress"/>
 	               <dsml:attribute name="hpdProviderPracticeAddress"/>
@@ -1209,8 +1203,7 @@ organization attributes.</con:description><con:settings/>
 	               <dsml:attribute name="hpdProviderPracticeAddress"/>
 	               <dsml:attribute name="hpdProviderLanguageSupported"/>
 	               <dsml:attribute name="hcSpeciailization"/>
-	               <dsml:attribute name="labeledUri"/>
-	               <dsml:attribute name="telephoneNumber"/>
+	               <dsml::attribute name="telephoneNumber"/>
 	               <dsml:attribute name="facsimileTelephoneNumber"/>
 	               <dsml:attribute name="hpdHasAService"/>
 	               <dsml:attribute name="mail"/>
@@ -1397,8 +1390,7 @@ organization unique reference ID.</con:description><con:settings/><con:testStep 
 	               <dsml:attribute name="hpdProviderPracticeAddress"/>
 	               <dsml:attribute name="hpdProviderLanguageSupported"/>
 	               <dsml:attribute name="hcSpeciailization"/>
-	               <dsml:attribute name="labeledUri"/>
-	               <dsml:attribute name="telephoneNumber"/>
+	               <dsml::attribute name="telephoneNumber"/>
 	               <dsml:attribute name="facsimileTelephoneNumber"/>
 	               <dsml:attribute name="hpdHasAService"/>
 	               <dsml:attribute name="mail"/>
@@ -1591,8 +1583,7 @@ relationships are returned.</con:description><con:settings/>
 	               <dsml:attribute name="hpdProviderLanguageSupported"/>
 	               <dsml:attribute name="gender"/>
 	               <dsml:attribute name="mail"/>
-	               <dsml:attribute name="labeledUri"/>
-	               <dsml:attribute name="physicalDeliveryOfficeName"/>
+	               <dsml::attribute name="physicalDeliveryOfficeName"/>
 	               <dsml:attribute name="hpdProviderMailingAddress"/>
 	               <dsml:attribute name="hpdProviderBillingAddress"/>
 	               <dsml:attribute name="hpdProviderPracticeAddress"/>
@@ -1859,8 +1850,7 @@ relationships are returned.</con:description><con:settings/>
 	               <dsml:attribute name="hpdProviderPracticeAddress"/>
 	               <dsml:attribute name="hpdProviderLanguageSupported"/>
 	               <dsml:attribute name="hcSpeciailization"/>
-	               <dsml:attribute name="labeledUri"/>
-	               <dsml:attribute name="telephoneNumber"/>
+	               <dsml::attribute name="telephoneNumber"/>
 	               <dsml:attribute name="facsimileTelephoneNumber"/>
 	               <dsml:attribute name="hpdHasAService"/>
 	               <dsml:attribute name="mail"/>
@@ -2110,8 +2100,7 @@ relationships are returned.</con:description><con:settings/>
                   <dsml:attribute name="hpdProviderLanguageSupported"/>
                   <dsml:attribute name="gender"/>
                   <dsml:attribute name="mail"/>
-                  <dsml:attribute name="labeledUri"/>
-                  <dsml:attribute name="physicalDeliveryOfficeName"/>
+                     <dsml:attribute name="physicalDeliveryOfficeName"/>
                   <dsml:attribute name="hpdProviderMailingAddress"/>
                   <dsml:attribute name="hpdProviderBillingAddress"/>
                   <dsml:attribute name="hpdProviderPracticeAddress"/>
@@ -2195,8 +2184,7 @@ other organizations are returned. </con:description><con:settings/>
 	               <dsml:attribute name="hpdProviderLanguageSupported"/>
 	               <dsml:attribute name="gender"/>
 	               <dsml:attribute name="mail"/>
-	               <dsml:attribute name="labeledUri"/>
-	               <dsml:attribute name="physicalDeliveryOfficeName"/>
+		           <dsml:attribute name="physicalDeliveryOfficeName"/>
 	               <dsml:attribute name="hpdProviderMailingAddress"/>
 	               <dsml:attribute name="hpdProviderBillingAddress"/>
 	               <dsml:attribute name="hpdProviderPracticeAddress"/>
@@ -2271,8 +2259,7 @@ other organizations are returned. </con:description><con:settings/>
                   <dsml:attribute name="hpdProviderPracticeAddress"/>
                   <dsml:attribute name="hpdProviderLanguageSupported"/>
                   <dsml:attribute name="hcSpeciailization"/>
-                  <dsml:attribute name="labeledUri"/>
-                  <dsml:attribute name="telephoneNumber"/>
+                     <dsml:attribute name="telephoneNumber"/>
                   <dsml:attribute name="facsimileTelephoneNumber"/>
                   <dsml:attribute name="hpdHasAService"/>
                   <dsml:attribute name="mail"/>
