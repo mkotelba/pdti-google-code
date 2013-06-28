@@ -266,19 +266,6 @@ m-name: hpdProviderPracticeAddress
 m-substr: caseIgnoreSubstringsMatch
 m-syntax: 1.3.6.1.4.1.1466.115.121.1.41
 
-# dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1.5,ou=attributeTypes,cn=hpd,ou=schema
-# objectclass: metaTop
-# objectclass: metaAttributeType
-# objectclass: top
-# m-oid: 1.3.6.1.4.1.19376.1.2.4.1.5
-# m-description: Electronic mailing address of provider where medical records 
-#  can be sent
-# m-equality: caseIgnoreMatch
-# m-length: 0
-# m-name: hpdMedicalRecordsDeliveryEmailAddress
-# m-singlevalue: TRUE
-# m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
-
 dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1.7,ou=attributeTypes,cn=hpd,ou=schema
 objectclass: metaTop
 objectclass: metaAttributeType
@@ -346,18 +333,6 @@ m-name: credentialNumber
 m-singlevalue: TRUE
 m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
 
-# dn: m-oid=1.3.6.1.4.1.19376.1.2.4.2.4,ou=attributeTypes,cn=hpd,ou=schema
-# objectclass: metaTop
-# objectclass: metaAttributeType
-# objectclass: top
-# m-oid: 1.3.6.1.4.1.19376.1.2.4.2.4
-# m-description: Additional information on the credential
-# m-equality: caseIgnoreMatch
-# m-length: 0
-# m-name: credentialDescription
-# m-singlevalue: TRUE
-# m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
-
 dn: m-oid=1.3.6.1.4.1.19376.1.2.4.2.5,ou=attributeTypes,cn=hpd,ou=schema
 objectclass: metaTop
 objectclass: metaAttributeType
@@ -396,24 +371,6 @@ m-name: credentialStatus
 m-singlevalue: TRUE
 m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
 
-# dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1,ou=objectClasses,cn=hpd,ou=schema
-# objectclass: metaObjectClass
-# objectclass: metaTop
-# objectclass: top
-# m-oid: 1.3.6.1.4.1.19376.1.2.4.1
-# m-may: hpdProviderStatus
-# m-may: hpdProviderLanguageSupported
-# m-may: hpdProviderBillingAddress
-# m-may: hpdProviderMailingAddress
-# m-may: hpdProviderPracticeAddress
-# m-may: hpdMedicalRecordsDeliveryEmailAddress
-# m-may: hpdProviderLegalAddress
-# m-may: hpdHasAService
-# m-may: hpdCredential
-# m-name: HPDProvider
-# m-supobjectclass: top
-# m-typeobjectclass: AUXILIARY
-
 dn: m-oid=1.3.6.1.4.1.19376.1.2.4.2,ou=objectClasses,cn=hpd,ou=schema
 objectclass: metaObjectClass
 objectclass: metaTop
@@ -422,7 +379,6 @@ m-oid: 1.3.6.1.4.1.19376.1.2.4.2
 m-may: credentialIssueDate
 m-may: credentialRenewalDate
 m-may: credentialStatus
-# m-may: credentialDescription
 m-may: description
 m-may: hpdHasAnOrg
 m-may: hpdHasAProvider
@@ -432,51 +388,6 @@ m-must: credentialType
 m-must: hpdCredentialId
 m-name: HPDProviderCredential
 m-supobjectclass: top
-
-#dn: m-oid=1.3.6.1.4.1.19376.1.2.4.4,ou=objectClasses,cn=hpd,ou=schema
-#objectclass: metaObjectClass
-#objectclass: metaTop
-#objectclass: top
-#m-oid: 1.3.6.1.4.1.19376.1.2.4.4
-#m-may: hpdHasAService
-#m-may: telephoneNumber
-#m-may: facsimileTelephoneNumber
-#m-may: mobile
-#m-may: Pager
-#m-may: Email
-#m-must: hpdMemberId
-#m-must: hpdHasAProvider
-#m-must: hpdHasAnOrg
-#m-name: HPDProviderMembership
-#m-supobjectclass: top
-#m-typeobjectclass: STRUCTURAL
-
-#dn: m-oid=1.3.6.1.4.1.19376.1.2.4.5,ou=objectClasses,cn=hpd,ou=schema
-#objectclass: metaObjectClass
-#objectclass: metaTop
-#objectclass: top
-#m-oid: 1.3.6.1.4.1.19376.1.2.4.5
-#m-may: hpdCertificate
-#m-may: hpdContentProfile
-#m-may: hpdIntegrationProfile
-#m-may: hpdSecurityProfile
-#m-must: hpdServiceAddress
-#m-must: hpdServiceId
-#m-name: HPDElectronicService
-#m-supobjectclass: top
-#m-typeobjectclass: STRUCTURAL
-
-# dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1.100,ou=attributeTypes,cn=hpd,ou=schema
-# objectclass: metaTop
-# objectclass: metaAttributeType
-# objectclass: top
-# m-oid: 1.3.6.1.4.1.19376.1.2.4.1.100
-# m-description: HPD Plus hpdMemberEmail attributeType
-# m-equality: caseIgnoreMatch
-# m-length: 0
-# m-name: hpdMemberEmail
-# m-singlevalue: TRUE
-# m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
 
 dn: m-oid=1.3.6.1.4.1.19376.1.2.4.1.101,ou=attributeTypes,cn=hpd,ou=schema
 objectclass: metaTop
@@ -568,11 +479,11 @@ objectclass: metaAttributeType
 objectclass: top
 m-oid: 1.3.6.1.4.1.19376.1.2.4.1.108
 m-description: HPD Plus hpdHasASubOrg attributeType
-m-equality: caseIgnoreMatch
+m-equality: distinguishedNameMatch
 m-length: 0
 m-name: hpdHasASubOrg
 m-singlevalue: TRUE
-m-syntax: 1.3.6.1.4.1.1466.115.121.1.15
+m-syntax: 1.3.6.1.4.1.1466.115.121.1.12
 
 dn: m-oid=1.3.6.1.4.1.19376.1.2.4.4,ou=objectClasses,cn=hpd,ou=schema
 objectclass: metaObjectClass
@@ -585,14 +496,11 @@ m-may: facsimileTelephoneNumber
 m-may: mobile
 m-may: pager
 m-may: mail
-# START: NEW ATTRIBUTE(S) (OPTIONAL)
-# m-may: hpdMemberEmail
 m-may: hpdMemberName
 m-may: hpdMemberStatus
 m-may: hpdMemberType
 m-may: hpdHasAProvider
 m-may: hpdHasASubOrg
-# END: NEW ATTRIBUTE(S) (OPTIONAL)
 m-must: hpdMemberId
 m-must: hpdHasAnOrg
 m-name: HPDProviderMembership
@@ -608,11 +516,9 @@ m-may: hpdCertificate
 # m-may: hpdContentProfile
 # m-may: hpdIntegrationProfile
 # m-may: hpdSecurityProfile
-# START: NEW ATTRIBUTE(S) (OPTIONAL)
 m-may: hpdServicePayload
 m-may: hpdServiceProtocol
 m-may: hpdServiceType
-# END: NEW ATTRIBUTE(S) (OPTIONAL)
 m-must: hpdServiceAddress
 m-must: hpdServiceId
 m-name: HPDElectronicService
@@ -629,7 +535,6 @@ m-may: hpdProviderLanguageSupported
 m-may: hpdProviderBillingAddress
 m-may: hpdProviderMailingAddress
 m-may: hpdProviderPracticeAddress
-# m-may: hpdMedicalRecordsDeliveryEmailAddress
 m-may: hpdProviderLegalAddress
 m-may: hpdHasAService
 m-may: hpdCredential
