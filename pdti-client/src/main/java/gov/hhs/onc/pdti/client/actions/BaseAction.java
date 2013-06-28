@@ -8,4 +8,6 @@ import com.opensymphony.xwork2.ActionSupport;
 @InterceptorRefs({ @InterceptorRef("defaultStack") })
 public class BaseAction extends ActionSupport {
 
+    private static final long serialVersionUID = -1751487419797613300L;
+
 }
