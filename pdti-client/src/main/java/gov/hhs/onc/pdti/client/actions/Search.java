@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.UUID;
 
 import javax.xml.bind.JAXBElement;
 
@@ -53,6 +54,7 @@ public class Search extends BaseAction {
     private static final String REQUIRED_FIELD_MESSAGE = "This field is required.";
     private static final String WSDL_PROPERTY_NAME = "provider.directory.wsdl.url";
     private static final String DETAILS = "details";
+    private final String defaultUrl = getText(WSDL_PROPERTY_NAME);
 
     private gov.hhs.onc.pdti.ws.api.ObjectFactory dsmlBasedObjectFactory = new gov.hhs.onc.pdti.ws.api.ObjectFactory();
     private gov.hhs.onc.pdti.ws.api.hpdplus.ObjectFactory hpdPlusObjectFactory =
@@ -146,9 +148,13 @@ public class Search extends BaseAction {
     private HpdPlusRequest buildHpdPlusRequest() {
         LOGGER.debug("buildHpdPlusRequest()");
         HpdPlusRequest hpdPlusRequest = hpdPlusObjectFactory.createHpdPlusRequest();
-        hpdPlusRequest.setRequestId(requestId);
+        if(Boolean.TRUE.equals(isShowDetails())) {
+            hpdPlusRequest.setRequestId(UUID.randomUUID().toString());
+        } else {
+            hpdPlusRequest.setRequestId(requestId);
+        }
         LOGGER.debug("HpdPlusRequest.requestId =" + requestId + "=");
-        hpdPlusRequest.setBatchRequest(buildBatchRequest());
+        hpdPlusRequest.setBatchRequest(buildBatchRequest(true));
         return hpdPlusRequest;
     }
 
@@ -157,7 +163,7 @@ public class Search extends BaseAction {
         ProviderInformationDirectoryService providerInformationDirectoryService =
                 new ProviderInformationDirectoryService(wsdlUrl);
         BatchResponse batchResponse = providerInformationDirectoryService.getProviderInformationDirectoryPortSoap()
-                .providerInformationQueryRequest(buildBatchRequest());
+                .providerInformationQueryRequest(buildBatchRequest(false));
         List<JAXBElement<?>> batchResponseJAXBElements = batchResponse.getBatchResponses();
         for (JAXBElement<?> batchResponseJAXBElement : batchResponseJAXBElements) {
             Object value = batchResponseJAXBElement.getValue();
@@ -202,13 +208,15 @@ public class Search extends BaseAction {
         }
     }
 
-    private BatchRequest buildBatchRequest() {
+    private BatchRequest buildBatchRequest(boolean isHpdPlusRequest) {
         LOGGER.debug("buildBatchRequest()");
         BatchRequest batchRequest = dsmlBasedObjectFactory.createBatchRequest();
         SearchRequest searchRequest = dsmlBasedObjectFactory.createSearchRequest();
-        if (!StringUtils.isEmpty(requestId)) {
-            batchRequest.setRequestId(requestId);
-            searchRequest.setRequestId(requestId);
+        if(!isHpdPlusRequest) {
+            if (!StringUtils.isEmpty(requestId)) {
+                batchRequest.setRequestId(requestId);
+                searchRequest.setRequestId(requestId);
+            }
         }
         searchRequest.setDn(OU + typeToSearch + COMMA + getText(DN));
         searchRequest.setScope(SINGLE_LEVEL);
@@ -347,6 +355,10 @@ public class Search extends BaseAction {
 
     public void setProviderDirectoryType(String providerDirectoryType) {
         this.providerDirectoryType = providerDirectoryType;
+    }
+    
+    public String getDefaultUrl() {
+        return defaultUrl;
     }
 
 }

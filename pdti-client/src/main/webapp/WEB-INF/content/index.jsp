@@ -8,13 +8,14 @@
 	        <hr/>
 			<s:form action="search" validate="true" class="form-inline">
                 <fieldset>
-                    <s:textfield key="url"/>
-                    <s:select key="providerDirectoryType" list="@gov.hhs.onc.pdti.client.types.ProviderDirectoryTypes@values()" />
-					<s:textfield key="requestId"/>
-					<s:select key="typeToSearch" list="@gov.hhs.onc.pdti.client.types.SearchTypes@values()" />
-					<s:textfield key="searchAttribute"/>
+                    <h5><s:text name="defaultUrl"/>: <s:text name="provider.directory.wsdl.url"/></h5>
+                    <s:textfield style="width: 400px;" key="url"/>
+                    <s:select style="width: 415px;" key="providerDirectoryType" list="@gov.hhs.onc.pdti.client.types.ProviderDirectoryTypes@values()" value="@gov.hhs.onc.pdti.client.types.ProviderDirectoryTypes@HPDPlus.toString()"/>
+					<s:textfield style="width: 400px;" key="requestId"/>
+					<s:select style="width: 415px;" key="typeToSearch" list="@gov.hhs.onc.pdti.client.types.SearchTypes@values()"/>
+					<s:textfield style="width: 400px;" key="searchAttribute"/>
 			<%--                 <s:select key="searchAttribute" list="@gov.hhs.onc.pdti.client.types.AttributeTypes@values()" /> --%>
-			        <s:textfield key="searchString" />
+			        <s:textfield style="width: 400px;" key="searchString" />
 			<%--                 <s:checkboxlist key="attributesToRetrieve" list="@gov.hhs.onc.pdti.client.types.AttributeTypes@values()" --%>
 			<%--                     value="@gov.hhs.onc.pdti.client.types.AttributeTypes@values()"/> --%>
 			        <s:submit />
