@@ -2,3 +2,6 @@
 target
 soapui.log
 soapui-errors.log
+.settings
+.project
+.classpath
