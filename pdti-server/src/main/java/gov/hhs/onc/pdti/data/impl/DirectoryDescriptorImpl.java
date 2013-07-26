@@ -1,7 +1,9 @@
 package gov.hhs.onc.pdti.data.impl;
 
 import gov.hhs.onc.pdti.data.DirectoryDescriptor;
+
 import java.net.URL;
+
 import org.apache.directory.api.ldap.model.name.Dn;
 
 public class DirectoryDescriptorImpl implements DirectoryDescriptor {
@@ -9,6 +11,7 @@ public class DirectoryDescriptorImpl implements DirectoryDescriptor {
     private String dirId;
     private URL wsdlLoc;
     private Dn baseDn;
+    private boolean shouldExposeDirectoryUri = true;
 
     @Override
     public Dn getBaseDn() {
@@ -48,5 +51,13 @@ public class DirectoryDescriptorImpl implements DirectoryDescriptor {
     @Override
     public void setWsdlLocation(URL wsdlLoc) {
         this.wsdlLoc = wsdlLoc;
+    }
+
+    public boolean isShouldExposeDirectoryUri() {
+        return shouldExposeDirectoryUri;
+    }
+
+    public void setShouldExposeDirectoryUri(boolean shouldExposeDirectoryUri) {
+        this.shouldExposeDirectoryUri = shouldExposeDirectoryUri;
     }
 }

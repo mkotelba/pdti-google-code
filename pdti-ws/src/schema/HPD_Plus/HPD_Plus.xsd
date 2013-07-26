@@ -202,19 +202,35 @@
     
     <xsd:complexType name="HpdPlusResponse">
         <xsd:annotation>
-            <xsd:documentation>
-                A HPD Plus response.
-            </xsd:documentation>
+            <xsd:documentation>A HPD Plus response.</xsd:documentation>
         </xsd:annotation>
         <xsd:sequence>
-            <xsd:element name="responseMetadata" type="HpdPlusResponseMetadata" minOccurs="0"/>
-            <xsd:group ref="HpdPlusErrors" minOccurs="0" maxOccurs="unbounded"/>
-            <xsd:group ref="HpdPlusResponseItems" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element
+                name="responseMetadata"
+                type="HpdPlusResponseMetadata"
+                minOccurs="0" />
+            <xsd:group
+                ref="HpdPlusErrors"
+                minOccurs="0"
+                maxOccurs="unbounded" />
+            <xsd:group
+                ref="HpdPlusResponseItems"
+                minOccurs="0"
+                maxOccurs="unbounded" />
         </xsd:sequence>
-        <xsd:attribute name="directoryID" type="HpdPlusDirectoryId" use="required"/>
-        <xsd:attribute name="requestID" type="HpdPlusRequestId" use="required"/>
+        <xsd:attribute
+            name="directoryID"
+            type="HpdPlusDirectoryId"
+            use="required" />
+        <xsd:attribute
+            name="requestID"
+            type="HpdPlusRequestId"
+            use="required" />
+        <xsd:attribute
+            name="directoryUri"
+            type="xsd:anyURI">
+        </xsd:attribute>
     </xsd:complexType>
-    
     <xsd:element name="hpdPlusRequest" type="HpdPlusRequest"/>
     <xsd:element name="hpdPlusResponse" type="HpdPlusResponse"/>
 </xsd:schema>
