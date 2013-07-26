@@ -1,6 +1,7 @@
 package gov.hhs.onc.pdti.data;
 
 import java.net.URL;
+
 import org.apache.directory.api.ldap.model.name.Dn;
 
 public interface DirectoryDescriptor {
@@ -19,4 +20,8 @@ public interface DirectoryDescriptor {
     public Dn getBaseDn();
 
     public void setBaseDn(Dn baseDn);
+    
+    public boolean isShouldExposeDirectoryUri();
+    
+    public void setShouldExposeDirectoryUri(boolean shouldExposeDirectoryUri);
 }

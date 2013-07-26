@@ -54,6 +54,7 @@ public class Search extends BaseAction {
     private static final String REQUIRED_FIELD_MESSAGE = "This field is required.";
     private static final String WSDL_PROPERTY_NAME = "provider.directory.wsdl.url";
     private static final String DETAILS = "details";
+    private static final String NO_ID = "NO ID (DSML DIRECTORY)";
     private final String defaultUrl = getText(WSDL_PROPERTY_NAME);
 
     private gov.hhs.onc.pdti.ws.api.ObjectFactory dsmlBasedObjectFactory = new gov.hhs.onc.pdti.ws.api.ObjectFactory();
@@ -135,7 +136,7 @@ public class Search extends BaseAction {
         List<Object> responseItems = hpdPlusResponse.getResponseItems();
         for(Object object : responseItems) {
             if(object instanceof BatchResponse) {
-                processBatchResponse((BatchResponse)object);
+                processBatchResponse(hpdPlusResponse.getDirectoryId(), hpdPlusResponse.getDirectoryUri(), (BatchResponse)object);
             } else if(object instanceof HpdPlusResponse) {
                 processHpdPlusResponse((HpdPlusResponse)object);
             } else {
@@ -172,7 +173,7 @@ public class Search extends BaseAction {
                 if (null != searchResponse.getSearchResultDone().getErrorMessage()) {
                     getSearchErrorMessages().add(searchResponse.getSearchResultDone().getErrorMessage());
                 } else {
-                    processSearchResultEntries(searchResponse.getSearchResultEntry());
+                    processSearchResultEntries(NO_ID, wsdlUrl.toExternalForm(), searchResponse.getSearchResultEntry());
                 }
             } else if (value instanceof ErrorResponse) {
                 ErrorResponse errorResponse = (ErrorResponse) value;
@@ -185,7 +186,7 @@ public class Search extends BaseAction {
         }
     }
     
-    private void processBatchResponse(BatchResponse batchResponse) {
+    private void processBatchResponse(String directoryId, String directoryUri, BatchResponse batchResponse) {
         LOGGER.debug("processBatchResponse(BatchRespons)");
         List<JAXBElement<?>> batchResponseJAXBElements = batchResponse.getBatchResponses();
         for (JAXBElement<?> batchResponseJAXBElement : batchResponseJAXBElements) {
@@ -195,7 +196,7 @@ public class Search extends BaseAction {
                 if (null != searchResponse.getSearchResultDone().getErrorMessage()) {
                     getSearchErrorMessages().add(searchResponse.getSearchResultDone().getErrorMessage());
                 } else {
-                    processSearchResultEntries(searchResponse.getSearchResultEntry());
+                    processSearchResultEntries(directoryId, directoryUri, searchResponse.getSearchResultEntry());
                 }
             } else if (value instanceof ErrorResponse) {
                 ErrorResponse errorResponse = (ErrorResponse) value;
@@ -238,13 +239,15 @@ public class Search extends BaseAction {
         return batchRequest;
     }
 
-    private void processSearchResultEntries(List<SearchResultEntry> searchResultEntries) {
+    private void processSearchResultEntries(String directoryId, String directoryUri, List<SearchResultEntry> searchResultEntries) {
         LOGGER.debug("processSearchResultEntries(List<SearchResultEntry>)");
         SearchResultWrapper[] newSearchResults = new SearchResultWrapper[searchResultEntries.size()];
         int index = 0;
         for (SearchResultEntry searchResultEntry : searchResultEntries) {
             SearchResultWrapper searchResultWrapper = new SearchResultWrapper();
             searchResultWrapper.setDn(searchResultEntry.getDn());
+            searchResultWrapper.setDirectoryId(directoryId);
+            searchResultWrapper.setDirectoryUri(directoryUri);
             List<DsmlAttr> dsmlAttributes = searchResultEntry.getAttr();
             Map<String, List<String>> attributesMap = new TreeMap<String, List<String>>();
             for (DsmlAttr dsmlAttribute : dsmlAttributes) {

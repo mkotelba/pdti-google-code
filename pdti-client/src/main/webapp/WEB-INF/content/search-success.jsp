@@ -13,7 +13,10 @@
 			<s:else>
 	            <s:iterator value="searchResults" var="searchResultWrapper">
 	            <tr>
-	               <td>DN: <s:property value="dn"/></td>
+                   <td>
+                       DIRECTORY ID: <s:property value="directoryId"/><br/>
+                       DIRECTORY URI: <s:property value="directoryUri"/><br/>
+                       DN: <s:property value="dn"/></td>
 	               <td>
 	                   <s:form action="search">
 	                       <s:hidden key="url"/>
