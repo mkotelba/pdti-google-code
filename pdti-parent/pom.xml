@@ -7,7 +7,7 @@
     
     <groupId>gov.hhs.onc.pdti</groupId>
     <artifactId>pdti-parent</artifactId>
-    <version>1.2_SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     
     <name>pdti-parent</name>
