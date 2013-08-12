@@ -86,7 +86,7 @@ objectClass: HPDProviderMembership
 hpdHasAnOrg: hpdOrgId=org100,ou=Organizations,o=dev2.provider-directories.com,dc=hpd
 hpdHasAProvider: HcIdentifier=provider100,ou=Providers,o=dev2.provider-directories.com,dc=hpd
 hpdMemberId: 100
-hpdMemberName: Maple Neurosurgery Clinic
+hpdHasAService: hpdServiceId=100,ou=Services,o=dev2.provider-directories.com
 
 #==================================================
 # END: MEMBERSHIP(S)
@@ -100,6 +100,14 @@ dn: ou=Services,o=dev2.provider-directories.com,dc=hpd
 objectClass: organizationalunit
 objectClass: top
 ou: Services
+
+dn: hpdServiceId=100,ou=Services,o=dev2.provider-directories.com,dc=hpd
+objectClass: top
+objectClass: HPDElectronicService
+hpdServiceAddress: http://caqh.org/SOAP/WSDL/CORERule2.2.0.wsdl
+hpdServiceId: 100
+hpdIntegrationProfile: CAQH CORE Connectivity Rule
+hpdContentProfile: CAQH CORE Phase I Operating Rules
 
 #==================================================
 # END: SERVICE(S)
