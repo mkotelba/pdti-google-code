@@ -93,8 +93,6 @@
 //dsml:searchResultEntry/dsml:attr/lower-case(@name)="mobile"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr title XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
 //dsml:searchResultEntry/dsml:attr/lower-case(@name)="title"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
-<con:assertion type="XPath Match" name="attr hpdProviderPracticeLocation XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdproviderpracticelocation"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr gender XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
 //dsml:searchResultEntry/dsml:attr/lower-case(@name)="gender"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdCredential XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
@@ -104,8 +102,7 @@
 <con:assertion type="XPath Match" name="attr HcRole XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
 //dsml:searchResultEntry/dsml:attr/lower-case(@name)="hcrole"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="count attr XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-count(//dsml:attr)</path><content>27</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
-
+count(//dsml:attr)</path><content>26</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:credentials>
               <con:username xsi:nil="true"/>
               <con:password xsi:nil="true"/>
@@ -192,12 +189,10 @@ count(//dsml:attr)</path><content>27</content><allowWildcards>false</allowWildca
 //dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdprovidermailingaddress"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdProviderPracticeAddress XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
 //dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdproviderpracticeaddress"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
-<con:assertion type="XPath Match" name="attr hpdProviderPracticeLocation XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdproviderpracticelocation"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdProviderStatus XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
 //dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdproviderstatus"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="count attr XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-count(//dsml:attr)</path><content>20</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+count(//dsml:attr)</path><content>19</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:credentials>
               <con:username xsi:nil="true"/>
               <con:password xsi:nil="true"/>
@@ -258,12 +253,6 @@ count(//dsml:attr)</path><content>20</content><allowWildcards>false</allowWildca
 //dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdhasaservice"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdHasAProvider XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
 //dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdhasaprovider"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
-<con:assertion type="XPath Match" name="attr hpdMemberName XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdmembername"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
-<con:assertion type="XPath Match" name="attr hpdMemberStatus XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdmemberstatus"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
-<con:assertion type="XPath Match" name="attr hpdMemberType XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdmembertype"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr mail XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
 //dsml:searchResultEntry/dsml:attr/lower-case(@name)="mail"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr mobile XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
@@ -275,8 +264,8 @@ count(//dsml:attr)</path><content>20</content><allowWildcards>false</allowWildca
 <con:assertion type="XPath Match" name="attr facsimileTelephoneNumber XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
 //dsml:searchResultEntry/dsml:attr/lower-case(@name)="facsimiletelephonenumber"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="count attr XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-count(//dsml:attr)</path><content>13</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
-            <con:credentials>
+count(//dsml:attr)</path><content>10</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:credentials>
               <con:username xsi:nil="true"/>
               <con:password xsi:nil="true"/>
               <con:domain xsi:nil="true"/>
@@ -334,15 +323,13 @@ count(//dsml:attr)</path><content>13</content><allowWildcards>false</allowWildca
 //dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdserviceid"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="attr hpdCertificate XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
 //dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdcertificate"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
-<con:assertion type="XPath Match" name="attr hpdServicePayload XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdservicepayload"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
-<con:assertion type="XPath Match" name="attr hpdServiceProtocol XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdserviceprotocol"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
-<con:assertion type="XPath Match" name="attr hpdServiceType XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdservicetype"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr hpdIntegrationProfile XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdintegrationprofile"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:assertion type="XPath Match" name="attr hpdContentProfile XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
+//dsml:searchResultEntry/dsml:attr/lower-case(@name)="hpdcontentprofile"</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
 <con:assertion type="XPath Match" name="count attr XPath Match"><con:configuration><path>declare namespace dsml='urn:oasis:names:tc:DSML:2:0:core';
-count(//dsml:attr)</path><content>7</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
-            <con:credentials>
+count(//dsml:attr)</path><content>6</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion>
+<con:credentials>
               <con:username xsi:nil="true"/>
               <con:password xsi:nil="true"/>
               <con:domain xsi:nil="true"/>
@@ -581,7 +568,7 @@ count(//dsml:attr)</path><content>1</content><allowWildcards>false</allowWildcar
 	               <dsml:attribute name="hpdProviderBillingAddress"/>
 	               <dsml:attribute name="hpdProviderPracticeAddress"/>
 	               <dsml:attribute name="hpdProviderLanguageSupported"/>
-	               <dsml:attribute name="hcSpeciailization"/>
+	               <dsml:attribute name="hcSpecialization"/>
 	               <dsml:attribute name="telephoneNumber"/>
 	               <dsml:attribute name="facsimileTelephoneNumber"/>
 	               <dsml:attribute name="hpdHasAService"/>
@@ -638,11 +625,8 @@ count(//dsml:attr)</path><content>1</content><allowWildcards>false</allowWildcar
                </dsml:filter>
                <dsml:attributes>
                   <dsml:attribute name="hpdMemberId"/>
-                  <dsml:attribute name="hpdMemberName"/>
                   <dsml:attribute name="hpdHasAProvider"/>
                   <dsml:attribute name="hpdHasAnOrg"/>
-                  <dsml:attribute name="hpdMemberStatus"/>
-                  <dsml:attribute name="hpdMemberType"/>
                   <dsml:attribute name="hpdHasAService"/>
                   <dsml:attribute name="telephoneNumber"/>
                   <dsml:attribute name="mail"/>
@@ -713,7 +697,6 @@ count(//dsml:attr)</path><content>1</content><allowWildcards>false</allowWildcar
 	               <dsml:attribute name="hpdProviderMailingAddress"/>
 	               <dsml:attribute name="hpdProviderBillingAddress"/>
 	               <dsml:attribute name="hpdProviderPracticeAddress"/>
-	               <dsml:attribute name="hpdProviderPracticeLocation"/>
 	               <dsml:attribute name="telephoneNumber"/>
 	               <dsml:attribute name="mobile"/>
 	               <dsml:attribute name="pager"/>
@@ -770,8 +753,8 @@ count(//dsml:attr)</path><content>1</content><allowWildcards>false</allowWildcar
                      <dsml:equalityMatch name="hpdServiceId">
                         <dsml:value>6</dsml:value>
                      </dsml:equalityMatch>
-                     <dsml:equalityMatch name="hpdServiceType">
-                        <dsml:value>Direct</dsml:value>
+                     <dsml:equalityMatch name="hpdIntegrationProfile">
+                        <dsml:value>DirectProjectSMTP</dsml:value>
                      </dsml:equalityMatch>
                   </dsml:and>
                </dsml:filter>
@@ -848,7 +831,6 @@ count(//dsml:attr)</path><content>1</content><allowWildcards>false</allowWildcar
                   <dsml:attribute name="hpdProviderMailingAddress"/>
                   <dsml:attribute name="hpdProviderBillingAddress"/>
                   <dsml:attribute name="hpdProviderPracticeAddress"/>
-                  <dsml:attribute name="hpdProviderPracticeLocation"/>
                   <dsml:attribute name="telephoneNumber"/>
                   <dsml:attribute name="mobile"/>
                   <dsml:attribute name="pager"/>
@@ -1461,7 +1443,6 @@ Request a specific individual by specifying the individual unique reference ID.<
 	               <dsml:attribute name="hpdProviderMailingAddress"/>
 	               <dsml:attribute name="hpdProviderBillingAddress"/>
 	               <dsml:attribute name="hpdProviderPracticeAddress"/>
-	               <dsml:attribute name="hpdProviderPracticeLocation"/>
 	               <dsml:attribute name="telephoneNumber"/>
 	               <dsml:attribute name="mobile"/>
 	               <dsml:attribute name="pager"/>
@@ -1531,7 +1512,7 @@ organization attributes.</con:description><con:settings/>
 	               <dsml:attribute name="hpdProviderBillingAddress"/>
 	               <dsml:attribute name="hpdProviderPracticeAddress"/>
 	               <dsml:attribute name="hpdProviderLanguageSupported"/>
-	               <dsml:attribute name="hcSpeciailization"/>
+	               <dsml:attribute name="hcSpecialization"/>
 	               <dsml:attribute name="telephoneNumber"/>
 	               <dsml:attribute name="facsimileTelephoneNumber"/>
 	               <dsml:attribute name="hpdHasAService"/>
@@ -1562,7 +1543,7 @@ organization attributes.</con:description><con:settings/>
           </con:request>
         </con:config>
       </con:testStep>
-      <con:testStep type="request" name="search_membership_by_hpdHasAnOrg_and_hpdHasASubOrg">
+      <con:testStep type="request" name="search_membership_by_hpdHasAnOrg_and_hpdHasASubOrg" disabled="true">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:interface>Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding</con:interface>
@@ -1593,9 +1574,6 @@ organization attributes.</con:description><con:settings/>
                   <dsml:attribute name="mobile"/>
                   <dsml:attribute name="pager"/>
                   <dsml:attribute name="mail"/>
-                  <dsml:attribute name="hpdMemberName"/>
-                  <dsml:attribute name="hpdMemberStatus"/>
-                  <dsml:attribute name="hpdMemberType"/>
                   <dsml:attribute name="hpdHasAProvider"/>
                   <dsml:attribute name="hpdHasASubOrg"/>
                   <dsml:attribute name="hpdMemberId"/>
@@ -1623,7 +1601,7 @@ organization attributes.</con:description><con:settings/>
             <con:wsrmConfig version="1.2"/>
           </con:request>
         </con:config>
-      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasASubOrg">
+      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasASubOrg" disabled="true">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:interface>Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding</con:interface>
@@ -1651,9 +1629,6 @@ organization attributes.</con:description><con:settings/>
                   <dsml:attribute name="mobile"/>
                   <dsml:attribute name="pager"/>
                   <dsml:attribute name="mail"/>
-                  <dsml:attribute name="hpdMemberName"/>
-                  <dsml:attribute name="hpdMemberStatus"/>
-                  <dsml:attribute name="hpdMemberType"/>
                   <dsml:attribute name="hpdHasAProvider"/>
                   <dsml:attribute name="hpdHasASubOrg"/>
                   <dsml:attribute name="hpdMemberId"/>
@@ -1718,7 +1693,7 @@ organization unique reference ID.</con:description><con:settings/><con:testStep 
 	               <dsml:attribute name="hpdProviderBillingAddress"/>
 	               <dsml:attribute name="hpdProviderPracticeAddress"/>
 	               <dsml:attribute name="hpdProviderLanguageSupported"/>
-	               <dsml:attribute name="hcSpeciailization"/>
+	               <dsml:attribute name="hcSpecialization"/>
 	               <dsml:attribute name="telephoneNumber"/>
 	               <dsml:attribute name="facsimileTelephoneNumber"/>
 	               <dsml:attribute name="hpdHasAService"/>
@@ -1748,7 +1723,7 @@ organization unique reference ID.</con:description><con:settings/><con:testStep 
             <con:wsrmConfig version="1.2"/>
           </con:request>
         </con:config>
-      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasAnOrg_and_hpdHasASubOrg">
+      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasAnOrg_and_hpdHasASubOrg" disabled="true">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:interface>Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding</con:interface>
@@ -1779,9 +1754,6 @@ organization unique reference ID.</con:description><con:settings/><con:testStep 
                   <dsml:attribute name="mobile"/>
                   <dsml:attribute name="pager"/>
                   <dsml:attribute name="mail"/>
-                  <dsml:attribute name="hpdMemberName"/>
-                  <dsml:attribute name="hpdMemberStatus"/>
-                  <dsml:attribute name="hpdMemberType"/>
                   <dsml:attribute name="hpdHasAProvider"/>
                   <dsml:attribute name="hpdHasASubOrg"/>
                   <dsml:attribute name="hpdMemberId"/>
@@ -1809,7 +1781,7 @@ organization unique reference ID.</con:description><con:settings/><con:testStep 
             <con:wsrmConfig version="1.2"/>
           </con:request>
         </con:config>
-      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasASubOrg">
+      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasASubOrg" disabled="true">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:interface>Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding</con:interface>
@@ -1837,9 +1809,6 @@ organization unique reference ID.</con:description><con:settings/><con:testStep 
                   <dsml:attribute name="mobile"/>
                   <dsml:attribute name="pager"/>
                   <dsml:attribute name="mail"/>
-                  <dsml:attribute name="hpdMemberName"/>
-                  <dsml:attribute name="hpdMemberStatus"/>
-                  <dsml:attribute name="hpdMemberType"/>
                   <dsml:attribute name="hpdHasAProvider"/>
                   <dsml:attribute name="hpdHasASubOrg"/>
                   <dsml:attribute name="hpdMemberId"/>
@@ -1916,7 +1885,6 @@ relationships are returned.</con:description><con:settings/>
 	               <dsml:attribute name="hpdProviderMailingAddress"/>
 	               <dsml:attribute name="hpdProviderBillingAddress"/>
 	               <dsml:attribute name="hpdProviderPracticeAddress"/>
-	               <dsml:attribute name="hpdProviderPracticeLocation"/>
 	               <dsml:attribute name="telephoneNumber"/>
 	               <dsml:attribute name="mobile"/>
 	               <dsml:attribute name="pager"/>
@@ -1976,11 +1944,8 @@ relationships are returned.</con:description><con:settings/>
                   <dsml:attribute name="mobile"/>
                   <dsml:attribute name="pager"/>
                   <dsml:attribute name="mail"/>
-                  <dsml:attribute name="hpdMemberName"/>
-                  <dsml:attribute name="hpdMemberStatus"/>
-                  <dsml:attribute name="hpdMemberType"/>
                   <dsml:attribute name="hpdHasAProvider"/>
-                  <dsml:attribute name="hpdHasASubOrg"/>
+                  <!--<dsml:attribute name="hpdHasASubOrg"/>-->
                   <dsml:attribute name="hpdMemberId"/>
                   <dsml:attribute name="hpdHasAnOrg"/>
                </dsml:attributes>
@@ -2006,7 +1971,7 @@ relationships are returned.</con:description><con:settings/>
             <con:wsrmConfig version="1.2"/>
           </con:request>
         </con:config>
-      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasAnOrg_and_hpdHasASubOrg">
+      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasAnOrg_and_hpdHasASubOrg" disabled="true">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:interface>Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding</con:interface>
@@ -2037,12 +2002,9 @@ relationships are returned.</con:description><con:settings/>
                </dsml:filter>
                <dsml:attributes>
                   <dsml:attribute name="hpdMemberId"/>
-                  <dsml:attribute name="hpdMemberName"/>
                   <dsml:attribute name="hpdHasAProvider"/>
                   <dsml:attribute name="hpdHasAnOrg"/>
                   <dsml:attribute name="hpdHasASubOrg"/>
-                  <dsml:attribute name="hpdMemberStatus"/>
-                  <dsml:attribute name="hpdMemberType"/>
                   <dsml:attribute name="hpdHasAService"/>
                   <dsml:attribute name="telephoneNumber"/>
                   <dsml:attribute name="mail"/>
@@ -2072,7 +2034,7 @@ relationships are returned.</con:description><con:settings/>
             <con:wsrmConfig version="1.2"/>
           </con:request>
         </con:config>
-      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasASubOrg">
+      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasASubOrg" disabled="true">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:interface>Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding</con:interface>
@@ -2100,12 +2062,9 @@ relationships are returned.</con:description><con:settings/>
                </dsml:filter>
                <dsml:attributes>
                   <dsml:attribute name="hpdMemberId"/>
-                  <dsml:attribute name="hpdMemberName"/>
                   <dsml:attribute name="hpdHasAProvider"/>
                   <dsml:attribute name="hpdHasAnOrg"/>
                   <dsml:attribute name="hpdHasASubOrg"/>
-                  <dsml:attribute name="hpdMemberStatus"/>
-                  <dsml:attribute name="hpdMemberType"/>
                   <dsml:attribute name="hpdHasAService"/>
                   <dsml:attribute name="telephoneNumber"/>
                   <dsml:attribute name="mail"/>
@@ -2178,7 +2137,7 @@ relationships are returned.</con:description><con:settings/>
 	               <dsml:attribute name="hpdProviderBillingAddress"/>
 	               <dsml:attribute name="hpdProviderPracticeAddress"/>
 	               <dsml:attribute name="hpdProviderLanguageSupported"/>
-	               <dsml:attribute name="hcSpeciailization"/>
+	               <dsml:attribute name="hcSpecialization"/>
 	               <dsml:attribute name="telephoneNumber"/>
 	               <dsml:attribute name="facsimileTelephoneNumber"/>
 	               <dsml:attribute name="hpdHasAService"/>
@@ -2239,11 +2198,8 @@ relationships are returned.</con:description><con:settings/>
                   <dsml:attribute name="mobile"/>
                   <dsml:attribute name="pager"/>
                   <dsml:attribute name="mail"/>
-                  <dsml:attribute name="hpdMemberName"/>
-                  <dsml:attribute name="hpdMemberStatus"/>
-                  <dsml:attribute name="hpdMemberType"/>
                   <dsml:attribute name="hpdHasAProvider"/>
-                  <dsml:attribute name="hpdHasASubOrg"/>
+                  <!--<dsml:attribute name="hpdHasASubOrg"/>-->
                   <dsml:attribute name="hpdMemberId"/>
                   <dsml:attribute name="hpdHasAnOrg"/>
                </dsml:attributes>
@@ -2269,7 +2225,7 @@ relationships are returned.</con:description><con:settings/>
             <con:wsrmConfig version="1.2"/>
           </con:request>
         </con:config>
-      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasASubOrg">
+      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasASubOrg" disabled="true">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:interface>Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding</con:interface>
@@ -2297,9 +2253,6 @@ relationships are returned.</con:description><con:settings/>
                   <dsml:attribute name="mobile"/>
                   <dsml:attribute name="pager"/>
                   <dsml:attribute name="mail"/>
-                  <dsml:attribute name="hpdMemberName"/>
-                  <dsml:attribute name="hpdMemberStatus"/>
-                  <dsml:attribute name="hpdMemberType"/>
                   <dsml:attribute name="hpdHasAProvider"/>
                   <dsml:attribute name="hpdHasASubOrg"/>
                   <dsml:attribute name="hpdMemberId"/>
@@ -2327,7 +2280,7 @@ relationships are returned.</con:description><con:settings/>
             <con:wsrmConfig version="1.2"/>
           </con:request>
         </con:config>
-      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasAnOrg_and_hpdHasAProvider">
+      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasAnOrg_and_hpdHasAProvider" disabled="true">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:interface>Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding</con:interface>
@@ -2353,12 +2306,9 @@ relationships are returned.</con:description><con:settings/>
                </dsml:filter>
                <dsml:attributes>
                   <dsml:attribute name="hpdMemberId"/>
-                  <dsml:attribute name="hpdMemberName"/>
                   <dsml:attribute name="hpdHasAProvider"/>
                   <dsml:attribute name="hpdHasAnOrg"/>
                   <dsml:attribute name="hpdHasASubOrg"/>
-                  <dsml:attribute name="hpdMemberStatus"/>
-                  <dsml:attribute name="hpdMemberType"/>
                   <dsml:attribute name="hpdHasAService"/>
                   <dsml:attribute name="telephoneNumber"/>
                   <dsml:attribute name="mail"/>
@@ -2433,7 +2383,6 @@ relationships are returned.</con:description><con:settings/>
                   <dsml:attribute name="hpdProviderMailingAddress"/>
                   <dsml:attribute name="hpdProviderBillingAddress"/>
                   <dsml:attribute name="hpdProviderPracticeAddress"/>
-                  <dsml:attribute name="hpdProviderPracticeLocation"/>
                   <dsml:attribute name="telephoneNumber"/>
                   <dsml:attribute name="mobile"/>
                   <dsml:attribute name="pager"/>
@@ -2517,7 +2466,6 @@ other organizations are returned. </con:description><con:settings/>
 	               <dsml:attribute name="hpdProviderMailingAddress"/>
 	               <dsml:attribute name="hpdProviderBillingAddress"/>
 	               <dsml:attribute name="hpdProviderPracticeAddress"/>
-	               <dsml:attribute name="hpdProviderPracticeLocation"/>
 	               <dsml:attribute name="telephoneNumber"/>
 	               <dsml:attribute name="mobile"/>
 	               <dsml:attribute name="pager"/>
@@ -2587,7 +2535,7 @@ other organizations are returned. </con:description><con:settings/>
                   <dsml:attribute name="hpdProviderBillingAddress"/>
                   <dsml:attribute name="hpdProviderPracticeAddress"/>
                   <dsml:attribute name="hpdProviderLanguageSupported"/>
-                  <dsml:attribute name="hcSpeciailization"/>
+                  <dsml:attribute name="hcSpecialization"/>
                      <dsml:attribute name="telephoneNumber"/>
                   <dsml:attribute name="facsimileTelephoneNumber"/>
                   <dsml:attribute name="hpdHasAService"/>
@@ -2617,7 +2565,7 @@ other organizations are returned. </con:description><con:settings/>
             <con:wsrmConfig version="1.2"/>
           </con:request>
         </con:config>
-      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasAnOrg_and_hpdHasASubOrg">
+      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasAnOrg_and_hpdHasASubOrg" disabled="true">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:interface>Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding</con:interface>
@@ -2653,9 +2601,6 @@ other organizations are returned. </con:description><con:settings/>
                   <dsml:attribute name="mobile"/>
                   <dsml:attribute name="pager"/>
                   <dsml:attribute name="mail"/>
-                  <dsml:attribute name="hpdMemberName"/>
-                  <dsml:attribute name="hpdMemberStatus"/>
-                  <dsml:attribute name="hpdMemberType"/>
                   <dsml:attribute name="hpdHasAProvider"/>
                   <dsml:attribute name="hpdHasASubOrg"/>
                   <dsml:attribute name="hpdMemberId"/>
@@ -2683,7 +2628,7 @@ other organizations are returned. </con:description><con:settings/>
             <con:wsrmConfig version="1.2"/>
           </con:request>
         </con:config>
-      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasASubOrg">
+      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasASubOrg" disabled="true">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:interface>Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding</con:interface>
@@ -2716,9 +2661,6 @@ other organizations are returned. </con:description><con:settings/>
                   <dsml:attribute name="mobile"/>
                   <dsml:attribute name="pager"/>
                   <dsml:attribute name="mail"/>
-                  <dsml:attribute name="hpdMemberName"/>
-                  <dsml:attribute name="hpdMemberStatus"/>
-                  <dsml:attribute name="hpdMemberType"/>
                   <dsml:attribute name="hpdHasAProvider"/>
                   <dsml:attribute name="hpdHasASubOrg"/>
                   <dsml:attribute name="hpdMemberId"/>
@@ -2746,7 +2688,7 @@ other organizations are returned. </con:description><con:settings/>
             <con:wsrmConfig version="1.2"/>
           </con:request>
         </con:config>
-      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasAnOrg_and_hpdHasAProvider">
+      </con:testStep><con:testStep type="request" name="search_membership_by_hpdHasAnOrg_and_hpdHasAProvider" disabled="true">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:interface>Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding</con:interface>
@@ -2779,12 +2721,9 @@ other organizations are returned. </con:description><con:settings/>
                </dsml:filter>
                <dsml:attributes>
                   <dsml:attribute name="hpdMemberId"/>
-                  <dsml:attribute name="hpdMemberName"/>
                   <dsml:attribute name="hpdHasAProvider"/>
                   <dsml:attribute name="hpdHasAnOrg"/>
                   <dsml:attribute name="hpdHasASubOrg"/>
-                  <dsml:attribute name="hpdMemberStatus"/>
-                  <dsml:attribute name="hpdMemberType"/>
                   <dsml:attribute name="hpdHasAService"/>
                   <dsml:attribute name="telephoneNumber"/>
                   <dsml:attribute name="mail"/>
@@ -2817,7 +2756,7 @@ other organizations are returned. </con:description><con:settings/>
       </con:testStep><con:properties/>
     </con:testCase><con:properties/>
   </con:testSuite>
-    <con:testSuite name="Requirement_7 _Plus"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Retrieve_Service_via_Membership" searchProperties="true" id="e5c0c8af-3610-4959-8244-6b95f150907e"><con:settings/><con:testStep type="request" name="search_membership_by_hpdHasAnOrg">
+    <con:testSuite name="Requirement_7 _Plus"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Retrieve_Service_via_Membership" searchProperties="true" id="e5c0c8af-3610-4959-8244-6b95f150907e"><con:settings/><con:testStep type="request" name="search_membership_by_hpdHasAnOrg" disabled="true">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:interface>Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding</con:interface>
@@ -2843,12 +2782,9 @@ other organizations are returned. </con:description><con:settings/>
                </dsml:filter>
                <dsml:attributes>
                   <dsml:attribute name="hpdMemberId"/>
-                  <dsml:attribute name="hpdMemberName"/>
                   <dsml:attribute name="hpdHasAProvider"/>
                   <dsml:attribute name="hpdHasAnOrg"/>
                   <dsml:attribute name="hpdHasASubOrg"/>
-                  <dsml:attribute name="hpdMemberStatus"/>
-                  <dsml:attribute name="hpdMemberType"/>
                   <dsml:attribute name="hpdHasAService"/>
                   <dsml:attribute name="telephoneNumber"/>
                   <dsml:attribute name="mail"/>
@@ -2902,10 +2838,9 @@ other organizations are returned. </con:description><con:settings/>
             <dsml:attributes>
                <dsml:attribute name="hpdServiceId"/>
                <dsml:attribute name="hpdServiceAddress"/>
-               <dsml:attribute name="hpdServicePayload"/>
-               <dsml:attribute name="hpdServiceProtocol"/>
-               <dsml:attribute name="hpdServiceType"/>
                <dsml:attribute name="hpdCertificate"/>
+               <dsml:attribute name="hpdIntegrationProfile"/>
+               <dsml:attribute name="hpdContentProfile"/>
             </dsml:attributes>
          </dsml:searchRequest>
       </dsml:batchRequest>

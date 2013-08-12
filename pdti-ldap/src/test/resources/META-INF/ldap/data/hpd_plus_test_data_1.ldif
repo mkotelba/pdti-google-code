@@ -46,7 +46,6 @@ hpdProviderLanguageSupported: en
 hpdProviderLegalAddress: Thomas Jones$01251 Chestnut Street$Panama City, DE 50369
 hpdProviderMailingAddress: Thomas Jones$01251 Chestnut Street$Panama City, DE 50369
 hpdProviderPracticeAddress: Thomas Jones$01251 Chestnut Street$Panama City, DE 50369
-hpdProviderPracticeLocation: HPD Plus hpdProviderPracticeLocation attributeType
 hpdProviderStatus: Active
 
 dn: HcIdentifier=provider2,ou=Providers,o=dev.provider-directories.com,dc=hpd
@@ -142,7 +141,6 @@ hpdProviderLanguageSupported: en
 hpdProviderLegalAddress: Thomas Jones$01251 Chestnut Street$Panama City, DE 50369
 hpdProviderMailingAddress: Dr. Thomas Jones Private Practice$01251 Chestnut Street$Panama City, DE 50369
 hpdProviderPracticeAddress: Thomas Jones$01251 Chestnut Street$Panama City, DE 50369
-hpdProviderPracticeLocation: Thomas Jones$01251 Chestnut Street$Panama City, DE 50369
 hpdProviderStatus: Active
 
 dn: hpdOrgId=org2,ou=Organizations,o=dev.provider-directories.com,dc=hpd
@@ -175,7 +173,6 @@ hpdProviderStatus: Active
 hpdProviderLanguageSupported: en sp jpn
 hpdProviderBillingAddress: Billing$123 Peachtree Street$Atlanta, GA 30032
 hpdProviderPracticeAddress: Practice$123 Peachtree Street$Atlanta, GA 30032
-hpdProviderPracticeLocation: PracticeLocation$123 Peachtree Street$Atlanta, GA 30032
 hpdProviderLegalAddress: Legal$123 Peachtree Street$Atlanta, GA 30032
 
 dn: hpdOrgId=org5,ou=Organizations,o=dev.provider-directories.com,dc=hpd
@@ -198,7 +195,6 @@ hpdProviderStatus: Active
 hpdProviderLanguageSupported: en sp jpn
 hpdProviderBillingAddress: Billing$123 Peachtree Street$Atlanta, GA 30032
 hpdProviderPracticeAddress: Practice$123 Peachtree Street$Atlanta, GA 30032
-hpdProviderPracticeLocation: PracticeLocation$123 Peachtree Street$Atlanta, GA 30032
 hpdProviderLegalAddress: Legal$123 Peachtree Street$Atlanta, GA 30032
 hpdHasAService: hpdServiceId=4,ou=Services,o=dev.provider-directories.com,dc=hpd
 hpdCredential: hpdCredentialId=2,ou=Credentials,o=dev.provider-directories.com,dc=hpd
@@ -216,7 +212,6 @@ objectClass: organizationalunit
 objectClass: top
 ou: Memberships
 
-
 dn: hpdMemberId=1,ou=Memberships,o=dev.provider-directories.com,dc=hpd
 objectClass: top
 objectClass: HPDProviderMembership
@@ -225,15 +220,11 @@ hpdMemberId: 1
 hpdHasAService: hpdServiceId=1,ou=Services,o=dev.provider-directories.com,dc=hpd^hpdServiceId=2,ou=Services,o=dev.provider-directories.com,dc=hpd^hpdServiceId=3,ou=Services,o=dev.provider-directories.com,dc=hpd
 hpdHasAProvider: HcIdentifier=provider1,ou=Providers,o=dev.provider-directories.com,dc=hpd
 #hpdHasASubOrg: should only have hpdHasAProvider OR hpdHasASubOrg. See membership hpdMemberId=5 for an example that does contain this attribute.
-hpdMemberName: Dr Thomas Jones' Private Practice
-hpdMemberStatus: Active
-hpdMemberType: individualToOrg
 mail: hpdmemberid1@direct.direct.org
 mobile: +1 123 456 7890
 pager: +1 123 456 7890
 telephoneNumber: +1 123 456 7890
 facsimileTelephoneNumber: +1 123 456 7890
-
 
 dn: hpdMemberId=2,ou=Memberships,o=dev.provider-directories.com,dc=hpd
 objectClass: top
@@ -241,7 +232,6 @@ objectClass: HPDProviderMembership
 hpdHasAnOrg: hpdOrgId=org2,ou=Organizations,o=dev.provider-directories.com,dc=hpd
 hpdHasAProvider: HcIdentifier=provider2,ou=Providers,o=dev.provider-directories.com,dc=hpd
 hpdMemberId: 2
-hpdMemberName: Panama City Clinic
 
 dn: hpdMemberId=3,ou=Memberships,o=dev.provider-directories.com,dc=hpd
 objectClass: top
@@ -254,30 +244,16 @@ dn: hpdMemberId=4,ou=Memberships,o=dev.provider-directories.com,dc=hpd
 objectClass: top
 objectClass: HPDProviderMembership
 hpdHasAnOrg: hpdOrgId=org5,ou=Organizations,o=dev.provider-directories.com,dc=hpd
-hpdHasASubOrg: hpdOrgId=org4,ou=Organizations,o=dev.provider-directories.com,dc=hpd
-#hpdHasAProvider: 
-#hpdHasAService: hpdServiceId=1,ou=Services,o=dev.provider-directories.com,dc=hpd^hpdServiceId=2,ou=Services,o=dev.provider-directories.com,dc=hpd^hpdServiceId=3,ou=Services,o=dev.provider-directories.com,dc=hpd
+#hpdHasASubOrg: hpdOrgId=org4,ou=Organizations,o=dev.provider-directories.com,dc=hpd
 hpdMemberId: 4
-hpdMemberName: Northside Maternity Unit Membership to Northside Hospital
-hpdMemberStatus: Active
-hpdMemberType: subOrgToOrg
-#mail:
-#mobile: 
-#pager: 
-#telephoneNumber: 
-#facsimileTelephoneNumber: 
 
 dn: hpdMemberId=5,ou=Memberships,o=dev.provider-directories.com,dc=hpd
 objectClass: top
 objectClass: HPDProviderMembership
 hpdHasAnOrg: hpdOrgId=org4,ou=Organizations,o=dev.provider-directories.com,dc=hpd
-#hpdHasASubOrg: 
 hpdHasAProvider: HcIdentifier=provider3,ou=Providers,o=dev.provider-directories.com,dc=hpd
 hpdHasAService: hpdServiceId=5,ou=Services,o=dev.provider-directories.com,dc=hpd^hpdServiceId=2,ou=Services,o=dev.provider-directories.com,dc=hpd^hpdServiceId=3,ou=Services,o=dev.provider-directories.com,dc=hpd
 hpdMemberId: 5
-hpdMemberName: Bob Jefferson Membership to Northside Maternity Org
-hpdMemberStatus: Active
-hpdMemberType: individualToOrg
 
 #==================================================
 # END: MEMBERSHIP(S)
@@ -312,34 +288,29 @@ hpdCertificate: MIICqjCCAZKgAwIBAgIJAMd5Vfs3Eo6kMA0GCSqGSIb3DQEBBQUAMA0xCzAJBgNV
  BVZ7UVeAKftcDwpBdggJxvEAoEGvRpm7X8OlqQI2jmm/Oxlw70mjCZTzJFtOFOJf
  homCEiQXSz/4tobOgw66ooBNWUd7f5MfAhquBV2/kDK5bnbOGJ30vzHBj9CUf8tT
  flVoSO0cwbuGBddusEU=
-hpdServicePayload: hpdServicePayload
-hpdServiceProtocol: SMTP
-hpdServiceType: Direct
+hpdIntegrationProfile: DirectProjectSMTP
+hpdContentProfile: PDF
 
 dn: hpdServiceId=2,ou=Services,o=dev.provider-directories.com,dc=hpd
 objectClass: top
 objectClass: HPDElectronicService
-hpdServiceAddress: https://service2.com:8181/DocumentRepository_Service/DocumentRepository
-hpdServiceProtocol: SOAP
-hpdServiceType: DocumentRepository
-hpdServicePayload: CCD^PDF
+hpdServiceAddress: https://service2.com:8181/DocumentRegistry_Service/DocumentRegistry
 hpdServiceId: 2
+hpdIntegrationProfile: SOAP
+hpdContentProfile: XDS:DocumentRegistry:Provide&Register
 
 dn: hpdServiceId=3,ou=Services,o=dev.provider-directories.com,dc=hpd
 objectClass: top
 objectClass: HPDElectronicService
-hpdServiceAddress: https://service3.com:8181/DocumentRegistry_Service/DocumentRegistry
-hpdServiceProtocol: SOAP
-hpdServiceType: DocumentRegistry
-hpdServicePayload: CCD^PDF
+hpdServiceAddress: 67.59.166.230:5000
 hpdServiceId: 3
+hpdIntegrationProfile: MLLP HL7 V2.5
+hpdContentProfile: S&ILRIORURO1
 
 dn: hpdServiceId=4,ou=Services,o=dev.provider-directories.com,dc=hpd
 objectClass: top
 objectClass: HPDElectronicService
 hpdServiceAddress: thomas.jones@direct.service1.com
-hpdServiceProtocol: SMTP
-hpdServiceType: Direct
 hpdServiceId: 4
 hpdCertificate: MIICqjCCAZKgAwIBAgIJAMd5Vfs3Eo6kMA0GCSqGSIb3DQEBBQUAMA0xCzAJBgNV
  BAMTAm1rMB4XDTEzMDUwMjE0MzMyNVoXDTIzMDQzMDE0MzMyNVowDTELMAkGA1UE
@@ -356,14 +327,13 @@ hpdCertificate: MIICqjCCAZKgAwIBAgIJAMd5Vfs3Eo6kMA0GCSqGSIb3DQEBBQUAMA0xCzAJBgNV
  BVZ7UVeAKftcDwpBdggJxvEAoEGvRpm7X8OlqQI2jmm/Oxlw70mjCZTzJFtOFOJf
  homCEiQXSz/4tobOgw66ooBNWUd7f5MfAhquBV2/kDK5bnbOGJ30vzHBj9CUf8tT
  flVoSO0cwbuGBddusEU=
-hpdServicePayload: C32
+hpdIntegrationProfile: DirectProjectSMTP
+hpdContentProfile: C32
 
 dn: hpdServiceId=5,ou=Services,o=dev.provider-directories.com,dc=hpd
 objectClass: top
 objectClass: HPDElectronicService
 hpdServiceAddress: bob.jefferson@direct.northside.maternity.com
-hpdServiceProtocol: SMTP
-hpdServiceType: Direct
 hpdServiceId: 5
 hpdCertificate: MIICqjCCAZKgAwIBAgIJAMd5Vfs3Eo6kMA0GCSqGSIb3DQEBBQUAMA0xCzAJBgNV
  BAMTAm1rMB4XDTEzMDUwMjE0MzMyNVoXDTIzMDQzMDE0MzMyNVowDTELMAkGA1UE
@@ -380,14 +350,13 @@ hpdCertificate: MIICqjCCAZKgAwIBAgIJAMd5Vfs3Eo6kMA0GCSqGSIb3DQEBBQUAMA0xCzAJBgNV
  BVZ7UVeAKftcDwpBdggJxvEAoEGvRpm7X8OlqQI2jmm/Oxlw70mjCZTzJFtOFOJf
  homCEiQXSz/4tobOgw66ooBNWUd7f5MfAhquBV2/kDK5bnbOGJ30vzHBj9CUf8tT
  flVoSO0cwbuGBddusEU=
-hpdServicePayload: C64
+hpdIntegrationProfile: DirectProjectSMTP
+hpdContentProfile: C64
 
 dn: hpdServiceId=6,ou=Services,o=dev.provider-directories.com,dc=hpd
 objectClass: top
 objectClass: HPDElectronicService
 hpdServiceAddress: john.smith@direct.panama_city_clinic.com
-hpdServiceProtocol: SMTP
-hpdServiceType: Direct
 hpdServiceId: 6
 hpdCertificate: MIICqjCCAZKgAwIBAgIJAMd5Vfs3Eo6kMA0GCSqGSIb3DQEBBQUAMA0xCzAJBgNV
  BAMTAm1rMB4XDTEzMDUwMjE0MzMyNVoXDTIzMDQzMDE0MzMyNVowDTELMAkGA1UE
@@ -404,7 +373,8 @@ hpdCertificate: MIICqjCCAZKgAwIBAgIJAMd5Vfs3Eo6kMA0GCSqGSIb3DQEBBQUAMA0xCzAJBgNV
  BVZ7UVeAKftcDwpBdggJxvEAoEGvRpm7X8OlqQI2jmm/Oxlw70mjCZTzJFtOFOJf
  homCEiQXSz/4tobOgw66ooBNWUd7f5MfAhquBV2/kDK5bnbOGJ30vzHBj9CUf8tT
  flVoSO0cwbuGBddusEU=
-hpdServicePayload: C64
+hpdIntegrationProfile: DirectProjectSMTP
+hpdContentProfile: C64
 
 #==================================================
 # END: SERVICE(S)
