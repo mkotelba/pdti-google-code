@@ -1,6 +1,6 @@
 <project name="PDTI_prod_deployment" default="deploy" basedir=".">
 
-    <fail unless="catalina.lib.dir" message="catalina.lib.dir property must be set."/>
+    <fail unless="java.lib.dir" message="java.lib.dir property must be set."/>
     <fail unless="server.war" message="server.war property must be set."/>
     <fail unless="client.war" message="client.war property must be set."/>
     <fail unless="prod1.deploy.url" message="prod1.deploy.url property must be set."/>
@@ -12,7 +12,7 @@
     
     <taskdef resource="org/apache/catalina/ant/catalina.tasks">
         <classpath>
-            <fileset dir="${catalina.lib.dir}">
+            <fileset dir="${java.lib.dir}">
                 <include name="*.jar"/>
             </fileset>
         </classpath>
