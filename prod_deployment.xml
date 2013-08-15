@@ -1,7 +1,6 @@
 <project name="PDTI_prod_deployment" default="deploy" basedir=".">
 
-    <fail unless="server.war" message="server.war property must be set."/>
-    <fail unless="catalina.ant.jar" message="catalina.ant.jar property must be set."/>
+    <fail unless="catalina.lib.dir" message="catalina.lib.dir property must be set."/>
     <fail unless="server.war" message="server.war property must be set."/>
     <fail unless="client.war" message="client.war property must be set."/>
     <fail unless="prod1.deploy.url" message="prod1.deploy.url property must be set."/>
@@ -11,7 +10,13 @@
     <fail unless="prod2.deploy.user" message="prod2.deploy.user property must be set."/>
     <fail unless="prod2.deploy.pass" message="prod2.deploy.pass property must be set."/>
     
-    <taskdef resource="org/apache/catalina/ant/catalina.tasks" classpath="${catalina.ant.jar}"/>
+    <taskdef resource="org/apache/catalina/ant/catalina.tasks">
+        <classpath>
+            <fileset dir="${catalina.lib.dir}">
+                <include name="*.jar"/>
+            </fileset>
+        </classpath>
+    </taskdef>
     
     <property name="temp.dir" value="${basedir}/.pdti_temp"/>
     <property name="prod1.server.dir" value="${temp.dir}/prod1_server"/>
