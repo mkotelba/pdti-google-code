@@ -26,9 +26,9 @@
     <property name="prod2.server.dir" value="${temp.dir}/prod2_server"/>
     <property name="prod2.server.extracted.dir" value="${prod2.server.dir}/extracted"/>
     <property name="server.war.name" value="pdti-server.war"/>
-    <property name="server.context" value="pdti-server"/>
+    <property name="server.context" value="/pdti-server"/>
     <property name="client.war.name" value="pdti-client.war"/>
-    <property name="client.context" value="pdti-client"/>
+    <property name="client.context" value="/pdti-client"/>
 
     <target name="deploy">
         <echo message="server.war =${server.war}"/>
@@ -47,6 +47,7 @@
             <replacetoken><![CDATA[o=dev.provider-directories.com,dc=hpd]]></replacetoken>
         </replace>
         <zip destfile="${prod2.server.dir}/${server.war.name}" basedir="${prod2.server.extracted.dir}"/>
+        <undeploy url="${prod2.deploy.url}" username="${prod2.deploy.user}" password="${prod2.deploy.pass}" path="${server.context}"/>
         <deploy url="${prod2.deploy.url}" username="${prod2.deploy.user}" password="${prod2.deploy.pass}" path="${server.context}" war="file:${prod2.server.dir}/${server.war.name}"/>
         
         <mkdir dir="${prod1.server.extracted.dir}"/>
@@ -57,10 +58,10 @@
         <replace file="${prod1.server.extracted.dir}/META-INF/data/directory/directory-default.xml" value="PDTI_PROD_1_HPDPLUS">
             <replacetoken><![CDATA[pdti-hpdplus-dir_#{ new java.util.Date().time }]]></replacetoken>
         </replace>
-        <replace file="${prod1.server.extracted.dir}/META-INF/data/directory/directory-default.xml" value="prod-provider-directories.com">
+        <replace file="${prod1.server.extracted.dir}/META-INF/data/directory/directory-default.xml" value="prod.provider-directories.com">
             <replacetoken><![CDATA[localhost:8080]]></replacetoken>
         </replace>
-        <replace file="${prod1.server.extracted.dir}/META-INF/data/federation/federation-default.xml" value="prod-provider-directories.com">
+        <replace file="${prod1.server.extracted.dir}/META-INF/data/federation/federation-default.xml">
             <replacetoken><![CDATA[<!-- Intentionally left empty (no default federation configuration) -->]]></replacetoken>
             <replacevalue><![CDATA[
     <beans:bean id="hpdPlusFederatedDirTest1" class="gov.hhs.onc.pdti.data.impl.DirectoryDescriptorImpl" parent="federatedDir"
@@ -72,14 +73,16 @@
     </beans:bean>]]></replacevalue>
         </replace>
         <zip destfile="${prod1.server.dir}/${server.war.name}" basedir="${prod1.server.extracted.dir}"/>
+        <undeploy url="${prod1.deploy.url}" username="${prod1.deploy.user}" password="${prod1.deploy.pass}" path="${server.context}"/>
         <deploy url="${prod1.deploy.url}" username="${prod1.deploy.user}" password="${prod1.deploy.pass}" path="${server.context}" war="file:${prod1.server.dir}/${server.war.name}"/>
         
         <mkdir dir="${prod1.client.extracted.dir}"/>
         <unzip src="${client.war}" dest="${prod1.client.extracted.dir}"/>
-        <replace file="${prod1.client.extracted.dir}/WEB-INF/classes/pdti-client.properties" value="prod-provider-directories.com">
+        <replace file="${prod1.client.extracted.dir}/WEB-INF/classes/pdti-client.properties" value="prod.provider-directories.com">
             <replacetoken><![CDATA[localhost:8080]]></replacetoken>
         </replace>
         <zip destfile="${prod1.client.dir}/${client.war.name}" basedir="${prod1.client.extracted.dir}"/>
+        <undeploy url="${prod1.deploy.url}" username="${prod1.deploy.user}" password="${prod1.deploy.pass}" path="${client.context}"/>
         <deploy url="${prod1.deploy.url}" username="${prod1.deploy.user}" password="${prod1.deploy.pass}" path="${client.context}" war="file:${prod1.client.dir}/${client.war.name}"/>
     </target>
 
