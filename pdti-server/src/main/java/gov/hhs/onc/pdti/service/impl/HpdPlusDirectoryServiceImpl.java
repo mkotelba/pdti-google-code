@@ -1,5 +1,6 @@
 package gov.hhs.onc.pdti.service.impl;
 
+
 import gov.hhs.onc.pdti.DirectoryStandard;
 import gov.hhs.onc.pdti.DirectoryStandardId;
 import gov.hhs.onc.pdti.DirectoryType;
@@ -14,6 +15,8 @@ import gov.hhs.onc.pdti.util.DirectoryUtils;
 import gov.hhs.onc.pdti.ws.api.BatchRequest;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusErrorType;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusMetadataProperties;
+import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusMetadataProperty;
+import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusMetadataPropertyName;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusRequest;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusRequestMetadata;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusResponse;
@@ -65,10 +68,12 @@ public class HpdPlusDirectoryServiceImpl extends AbstractDirectoryService<HpdPlu
                 }
             }
 
-            try {
-                hpdPlusResp.getResponseItems().addAll(this.fedService.federate(hpdPlusReq));
-            } catch (Throwable th) {
-                this.addError(dirId, reqId, hpdPlusResp, th);
+            if (!this.containsMetadataProperty(reqMeta, HpdPlusMetadataPropertyName.DO_NOT_FEDERATE)) {
+                try {
+                    hpdPlusResp.getResponseItems().addAll(this.fedService.federate(hpdPlusReq));
+                } catch (Throwable th) {
+                    this.addError(dirId, reqId, hpdPlusResp, th);
+                }
             }
 
             this.transferMetadata(reqMeta, hpdPlusResp);
@@ -97,6 +102,22 @@ public class HpdPlusDirectoryServiceImpl extends AbstractDirectoryService<HpdPlu
     protected void addError(String dirId, String reqId, HpdPlusResponse hpdPlusResp, Throwable th) {
         // TODO: improve error handling
         hpdPlusResp.getErrors().add(this.errBuilder.buildError(dirId, reqId, HpdPlusErrorType.OTHER, th));
+    }
+
+    private boolean containsMetadataProperty(HpdPlusRequestMetadata reqMeta, HpdPlusMetadataPropertyName metaPropName) {
+        HpdPlusMetadataProperties metaProps = null;
+
+        if ((reqMeta == null) || ((metaProps = reqMeta.getProperties()) == null)) {
+            return false;
+        }
+
+        for (HpdPlusMetadataProperty metaProp : metaProps.getProperty()) {
+            if (metaProp.getName().equals(metaPropName)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void transferMetadata(HpdPlusRequestMetadata reqMeta, HpdPlusResponse hpdPlusResp) {
