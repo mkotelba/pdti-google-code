@@ -32,6 +32,7 @@
 
     <target name="deploy">
         <echo message="server.war =${server.war}"/>
+    	<delete dir="${prod2.server.extracted.dir}"/>
         <mkdir dir="${prod2.server.extracted.dir}"/>
         <unzip src="${server.war}" dest="${prod2.server.extracted.dir}"/>
         <replace file="${prod2.server.extracted.dir}/META-INF/data/directory/directory-default.xml" value="PDTI_PROD_2_DSML_BASED">
