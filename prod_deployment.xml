@@ -41,7 +41,7 @@
         <replace file="${prod2.server.extracted.dir}/META-INF/data/directory/directory-default.xml" value="PDTI_PROD_2_HPDPLUS">
             <replacetoken><![CDATA[pdti-hpdplus-dir_#{ new java.util.Date().time }]]></replacetoken>
         </replace>
-        <replace file="${prod2.server.extracted.dir}/META-INF/data/directory/directory-default.xml" value="prod-2-provider-directories.com">
+        <replace file="${prod2.server.extracted.dir}/META-INF/data/directory/directory-default.xml" value="prod2.provider-directories.com">
             <replacetoken><![CDATA[localhost:8080]]></replacetoken>
         </replace>
         <replace file="${prod2.server.extracted.dir}/META-INF/data/directory/directory-default.xml" value="o=dev2.provider-directories.com,dc=hpd">
