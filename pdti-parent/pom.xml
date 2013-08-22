@@ -16,25 +16,14 @@
     
     <pluginRepositories>
         <pluginRepository>
-            <id>central</id>
-            <name>Maven Plugin Repository</name>
-            <url>http://repo1.maven.org/maven2</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <releases>
-                <updatePolicy>never</updatePolicy>
-            </releases>
-        </pluginRepository>
-        <pluginRepository>
             <id>eviware</id>
-            <name>eviware Plugin Repository</name>
-            <url>http://www.eviware.com/repository/maven2</url>
+            <name>SoapUI Plugin Repository</name>
+            <url>http://www.soapui.org/repository/maven2</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
             <releases>
-                <updatePolicy>never</updatePolicy>
+                <updatePolicy>daily</updatePolicy>
             </releases>
         </pluginRepository>
     </pluginRepositories>
