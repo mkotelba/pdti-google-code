@@ -30,6 +30,12 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>pdti-server</artifactId>
             <version>${project.version}</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>pdti-server</artifactId>
+            <version>${project.version}</version>
             <scope>test</scope>
             <type>test-jar</type>
         </dependency>
@@ -121,6 +127,26 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
+                        <id>unpack-pdti-server-war</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>pdti-server</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>war</type>
+                                </artifactItem>
+                            </artifactItems>
+                            <includes>favicon.ico,img/**</includes>
+                            <outputDirectory>${project.build.directory}/${project.build.finalName}</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>unpack-pdti-server-test-jar</id>
                         <phase>process-sources</phase>
                         <goals>
                             <goal>unpack</goal>
