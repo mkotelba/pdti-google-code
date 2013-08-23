@@ -31,7 +31,8 @@
     <properties>
         <java.version>1.7</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.build.testScriptSourceDirectory>${project.basedir}/src/test/scripts</project.build.testScriptSourceDirectory>
+        <project.build.testScriptSourceDirectory>${project.basedir}/src/test/scripts</project.build.testScriptSourceDirectory>        
+        <struts2.version>2.3.14</struts2.version>
     </properties>
     
     <dependencyManagement>
@@ -424,18 +425,16 @@
                 </property>
             </activation>
             <build>
-                <pluginManagement>
-                    <plugins>
-                        <plugin>
-                            <groupId>com.github.redfish4ktc.soapui</groupId>
-                            <artifactId>maven-soapui-extension-plugin</artifactId>
-                            <inherited>true</inherited>
-                            <configuration combine.children="merge">
-                                <testSuite>${soapui.testSuite}</testSuite>
-                            </configuration>
-                        </plugin>
-                    </plugins>
-                </pluginManagement>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.redfish4ktc.soapui</groupId>
+                        <artifactId>maven-soapui-extension-plugin</artifactId>
+                        <inherited>true</inherited>
+                        <configuration combine.children="merge">
+                            <testSuite>${soapui.testSuite}</testSuite>
+                        </configuration>
+                    </plugin>
+                </plugins>
             </build>
         </profile>
         <!-- Select SoapUI testCase to run -->
@@ -447,18 +446,16 @@
                 </property>
             </activation>
             <build>
-                <pluginManagement>
-                    <plugins>
-                        <plugin>
-                            <groupId>com.github.redfish4ktc.soapui</groupId>
-                            <artifactId>maven-soapui-extension-plugin</artifactId>
-                            <inherited>true</inherited>
-                            <configuration combine.children="merge">
-                                <testCase>${soapui.testCase}</testCase>
-                            </configuration>
-                        </plugin>
-                    </plugins>
-                </pluginManagement>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.redfish4ktc.soapui</groupId>
+                        <artifactId>maven-soapui-extension-plugin</artifactId>
+                        <inherited>true</inherited>
+                        <configuration combine.children="merge">
+                            <testCase>${soapui.testCase}</testCase>
+                        </configuration>
+                    </plugin>
+                </plugins>
             </build>
         </profile>
         <!-- Set Tomcat manager URL property if not defined already -->

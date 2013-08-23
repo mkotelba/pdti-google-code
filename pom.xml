@@ -25,5 +25,6 @@
         <module>pdti-ws</module>
         <module>pdti-server</module>
         <module>pdti-client</module>
+        <module>pdti-testtool</module>
     </modules>
 </project>
