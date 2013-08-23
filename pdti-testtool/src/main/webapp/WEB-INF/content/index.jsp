@@ -4,13 +4,18 @@
 	<%@ include file="head.jsp"%>
 	<body>
         <div class="container">
-	        <h3><s:text name="title" /></h3>
+	        <h3 id="title">
+                <img src="img/pdti-logo.png" id="title-img"/>
+                <span id="title-content">
+                    <s:text name="title"/>
+                </span>
+            </h3>
 	        <hr/>
             <s:form action="execute" class="form-inline">
                 <fieldset>
-                    <s:textfield style="width: 400px;" key="wsdlUrl"/>
-                    <s:textfield style="width: 400px;" key="baseDn"/>
-	                <s:submit />
+                    <s:textfield key="wsdlUrl"/>
+                    <s:textfield key="baseDn"/>
+	                <s:submit/>
                 </fieldset>
             </s:form>
         </div>

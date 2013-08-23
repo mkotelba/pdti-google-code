@@ -1,0 +1,17 @@
+h3#title {
+    line-height: 64px;
+}
+
+img#title-img {
+    width: 64px;
+    height: 64px;
+    margin-right: 5px;
+}
+
+span#title-content {
+    vertical-align: middle;
+}
+
+div.back-container {
+    text-align:center;
+}
