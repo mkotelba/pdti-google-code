@@ -1,12 +1,12 @@
 package gov.hhs.onc.pdti.testtool.actions;
 
 import gov.hhs.onc.pdti.testtool.soapui.TestExecutor;
-
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Execute extends BaseAction {
 
-    private static final Logger LOGGER = Logger.getLogger(Execute.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Execute.class);
     
     private String wsdlUrl;
     private String baseDn;
