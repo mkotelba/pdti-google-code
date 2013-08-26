@@ -1,5 +1,6 @@
 package gov.hhs.onc.pdti.test.interceptor.impl;
 
+
 import gov.hhs.onc.pdti.DirectoryStandard;
 import gov.hhs.onc.pdti.DirectoryStandardId;
 import gov.hhs.onc.pdti.DirectoryType;
@@ -16,28 +17,28 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-@Component("hpdPlusFedLoopTestInterceptor")
+@Component("hpdPlusDupReqIdTestInterceptor")
 @DirectoryStandard(DirectoryStandardId.HPD_PLUS_PROPOSED)
 @Order(0)
 @Scope("singleton")
-public class HpdPlusFederationLoopTestInterceptorImpl extends AbstractFederationLoopTestInterceptor<HpdPlusRequest, HpdPlusResponse> {
+public class HpdPlusDuplicateRequestIdTestInterceptorImpl extends AbstractDuplicateRequestIdTestInterceptor<HpdPlusRequest, HpdPlusResponse> {
     @Override
     public void interceptRequest(DirectoryDescriptor dirDesc, String reqId, HpdPlusRequest hpdPlusReq) throws DirectoryInterceptorException {
-        this.setFederationLoopTest(reqId, true);
+        this.setDuplicateRequestIdTest(reqId, true);
     }
 
     @Override
     public void interceptResponse(DirectoryDescriptor dirDesc, String reqId, HpdPlusRequest hpdPlusReq, HpdPlusResponse hpdPlusResp)
             throws DirectoryInterceptorException {
-        this.setFederationLoopTest(reqId, false);
+        this.setDuplicateRequestIdTest(reqId, false);
     }
 
     @Autowired(required = false)
     @DirectoryStandard(DirectoryStandardId.HPD_PLUS_PROPOSED)
     @DirectoryType(DirectoryTypeId.FEDERATED)
-    @DirectoryTestType(DirectoryTestTypeId.FEDERATION_LOOP)
+    @DirectoryTestType(DirectoryTestTypeId.DUPLICATE_REQUEST_ID)
     @Override
-    protected void setFederationLoopTestDirectories(List<DirectoryDescriptor> fedLoopTestDirs) {
-        this.fedLoopTestDirs = fedLoopTestDirs;
+    protected void setDuplicateRequestIdTestDirectories(List<DirectoryDescriptor> dupReqIdTestDirs) {
+        this.dupReqIdTestDirs = dupReqIdTestDirs;
     }
 }

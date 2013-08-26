@@ -1,5 +1,6 @@
 package gov.hhs.onc.pdti.ws.handler.impl;
 
+
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheStats;
@@ -11,7 +12,7 @@ import gov.hhs.onc.pdti.jaxb.DirectoryJaxb2Marshaller;
 import gov.hhs.onc.pdti.ws.handler.DirectoryHandler;
 import gov.hhs.onc.pdti.ws.handler.DirectoryHandlerException;
 import gov.hhs.onc.pdti.ws.handler.DirectoryRequestCacheDescriptor;
-import gov.hhs.onc.pdti.ws.handler.FederationLoopException;
+import gov.hhs.onc.pdti.ws.handler.DuplicateRequestIdException;
 import java.util.Date;
 import java.util.concurrent.Semaphore;
 import javax.xml.bind.JAXBElement;
@@ -23,8 +24,9 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.scheduling.TaskScheduler;
 import org.springframework.ws.soap.server.endpoint.annotation.SoapFault;
 
 public abstract class AbstractDirectoryHandler<T, U> implements DirectoryHandler<T, U>, RemovalListener<String, Date> {
@@ -59,8 +61,7 @@ public abstract class AbstractDirectoryHandler<T, U> implements DirectoryHandler
         Date reqDate;
 
         if ((reqDate = dirReqCache.getIfPresent(reqId)) != null) {
-            throw new FederationLoopException("Directory federation loop detected - request (requestId=" + reqId + ", requestDate=" + reqDate
-                    + ") was already registered.");
+            throw new DuplicateRequestIdException("Duplicate directory request ID (" + reqId + ") detected - already registered at: " + reqDate);
         }
 
         reqDate = new Date();
@@ -80,15 +81,16 @@ public abstract class AbstractDirectoryHandler<T, U> implements DirectoryHandler
         dirReqCache.invalidate(reqId);
     }
 
-    @Scheduled(fixedDelayString = "#{ dirReqCacheDescriptor.cleanUpInterval }")
     public synchronized void cleanUpRequests() {
         this.checkDirectoryRequestCache();
 
-        dirReqCache.cleanUp();
-
         CacheStats dirReqCacheStats = dirReqCache.stats();
 
-        LOGGER.trace("Cleaned up directory request cache: " + dirReqCacheStats);
+        dirReqCache.cleanUp();
+
+        if (dirReqCacheStats.evictionCount() > 0) {
+            LOGGER.trace("Cleaned up directory request cache: " + dirReqCacheStats);
+        }
 
         // Resetting directory request cache statistics
         dirReqCacheStats.minus(dirReqCacheStats);
@@ -104,8 +106,6 @@ public abstract class AbstractDirectoryHandler<T, U> implements DirectoryHandler
         try {
             if (this.isRequest(logicalMsgContext)) {
                 this.registerRequest(this.getRequestId(logicalMsgContext, logicalMsgContext.getMessage(), this.reqClass));
-            } else if (this.isResponse(logicalMsgContext)) {
-                this.releaseRequest(this.getRequestId(logicalMsgContext, logicalMsgContext.getMessage(), this.respClass));
             }
         } catch (RuntimeException e) {
             if (e.getClass().getAnnotation(SoapFault.class) != null) {

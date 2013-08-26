@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class AbstractFederationService<T, U> implements FederationService<T, U> {
-    protected final static String FED_LOOP_MSG_PATTERN = "^.+Directory federation loop detected.+$";
+    protected final static String DUP_REQ_ID_MSG_PATTERN = "^.+Duplicate directory request ID.+$";
 
     @Autowired
     protected DirectoryErrorBuilder errBuilder;
@@ -78,8 +78,8 @@ public abstract class AbstractFederationService<T, U> implements FederationServi
         }
     }
 
-    protected boolean isFederationLoopSoapFault(SOAPFaultException e) {
-        return e.getMessage().matches(FED_LOOP_MSG_PATTERN);
+    protected boolean isDuplicateRequestIdSoapFault(SOAPFaultException e) {
+        return e.getMessage().matches(DUP_REQ_ID_MSG_PATTERN);
     }
 
     protected abstract void addError(String fedDirId, String reqId, U fedQueryResp, Throwable th);

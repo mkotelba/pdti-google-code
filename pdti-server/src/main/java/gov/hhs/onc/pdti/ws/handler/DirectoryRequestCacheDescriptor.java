@@ -3,9 +3,9 @@ package gov.hhs.onc.pdti.ws.handler;
 public interface DirectoryRequestCacheDescriptor {
     public String toCacheBuilderSpecString();
 
-    public int getCleanUpInterval();
+    public long getCleanUpInterval();
 
-    public void setCleanUpInterval(int cleanUpInterval);
+    public void setCleanUpInterval(long cleanUpInterval);
 
     public int getConcurrencyLevel();
 

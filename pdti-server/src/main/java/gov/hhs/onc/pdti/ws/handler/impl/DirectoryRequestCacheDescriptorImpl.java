@@ -41,7 +41,7 @@ public class DirectoryRequestCacheDescriptorImpl implements DirectoryRequestCach
     private boolean weakValues;
     private String refreshAfterWrite;
     private String refreshInterval;
-    private int cleanUpInterval = -1;
+    private long cleanUpInterval = -1;
 
     @Override
     public String toCacheBuilderSpecString() {
@@ -95,12 +95,12 @@ public class DirectoryRequestCacheDescriptorImpl implements DirectoryRequestCach
     }
 
     @Override
-    public int getCleanUpInterval() {
+    public long getCleanUpInterval() {
         return this.cleanUpInterval;
     }
 
     @Override
-    public void setCleanUpInterval(int cleanUpInterval) {
+    public void setCleanUpInterval(long cleanUpInterval) {
         this.cleanUpInterval = cleanUpInterval;
     }
 

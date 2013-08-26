@@ -65,7 +65,7 @@
             <xsd:enumeration value="unresolvableURI"/>
             <xsd:enumeration value="other"/>
             <!-- New to (extended) HPD Plus -->
-            <xsd:enumeration value="federationLoop"/>
+            <xsd:enumeration value="duplicateRequestId"/>
             <xsd:enumeration value="organizationalQueryRulesViolation"/>
         </xsd:restriction>
     </xsd:simpleType>
