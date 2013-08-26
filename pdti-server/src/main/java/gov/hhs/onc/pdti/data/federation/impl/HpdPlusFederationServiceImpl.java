@@ -59,8 +59,8 @@ public class HpdPlusFederationServiceImpl extends AbstractFederationService<HpdP
         HpdPlusError hpdPlusErr = null;
 
         if (SOAPFaultException.class.isAssignableFrom(thClass)) {
-            if (this.isFederationLoopSoapFault((SOAPFaultException) th)) {
-                hpdPlusErr = this.errBuilder.buildError(fedDirId, reqId, HpdPlusErrorType.FEDERATION_LOOP, th);
+            if (this.isDuplicateRequestIdSoapFault((SOAPFaultException) th)) {
+                hpdPlusErr = this.errBuilder.buildError(fedDirId, reqId, HpdPlusErrorType.DUPLICATE_REQUEST_ID, th);
             }
         }
 

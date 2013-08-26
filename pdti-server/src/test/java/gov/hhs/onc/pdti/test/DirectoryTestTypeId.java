@@ -3,7 +3,7 @@ package gov.hhs.onc.pdti.test;
 import gov.hhs.onc.pdti.DirectoryEnumId;
 
 public enum DirectoryTestTypeId implements DirectoryEnumId {
-    FEDERATION_LOOP("federation_loop");
+    DUPLICATE_REQUEST_ID("duplicate_request_id");
 
     private String id;
 

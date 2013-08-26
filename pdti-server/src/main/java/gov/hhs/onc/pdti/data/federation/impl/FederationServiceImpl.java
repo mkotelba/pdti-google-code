@@ -58,7 +58,7 @@ public class FederationServiceImpl extends AbstractFederationService<BatchReques
         ErrorResponse errResp = null;
 
         if (SOAPFaultException.class.isAssignableFrom(thClass)) {
-            if (this.isFederationLoopSoapFault((SOAPFaultException) th)) {
+            if (this.isDuplicateRequestIdSoapFault((SOAPFaultException) th)) {
                 // TODO: add error customization
                 errResp = this.errBuilder.buildErrorResponse(reqId, ErrorType.OTHER, th);
             }
