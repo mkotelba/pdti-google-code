@@ -18,7 +18,21 @@
     
     <name>${project.artifactId}</name>
     <description>Provider Directories Test Implementation (PDTI) test tool webapp.</description>
-    <url>http://dev.provider-directories.com/pdti-testtool/</url>
+    <url>http://api.provider-directories.com/${project.artifactId}/${project.version}/</url>
+    
+    <scm>
+        <url>http://code.google.com/p/pdti/source/browse/${project.artifactId}/</url>
+        <developerConnection>scm:hg:https://code.google.com/p/pdti/</developerConnection>
+        <connection>scm:hg:http://code.google.com/p/pdti/</connection>
+    </scm>
+    
+    <distributionManagement>
+        <site>
+            <id>api.provider-directories.com</id>
+            <name>api.provider-directories.com</name>
+            <url>dav:http://api.provider-directories.com/${project.artifactId}/${project.version}/</url>
+        </site>
+    </distributionManagement>
     
     <dependencies>
         <dependency>
@@ -133,13 +147,6 @@
         </dependency>
     </dependencies>
     
-    <repositories>
-        <repository>
-            <id>eviware</id>
-            <url>http://www.eviware.com/repository/maven2/</url>
-        </repository>
-    </repositories>
-    
     <build>
         <finalName>${project.artifactId}</finalName>
         <plugins>
@@ -158,7 +165,7 @@
                 <executions>
                     <execution>
                         <id>unpack-pdti-server-war</id>
-                        <phase>process-sources</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>unpack</goal>
                         </goals>
@@ -177,7 +184,7 @@
                     </execution>
                     <execution>
                         <id>unpack-pdti-server-test-jar</id>
-                        <phase>process-sources</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>unpack</goal>
                         </goals>

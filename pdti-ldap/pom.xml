@@ -17,7 +17,21 @@
     
     <name>pdti-ldap</name>
     <description>Provider Directories Test Implementation (PDTI) LDAP-related data.</description>
-    <url>http://dev.provider-directories.com/pdti-ldap/</url>
+    <url>http://api.provider-directories.com/${project.artifactId}/${project.version}/</url>
+    
+    <scm>
+        <url>http://code.google.com/p/pdti/source/browse/${project.artifactId}/</url>
+        <developerConnection>scm:hg:https://code.google.com/p/pdti/</developerConnection>
+        <connection>scm:hg:http://code.google.com/p/pdti/</connection>
+    </scm>
+    
+    <distributionManagement>
+        <site>
+            <id>api.provider-directories.com</id>
+            <name>api.provider-directories.com</name>
+            <url>dav:http://api.provider-directories.com/${project.artifactId}/${project.version}/</url>
+        </site>
+    </distributionManagement>
     
     <build>
         <plugins>
