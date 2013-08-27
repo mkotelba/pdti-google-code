@@ -17,7 +17,21 @@
     
     <name>pdti-server</name>
     <description>Provider Directories Test Implementation (PDTI) server webapp.</description>
-    <url>http://dev.provider-directories.com/pdti-server/</url>
+    <url>http://api.provider-directories.com/${project.artifactId}/${project.version}/</url>
+    
+    <scm>
+        <url>http://code.google.com/p/pdti/source/browse/${project.artifactId}/</url>
+        <developerConnection>scm:hg:https://code.google.com/p/pdti/</developerConnection>
+        <connection>scm:hg:http://code.google.com/p/pdti/</connection>
+    </scm>
+    
+    <distributionManagement>
+        <site>
+            <id>api.provider-directories.com</id>
+            <name>api.provider-directories.com</name>
+            <url>dav:http://api.provider-directories.com/${project.artifactId}/${project.version}/</url>
+        </site>
+    </distributionManagement>
     
     <dependencies>
         <dependency>
@@ -259,7 +273,7 @@
                                     <goal>test</goal>
                                 </goals>
                                 <configuration>
-                                    <outputFolder>${project.build.directory}/soapui-reports</outputFolder>
+                                    <outputFolder>${project.build.directory}/surefire-reports</outputFolder>
                                     <projectFile>${project.build.testOutputDirectory}/soapui-project.xml</projectFile>
                                     <projectProperties>
                                         <value>project.test.server.wsdl.url=${project.test.server.1.scheme}://${project.test.server.1.host}:${project.test.server.1.port}/${project.test.server.1.context}/${project.service}?wsdl</value>
@@ -281,7 +295,7 @@
                                     <goal>test</goal>
                                 </goals>
                                 <configuration>
-                                    <outputFolder>${project.build.directory}/soapui-reports</outputFolder>
+                                    <outputFolder>${project.build.directory}/surefire-reports</outputFolder>
                                     <projectFile>${project.build.testOutputDirectory}/soapui-project_hpdplus.xml</projectFile>
                                     <projectProperties>
                                         <value>project.test.server.wsdl.url=${project.test.server.1.scheme}://${project.test.server.1.host}:${project.test.server.1.port}/${project.test.server.1.context}/${project.service.hpdplus}?wsdl</value>
