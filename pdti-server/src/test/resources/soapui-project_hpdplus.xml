@@ -1014,7 +1014,7 @@ count(//dsml:attr)</path><content>1</content><allowWildcards>false</allowWildcar
       <con:properties/>
     </con:testCase><con:properties/>
   </con:testSuite>
-  <con:testSuite name="Message_Compliance_Plus"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="RequestIDs_Equal" searchProperties="true" id="0815e6ca-486e-41dd-ba1f-86701778f6db"><con:settings/><con:testStep type="request" name="RequestIDs_Equal">
+  <con:testSuite name="Message_Compliance_Plus"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="RequestIDs_Equal" searchProperties="true" id="0815e6ca-486e-41dd-ba1f-86701778f6db"><con:description>Asserts that the attribute requestID sent in with the request is identical to the one sent back in the response.</con:description><con:settings/><con:testStep type="request" name="RequestIDs_Equal">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:interface>Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding</con:interface>
@@ -1101,7 +1101,7 @@ for (i in responseIDs){
             <con:wsrmConfig version="1.2"/>
           </con:request>
         </con:config>
-      </con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Unallowed_Metadata" searchProperties="true"><con:settings/><con:testStep type="request" name="Unallowed_Metadata">
+      </con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Unallowed_Metadata" searchProperties="true"><con:description>HPDPlus-only test case. Populates metadata with an unallowed value and expects an error response.</con:description><con:settings/><con:testStep type="request" name="Unallowed_Metadata">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:interface>Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding</con:interface>
@@ -1196,7 +1196,7 @@ for (i in responseIDs){
             <con:wsrmConfig version="1.2"/>
           </con:request>
         </con:config>
-      </con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Allowed_Metadata" searchProperties="true"><con:settings/><con:testStep type="request" name="Allowed_Metadata">
+      </con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Allowed_Metadata" searchProperties="true"><con:description>HPDPlus-only test case.Populates metadata with all of the allowed values and expects a successful response.</con:description><con:settings/><con:testStep type="request" name="Allowed_Metadata">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:interface>Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding</con:interface>
@@ -1288,14 +1288,14 @@ count(//dsml:attr)</path><content>1</content><allowWildcards>false</allowWildcar
   <con:testSuite name="Federation_Plus">
         <con:settings/>
         <con:runType>SEQUENTIAL</con:runType>
-        <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="dup_req_id_test_hpdplus" searchProperties="true" id="d32cf9e5-f39b-4ab7-a71e-e1198c61ad97">
+        <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="duplicate_requestID" searchProperties="true" id="d32cf9e5-f39b-4ab7-a71e-e1198c61ad97">
             <con:settings/>
-            <con:testStep type="request" name="dup_req_id_test_hpdplus">
+            <con:testStep type="request" name="duplicate_requestID">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <con:interface>Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="dup_req_id_test_hpdplus" outgoingWss="" incomingWss="">
+                <con:request name="duplicate_requestID" outgoingWss="" incomingWss="">
                     <con:settings>
                     <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
                     </con:settings>
@@ -1304,15 +1304,15 @@ count(//dsml:attr)</path><content>1</content><allowWildcards>false</allowWildcar
                     <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
    <soap-env:Body>
       <hpdplus:hpdPlusRequest requestID="${=project.name}_${=testSuite.name}_${=testCase.name}_${=testStep.name}_${=request.name}" xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
-          <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-             <dsml:searchRequest dn="ou=Providers,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
-                <dsml:filter>
-                   <dsml:present name="uid"/>
-                </dsml:filter>
-                    <!--dsml:attributes>
+         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <dsml:searchRequest dn="ou=Providers,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
+               <dsml:filter>
+                  <dsml:present name="uid"/>
+               </dsml:filter>
+               <!--dsml:attributes>
                     </dsml:attributes-->
-             </dsml:searchRequest>
-          </dsml:batchRequest>
+            </dsml:searchRequest>
+         </dsml:batchRequest>
       </hpdplus:hpdPlusRequest>
    </soap-env:Body>
 </soap-env:Envelope>]]></con:request>
@@ -1358,14 +1358,14 @@ assert(response["//hpdplus:hpdPlusError/@type"].contains("duplicateRequestId"));
       </con:testStep>
       <con:properties/>
     </con:testCase>
-      <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="dup_req_id_federation_loop_test_hpdplus" searchProperties="true" id="c32cf9e5-f39b-4ab7-a71e-e1198c61ad97">
+      <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="federation_loop_test" searchProperties="true" id="c32cf9e5-f39b-4ab7-a71e-e1198c61ad97">
             <con:settings/>
-            <con:testStep type="request" name="dup_req_id_federation_loop_test_hpdplus">
+            <con:testStep type="request" name="federation_loop_test">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <con:interface>Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-                <con:request name="dup_req_id_federation_loop_test_hpdplus" outgoingWss="" incomingWss="">
+                <con:request name="federation_loop_test" outgoingWss="" incomingWss="">
                     <con:settings>
                     <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
                     </con:settings>
@@ -1413,7 +1413,7 @@ assert(response["//hpdplus:hpdPlusError/@type"].contains("duplicateRequestId"));
       </con:testStep>
       <con:properties/>
     </con:testCase>
-   <con:properties/></con:testSuite><con:testSuite name="Requirement_6_Plus">
+   <con:properties/></con:testSuite><con:testSuite name="S&amp;I_Use_Cases_Plus">
     <con:description>See http://wiki.siframework.org/file/view/ESI%20Query%20and%20Response.pdf for
 details about these test cases. Two test cases, Find Unique Individual and Find Unique
 Organization, were intentionally omitted.</con:description><con:settings/>
