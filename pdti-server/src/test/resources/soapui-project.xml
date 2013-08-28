@@ -984,7 +984,7 @@ count(//dsml:attr)</path><content>1</content><allowWildcards>false</allowWildcar
       <con:properties/>
     </con:testCase><con:properties/>
   </con:testSuite>
-  <con:testSuite name="Message_Compliance"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="RequestIDs_Equal" searchProperties="true" id="7630e26d-c4fe-4b96-800f-672e70358c3c"><con:settings/><con:testStep type="request" name="RequestIDs_Equal">
+  <con:testSuite name="Message_Compliance"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="RequestIDs_Equal" searchProperties="true" id="7630e26d-c4fe-4b96-800f-672e70358c3c"><con:description>Asserts that the attribute requestID sent in with the request is identical to the one sent back in the response.</con:description><con:settings/><con:testStep type="request" name="RequestIDs_Equal">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
@@ -1071,14 +1071,14 @@ for (i in responseIDs){
   <con:testSuite name="Federation">
         <con:settings/>
         <con:runType>SEQUENTIAL</con:runType>
-        <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="dup_req_id_test" searchProperties="true" id="d32cf9e5-f39b-4ab7-a71e-e1198c61ad97">
+        <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="duplicate_requestID" searchProperties="true" id="d32cf9e5-f39b-4ab7-a71e-e1198c61ad97">
             <con:settings/>
-            <con:testStep type="request" name="dup_req_id_test">
+            <con:testStep type="request" name="duplicate_requestID">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
-                <con:request name="dup_req_id_test" outgoingWss="" incomingWss="">
+                <con:request name="duplicate_requestID" outgoingWss="" incomingWss="">
                     <con:settings>
                     <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
                     </con:settings>
@@ -1137,14 +1137,14 @@ assert(response["//dsml:errorResponse/dsml:message/text()"].join("\n").contains(
       </con:testStep>
       <con:properties/>
     </con:testCase>
-    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="dup_req_id_federation_loop_test" searchProperties="true" id="c32cf9e5-f39b-4ab7-a71e-e1198c61ad97">
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="federation_loop_test" searchProperties="true" id="c32cf9e5-f39b-4ab7-a71e-e1198c61ad97">
             <con:settings/>
-            <con:testStep type="request" name="dup_req_id_federation_loop_test">
+            <con:testStep type="request" name="federation_loop_test">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
-                <con:request name="dup_req_id_federation_loop_test" outgoingWss="" incomingWss="">
+                <con:request name="federation_loop_test" outgoingWss="" incomingWss="">
                     <con:settings>
                     <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
                     </con:settings>
@@ -1190,7 +1190,7 @@ assert(response["//dsml:errorResponse/dsml:message/text()"].join("\n").contains(
       </con:testStep>
       <con:properties/>
     </con:testCase>
-   <con:properties/></con:testSuite><con:testSuite name="Requirement_6">
+   <con:properties/></con:testSuite><con:testSuite name="S&amp;I_Use_Cases">
     <con:description>See http://wiki.siframework.org/file/view/ESI%20Query%20and%20Response.pdf for
 details about these test cases. Two test cases, Find Unique Individual and Find Unique
 Organization, were intentionally omitted.</con:description><con:settings/>
