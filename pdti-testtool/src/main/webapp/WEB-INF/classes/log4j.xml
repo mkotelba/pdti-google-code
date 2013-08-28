@@ -21,7 +21,7 @@
         <param name="threshold" value="all"/>
 
         <layout class="org.apache.log4j.EnhancedPatternLayout">
-            <param name="conversionPattern" value="%m%n"/>
+            <param name="conversionPattern" value="%p - %m%n"/>
         </layout>
     </appender>
     
@@ -51,13 +51,18 @@
     <!--==================================================
     = LOGGERS: DEPENDENCIES
     ===================================================-->
-    <logger name="com.opensymphony" additivity="false">
+    <logger name="com.opensymphony.xwork2" additivity="false">
         <level value="warn"/>
         <appender-ref ref="consoleApp"/>
         <appender-ref ref="fileApp"/>
     </logger>
     <logger name="org.apache.struts2" additivity="false">
         <level value="info"/>
+        <appender-ref ref="consoleApp"/>
+        <appender-ref ref="fileApp"/>
+    </logger>
+    <logger name="org.apache.struts2.config" additivity="false">
+        <level value="warn"/>
         <appender-ref ref="consoleApp"/>
         <appender-ref ref="fileApp"/>
     </logger>
@@ -86,7 +91,7 @@
     </logger>
     <!--========== ROOT ==========-->
     <root>
-        <level value="all"/>
+        <level value="warn"/>
         <appender-ref ref="consoleApp"/>
         <appender-ref ref="fileApp"/>
     </root>
