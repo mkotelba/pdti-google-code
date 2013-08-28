@@ -1,0 +1,30 @@
+span.wsdlUrl {
+    padding: 2px;
+    border: 1px dashed black;
+    font-family: monospace;
+}
+
+div#testResults {
+    height: 100%;
+    margin: 10px 0 -160px 0;
+}
+
+table#testResultsTable {
+    width: 100%;
+}
+
+th.testResultsHeader {
+    border: 1px solid black;
+}
+
+tr.testResultsRow {
+}
+
+td.testResultsData {
+    border: 1px dotted black;
+}
+
+div.backContainer {
+    margin-top: 10px;
+    text-align: center;
+}
