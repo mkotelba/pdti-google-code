@@ -1071,14 +1071,14 @@ for (i in responseIDs){
   <con:testSuite name="Federation">
         <con:settings/>
         <con:runType>SEQUENTIAL</con:runType>
-        <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="duplicate_requestID" searchProperties="true" id="d32cf9e5-f39b-4ab7-a71e-e1198c61ad97">
+        <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="dup_req_id_test" searchProperties="true" id="d32cf9e5-f39b-4ab7-a71e-e1198c61ad97">
             <con:settings/>
-            <con:testStep type="request" name="duplicate_requestID">
+            <con:testStep type="request" name="dup_req_id_test">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
-                <con:request name="duplicate_requestID" outgoingWss="" incomingWss="">
+                <con:request name="dup_req_id_test" outgoingWss="" incomingWss="">
                     <con:settings>
                     <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
                     </con:settings>
@@ -1137,14 +1137,14 @@ assert(response["//dsml:errorResponse/dsml:message/text()"].join("\n").contains(
       </con:testStep>
       <con:properties/>
     </con:testCase>
-    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="federation_loop_test" searchProperties="true" id="c32cf9e5-f39b-4ab7-a71e-e1198c61ad97">
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="dup_req_id_federation_loop_test" searchProperties="true" id="c32cf9e5-f39b-4ab7-a71e-e1198c61ad97">
             <con:settings/>
-            <con:testStep type="request" name="federation_loop_test">
+            <con:testStep type="request" name="dup_req_id_federation_loop_test">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <con:interface>ProviderInformationDirectory_Port_SoapBinding</con:interface>
                 <con:operation>ProviderInformationQueryRequest</con:operation>
-                <con:request name="federation_loop_test" outgoingWss="" incomingWss="">
+                <con:request name="dup_req_id_federation_loop_test" outgoingWss="" incomingWss="">
                     <con:settings>
                     <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
                     </con:settings>
