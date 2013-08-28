@@ -1190,7 +1190,7 @@ assert(response["//dsml:errorResponse/dsml:message/text()"].join("\n").contains(
       </con:testStep>
       <con:properties/>
     </con:testCase>
-   <con:properties/></con:testSuite><con:testSuite name="S&amp;I_Use_Cases">
+   <con:properties/></con:testSuite><con:testSuite name="SI_Use_Cases">
     <con:description>See http://wiki.siframework.org/file/view/ESI%20Query%20and%20Response.pdf for
 details about these test cases. Two test cases, Find Unique Individual and Find Unique
 Organization, were intentionally omitted.</con:description><con:settings/>
