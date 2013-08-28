@@ -11,7 +11,7 @@
     <body>
         <%@ include file="title_bar.jsp"%>
         <div>
-            <img id="indicator" src="<s:url value="/img/loader.gif"/>" alt="Loading ..."/>
+            <img id="indicator" src="<s:url value="/img/ajax-loader.gif"/>" alt="Loading ..."/>
             <s:text name="tests.running.text"/> 
             <span class="wsdlUrl"><s:property value="wsdlUrl"/></span>
         </div>
