@@ -1,6 +1,18 @@
 package gov.hhs.onc.pdti.testtool.actions;
 
 
+import gov.hhs.onc.pdti.testtool.DirectoryTypes;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.struts2.convention.annotation.InterceptorRef;
+import org.apache.struts2.convention.annotation.InterceptorRefs;
+import org.apache.xmlbeans.XmlException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.model.testsuite.TestCase;
 import com.eviware.soapui.model.testsuite.TestCaseRunner;
@@ -10,14 +22,6 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator;
 import com.opensymphony.xwork2.validator.annotations.Validations;
 import com.opensymphony.xwork2.validator.annotations.ValidatorType;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import org.apache.struts2.convention.annotation.InterceptorRef;
-import org.apache.struts2.convention.annotation.InterceptorRefs;
-import org.apache.xmlbeans.XmlException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @InterceptorRefs({ @InterceptorRef("defaultStack"), @InterceptorRef("execAndWait") })
 public class Execute extends ActionSupport {
@@ -25,30 +29,41 @@ public class Execute extends ActionSupport {
 
     private static final String WSDL_URL_ATTRIBUTE_PARAM_NAME = "wsdlUrl";
     private static final String BASE_DN_STRING_PARAM_NAME = "baseDn";
+    private static final String DIRECTORY_TYPE_PARAM_NAME = "typeOfDirectory";
     private static final String REQUIRED_FIELD_MESSAGE = "This field is required.";
-    private static final String SOAPUI_PROJECT_FILE = "soapui-project_hpdplus.xml";
+    private static final String MSPD_SOAPUI_PROJECT_FILE = "soapui-project_hpdplus.xml";
+    private static final String IHE_IWG_SOAPUI_PROJECT_FILE = "soapui-project.xml";
     private static final String URL_PROPERTY = "project.test.server.wsdl.url";
     private static final String BASE_DN_PROPERTY = "project.test.server.dsml.dn.base";
-
     private static final String STATUS_MESSAGE_FRAGMENT = "tests have been executed.";
-
     private static final String[] SKIP_TEST_CASE_NAME_PATTERNS = new String[] { "^dup_req_id_[^$]+$" };
+    private static final String BAD_DIRECTORY_TYPE_MESSAGE_FRAGMENT = " is not a recognized directory type.";
 
     private String wsdlUrl;
     private String baseDn;
     private List<String[]> testResults = new ArrayList<>();
     private String status = "no " + STATUS_MESSAGE_FRAGMENT;
+    private String typeOfDirectory;
 
     @Validations(requiredFields = {
             @RequiredFieldValidator(type = ValidatorType.SIMPLE, fieldName = WSDL_URL_ATTRIBUTE_PARAM_NAME, message = REQUIRED_FIELD_MESSAGE),
-            @RequiredFieldValidator(type = ValidatorType.SIMPLE, fieldName = BASE_DN_STRING_PARAM_NAME, message = REQUIRED_FIELD_MESSAGE) })
+            @RequiredFieldValidator(type = ValidatorType.SIMPLE, fieldName = BASE_DN_STRING_PARAM_NAME, message = REQUIRED_FIELD_MESSAGE),
+            @RequiredFieldValidator(type = ValidatorType.SIMPLE, fieldName = DIRECTORY_TYPE_PARAM_NAME, message = REQUIRED_FIELD_MESSAGE) })
     public String execute() {
         WsdlProject wsdlProject = null;
 
         try {
-            wsdlProject = new WsdlProject(Execute.class.getClassLoader().getResource(SOAPUI_PROJECT_FILE).toString());
+            if (typeOfDirectory.equals(DirectoryTypes.IHE_IWG.toString())) {
+                wsdlProject = new WsdlProject(Execute.class.getClassLoader().getResource(IHE_IWG_SOAPUI_PROJECT_FILE).toString());
+            } else if (typeOfDirectory.equals(DirectoryTypes.MSPD.toString())) {
+                wsdlProject = new WsdlProject(Execute.class.getClassLoader().getResource(MSPD_SOAPUI_PROJECT_FILE).toString());
+            } else {
+                String errorMessage = typeOfDirectory + BAD_DIRECTORY_TYPE_MESSAGE_FRAGMENT;
+                LOGGER.error(errorMessage);
+                return ERROR;
+            }
         } catch (XmlException | IOException | SoapUIException e) {
-            LOGGER.error("Unable to create SoapUI WSDL project from SoapUI project file: " + SOAPUI_PROJECT_FILE, e);
+            LOGGER.error("Unable to create SoapUI WSDL project from SoapUI project file: " + MSPD_SOAPUI_PROJECT_FILE, e);
         }
 
         wsdlProject.setPropertyValue(URL_PROPERTY, getWsdlUrl());
@@ -121,5 +136,13 @@ public class Execute extends ActionSupport {
 
     public String getStatus() {
         return this.status;
+    }
+
+    public String getTypeOfDirectory() {
+        return typeOfDirectory;
+    }
+
+    public void setTypeOfDirectory(String typeOfDirectory) {
+        this.typeOfDirectory = typeOfDirectory;
     }
 }

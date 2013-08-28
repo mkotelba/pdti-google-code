@@ -14,6 +14,7 @@
         </p>
         <hr/>
         <s:form action="execute" validate="true">
+            <s:select key="typeOfDirectory" list="@gov.hhs.onc.pdti.testtool.DirectoryTypes@values()"/>
             <s:textfield key="wsdlUrl" />
             <s:textfield key="baseDn" />
             <s:submit/>
