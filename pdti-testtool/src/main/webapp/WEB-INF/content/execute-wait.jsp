@@ -12,7 +12,7 @@
         <%@ include file="title_bar.jsp"%>
         <div>
             <img id="indicator" src="<s:url value="/img/ajax-loader.gif"/>" alt="Loading ..."/>
-            <s:text name="tests.running.text"/> 
+            <s:text name="tests.running.text"/>
             <span class="wsdlUrl"><s:property value="wsdlUrl"/></span>
         </div>
         <%@ include file="display_test_results.jsp"%>
