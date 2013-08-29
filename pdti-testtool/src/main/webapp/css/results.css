@@ -20,8 +20,21 @@ th.testResultsHeader {
 tr.testResultsRow {
 }
 
-td.testResultsData {
+.testResultsText {
     border: 1px dotted black;
+}
+
+.centered {
+    text-align: center; 
+    vertical-align: middle;
+}
+
+.red {
+    background: #FF1919;
+}
+
+.green {
+    background: #00CC00;
 }
 
 div.backContainer {

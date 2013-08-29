@@ -2,7 +2,7 @@ package gov.hhs.onc.pdti.testtool;
 
 public enum DirectoryTypes {
 
-    IHE_IWG("IHE-IWG DSML-Based"), MSPD("Mod Specs HPDPlus");
+    IHE("IHE WSDL"), MSPD("MSPD WSDL");
     
     private String name;
     
