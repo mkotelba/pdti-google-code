@@ -5,81 +5,6 @@
     <head>
         <%@ include file="head_common.jsp"%>
         <link href="<s:url value="css/index.css"/>" rel="stylesheet" type="text/css"/>
-    <script>
-    $(function() {
-        $( "#wsdl_type-dialog" ).dialog({
-            autoOpen: false,
-            width: 400,
-            buttons: [
-                {
-                    text: "Ok",
-                    click: function() {
-                        $( this ).dialog( "close" );
-                    }
-                },
-                {
-                    text: "Cancel",
-                    click: function() {
-                        $( this ).dialog( "close" );
-                    }
-                }
-            ]
-        });
-        // Link to open the dialog
-        $( "#wsdl_type-dialog-link" ).click(function( event ) {
-            $( "#wsdl_type-dialog" ).dialog( "open" );
-            event.preventDefault();
-        });
-        
-        $( "#wsdl_url-dialog" ).dialog({
-            autoOpen: false,
-            width: 400,
-            buttons: [
-                {
-                    text: "Ok",
-                    click: function() {
-                        $( this ).dialog( "close" );
-                    }
-                },
-                {
-                    text: "Cancel",
-                    click: function() {
-                        $( this ).dialog( "close" );
-                    }
-                }
-            ]
-        });
-        // Link to open the dialog
-        $( "#wsdl_url-dialog-link" ).click(function( event ) {
-            $( "#wsdl_url-dialog" ).dialog( "open" );
-            event.preventDefault();
-        });
-        
-        $( "#basedn-dialog" ).dialog({
-            autoOpen: false,
-            width: 400,
-            buttons: [
-                {
-                    text: "Ok",
-                    click: function() {
-                        $( this ).dialog( "close" );
-                    }
-                },
-                {
-                    text: "Cancel",
-                    click: function() {
-                        $( this ).dialog( "close" );
-                    }
-                }
-            ]
-        });
-        // Link to open the dialog
-        $( "#basedn-dialog-link" ).click(function( event ) {
-            $( "#basedn-dialog" ).dialog( "open" );
-            event.preventDefault();
-        });
-    });
-    </script>
     </head>
     <body>
         <%@ include file="title_bar.jsp"%>
@@ -124,6 +49,81 @@
         <div id="basedn-dialog" title="Base DN">
             <p>Please provide the base DN of your data source. This is at the level above Providers, Organizations, <i>etc.</i> For example, the test data provided in the MSPD code base has a base DN of "o=dev.provider-directories.com,dc=hpd".</p>
         </div>
-        
+
+        <script type="text/javascript">
+            $(function() {
+                $( "#wsdl_type-dialog" ).dialog({
+                    autoOpen: false,
+                    width: 400,
+                    buttons: [
+                        {
+                            text: "Ok",
+                            click: function() {
+                                $( this ).dialog( "close" );
+                            }
+                        },
+                        {
+                            text: "Cancel",
+                            click: function() {
+                                $( this ).dialog( "close" );
+                            }
+                        }
+                    ]
+                });
+                // Link to open the dialog
+                $( "#wsdl_type-dialog-link" ).click(function( event ) {
+                    $( "#wsdl_type-dialog" ).dialog( "open" );
+                    event.preventDefault();
+                });
+                
+                $( "#wsdl_url-dialog" ).dialog({
+                    autoOpen: false,
+                    width: 400,
+                    buttons: [
+                        {
+                            text: "Ok",
+                            click: function() {
+                                $( this ).dialog( "close" );
+                            }
+                        },
+                        {
+                            text: "Cancel",
+                            click: function() {
+                                $( this ).dialog( "close" );
+                            }
+                        }
+                    ]
+                });
+                // Link to open the dialog
+                $( "#wsdl_url-dialog-link" ).click(function( event ) {
+                    $( "#wsdl_url-dialog" ).dialog( "open" );
+                    event.preventDefault();
+                });
+                
+                $( "#basedn-dialog" ).dialog({
+                    autoOpen: false,
+                    width: 400,
+                    buttons: [
+                        {
+                            text: "Ok",
+                            click: function() {
+                                $( this ).dialog( "close" );
+                            }
+                        },
+                        {
+                            text: "Cancel",
+                            click: function() {
+                                $( this ).dialog( "close" );
+                            }
+                        }
+                    ]
+                });
+                // Link to open the dialog
+                $( "#basedn-dialog-link" ).click(function( event ) {
+                    $( "#basedn-dialog" ).dialog( "open" );
+                    event.preventDefault();
+                });
+            });
+        </script>
     </body>
 </html>
