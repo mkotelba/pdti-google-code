@@ -7,11 +7,6 @@
     xmlns:log4j="http://jakarta.apache.org/log4j/">
     
     <!--==================================================
-    = THROWABLE RENDERERS
-    ===================================================-->
-    <throwableRenderer class="gov.hhs.onc.pdti.context.DirectoryThrowableRenderer"/>
-    
-    <!--==================================================
     = APPENDERS: CONSOLE
     ===================================================-->
     <appender name="consoleApp" class="org.apache.log4j.ConsoleAppender">
