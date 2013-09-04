@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project activeEnvironment="Default" name="verify_data_1" resourceRoot="" soapui-version="4.5.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding" type="wsdl" bindingName="{urn:gov:hhs:onc:hpdplus:2013}Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding" soapVersion="1_2" anonymous="optional" definition="${#Project#project.test.server.url}?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<con:soapui-project activeEnvironment="Default" name="verify_data_1" resourceRoot="" soapui-version="4.5.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:description>This SoapUI project utilizes the MSPD WSDL and the primary test data set. The primary data set is to be used in a data source for a top-level provider directory, i.e. a directory from which a response is obtained directly as opposed to a federated server. The test project verifies every attribute of every object in the data set. Objects are referenced by their RDN, as indicated in the test case name.</con:description><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding" type="wsdl" bindingName="{urn:gov:hhs:onc:hpdplus:2013}Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding" soapVersion="1_2" anonymous="optional" definition="${#Project#project.test.server.url}?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <con:settings/>
     <con:endpoints>
       <con:endpoint>${#Project#project.test.server.url}</con:endpoint>
@@ -7,8 +7,8 @@
     <con:operation isOneWay="false" action="urn:gov:hhs:onc:hpdplus:2013:Hpd_Plus_ProviderInformationQueryRequest" name="Hpd_Plus_ProviderInformationQueryRequest" bindingOperationName="Hpd_Plus_ProviderInformationQueryRequest" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional">
       <con:settings/>
     </con:operation>
-  </con:interface><con:testSuite name="Providers"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="hcidentifier=provider1" searchProperties="true" id="fa53f1ba-43b8-4280-9805-5f7031bb730b">
-      <con:description>Basic search for Provider by givenName attribute</con:description><con:settings/>
+  </con:interface><con:testSuite name="Providers"><con:description>The following test cases request each provider by its RDN, which in this case is the attribute "HcIdentifier," and verifies that all attributes are either present and correct, or not present, as the case may be.</con:description><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="HcIdentifier=provider1" searchProperties="true" id="fa53f1ba-43b8-4280-9805-5f7031bb730b">
+      <con:description>Basic search for Provider by HcIdentifier attribute</con:description><con:settings/>
       <con:testStep type="request" name="search_provider_by_hcidentifier">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -125,8 +125,8 @@ count(//dsml:attr[@name!="objectClass"])</path><content>25</content><allowWildca
         </con:config>
       </con:testStep>
       <con:properties><con:property><con:name>rdn</con:name><con:value>provider1</con:value></con:property></con:properties>
-    </con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="hcidentifier=provider2" searchProperties="true" id="4619078e-5b08-4106-a8c2-7652d83d62c3">
-      <con:description>Basic search for Provider by givenName attribute</con:description><con:settings/>
+    </con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="HcIdentifier=provider2" searchProperties="true" id="4619078e-5b08-4106-a8c2-7652d83d62c3">
+      <con:description>Basic search for Provider by HcIdentifier attribute</con:description><con:settings/>
       <con:testStep type="request" name="search_provider_by_hcidentifier">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -243,8 +243,8 @@ empty(//dsml:searchResultEntry/dsml:attr[@name[matches(.,"^hpdProviderStatus$","
         </con:config>
       </con:testStep>
       <con:properties><con:property><con:name>rdn</con:name><con:value>provider2</con:value></con:property></con:properties>
-    </con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="hcidentifier=provider3" searchProperties="true" id="d8ee3a4a-a3eb-4fc3-a2ab-a279d2fa93d8">
-      <con:description>Basic search for Provider by givenName attribute</con:description><con:settings/>
+    </con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="HcIdentifier=provider3" searchProperties="true" id="d8ee3a4a-a3eb-4fc3-a2ab-a279d2fa93d8">
+      <con:description>Basic search for Provider by HcIdentifier attribute</con:description><con:settings/>
       <con:testStep type="request" name="search_provider_by_hcidentifier">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -361,7 +361,7 @@ empty(//dsml:searchResultEntry/dsml:attr[@name[matches(.,"^hpdProviderStatus$","
         </con:config>
       </con:testStep>
       <con:properties><con:property><con:name>rdn</con:name><con:value>provider3</con:value></con:property></con:properties>
-    </con:testCase><con:properties/></con:testSuite><con:testSuite name="Organizations"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="hpdOrgId=org1" searchProperties="true" id="a63010dd-6c12-4644-b7b9-cd5e56f5400a">
+    </con:testCase><con:properties/></con:testSuite><con:testSuite name="Organizations"><con:description>The following test cases request each organization by its RDN, which in this case is the attribute "hpdOrgId," and verifies that all attributes are either present and correct, or not present, as the case may be.</con:description><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="hpdOrgId=org1" searchProperties="true" id="a63010dd-6c12-4644-b7b9-cd5e56f5400a">
       <con:description>Basic search for Organization by hpdOrgId attribute</con:description><con:settings/>
       <con:testStep type="request" name="search_org_by_hpdOrgId">
         <con:settings/>
@@ -749,8 +749,8 @@ count(//dsml:attr[@name!="objectClass"])</path><content>18</content><allowWildca
         </con:config>
       </con:testStep>
       <con:properties><con:property><con:name>rdn</con:name><con:value>org5</con:value></con:property></con:properties>
-    </con:testCase><con:properties/></con:testSuite><con:testSuite name="Memberships"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="hpdMemberId=1" searchProperties="true" id="afe93686-dd7a-45cb-b4af-145b89732e08">
-      <con:description>Basic search for Membership by hpdHasAProvider attribute</con:description><con:settings/>
+    </con:testCase><con:properties/></con:testSuite><con:testSuite name="Memberships"><con:description>The following test cases request each membership by its RDN, which in this case is the attribute "hpdMemberId," and verifies that all attributes are either present and correct, or not present, as the case may be.</con:description><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="hpdMemberId=1" searchProperties="true" id="afe93686-dd7a-45cb-b4af-145b89732e08">
+      <con:description>Basic search for Membership by hpdMemberId attribute</con:description><con:settings/>
       <con:testStep type="request" name="search_membership_by_hpdMemberId">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -825,7 +825,7 @@ count(//dsml:attr[@name!="objectClass"])</path><content>9</content><allowWildcar
       </con:testStep>
       <con:properties><con:property><con:name>rdn</con:name><con:value>1</con:value></con:property></con:properties>
     </con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="hpdMemberId=2" searchProperties="true" id="eb2acb8a-2dfd-491b-a2ca-513d5c907101">
-      <con:description>Basic search for Membership by hpdHasAProvider attribute</con:description><con:settings/>
+      <con:description>Basic search for Membership by hpdMemberId attribute</con:description><con:settings/>
       <con:testStep type="request" name="search_membership_by_hpdMemberId">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -900,7 +900,7 @@ empty(//dsml:searchResultEntry/dsml:attr[@name[matches(.,"^facsimiletelephonenum
       </con:testStep>
       <con:properties><con:property><con:name>rdn</con:name><con:value>2</con:value></con:property></con:properties>
     </con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="hpdMemberId=3" searchProperties="true" id="c3243e51-b7ca-4406-93f7-2953c2c5cfa4">
-      <con:description>Basic search for Membership by hpdHasAProvider attribute</con:description><con:settings/>
+      <con:description>Basic search for Membership by hpdMemberId attribute</con:description><con:settings/>
       <con:testStep type="request" name="search_membership_by_hpdMemberId">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -975,7 +975,7 @@ empty(//dsml:searchResultEntry/dsml:attr[@name[matches(.,"^facsimiletelephonenum
       </con:testStep>
       <con:properties><con:property><con:name>rdn</con:name><con:value>3</con:value></con:property></con:properties>
     </con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="hpdMemberId=4" searchProperties="true" id="6aeee303-00fa-44ab-8600-767adb30b63b">
-      <con:description>Basic search for Membership by hpdHasAProvider attribute</con:description><con:settings/>
+      <con:description>Basic search for Membership by hpdMemberId attribute</con:description><con:settings/>
       <con:testStep type="request" name="search_membership_by_hpdMemberId">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -1050,7 +1050,7 @@ empty(//dsml:searchResultEntry/dsml:attr[@name[matches(.,"^facsimiletelephonenum
       </con:testStep>
       <con:properties><con:property><con:name>rdn</con:name><con:value>4</con:value></con:property></con:properties>
     </con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="hpdMemberId=5" searchProperties="true" id="05135c00-ab59-4f32-94e1-76136c8b5f25">
-      <con:description>Basic search for Membership by hpdHasAProvider attribute</con:description><con:settings/>
+      <con:description>Basic search for Membership by hpdMemberId attribute</con:description><con:settings/>
       <con:testStep type="request" name="search_membership_by_hpdMemberId">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -1124,7 +1124,7 @@ empty(//dsml:searchResultEntry/dsml:attr[@name[matches(.,"^facsimiletelephonenum
         </con:config>
       </con:testStep>
       <con:properties><con:property><con:name>rdn</con:name><con:value>5</con:value></con:property></con:properties>
-    </con:testCase><con:properties/></con:testSuite><con:testSuite name="Credentials"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="hpdCredentialId=1" searchProperties="true" id="c5409f3d-7065-4ba6-9f22-aa98a4135419">
+    </con:testCase><con:properties/></con:testSuite><con:testSuite name="Credentials"><con:description>The following test cases request each credential by its RDN, which in this case is the attribute "hpdCredentialId," and verifies that all attributes are either present and correct, or not present, as the case may be.</con:description><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="hpdCredentialId=1" searchProperties="true" id="c5409f3d-7065-4ba6-9f22-aa98a4135419">
       <con:description>Basic search for Credential by hpdCredentialId attribute</con:description><con:settings/>
       <con:testStep type="request" name="search_credential_by_hpdCredentialId">
         <con:settings/>
@@ -1278,7 +1278,7 @@ count(//dsml:attr[@name!="objectClass"])</path><content>10</content><allowWildca
         </con:config>
       </con:testStep>
       <con:properties><con:property><con:name>rdn</con:name><con:value>2</con:value></con:property></con:properties>
-    </con:testCase><con:properties/></con:testSuite><con:testSuite name="Services"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="hpdServiceId=1" searchProperties="true" id="ab8a777b-dd3b-405f-8017-34f3240a9f95">
+    </con:testCase><con:properties/></con:testSuite><con:testSuite name="Services"><con:description>The following test cases request each Service by its RDN, which in this case is the attribute "hpdServiceId," and verifies that all attributes are either present and correct, or not present, as the case may be.</con:description><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="hpdServiceId=1" searchProperties="true" id="ab8a777b-dd3b-405f-8017-34f3240a9f95">
       <con:description>Basic search for Service by hpdServiceId attribute</con:description><con:settings/>
       <con:testStep type="request" name="search_service_by_hpdServiceId">
         <con:settings/>
