@@ -7,9 +7,11 @@
         <link href="<s:url value="css/results.css"/>" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <%@ include file="title_bar.jsp"%>
-        <s:text name="tests.done.text" /> 
-        <span class="wsdlUrl"><s:property value="wsdlUrl"/></span>
-        <%@ include file="display_test_results.jsp"%>
+        <%@ include file="header.jsp"%>
+        <div class="container">
+	        <s:text name="tests.done.text" /> 
+	        <span class="wsdlUrl"><s:property value="wsdlUrl"/></span>
+	        <%@ include file="display_test_results.jsp"%>
+        </div>
     </body>
 </html>

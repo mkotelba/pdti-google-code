@@ -1,8 +1,7 @@
-body{
-    font: 80% "Trebuchet MS", sans-serif;
-    margin: 50px;
+input[type="text"] {
+    width: 700px;
 }
 
-table.wwFormTable input[type="text"] {
-    width: 400px;
+td {
+	white-space:nowrap;
 }

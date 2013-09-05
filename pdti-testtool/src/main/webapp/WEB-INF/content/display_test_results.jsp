@@ -25,6 +25,6 @@
 	    </table>
     </div>
     <div class="backContainer">
-        <a href="<s:url value="/"/>"><s:text name="back"/></a>
+        <a href="<s:url action="test"/>"><s:text name="back"/></a>
     </div>
 </div>
