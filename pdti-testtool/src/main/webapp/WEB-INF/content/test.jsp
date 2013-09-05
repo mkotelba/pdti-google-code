@@ -5,6 +5,8 @@
     <head>
         <%@ include file="head_common.jsp"%>
         <link href="<s:url value="css/index.css"/>" rel="stylesheet" type="text/css"/>
+        <!-- workaround for bootstrap conflict with jquery that prevents dialog close icon from appearing (see: http://stackoverflow.com/questions/8681707/jqueryui-modal-dialog-does-not-show-close-button-x) -->
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript" ></script>
     </head>
     <body>
         <%@ include file="header.jsp"%>
@@ -25,15 +27,15 @@
             </s:form>
         </div>
 
-        <div id="wsdl_type-dialog" title="WSDL Type">
+        <div id="wsdl_type-dialog" title="<s:text name='typeOfDirectory'/>">
             <s:text name="wsdl.type.dialog.html"/>
         </div>
 
-        <div id="wsdl_url-dialog" title="WSDL URL">
+        <div id="wsdl_url-dialog" title="<s:text name='wsdlUrl'/>">
             <s:text name="wsdl.url.dialog.html"/>
         </div>
 
-        <div id="basedn-dialog" title="Base DN">
+        <div id="basedn-dialog" title="<s:text name='baseDn'/>">
             <s:text name="basedn.dialog.html"/>
         </div>
 
@@ -41,7 +43,7 @@
             $(function() {
                 $( "#wsdl_type-dialog" ).dialog({
                     autoOpen: false,
-                    width: 700,
+                    width: 800,
                     buttons: [
                         {
                             text: "OK",
