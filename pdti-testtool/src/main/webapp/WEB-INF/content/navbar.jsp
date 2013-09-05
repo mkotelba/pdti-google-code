@@ -10,7 +10,7 @@
 	            <ul class="nav">
 	                <li id="home"><a href="<s:url value="/"/>"><i class="icon-home icon-white"></i> <s:text name="home"/></a></li>
 	                <li id="test"><a href="<s:url action="test"/>"><i class="icon-play icon-white"></i> <s:text name="test"/></a></li>
-	                <li id="fat-menu" class="dropdown">
+	                <li id="help-menu" class="dropdown">
 	                    <a class="dropdown-toggle" data-toggle="dropdown"><i class="icon-question-sign icon-white"></i> <s:text name="help"/> <b class="caret"></b></a>
 	                    <ul class="dropdown-menu">
 	                        <li>
@@ -24,8 +24,8 @@
 	                </li>
 	            </ul>
 	            <ul class="nav">
-	                <li id="fat-menu" class="dropdown">
-	                    <a class="dropdown-toggle" data-toggle="dropdown"><s:text name="about.project"/> <b class="caret"></b></a>
+	                <li id="project-menu" class="dropdown">
+	                    <a class="dropdown-toggle" data-toggle="dropdown"><i class="icon-wrench icon-white"></i> <s:text name="about.project"/> <b class="caret"></b></a>
 	                    <ul class="dropdown-menu">
 	                        <li>
 	                            <a href="https://code.google.com/p/pdti/" target="_blank"><s:text name="project"/></a>
