@@ -2,7 +2,7 @@ package gov.hhs.onc.pdti.testtool;
 
 public enum DirectoryTypes {
 
-    IHE("IHE WSDL"), MSPD("MSPD WSDL");
+    MSPD("MSPD WSDL"), IHE("IHE WSDL");
     
     private String name;
     
