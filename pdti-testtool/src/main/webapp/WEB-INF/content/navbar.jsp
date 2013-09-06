@@ -18,7 +18,7 @@
 	                        </li>
 	                        <li class="divider"></li>
 	                        <li>
-	                            <a href="http://nytimes.com" target="_blank"><s:text name="faq"/></a>
+	                            <a href="http://modularspecs.siframework.org/+Provider+Directories+FAQ" target="_blank"><s:text name="faq"/></a>
 	                        </li>
 	                    </ul>
 	                </li>

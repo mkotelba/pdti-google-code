@@ -28,9 +28,10 @@
                 <strong><s:text name="how.to.use.header"/></strong>
                 <br/>
                 <br/>
-                <s:text name="how.to.use.language"/>
+                <s:text name="how.to.use.language">
+                    <s:param><s:url action="test"/></s:param>
+                </s:text>
             </p>
-            <hr/>
         </div>
     </body>
 </html>

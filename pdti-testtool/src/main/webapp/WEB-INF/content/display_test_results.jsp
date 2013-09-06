@@ -1,30 +1,40 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<style>
+em {
+    font-weight: bold;
+}
+</style>
 <div id="testResults">
-    <div style="width:100%; height:490px; overflow:auto;">
-	    <table id="testResultsTable">
-	        <tr>
-	            <th class="testResultsHeader"><s:text name="testsuite.header.text"/></th>
-	            <th class="testResultsHeader"><s:text name="testcase.header.text"/></th>
-	            <th class="testResultsHeader"><s:text name="result.header.text"/></th>
-	        </tr>
-	        <s:iterator value="testResults" var="testResult">
-	            <tr class="testResultsRow">
-	                <s:iterator value="testResult" var="stringValue">
-	                    <s:if test="#stringValue.equals(\"PASSED\")">
-		                    <td class="testResultsText centered green"><s:property value="stringValue"/></td>
-		                </s:if>
-	                    <s:elseif test="#stringValue == 'FAILED'">
-	                        <td class="testResultsText centered red"><s:property value="stringValue"/></td>
-	                    </s:elseif>
-	                    <s:else>
-	                        <td class="testResultsText"><s:property value="stringValue"/></td>
-	                    </s:else>
-	                </s:iterator>
-	            </tr>
-	        </s:iterator>
-	    </table>
+    <div id="accordion">
+     <s:iterator value="testResults" var="testResult">
+         <s:if test="#testResult[2].equals(\"PASSED\")">
+             <h4 style="background:none;background-color:#00CC00;color:#ffffff;"><s:property value="#testResult[0]"/>.<s:property value="#testResult[1]"/><div class="pull-right"><s:property value="#testResult[2]"/></div></h4>
+         </s:if>
+         <s:else>
+             <h4 style="background:none;background-color:#FF1919;color:#ffffff;"><s:property value="#testResult[0]"/>.<s:property value="#testResult[1]"/><div class="pull-right"><s:property value="#testResult[2]"/></div></h4>
+         </s:else>
+         <div>
+            <em><s:text name="description"/>:</em>
+            <br/>
+            <p><s:property value="#testResult[3]"/></p>
+            <hr/>
+            <em><s:text name="messages"/>:</em>
+            <br/>
+            <p>
+            <s:iterator value="#testResult[4]" var="message">
+                <s:property value="#message"/><br/>
+            </s:iterator>
+            </p>
+            <hr/>
+            <em><s:text name="response"/>:</em>
+            <br/>
+            <p><s:property value="#testResult[5]"/></p>
+         </div>
+     </s:iterator>
     </div>
-    <div class="backContainer">
-        <a href="<s:url action="test"/>"><s:text name="back"/></a>
-    </div>
+    <script type="text/javascript">
+	    $(function() {
+	        $( "#accordion" ).accordion({ header: "h4", collapsible: true, active: false });
+	    });
+    </script>
 </div>
