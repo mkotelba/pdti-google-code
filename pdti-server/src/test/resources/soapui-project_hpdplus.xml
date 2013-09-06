@@ -11,7 +11,7 @@
     </con:operation>
   </con:interface>
   <con:testSuite name="ProviderInformationQueryRequestTestSuite_Plus">
-    <con:settings/>
+    <con:description>Searches for each of the five object types: Provider, Organization, Membership, Service, and Credential.</con:description><con:settings/>
     <con:runType>SEQUENTIAL</con:runType>
     <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="search_provider_by_name" searchProperties="true" id="c32cf9e5-f39b-4ab7-a71e-e1198c61ad97">
       <con:description>Basic search for Provider by givenName attribute</con:description><con:settings/>
@@ -419,11 +419,11 @@ count(//dsml:attr)</path><content>11</content><allowWildcards>false</allowWildca
     <con:properties/>
   </con:testSuite>
   <con:testSuite name="Workflows_Plus">
-    <con:settings/>
+    <con:description>Three workflows are from the Western States Consortium (WSC) and one from the EHR/HIE Interoperability Workgroup (IWG). The second WSC workflow happens to mirror the IWG workflow, so it was combined into one test case.</con:description><con:settings/>
     <con:runType>SEQUENTIAL</con:runType>
     
     <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="WSC_1" searchProperties="true" id="9a0dd776-689d-4b7a-9f74-0847d5966d95">
-      <con:settings/>
+      <con:description>Search for a specific Provider, then find its Service.</con:description><con:settings/>
       
       
       
@@ -534,7 +534,7 @@ count(//dsml:attr)</path><content>1</content><allowWildcards>false</allowWildcar
     </con:testCase>
     
     <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="WSC_2_and_IWG" searchProperties="true" id="f42973ce-ef2c-4bc5-9a7d-224688a0c4e4">
-      <con:settings/>
+      <con:description>Search for a specific Organization, then use Memberships to find all of its Providers, then find the Provider's Services.</con:description><con:settings/>
       <con:testStep type="request" name="search_org_by_id">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -787,7 +787,7 @@ count(//dsml:attr)</path><content>1</content><allowWildcards>false</allowWildcar
       <con:properties/>
     </con:testCase>
     <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="WSC_3" searchProperties="true" id="59bb8da9-6653-41cc-a53b-25feae4738a5">
-      <con:settings/>
+      <con:description>Search for a specific Provider, then use Memberships to find its Organization, then find the Organization's Services.</con:description><con:settings/>
       <con:testStep type="request" name="search_provider_by_givenName_and_sn">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -1014,7 +1014,7 @@ count(//dsml:attr)</path><content>1</content><allowWildcards>false</allowWildcar
       <con:properties/>
     </con:testCase><con:properties/>
   </con:testSuite>
-  <con:testSuite name="Message_Compliance_Plus"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="RequestIDs_Equal" searchProperties="true" id="0815e6ca-486e-41dd-ba1f-86701778f6db"><con:description>Asserts that the attribute requestID sent in with the request is identical to the one sent back in the response.</con:description><con:settings/><con:testStep type="request" name="RequestIDs_Equal">
+  <con:testSuite name="Message_Compliance_Plus"><con:description>Test cases for elements outside of the data model</con:description><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="RequestIDs_Equal" searchProperties="true" id="0815e6ca-486e-41dd-ba1f-86701778f6db"><con:description>Asserts that the attribute requestID sent in with the request is identical to the one sent back in the response.</con:description><con:settings/><con:testStep type="request" name="RequestIDs_Equal">
         <con:settings/>
         <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:interface>Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding</con:interface>
@@ -1285,11 +1285,11 @@ count(//dsml:attr)</path><content>1</content><allowWildcards>false</allowWildcar
           </con:request>
         </con:config>
       </con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite>
-  <con:testSuite name="Federation_Plus">
-        <con:settings/>
+  <con:testSuite name="Error_Plus">
+        <con:description>Error test cases. These test cases utilize special requestIDs that are recognized by the MSPD Test Implementation and induce these errors in a special manner.</con:description><con:settings/>
         <con:runType>SEQUENTIAL</con:runType>
         <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="dup_req_id_test_hpdplus" searchProperties="true" id="d32cf9e5-f39b-4ab7-a71e-e1198c61ad97">
-            <con:settings/>
+            <con:description>Duplicate requestIDs sent.</con:description><con:settings/>
             <con:testStep type="request" name="dup_req_id_test_hpdplus">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -1359,7 +1359,7 @@ assert(response["//hpdplus:hpdPlusError/@type"].contains("duplicateRequestId"));
       <con:properties/>
     </con:testCase>
       <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="dup_req_id_federation_loop_test_hpdplus" searchProperties="true" id="c32cf9e5-f39b-4ab7-a71e-e1198c61ad97">
-            <con:settings/>
+            <con:description>A federation loop is induced.</con:description><con:settings/>
             <con:testStep type="request" name="dup_req_id_federation_loop_test_hpdplus">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -1414,9 +1414,7 @@ assert(response["//hpdplus:hpdPlusError/@type"].contains("duplicateRequestId"));
       <con:properties/>
     </con:testCase>
    <con:properties/></con:testSuite><con:testSuite name="SI_Use_Cases_Plus">
-    <con:description>See http://wiki.siframework.org/file/view/ESI%20Query%20and%20Response.pdf for
-details about these test cases. Two test cases, Find Unique Individual and Find Unique
-Organization, were intentionally omitted.</con:description><con:settings/>
+    <con:description>See the &lt;a href="http://wiki.siframework.org/file/view/ESI%20Query%20and%20Response.pdf">S&amp;I Query and Response use cases&lt;/a> for details about these test cases. Two test cases, Find Unique Individual and Find Unique Organization, were intentionally omitted.</con:description><con:settings/>
     <con:runType>SEQUENTIAL</con:runType>
     <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Find_Individual" searchProperties="true" id="c46d6e17-f483-46d2-babc-4d5bff7cfe86">
       <con:description>From http://wiki.siframework.org/file/view/ESI%20Query%20and%20Response.pdf
@@ -2826,115 +2824,7 @@ other organizations are returned. </con:description><con:settings/>
       </con:testStep><con:properties/>
     </con:testCase><con:properties/>
   </con:testSuite>
-    <con:testSuite name="Requirement_7 _Plus"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Retrieve_Service_via_Membership" searchProperties="true" id="e5c0c8af-3610-4959-8244-6b95f150907e"><con:settings/><con:testStep type="request" name="search_membership_by_hpdHasAnOrg" disabled="true">
-        <con:settings/>
-        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:interface>Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding</con:interface>
-          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-          <con:request name="search_membership_by_hpdHasAnOrg" outgoingWss="" incomingWss="">
-            <con:settings>
-              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-            </con:settings>
-            <con:encoding>UTF-8</con:encoding>
-            <con:endpoint>${#Project#project.test.server.wsdl.url}</con:endpoint>
-            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
-   <soap-env:Body>
-      <hpdplus:hpdPlusRequest requestID="${=project.name}_${=testSuite.name}_${=testCase.name}_${=testStep.name}_${=request.name}_${=UUID.randomUUID()}" xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
-         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <dsml:searchRequest dn="ou=Memberships,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
-               <dsml:filter>
-                  <dsml:and>
-                     <dsml:equalityMatch name="hpdHasAnOrg">
-                        <dsml:value>hpdOrgId=org1,ou=Organizations,o=dev.provider-directories.com,dc=hpd</dsml:value>
-                     </dsml:equalityMatch>
-                     <dsml:present name="hpdHasAProvider"/>
-                  </dsml:and>
-               </dsml:filter>
-               <dsml:attributes>
-                  <dsml:attribute name="hpdMemberId"/>
-                  <dsml:attribute name="hpdHasAProvider"/>
-                  <dsml:attribute name="hpdHasAnOrg"/>
-                  <dsml:attribute name="hpdHasASubOrg"/>
-                  <dsml:attribute name="hpdHasAService"/>
-                  <dsml:attribute name="telephoneNumber"/>
-                  <dsml:attribute name="mail"/>
-                  <dsml:attribute name="facsimileTelephoneNumber"/>
-                  <dsml:attribute name="mobile"/>
-                  <dsml:attribute name="pager"/>
-               </dsml:attributes>
-            </dsml:searchRequest>
-         </dsml:batchRequest>
-      </hpdplus:hpdPlusRequest>
-   </soap-env:Body>
-</soap-env:Envelope>]]></con:request>
-            <con:assertion type="SOAP Response"/>
-            <con:assertion type="Schema Compliance">
-              <con:configuration/>
-            </con:assertion>
-            <con:assertion type="SOAP Fault Assertion"/>
-            <con:credentials>
-              <con:username xsi:nil="true"/>
-              <con:password xsi:nil="true"/>
-              <con:domain xsi:nil="true"/>
-              <con:authType>Global HTTP Settings</con:authType>
-            </con:credentials>
-            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-            <con:jmsPropertyConfig/>
-            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-            <con:wsrmConfig version="1.2"/>
-          </con:request>
-        </con:config>
-      </con:testStep><con:testStep type="request" name="search_service_by_id">
-        <con:settings/>
-        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:interface>Hpd_Plus_ProviderInformationDirectory_Port_SoapBinding</con:interface>
-          <con:operation>Hpd_Plus_ProviderInformationQueryRequest</con:operation>
-          <con:request name="search_service_by_id" outgoingWss="" incomingWss="">
-            <con:settings>
-              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-            </con:settings>
-            <con:encoding>UTF-8</con:encoding>
-            <con:endpoint>${#Project#project.test.server.wsdl.url}</con:endpoint>
-            <con:request><![CDATA[<soap-env:Envelope xmlns:soap-env="http://www.w3.org/2003/05/soap-envelope">
-   <soap-env:Body>
-      <hpdplus:hpdPlusRequest requestID="${=project.name}_${=testSuite.name}_${=testCase.name}_${=testStep.name}_${=request.name}_${=UUID.randomUUID()}" xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
-      <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-         <dsml:searchRequest dn="ou=Services,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
-            <dsml:filter>
-               <dsml:equalityMatch name="hpdServiceId">
-                  <dsml:value>1</dsml:value>
-               </dsml:equalityMatch>
-            </dsml:filter>
-            <dsml:attributes>
-               <dsml:attribute name="hpdServiceId"/>
-               <dsml:attribute name="hpdServiceAddress"/>
-               <dsml:attribute name="hpdCertificate"/>
-               <dsml:attribute name="hpdIntegrationProfile"/>
-               <dsml:attribute name="hpdContentProfile"/>
-            </dsml:attributes>
-         </dsml:searchRequest>
-      </dsml:batchRequest>
-      </hpdplus:hpdPlusRequest>
-   </soap-env:Body>
-</soap-env:Envelope>]]></con:request>
-            <con:assertion type="SOAP Response"/>
-            <con:assertion type="Schema Compliance">
-              <con:configuration/>
-            </con:assertion>
-            <con:assertion type="SOAP Fault Assertion"/>
-            <con:credentials>
-              <con:username xsi:nil="true"/>
-              <con:password xsi:nil="true"/>
-              <con:domain xsi:nil="true"/>
-              <con:authType>Global HTTP Settings</con:authType>
-            </con:credentials>
-            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-            <con:jmsPropertyConfig/>
-            <con:wsaConfig mustUnderstand="NONE" version="200508"/>
-            <con:wsrmConfig version="1.2"/>
-          </con:request>
-        </con:config>
-      </con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite>
+    
       <con:properties><con:property><con:name>project.test.server.wsdl.url</con:name><con:value>http://localhost:8080/pdti-server/Hpd_Plus_ProviderInformationDirectoryService?wsdl</con:value></con:property><con:property><con:name>project.test.server.dsml.dn.base</con:name><con:value>o=dev.provider-directories.com,dc=hpd</con:value></con:property></con:properties><con:wssContainer/>
   <con:sensitiveInformation/>
 </con:soapui-project>
