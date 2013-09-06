@@ -28,16 +28,3 @@ tr.testResultsRow {
     text-align: center; 
     vertical-align: middle;
 }
-
-.red {
-    background: #FF1919;
-}
-
-.green {
-    background: #00CC00;
-}
-
-div.backContainer {
-    margin-top: 10px;
-    text-align: center;
-}
