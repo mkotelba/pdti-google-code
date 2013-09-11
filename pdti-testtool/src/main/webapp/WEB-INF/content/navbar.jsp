@@ -1,10 +1,15 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<style>
+	.greylink {
+        color:#999999;
+    }
+</style>
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
             <div class="brand">
 	            <img src="<s:url value="/img/pdti-logo.png"/>" id="title-img"/>
-	            <s:text name="title"/>
+	            <a class="greylink" href="<s:url value="/"/>"><s:text name="title"/></a>
             </div>
             <div class="pull-right">
 	            <ul class="nav">
