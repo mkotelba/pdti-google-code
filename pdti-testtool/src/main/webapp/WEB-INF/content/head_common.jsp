@@ -12,6 +12,9 @@ Pretty Office Icon Set Part 4 (http://www.customicondesign.com/free-icons/pretty
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript" ></script>
 <script type="text/javascript" src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
 <link href="http://code.jquery.com/ui/1.10.3/themes/cupertino/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="http://shjs.sourceforge.net/sh_main.min.js"></script>
+<script type="text/javascript" src="http://shjs.sourceforge.net/lang/sh_xml.min.js"></script>
+<link href="http://shjs.sourceforge.net/sh_style.css" rel="stylesheet" type="text/css"/>
 <script src="js/pdti-testtool.js" type="text/javascript"></script>
 <link href="css/pdti-testtool.css" rel="stylesheet" type="text/css"/>
 <script>
