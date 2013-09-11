@@ -196,7 +196,7 @@
                         $("#indicatordiv").hide();
                         $("#infodiv").show();
                         
-                        $("#accordion").accordion({ header: "h4", collapsible: true, active: false });
+                        $("#accordion").accordion({ header: "h4", collapsible: true, active: false, heightStyle: "content" });
                     });
                 	return false;
                 });
