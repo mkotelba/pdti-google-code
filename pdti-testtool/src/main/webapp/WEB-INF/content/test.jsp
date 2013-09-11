@@ -177,7 +177,8 @@
                             var testStatus = message[2];
                             var testCaseDescription = message[3];
                             var testCaseMessages = message[4];
-                            var response = message[5];
+                            var request = message[5];
+                            var response = message[6];
                             var color = "#FF1919";
                             if("PASSED" == testStatus) {
                             	color = "#00CC00";
@@ -188,6 +189,8 @@
                                 "<p>" + testCaseDescription + "</p><hr/>" +
                                 "<em>Test Case Messages:</em><br/>" +
                                 "<p>" + testCaseMessages + "</p><hr/>" +
+                                "<em>Request Content:</em><br/>" +
+                                "<pre class=\"sh_xml\">" + request.replace(/</g, "&lt;").replace(/>/g, "&gt;") + "</pre>" +
                                 "<em>Response Content:</em><br/>" +
                                 "<pre class=\"sh_xml\">" + response.replace(/</g, "&lt;").replace(/>/g, "&gt;") + "</pre>" +
                                 "</div>";

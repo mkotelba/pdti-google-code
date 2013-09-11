@@ -43,7 +43,7 @@ public class Execute extends ActionSupport {
     private static final String IHE_SOAPUI_PROJECT_FILE = "soapui-project.xml";
     private static final String URL_PROPERTY = "project.test.server.wsdl.url";
     private static final String BASE_DN_PROPERTY = "project.test.server.dsml.dn.base";
-    private static final String[] SKIP_TEST_CASE_NAME_PATTERNS = new String[] { "^dup_req_id_[^$]+$" };
+    private static final String[] SKIP_TEST_CASE_NAME_PATTERNS = new String[] { "^dup_req_id_federation_loop_[^$]+$" };
     private static final String BAD_DIRECTORY_TYPE_MESSAGE_FRAGMENT = " is not a recognized directory type.";
     private static final String FINISHED = "FINISHED";
     private static final String PASSED = "PASSED";
@@ -133,11 +133,13 @@ public class Execute extends ActionSupport {
                     }
                     List<TestStepResult> testStepResultList = testCaseRunner.getResults();
                     List<String> messagesList = new ArrayList<String>();
+                    String requestContent = null;
                     String responseContent = null;
                     for(TestStepResult testStepResult : testStepResultList) {
                         WsdlTestRequestStepResult wsdlTestRequestStepResult = null;
                         if(testStepResult instanceof WsdlTestRequestStepResult) {
                             wsdlTestRequestStepResult = (WsdlTestRequestStepResult)testStepResult;
+                            requestContent = wsdlTestRequestStepResult.getRequestContentAsXml();
                             responseContent = wsdlTestRequestStepResult.getResponseContentAsXml();
                         }
                         String[] messages = testStepResult.getMessages();
@@ -149,7 +151,8 @@ public class Execute extends ActionSupport {
                         }
                     }
                     Object[] testResultData = new Object[] {testSuite.getName(), testCase.getName(), testStatus,
-                            testCasesDescriptionsMap.get(testCase.getName()), messagesList, responseContent };
+                            testCasesDescriptionsMap.get(testCase.getName()), messagesList, requestContent,
+                            responseContent};
                     testResults.add(testResultData);
                     status = testCaseCounter + SLASH + numberOfTestCases;
                 }
