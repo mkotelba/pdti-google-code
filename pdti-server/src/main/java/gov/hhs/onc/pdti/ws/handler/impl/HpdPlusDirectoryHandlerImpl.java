@@ -2,7 +2,6 @@ package gov.hhs.onc.pdti.ws.handler.impl;
 
 import gov.hhs.onc.pdti.DirectoryStandard;
 import gov.hhs.onc.pdti.DirectoryStandardId;
-import gov.hhs.onc.pdti.ws.api.BatchResponse;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusRequest;
 import gov.hhs.onc.pdti.ws.api.hpdplus.HpdPlusResponse;
 import gov.hhs.onc.pdti.ws.handler.DirectoryHandler;
@@ -26,7 +25,7 @@ public class HpdPlusDirectoryHandlerImpl extends AbstractDirectoryHandler<HpdPlu
             throws DirectoryHandlerException {
         if (HpdPlusRequest.class.isAssignableFrom(payloadClass)) {
             return this.getPayload(logicalMsgContext, logicalMsg, HpdPlusRequest.class).getRequestId();
-        } else if (BatchResponse.class.isAssignableFrom(payloadClass)) {
+        } else if (HpdPlusResponse.class.isAssignableFrom(payloadClass)) {
             return this.getPayload(logicalMsgContext, logicalMsg, HpdPlusResponse.class).getRequestId();
         } else {
             return null;

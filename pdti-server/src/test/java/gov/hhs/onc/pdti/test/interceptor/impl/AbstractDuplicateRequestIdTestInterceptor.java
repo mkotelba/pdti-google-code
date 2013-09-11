@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 
 public abstract class AbstractDuplicateRequestIdTestInterceptor<T, U> extends AbstractDirectoryInterceptor implements DirectoryRequestInterceptor<T>,
         DirectoryResponseInterceptor<T, U> {
-    protected final static String DUP_REQ_ID_TEST_REQ_ID_PATTERN = "^.*_dup_req_id_\\w*test_.*$";
+    protected final static String DUP_REQ_ID_TEST_REQ_ID_PATTERN = "^dup_req_id_federation_loop_[^$]+$";
 
     protected final static Logger LOGGER = Logger.getLogger(AbstractDuplicateRequestIdTestInterceptor.class);
 
