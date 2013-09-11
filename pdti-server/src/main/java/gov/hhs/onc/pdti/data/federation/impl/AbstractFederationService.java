@@ -10,12 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
+import java.util.regex.Pattern;
 import javax.xml.ws.soap.SOAPFaultException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class AbstractFederationService<T, U> implements FederationService<T, U> {
-    protected final static String DUP_REQ_ID_MSG_PATTERN = "^.+Duplicate directory request ID.+$";
+    protected final static Pattern DUP_REQ_ID_MSG_PATTERN = Pattern.compile("^.+Duplicate directory request ID.+$", Pattern.DOTALL);
 
     @Autowired
     protected DirectoryErrorBuilder errBuilder;
@@ -79,7 +80,7 @@ public abstract class AbstractFederationService<T, U> implements FederationServi
     }
 
     protected boolean isDuplicateRequestIdSoapFault(SOAPFaultException e) {
-        return e.getMessage().matches(DUP_REQ_ID_MSG_PATTERN);
+        return DUP_REQ_ID_MSG_PATTERN.matcher(e.getMessage()).matches();
     }
 
     protected abstract void addError(String fedDirId, String reqId, U fedQueryResp, Throwable th);

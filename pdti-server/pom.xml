@@ -276,7 +276,7 @@
                                     <outputFolder>${project.build.directory}/surefire-reports</outputFolder>
                                     <projectFile>${project.build.testOutputDirectory}/soapui-project.xml</projectFile>
                                     <projectProperties>
-                                        <value>project.test.server.wsdl.url=${project.test.server.1.scheme}://${project.test.server.1.host}:${project.test.server.1.port}/${project.test.server.1.context}/${project.service}?wsdl</value>
+                                        <value>project.test.server.wsdl.url=${project.test.server.1.dir.wsdl.location}</value>
                                         <value>project.test.server.dsml.dn.base=${project.test.server.1.dir.dn.base}</value>
                                     </projectProperties>
                                     <settingsFile>${project.build.testOutputDirectory}/soapui-settings.xml</settingsFile>
@@ -298,7 +298,7 @@
                                     <outputFolder>${project.build.directory}/surefire-reports</outputFolder>
                                     <projectFile>${project.build.testOutputDirectory}/soapui-project_hpdplus.xml</projectFile>
                                     <projectProperties>
-                                        <value>project.test.server.wsdl.url=${project.test.server.1.scheme}://${project.test.server.1.host}:${project.test.server.1.port}/${project.test.server.1.context}/${project.service.hpdplus}?wsdl</value>
+                                        <value>project.test.server.wsdl.url=${project.test.server.1.dir.wsdl.location.hpdplus}</value>
                                         <value>project.test.server.dsml.dn.base=${project.test.server.1.dir.dn.base}</value>
                                     </projectProperties>
                                     <settingsFile>${project.build.testOutputDirectory}/soapui-settings.xml</settingsFile>
