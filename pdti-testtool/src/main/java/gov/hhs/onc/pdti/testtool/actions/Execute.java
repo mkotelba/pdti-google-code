@@ -9,8 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.InterceptorRefs;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
 import org.apache.xmlbeans.XmlException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +30,8 @@ import com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator;
 import com.opensymphony.xwork2.validator.annotations.Validations;
 import com.opensymphony.xwork2.validator.annotations.ValidatorType;
 
-@InterceptorRefs({ @InterceptorRef("defaultStack"), @InterceptorRef("execAndWait") })
+@InterceptorRefs({ @InterceptorRef("defaultStack") })
+@ParentPackage("json-default")
 public class Execute extends ActionSupport {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Execute.class);
@@ -58,6 +62,7 @@ public class Execute extends ActionSupport {
     private String wsdlUrl;
     private String baseDn;
     private List<Object[]> testResults = new ArrayList<Object[]>();
+    private Map<String, Object> testResultsJson = new HashMap<String, Object>();
     private String status = STARTING;
     private String typeOfDirectory;
     
@@ -95,6 +100,7 @@ public class Execute extends ActionSupport {
             @RequiredFieldValidator(type = ValidatorType.SIMPLE, fieldName = WSDL_URL_ATTRIBUTE_PARAM_NAME, message = REQUIRED_FIELD_MESSAGE),
             @RequiredFieldValidator(type = ValidatorType.SIMPLE, fieldName = BASE_DN_STRING_PARAM_NAME, message = REQUIRED_FIELD_MESSAGE),
             @RequiredFieldValidator(type = ValidatorType.SIMPLE, fieldName = DIRECTORY_TYPE_PARAM_NAME, message = REQUIRED_FIELD_MESSAGE) })
+    @Action(value="testResultsJson", results = { @Result(name="success", type="json") })
     public String execute() {
         if (typeOfDirectory.equals(DirectoryTypes.IHE.toString())) {
             wsdlProject = IHE_WSDL_PROJECT;
@@ -105,7 +111,6 @@ public class Execute extends ActionSupport {
             LOGGER.error(errorMessage);
             return ERROR;
         }
-
         wsdlProject.setPropertyValue(URL_PROPERTY, getWsdlUrl());
         wsdlProject.setPropertyValue(BASE_DN_PROPERTY, getBaseDn());
         executeTests();
@@ -143,12 +148,14 @@ public class Execute extends ActionSupport {
                             messagesList.add(NONE);
                         }
                     }
-                    testResults.add(new Object[] {testSuite.getName(), testCase.getName(), testStatus,
-                            testCasesDescriptionsMap.get(testCase.getName()), messagesList, responseContent });
+                    Object[] testResultData = new Object[] {testSuite.getName(), testCase.getName(), testStatus,
+                            testCasesDescriptionsMap.get(testCase.getName()), messagesList, responseContent };
+                    testResults.add(testResultData);
                     status = testCaseCounter + SLASH + numberOfTestCases;
                 }
             }
         }
+        testResultsJson.put("testResults", testResults);
     }
 
     private static boolean isSkippedTestCase(String testCaseName) {
@@ -202,6 +209,10 @@ public class Execute extends ActionSupport {
 
     public void setTypeOfDirectory(String typeOfDirectory) {
         this.typeOfDirectory = typeOfDirectory;
+    }
+
+    public Map<String, Object> getTestResultsJson() {
+        return testResultsJson;
     }
 
 }

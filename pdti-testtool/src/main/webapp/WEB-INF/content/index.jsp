@@ -19,12 +19,6 @@
                 <s:text name="purpose.language"/>
             </p>
             <p class="text">
-                <strong><s:text name="future.plans.header"/></strong>
-                <br/>
-                <br/>
-                <s:text name="future.plans.language"/>
-            </p>
-            <p class="text">
                 <strong><s:text name="how.to.use.header"/></strong>
                 <br/>
                 <br/>

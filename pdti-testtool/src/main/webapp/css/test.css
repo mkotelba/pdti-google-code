@@ -1,3 +1,7 @@
+em {
+    font-weight: bold;
+}
+
 span.wsdlUrl {
     padding: 2px;
     border: 1px dashed black;
