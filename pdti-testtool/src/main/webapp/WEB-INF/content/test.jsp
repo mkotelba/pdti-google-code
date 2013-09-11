@@ -189,7 +189,7 @@
                                 "<em>Test Case Messages:</em><br/>" +
                                 "<p>" + testCaseMessages + "</p><hr/>" +
                                 "<em>Response Content:</em><br/>" +
-                                "<p>" + response + "</p>" +
+                                "<pre class=\"sh_xml\">" + response.replace(/</g, "&lt;").replace(/>/g, "&gt;") + "</pre>" +
                                 "</div>";
                             $("#accordion").append(divHtml);
                         }
@@ -222,6 +222,10 @@
                     return true;
             	}
             }
+    
+            $(document).ready(function () {
+               sh_highlightDocument(); 
+            });
         </script>
 </body>
 </html>
