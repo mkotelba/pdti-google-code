@@ -20,42 +20,38 @@
 			<s:text name="test.header" />
 		</h2>
 		<hr />
-                <!-- <a href="#" id="wsdl_type-dialog-link" class="helplink"><i class="icon-question-sign"></a>
-                <a href="#" id="wsdl_url-dialog-link" class="helplink"><i class="icon-question-sign"></a>
-                <a href="#" id="basedn-dialog-link" class="helplink"><i class="icon-question-sign"></a> -->
-        <p>
-            <div id="validationerrordiv" style="color:#b94a48;">* <s:text name="required"/></div>
-        </p>
-		<form id="testform" class="form-horizontal">
-			<div class="control-group">
-				<label id="typeOfDirectoryLabel" class="control-label"
-					for="typeOfDirectory"><s:text name="typeOfDirectory" /></label>
-				<div class="controls">
-					<s:select id="typeOfDirectory" key="typeOfDirectory"
-						list="@gov.hhs.onc.pdti.testtool.DirectoryTypes@values()"
-						value="@gov.hhs.onc.pdti.testtool.DirectoryTypes@MSPD.toString()"
-						theme="simple" />
-				</div>
-			</div>
-            <div id="wsdlUrlControls" class="control-group">
-                <label class="control-label"
-                    for="wsdlUrl"><s:text name="wsdlUrl" /></label>
-                <div class="controls">
-                    <s:textfield id="wsdlUrl" key="wsdlUrl" theme="simple"/>
-                </div>
-            </div>
-            <div id="baseDnControls" class="control-group">
-                <label class="control-label"
-                    for="baseDn"><s:text name="baseDn" /></label>
-                <div class="controls">
-                    <s:textfield id="baseDn" key="baseDn" theme="simple"/>
-                </div>
-            </div>
-			<div class="control-group">
-				<div class="controls">
-					<button type="submit" class="btn"><s:text name="submit"/></button>
-				</div>
-			</div>
+		<div id="validationerrordiv" class="validationerror">* <s:text name="required" /></div>
+		<form id="testform">
+			<table>
+				<tr>
+					<td><label id="typeOfDirectoryLabel" for="typeOfDirectory"><s:text name="typeOfDirectory" /></label></td>
+					<td><a href="#" id="wsdl_type-dialog-link" class="helplink"><i
+							class="icon-question-sign"></i></a></td>
+					<td><s:select id="typeOfDirectory" key="typeOfDirectory"
+							list="@gov.hhs.onc.pdti.testtool.DirectoryTypes@values()"
+							value="@gov.hhs.onc.pdti.testtool.DirectoryTypes@MSPD.toString()"
+							theme="simple" /></td>
+				</tr>
+				<tr>
+					<td><label id="wsdlUrlLabel" for="wsdlUrl"><s:text name="wsdlUrl" /></label></td>
+					<td><a href="#" id="wsdl_url-dialog-link" class="helplink"><i
+							class="icon-question-sign"></i></a></td>
+					<td><s:textfield id="wsdlUrl" key="wsdlUrl" theme="simple" /></td>
+				</tr>
+				<tr>
+					<td><label id="baseDnLabel" for="baseDn"><s:text name="baseDn" /></label></td>
+					<td><a href="#" id="basedn-dialog-link" class="helplink"><i
+							class="icon-question-sign"></i></a></td>
+					<td><s:textfield id="baseDn" key="baseDn" theme="simple" /></td>
+				</tr>
+				<tr>
+					<td>
+						<button type="submit" class="btn">
+							<s:text name="submit" />
+						</button>
+					</td>
+				</tr>
+			</table>
 		</form>
 	</div>
 
@@ -114,6 +110,8 @@
                 // Link to open the dialog
                 $("#wsdl_type-dialog-link").click(function( event ) {
                     $("#wsdl_type-dialog").dialog( "open");
+                    $("#problemlink").blur();
+                    $('.ui-dialog :button').blur();
                     event.preventDefault();
                 });
                 
@@ -132,6 +130,7 @@
                 // Link to open the dialog
                 $("#wsdl_url-dialog-link").click(function( event ) {
                     $("#wsdl_url-dialog").dialog( "open");
+                    $('.ui-dialog :button').blur();
                     event.preventDefault();
                 });
                 
@@ -150,6 +149,7 @@
                 // Link to open the dialog
                 $("#basedn-dialog-link").click(function( event ) {
                     $("#basedn-dialog").dialog( "open");
+                    $('.ui-dialog :button').blur();
                     event.preventDefault();
                 });
                 
@@ -206,18 +206,22 @@
             });
             
             function clearErrors() {
-            	$("#wsdlUrlControls").removeClass("error");
-                $("#baseDnControls").removeClass("error");
+            	$("#wsdlUrlLabel").removeClass("validationerror");
+                $("#wsdlUrl").removeClass("validationerrorinput");
+                $("#baseDnLabel").removeClass("validationerror");
+                $("#baseDn").removeClass("validationerrorinput");
             }
             
             function validate(wsdlUrlValue, baseDnValue) {
             	if("" == wsdlUrlValue || "" == baseDnValue) {
             		$("#validationerrordiv").show();
             		if("" == wsdlUrlValue) {
-            			$("#wsdlUrlControls").addClass("error");
+            			$("#wsdlUrlLabel").addClass("validationerror");
+            			$("#wsdlUrl").addClass("validationerrorinput");
             		}
             		if("" == baseDnValue) {
-                        $("#baseDnControls").addClass("error");
+                        $("#baseDnLabel").addClass("validationerror");
+                        $("#baseDn").addClass("validationerrorinput");
             		}
                     return false;
             	} else {
