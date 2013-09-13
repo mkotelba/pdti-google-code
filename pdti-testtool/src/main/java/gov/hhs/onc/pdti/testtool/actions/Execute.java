@@ -18,12 +18,15 @@ import org.apache.xmlbeans.XmlException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.eviware.soapui.impl.settings.XmlBeansSettingsImpl;
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestRequestStepResult;
 import com.eviware.soapui.model.testsuite.TestCase;
 import com.eviware.soapui.model.testsuite.TestCaseRunner;
 import com.eviware.soapui.model.testsuite.TestStepResult;
 import com.eviware.soapui.model.testsuite.TestSuite;
+import com.eviware.soapui.settings.HttpSettings;
+import com.eviware.soapui.settings.WsdlSettings;
 import com.eviware.soapui.support.SoapUIException;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator;
@@ -57,6 +60,7 @@ public class Execute extends ActionSupport {
             new HashMap<WsdlProject, Map<String, Map<String, String>>>();
     private static final WsdlProject IHE_WSDL_PROJECT = getWsdlProject(IHE_SOAPUI_PROJECT_FILE);
     private static final WsdlProject MSPD_WSDL_PROJECT = getWsdlProject(MSPD_SOAPUI_PROJECT_FILE);
+    private static final String SETTINGS_FILE_NAME = "soapui-settings.xml";
 
     private WsdlProject wsdlProject;
     private String wsdlUrl;
@@ -66,14 +70,21 @@ public class Execute extends ActionSupport {
     private String status = STARTING;
     private String typeOfDirectory;
     
-    private static String getProjectFileUrl(final String projectFile) {
-        return Execute.class.getClassLoader().getResource(projectFile).toString();
+    private static String getFileUrl(final String fileName) {
+        return Execute.class.getClassLoader().getResource(fileName).toString();
     }
     
     private static WsdlProject getWsdlProject(final String projectFile) {
         WsdlProject wsdlProject = null;
         try {
-            wsdlProject = new WsdlProject(getProjectFileUrl(projectFile));
+            wsdlProject = new WsdlProject(getFileUrl(projectFile));
+            XmlBeansSettingsImpl xmlBeansSettingsImpl = wsdlProject.getSettings();
+            xmlBeansSettingsImpl.setString(HttpSettings.CLOSE_CONNECTIONS, Boolean.TRUE.toString());
+            xmlBeansSettingsImpl.setString(HttpSettings.INCLUDE_REQUEST_IN_TIME_TAKEN, Boolean.TRUE.toString());
+            xmlBeansSettingsImpl.setString(HttpSettings.INCLUDE_RESPONSE_IN_TIME_TAKEN, Boolean.TRUE.toString());
+            xmlBeansSettingsImpl.setString(WsdlSettings.CACHE_WSDLS, Boolean.FALSE.toString());
+            xmlBeansSettingsImpl.setString(WsdlSettings.PRETTY_PRINT_PROJECT_FILES, Boolean.TRUE.toString());
+            xmlBeansSettingsImpl.setString(WsdlSettings.PRETTY_PRINT_RESPONSE_MESSAGES, Boolean.TRUE.toString());
             buildTestcaseDescriptionsMap(wsdlProject);
         } catch (XmlException | IOException | SoapUIException e) {
             LOGGER.error(SOAPUI_PROJECT_FILE_ERROR_FRAGMENT + projectFile, e);
