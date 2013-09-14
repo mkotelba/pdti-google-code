@@ -1,29 +1,31 @@
 package gov.hhs.onc.pdti.data.federation.impl;
 
+
+import gov.hhs.onc.pdti.DirectoryType;
+import gov.hhs.onc.pdti.DirectoryTypeId;
 import gov.hhs.onc.pdti.data.DirectoryDescriptor;
 import gov.hhs.onc.pdti.data.federation.DirectoryFederationException;
 import gov.hhs.onc.pdti.data.federation.FederationService;
 import gov.hhs.onc.pdti.error.DirectoryErrorBuilder;
+import gov.hhs.onc.pdti.interceptor.DirectoryInterceptor;
+import gov.hhs.onc.pdti.interceptor.DirectoryInterceptorException;
 import gov.hhs.onc.pdti.interceptor.DirectoryRequestInterceptor;
 import gov.hhs.onc.pdti.interceptor.DirectoryResponseInterceptor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
-import java.util.regex.Pattern;
-import javax.xml.ws.soap.SOAPFaultException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.AnnotationUtils;
 
 public abstract class AbstractFederationService<T, U> implements FederationService<T, U> {
-    protected final static Pattern DUP_REQ_ID_MSG_PATTERN = Pattern.compile("^.+Duplicate directory request ID.+$", Pattern.DOTALL);
-
     @Autowired
     protected DirectoryErrorBuilder errBuilder;
 
     protected List<DirectoryDescriptor> fedDirs;
 
-    protected Set<DirectoryRequestInterceptor<T>> fedReqInterceptors;
+    protected Set<DirectoryRequestInterceptor<T, U>> fedReqInterceptors;
 
     protected Set<DirectoryResponseInterceptor<T, U>> fedRespInterceptors;
 
@@ -47,47 +49,66 @@ public abstract class AbstractFederationService<T, U> implements FederationServi
         return queryResps;
     }
 
-    protected void interceptRequests(DirectoryDescriptor fedDir, String fedDirId, String reqId, T fedQueryReq, U fedQueryResp) {
+    protected void interceptRequests(DirectoryDescriptor fedDir, String fedDirId, String reqId, T fedQueryReq, U fedQueryResp)
+            throws DirectoryInterceptorException {
         if (this.fedReqInterceptors != null) {
             for (DirectoryRequestInterceptor fedReqInterceptor : this.fedReqInterceptors) {
-                LOGGER.trace("Intercepting federated request (directoryId=" + fedDirId + ", requestId=" + reqId + ", requestClass="
-                        + fedQueryReq.getClass().getName() + "): class=" + fedReqInterceptor.getClass().getName());
+                if (!this.isFederatedInterceptor(fedReqInterceptor)) {
+                    continue;
+                }
 
                 try {
-                    fedReqInterceptor.interceptRequest(fedDir, reqId, fedQueryReq);
+                    fedReqInterceptor.interceptRequest(fedDir, reqId, fedQueryReq, fedQueryResp);
+
+                    LOGGER.trace("Intercepted (class=" + fedReqInterceptor.getClass().getName() + ") federated request (directoryId=" + fedDirId
+                            + ", requestId=" + reqId + ", requestClass=" + fedQueryReq.getClass().getName() + ").");
+                } catch (DirectoryInterceptorException e) {
+                    throw e;
                 } catch (Throwable th) {
-                    // TODO: improve error handling
-                    this.addError(fedDirId, reqId, fedQueryResp, th);
+                    throw new DirectoryInterceptorException("Unable to intercept (class=" + fedReqInterceptor.getClass().getName()
+                            + ") federated request (directoryId=" + fedDirId + ", requestId=" + reqId + ", responseClass=" + fedQueryResp.getClass().getName()
+                            + ").", th);
                 }
             }
         }
     }
 
-    protected void interceptResponses(DirectoryDescriptor fedDir, String fedDirId, String reqId, T fedQueryReq, U fedQueryResp) {
+    protected void interceptResponses(DirectoryDescriptor fedDir, String fedDirId, String reqId, T fedQueryReq, U fedQueryResp)
+            throws DirectoryInterceptorException {
         if (this.fedRespInterceptors != null) {
             for (DirectoryResponseInterceptor fedRespInterceptor : this.fedRespInterceptors) {
-                LOGGER.trace("Intercepting federated response (directoryId=" + fedDirId + ", requestId=" + reqId + ", responseClass="
-                        + fedQueryResp.getClass().getName() + "): class=" + fedRespInterceptor.getClass().getName());
+                if (!this.isFederatedInterceptor(fedRespInterceptor)) {
+                    continue;
+                }
 
                 try {
                     fedRespInterceptor.interceptResponse(fedDir, reqId, fedQueryReq, fedQueryResp);
+
+                    LOGGER.trace("Intercepted (class=" + fedRespInterceptor.getClass().getName() + ") federated response (directoryId=" + fedDirId
+                            + ", requestId=" + reqId + ", responseClass=" + fedQueryResp.getClass().getName() + ").");
+                } catch (DirectoryInterceptorException e) {
+                    throw e;
                 } catch (Throwable th) {
-                    // TODO: improve error handling
-                    this.addError(fedDirId, reqId, fedQueryResp, th);
+                    throw new DirectoryInterceptorException("Intercepted (class=" + fedRespInterceptor.getClass().getName()
+                            + ") federated response (directoryId=" + fedDirId + ", requestId=" + reqId + ", responseClass=" + fedQueryResp.getClass().getName()
+                            + ").", th);
                 }
             }
         }
     }
 
-    protected boolean isDuplicateRequestIdSoapFault(SOAPFaultException e) {
-        return DUP_REQ_ID_MSG_PATTERN.matcher(e.getMessage()).matches();
+    protected boolean isFederatedInterceptor(DirectoryInterceptor<T, U> dirInterceptor) {
+        DirectoryType dirInterceptorType;
+
+        return ((dirInterceptorType = AnnotationUtils.findAnnotation(dirInterceptor.getClass(), DirectoryType.class)) == null)
+                || (dirInterceptorType.value() == DirectoryTypeId.FEDERATED);
     }
 
     protected abstract void addError(String fedDirId, String reqId, U fedQueryResp, Throwable th);
 
     protected abstract void setFederatedDirs(List<DirectoryDescriptor> federatedDirs);
 
-    protected abstract void setFederatedRequestInterceptors(SortedSet<DirectoryRequestInterceptor<T>> fedReqInterceptors);
+    protected abstract void setFederatedRequestInterceptors(SortedSet<DirectoryRequestInterceptor<T, U>> fedReqInterceptors);
 
     protected abstract void setFederatedResponseInterceptors(SortedSet<DirectoryResponseInterceptor<T, U>> fedRespInterceptors);
 }

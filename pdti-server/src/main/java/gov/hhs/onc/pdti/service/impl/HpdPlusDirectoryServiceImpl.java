@@ -8,6 +8,8 @@ import gov.hhs.onc.pdti.DirectoryTypeId;
 import gov.hhs.onc.pdti.data.DirectoryDataService;
 import gov.hhs.onc.pdti.data.DirectoryDescriptor;
 import gov.hhs.onc.pdti.data.federation.FederationService;
+import gov.hhs.onc.pdti.interceptor.DirectoryInterceptorException;
+import gov.hhs.onc.pdti.interceptor.DirectoryInterceptorNoOpException;
 import gov.hhs.onc.pdti.interceptor.DirectoryRequestInterceptor;
 import gov.hhs.onc.pdti.interceptor.DirectoryResponseInterceptor;
 import gov.hhs.onc.pdti.service.DirectoryService;
@@ -46,42 +48,62 @@ public class HpdPlusDirectoryServiceImpl extends AbstractDirectoryService<HpdPlu
         BatchRequest batchReq = hpdPlusReq.getBatchRequest();
         HpdPlusRequestMetadata reqMeta = hpdPlusReq.getRequestMetadata();
         HpdPlusResponse hpdPlusResp = this.hpdPlusObjectFactory.createHpdPlusResponse();
+        DirectoryInterceptorNoOpException noOpException = null;
 
-        this.interceptRequests(dirDesc, dirId, reqId, hpdPlusReq, hpdPlusResp);
+        try {
+            this.interceptRequests(dirDesc, dirId, reqId, hpdPlusReq, hpdPlusResp);
+        } catch (DirectoryInterceptorNoOpException e) {
+            noOpException = e;
+        } catch (DirectoryInterceptorException e) {
+            this.addError(dirId, reqId, hpdPlusResp, e);
+        }
 
         try {
             String hpdPlusReqStr = this.dirJaxb2Marshaller.marshal(this.hpdPlusObjectFactory.createHpdPlusRequest(hpdPlusReq));
 
-            if (LOGGER.isTraceEnabled()) {
-                LOGGER.trace("Processing HPD Plus request (directoryId=" + dirId + ", requestId=" + reqId + "):\n" + hpdPlusReqStr);
-            } else if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Processing HPD Plus request (directoryId=" + dirId + ", requestId=" + reqId + ").");
-            }
+            if (noOpException != null) {
+                if (LOGGER.isTraceEnabled()) {
+                    LOGGER.trace("Skipping processing of HPD Plus request (directoryId=" + dirId + ", requestId=" + reqId + "):\n" + hpdPlusReqStr,
+                            noOpException);
+                } else if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("Skipping processing of HPD Plus request (directoryId=" + dirId + ", requestId=" + reqId + ").", noOpException);
+                }
+            } else {
+                if (LOGGER.isTraceEnabled()) {
+                    LOGGER.trace("Processing HPD Plus request (directoryId=" + dirId + ", requestId=" + reqId + "):\n" + hpdPlusReqStr);
+                } else if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("Processing HPD Plus request (directoryId=" + dirId + ", requestId=" + reqId + ").");
+                }
 
-            if (this.dataServices != null) {
-                for (DirectoryDataService<?> dataService : this.dataServices) {
+                if (this.dataServices != null) {
+                    for (DirectoryDataService<?> dataService : this.dataServices) {
+                        try {
+                            hpdPlusResp.getResponseItems().addAll(dataService.processData(batchReq));
+                        } catch (Throwable th) {
+                            this.addError(dirId, reqId, hpdPlusResp, th);
+                        }
+                    }
+                }
+
+                if (!this.containsMetadataProperty(reqMeta, HpdPlusMetadataPropertyName.DO_NOT_FEDERATE)) {
                     try {
-                        hpdPlusResp.getResponseItems().addAll(dataService.processData(batchReq));
+                        hpdPlusResp.getResponseItems().addAll(this.fedService.federate(hpdPlusReq));
                     } catch (Throwable th) {
                         this.addError(dirId, reqId, hpdPlusResp, th);
                     }
                 }
-            }
 
-            if (!this.containsMetadataProperty(reqMeta, HpdPlusMetadataPropertyName.DO_NOT_FEDERATE)) {
-                try {
-                    hpdPlusResp.getResponseItems().addAll(this.fedService.federate(hpdPlusReq));
-                } catch (Throwable th) {
-                    this.addError(dirId, reqId, hpdPlusResp, th);
-                }
+                this.transferMetadata(reqMeta, hpdPlusResp);
             }
-
-            this.transferMetadata(reqMeta, hpdPlusResp);
         } catch (XmlMappingException e) {
             this.addError(dirId, reqId, hpdPlusResp, e);
         }
 
-        this.interceptResponses(dirDesc, dirId, reqId, hpdPlusReq, hpdPlusResp);
+        try {
+            this.interceptResponses(dirDesc, dirId, reqId, hpdPlusReq, hpdPlusResp);
+        } catch (DirectoryInterceptorException e) {
+            this.addError(dirId, reqId, hpdPlusResp, e);
+        }
 
         try {
             String hpdPlusRespStr = this.dirJaxb2Marshaller.marshal(this.hpdPlusObjectFactory.createHpdPlusResponse(hpdPlusResp));
@@ -151,7 +173,7 @@ public class HpdPlusDirectoryServiceImpl extends AbstractDirectoryService<HpdPlu
     @Autowired(required = false)
     @DirectoryStandard(DirectoryStandardId.HPD_PLUS_PROPOSED)
     @Override
-    protected void setRequestInterceptors(SortedSet<DirectoryRequestInterceptor<HpdPlusRequest>> reqInterceptors) {
+    protected void setRequestInterceptors(SortedSet<DirectoryRequestInterceptor<HpdPlusRequest, HpdPlusResponse>> reqInterceptors) {
         this.reqInterceptors = reqInterceptors;
     }
 

@@ -10,7 +10,7 @@
         http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
     
-    <beans:bean id="dirReqCacheDefault" class="gov.hhs.onc.pdti.ws.handler.impl.DirectoryRequestCacheDescriptorImpl" parent="dirReqCacheDescriptor"
+    <beans:bean id="dirCacheDescriptorDefault" class="gov.hhs.onc.pdti.cache.impl.DirectoryCacheDescriptorImpl" parent="dirCacheDescriptor"
         p:cleanUpInterval="5000"
         p:concurrencyLevel="10"
         p:expireAfterWrite="5m"
@@ -20,8 +20,7 @@
     </beans:bean>
     
     <task:scheduled-tasks scheduler="dirScheduler">
-        <task:scheduled ref="dirHandler" method="cleanUpRequests" trigger="dirReqCacheCleanUpTrigger"/>
-        <task:scheduled ref="hpdPlusDirHandler" method="cleanUpRequests" trigger="dirReqCacheCleanUpTrigger"/>
+        <task:scheduled ref="dirCache" method="cleanUp" trigger="dirCacheCleanUpTrigger"/>
     </task:scheduled-tasks>
     
     <beans:bean id="dirDefault" class="gov.hhs.onc.pdti.data.impl.DirectoryDescriptorImpl" parent="mainDir"

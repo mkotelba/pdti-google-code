@@ -1,4 +1,7 @@
 package gov.hhs.onc.pdti.interceptor;
 
-public interface DirectoryInterceptor extends Comparable<DirectoryInterceptor> {
+
+import org.springframework.core.PriorityOrdered;
+
+public interface DirectoryInterceptor<T, U> extends Comparable<DirectoryInterceptor<T, U>>, PriorityOrdered {
 }

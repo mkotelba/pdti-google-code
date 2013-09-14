@@ -1,5 +1,6 @@
 package gov.hhs.onc.pdti.interceptor.impl;
 
+
 import gov.hhs.onc.pdti.DirectoryStandard;
 import gov.hhs.onc.pdti.DirectoryStandardId;
 import gov.hhs.onc.pdti.data.DirectoryDescriptor;
@@ -23,18 +24,19 @@ import org.springframework.stereotype.Component;
 @DirectoryStandard(DirectoryStandardId.HPD_PLUS_PROPOSED)
 @Order(100)
 @Scope("singleton")
-public class HpdPlusIdInterceptorImpl extends AbstractDirectoryInterceptor implements DirectoryRequestInterceptor<HpdPlusRequest>,
-        DirectoryResponseInterceptor<HpdPlusRequest, HpdPlusResponse> {
+public class HpdPlusIdInterceptorImpl extends AbstractDirectoryInterceptor<HpdPlusRequest, HpdPlusResponse> implements
+        DirectoryRequestInterceptor<HpdPlusRequest, HpdPlusResponse>, DirectoryResponseInterceptor<HpdPlusRequest, HpdPlusResponse> {
     @Autowired
     private IdInterceptorImpl idInterceptor;
 
     @Override
-    public void interceptRequest(DirectoryDescriptor dirDesc, String reqId, HpdPlusRequest hpdPlusReq) throws DirectoryInterceptorException {
+    public void interceptRequest(DirectoryDescriptor dirDesc, String reqId, HpdPlusRequest hpdPlusReq, HpdPlusResponse hpdPlusResp)
+            throws DirectoryInterceptorException {
         String dirId = dirDesc.getDirectoryId();
 
         hpdPlusReq.setDirectoryId(dirId);
 
-        this.idInterceptor.interceptRequest(dirDesc, reqId, hpdPlusReq.getBatchRequest());
+        this.idInterceptor.interceptRequest(dirDesc, reqId, hpdPlusReq.getBatchRequest(), null);
     }
 
     @Override

@@ -8,7 +8,7 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
     
-    <beans:bean id="dirReqCacheDescriptor" class="gov.hhs.onc.pdti.ws.handler.DirectoryRequestCacheDescriptor" abstract="true"/>
+    <beans:bean id="dirCacheDescriptor" class="gov.hhs.onc.pdti.cache.DirectoryCacheDescriptor" abstract="true"/>
     
     <beans:bean id="dirDescriptor" class="gov.hhs.onc.pdti.data.DirectoryDescriptor" abstract="true"/>
     

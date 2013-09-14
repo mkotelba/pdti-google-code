@@ -23,7 +23,8 @@ import org.springframework.stereotype.Component;
 @Scope("singleton")
 public class DuplicateRequestIdTestInterceptorImpl extends AbstractDuplicateRequestIdTestInterceptor<BatchRequest, BatchResponse> {
     @Override
-    public void interceptRequest(DirectoryDescriptor dirDesc, String reqId, BatchRequest batchReq) throws DirectoryInterceptorException {
+    public void interceptRequest(DirectoryDescriptor dirDesc, String reqId, BatchRequest batchReq, BatchResponse batchResp)
+            throws DirectoryInterceptorException {
         this.setDuplicateRequestIdTest(reqId, true);
     }
 

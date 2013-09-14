@@ -1364,6 +1364,7 @@ count(//dsml:attr)</path><content>1</content><allowWildcards>false</allowWildcar
                     <con:assertion type="Schema Compliance">
                     <con:configuration><definition/></con:configuration>
                     </con:assertion>
+                    <con:assertion type="SOAP Fault Assertion"/>
                     <con:assertion type="GroovyScriptAssertion" name="dup_req_id_test_hpdplus_response_script_assertion">
                         <con:configuration><scriptText>def groovyUtils = new com.eviware.soapui.support.GroovyUtils(context);
 def response = groovyUtils.getXmlHolder(messageExchange.getResponseContentAsXml());

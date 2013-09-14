@@ -23,22 +23,14 @@
         <wss:service>
             <ws:service
                 bean="#providerInfoDir"
-                bindingID="http://www.w3.org/2003/05/soap/bindings/HTTP/">
-                <ws:handlers>
-                    <beans:ref bean="dirHandler"/>
-                </ws:handlers>
-            </ws:service>
+                bindingID="http://www.w3.org/2003/05/soap/bindings/HTTP/"/>
         </wss:service>
     </wss:binding>
     <wss:binding url="/Hpd_Plus_ProviderInformationDirectoryService">
         <wss:service>
             <ws:service
                 bean="#hpdPlusProviderInfoDir"
-                bindingID="http://www.w3.org/2003/05/soap/bindings/HTTP/">
-                <ws:handlers>
-                    <beans:ref bean="hpdPlusDirHandler"/>
-                </ws:handlers>
-            </ws:service>
+                bindingID="http://www.w3.org/2003/05/soap/bindings/HTTP/"/>
         </wss:service>
     </wss:binding>
 </beans:beans>

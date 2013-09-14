@@ -1,5 +1,6 @@
 package gov.hhs.onc.pdti.service.impl;
 
+
 import gov.hhs.onc.pdti.DirectoryStandard;
 import gov.hhs.onc.pdti.DirectoryStandardId;
 import gov.hhs.onc.pdti.DirectoryType;
@@ -7,6 +8,8 @@ import gov.hhs.onc.pdti.DirectoryTypeId;
 import gov.hhs.onc.pdti.data.DirectoryDataService;
 import gov.hhs.onc.pdti.data.DirectoryDescriptor;
 import gov.hhs.onc.pdti.data.federation.FederationService;
+import gov.hhs.onc.pdti.interceptor.DirectoryInterceptorException;
+import gov.hhs.onc.pdti.interceptor.DirectoryInterceptorNoOpException;
 import gov.hhs.onc.pdti.interceptor.DirectoryRequestInterceptor;
 import gov.hhs.onc.pdti.interceptor.DirectoryResponseInterceptor;
 import gov.hhs.onc.pdti.service.DirectoryService;
@@ -37,38 +40,58 @@ public class DirectoryServiceImpl extends AbstractDirectoryService<BatchRequest,
     public BatchResponse processRequest(BatchRequest batchReq) {
         String dirId = this.dirDesc.getDirectoryId(), reqId = DirectoryUtils.defaultRequestId(batchReq.getRequestId());
         BatchResponse batchResp = this.objectFactory.createBatchResponse();
+        DirectoryInterceptorNoOpException noOpException = null;
 
-        this.interceptRequests(dirDesc, dirId, reqId, batchReq, batchResp);
+        try {
+            this.interceptRequests(dirDesc, dirId, reqId, batchReq, batchResp);
+        } catch (DirectoryInterceptorNoOpException e) {
+            noOpException = e;
+        } catch (DirectoryInterceptorException e) {
+            this.addError(dirId, reqId, batchResp, e);
+        }
 
         try {
             String batchReqStr = this.dirJaxb2Marshaller.marshal(this.objectFactory.createBatchRequest(batchReq));
 
-            if (LOGGER.isTraceEnabled()) {
-                LOGGER.trace("Processing DSML batch request (directoryId=" + dirId + ", requestId=" + reqId + "):\n" + batchReqStr);
-            } else if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Processing DSML batch request (directoryId=" + dirId + ", requestId=" + reqId + ").");
-            }
+            if (noOpException != null) {
+                if (LOGGER.isTraceEnabled()) {
+                    LOGGER.trace("Skipping processing of DSML batch request (directoryId=" + dirId + ", requestId=" + reqId + "):\n" + batchReqStr,
+                            noOpException);
+                } else if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("Skipping processing of DSML batch request (directoryId=" + dirId + ", requestId=" + reqId + ").", noOpException);
+                }
+            } else {
+                if (LOGGER.isTraceEnabled()) {
+                    LOGGER.trace("Processing DSML batch request (directoryId=" + dirId + ", requestId=" + reqId + "):\n" + batchReqStr);
+                } else if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("Processing DSML batch request (directoryId=" + dirId + ", requestId=" + reqId + ").");
+                }
 
-            if (this.dataServices != null) {
-                for (DirectoryDataService<?> dataService : this.dataServices) {
-                    try {
-                        combineBatchResponses(batchResp, dataService.processData(batchReq));
-                    } catch (Throwable th) {
-                        this.addError(dirId, reqId, batchResp, th);
+                if (this.dataServices != null) {
+                    for (DirectoryDataService<?> dataService : this.dataServices) {
+                        try {
+                            combineBatchResponses(batchResp, dataService.processData(batchReq));
+                        } catch (Throwable th) {
+                            this.addError(dirId, reqId, batchResp, th);
+                        }
                     }
                 }
-            }
 
-            try {
-                combineBatchResponses(batchResp, this.fedService.federate(batchReq));
-            } catch (Throwable th) {
-                this.addError(dirId, reqId, batchResp, th);
+                try {
+                    combineBatchResponses(batchResp, this.fedService.federate(batchReq));
+                } catch (Throwable th) {
+                    this.addError(dirId, reqId, batchResp, th);
+                }
             }
         } catch (XmlMappingException e) {
             this.addError(dirId, reqId, batchResp, e);
         }
 
-        this.interceptResponses(dirDesc, dirId, reqId, batchReq, batchResp);
+        try {
+            this.interceptResponses(dirDesc, dirId, reqId, batchReq, batchResp);
+        } catch (DirectoryInterceptorException e) {
+            this.addError(dirId, reqId, batchResp, e);
+        }
 
         try {
             String batchRespStr = this.dirJaxb2Marshaller.marshal(this.objectFactory.createBatchResponse(batchResp));
@@ -115,7 +138,7 @@ public class DirectoryServiceImpl extends AbstractDirectoryService<BatchRequest,
     @Autowired(required = false)
     @DirectoryStandard(DirectoryStandardId.IHE)
     @Override
-    protected void setRequestInterceptors(SortedSet<DirectoryRequestInterceptor<BatchRequest>> reqInterceptors) {
+    protected void setRequestInterceptors(SortedSet<DirectoryRequestInterceptor<BatchRequest, BatchResponse>> reqInterceptors) {
         this.reqInterceptors = reqInterceptors;
     }
 
