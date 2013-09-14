@@ -1,6 +1,6 @@
-package gov.hhs.onc.pdti.ws.handler;
+package gov.hhs.onc.pdti.cache;
 
-public interface DirectoryRequestCacheDescriptor {
+public interface DirectoryCacheDescriptor {
     public String toCacheBuilderSpecString();
 
     public long getCleanUpInterval();

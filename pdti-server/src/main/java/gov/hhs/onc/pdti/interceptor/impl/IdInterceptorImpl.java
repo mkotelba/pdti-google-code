@@ -1,5 +1,6 @@
 package gov.hhs.onc.pdti.interceptor.impl;
 
+
 import gov.hhs.onc.pdti.DirectoryStandard;
 import gov.hhs.onc.pdti.DirectoryStandardId;
 import gov.hhs.onc.pdti.data.DirectoryDescriptor;
@@ -17,10 +18,11 @@ import org.springframework.stereotype.Component;
 @DirectoryStandard(DirectoryStandardId.IHE)
 @Order(100)
 @Scope("singleton")
-public class IdInterceptorImpl extends AbstractDirectoryInterceptor implements DirectoryRequestInterceptor<BatchRequest>,
-        DirectoryResponseInterceptor<BatchRequest, BatchResponse> {
+public class IdInterceptorImpl extends AbstractDirectoryInterceptor<BatchRequest, BatchResponse> implements
+        DirectoryRequestInterceptor<BatchRequest, BatchResponse>, DirectoryResponseInterceptor<BatchRequest, BatchResponse> {
     @Override
-    public void interceptRequest(DirectoryDescriptor dirDesc, String reqId, BatchRequest batchReq) throws DirectoryInterceptorException {
+    public void interceptRequest(DirectoryDescriptor dirDesc, String reqId, BatchRequest batchReq, BatchResponse batchResp)
+            throws DirectoryInterceptorException {
         DirectoryUtils.setRequestId(batchReq, reqId);
     }
 

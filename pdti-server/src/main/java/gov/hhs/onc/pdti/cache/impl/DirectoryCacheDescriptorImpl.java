@@ -1,11 +1,12 @@
-package gov.hhs.onc.pdti.ws.handler.impl;
+package gov.hhs.onc.pdti.cache.impl;
 
-import gov.hhs.onc.pdti.ws.handler.DirectoryRequestCacheDescriptor;
+
+import gov.hhs.onc.pdti.cache.DirectoryCacheDescriptor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class DirectoryRequestCacheDescriptorImpl implements DirectoryRequestCacheDescriptor {
+public class DirectoryCacheDescriptorImpl implements DirectoryCacheDescriptor {
     private static class CacheBuilderToStringStyle extends ToStringStyle {
         public final static CacheBuilderToStringStyle INSTANCE = new CacheBuilderToStringStyle();
 

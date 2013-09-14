@@ -23,7 +23,8 @@ import org.springframework.stereotype.Component;
 @Scope("singleton")
 public class HpdPlusDuplicateRequestIdTestInterceptorImpl extends AbstractDuplicateRequestIdTestInterceptor<HpdPlusRequest, HpdPlusResponse> {
     @Override
-    public void interceptRequest(DirectoryDescriptor dirDesc, String reqId, HpdPlusRequest hpdPlusReq) throws DirectoryInterceptorException {
+    public void interceptRequest(DirectoryDescriptor dirDesc, String reqId, HpdPlusRequest hpdPlusReq, HpdPlusResponse hpdPlusResp)
+            throws DirectoryInterceptorException {
         this.setDuplicateRequestIdTest(reqId, true);
     }
 
