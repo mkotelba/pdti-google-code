@@ -3,6 +3,7 @@
     <fail unless="java.lib.dir" message="java.lib.dir property must be set."/>
     <fail unless="server.war" message="server.war property must be set."/>
     <fail unless="client.war" message="client.war property must be set."/>
+    <fail unless="testtool.war" message="testtool.war property must be set."/>
     <fail unless="prod1.deploy.url" message="prod1.deploy.url property must be set."/>
     <fail unless="prod1.deploy.user" message="prod1.deploy.user property must be set."/>
     <fail unless="prod1.deploy.pass" message="prod1.deploy.pass property must be set."/>
@@ -29,6 +30,7 @@
     <property name="server.context" value="/pdti-server"/>
     <property name="client.war.name" value="pdti-client.war"/>
     <property name="client.context" value="/pdti-client"/>
+    <property name="client.context" value="/testtool"/>
 
     <target name="deploy">
         <echo message="server.war =${server.war}"/>
@@ -85,6 +87,9 @@
         <zip destfile="${prod1.client.dir}/${client.war.name}" basedir="${prod1.client.extracted.dir}"/>
         <undeploy url="${prod1.deploy.url}" username="${prod1.deploy.user}" password="${prod1.deploy.pass}" path="${client.context}"/>
         <deploy url="${prod1.deploy.url}" username="${prod1.deploy.user}" password="${prod1.deploy.pass}" path="${client.context}" war="file:${prod1.client.dir}/${client.war.name}"/>
+        
+        <undeploy url="${prod1.deploy.url}" username="${prod1.deploy.user}" password="${prod1.deploy.pass}" path="${testtool.context}"/>
+        <deploy url="${prod1.deploy.url}" username="${prod1.deploy.user}" password="${prod1.deploy.pass}" path="${testtool.context}" war="file:${testtool.war}"/>
     </target>
 
 </project>
