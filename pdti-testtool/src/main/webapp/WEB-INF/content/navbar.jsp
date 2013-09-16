@@ -1,10 +1,5 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<style>
-	.greylink {
-        color:#999999;
-    }
-</style>
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
             <div class="brand">
@@ -46,6 +41,9 @@
 	                    </ul>
 	                </li>
 	            </ul>
+                <div id="version">
+                    <strong>Version</strong>: <s:text name="version"/>
+                </div>
             </div>
         </div>
     </div>

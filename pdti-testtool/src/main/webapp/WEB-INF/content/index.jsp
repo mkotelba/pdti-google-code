@@ -4,7 +4,6 @@
 <html>
     <head>
         <%@ include file="head_common.jsp"%>
-        <link href="<s:url value="css/index.css"/>" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <%@ include file="header.jsp"%>
