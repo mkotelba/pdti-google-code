@@ -497,11 +497,37 @@
                     <inherited>true</inherited>
                     <configuration combine.children="merge">
                         <password>${tomcat.manager.password}</password>
-                        <!--<path>/${project.build.finalName}</path>-->
                         <update>true</update>
                         <url>${tomcat.manager.url}</url>
                         <username>${tomcat.manager.username}</username>
                     </configuration>
+                    <executions>
+                        <execution>
+                            <id>tomcat7-deploy1</id>
+                            <phase>install</phase>
+                            <goals>
+                                <goal>deploy-only</goal>
+                            </goals>
+                            <inherited>true</inherited>
+                            <configuration>
+                                <path>/${project.deploy.server.1.context}</path>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>tomcat7-deploy2</id>
+                            <phase>install</phase>
+                            <goals>
+                                <goal>deploy-only</goal>
+                            </goals>
+                            <inherited>true</inherited>
+                            <configuration>
+                                <password>${tomcat.manager.2.password}</password>
+                                <path>/${project.deploy.server.2.context}</path>
+                                <url>${tomcat.manager.2.url}</url>
+                                <username>${tomcat.manager.2.username}</username>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.cargo</groupId>
@@ -736,7 +762,19 @@
                 </property>
             </activation>
             <properties>
-                <tomcat.manager.url>http://${project.deploy.server.host}:${project.deploy.server.port}/manager/text</tomcat.manager.url>
+                <tomcat.manager.url>http://${project.deploy.server.1.host}:${project.deploy.server.1.port}/manager/text</tomcat.manager.url>
+            </properties>
+        </profile>
+        <!-- Set Tomcat manager 2 URL property if not defined already -->
+        <profile>
+            <id>default-tomcat.manager.2.url</id>
+            <activation>
+                <property>
+                    <name>!tomcat.manager.2.url</name>
+                </property>
+            </activation>
+            <properties>
+                <tomcat.manager.2.url>http://${project.deploy.server.2.host}:${project.deploy.server.2.port}/manager/text</tomcat.manager.2.url>
             </properties>
         </profile>
         <!-- Set Tomcat manager username property if not defined already -->
@@ -751,6 +789,18 @@
                 <tomcat.manager.username/>
             </properties>
         </profile>
+        <!-- Set Tomcat manager 2 username property if not defined already -->
+        <profile>
+            <id>default-tomcat.manager.2.username</id>
+            <activation>
+                <property>
+                    <name>!tomcat.manager.2.username</name>
+                </property>
+            </activation>
+            <properties>
+                <tomcat.manager.2.username/>
+            </properties>
+        </profile>
         <!-- Set Tomcat manager password property if not defined already -->
         <profile>
             <id>default-tomcat.manager.password</id>
@@ -760,7 +810,19 @@
                 </property>
             </activation>
             <properties>
-                <tomcat.manager.password />
+                <tomcat.manager.password/>
+            </properties>
+        </profile>
+        <!-- Set Tomcat manager 2 password property if not defined already -->
+        <profile>
+            <id>default-tomcat.manager.2.password</id>
+            <activation>
+                <property>
+                    <name>!tomcat.manager.2.password</name>
+                </property>
+            </activation>
+            <properties>
+                <tomcat.manager.2.password/>
             </properties>
         </profile>
     </profiles>

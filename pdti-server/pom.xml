@@ -509,7 +509,7 @@
             </build>
         </profile>
         <profile>
-            <id>deploy-server</id>
+            <id>deploy-servers</id>
             <activation>
                 <property>
                     <name>!skipTests</name>
@@ -523,27 +523,10 @@
                         <executions>
                             <execution>
                                 <id>tomcat7-deploy1</id>
-                                <phase>install</phase>
-                                <goals>
-                                    <goal>deploy-only</goal>
-                                </goals>
-                                <configuration>
-                                    <path>/${project.deploy.server.context.1}</path>
-                                </configuration>
                             </execution>
-                            <!-- TODO: implement multi-context federation handling -->
-                            <!--
                             <execution>
                                 <id>tomcat7-deploy2</id>
-                                <phase>install</phase>
-                                <goals>
-                                    <goal>deploy</goal>
-                                </goals>
-                                <configuration>
-                                    <path>/${project.deploy.server.context.2}</path>
-                                </configuration>
                             </execution>
-                            -->
                         </executions>
                     </plugin>
                 </plugins>

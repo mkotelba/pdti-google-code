@@ -119,13 +119,6 @@
                         <executions>
                             <execution>
                                 <id>tomcat7-deploy1</id>
-                                <phase>install</phase>
-                                <goals>
-                                    <goal>deploy-only</goal>
-                                </goals>
-                                <configuration>
-                                    <path>/${project.deploy.server.context.1}</path>
-                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
