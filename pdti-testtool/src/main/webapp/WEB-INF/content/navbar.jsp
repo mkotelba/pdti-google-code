@@ -1,4 +1,6 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<!-- workaround for bootstrap conflict with jquery that prevents dialog close icon from appearing (see: http://stackoverflow.com/questions/8681707/jqueryui-modal-dialog-does-not-show-close-button-x) -->
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript"></script>
 <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
@@ -19,6 +21,10 @@
 	                        <li class="divider"></li>
 	                        <li>
 	                            <a href="http://modularspecs.siframework.org/+Provider+Directories+FAQ" target="_blank"><s:text name="faq"/></a>
+	                        </li>
+                            <li class="divider"></li>
+	                        <li>
+	                           <a href="#" id="version-dialog-link" class="helplink"><s:text name="version.link"/></i></a>
 	                        </li>
 	                    </ul>
 	                </li>
@@ -41,10 +47,38 @@
 	                    </ul>
 	                </li>
 	            </ul>
-                <div id="version">
-                    <strong>Version</strong>: <s:text name="version"/>
-                </div>
             </div>
         </div>
     </div>
 </div>
+
+<div id="version-dialog" title="<s:text name='version.title'/>">
+    <s:text name="version"/>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+	
+	// specify dialog
+	$("#version-dialog").dialog({
+        autoOpen: false,
+        width: 600,
+        buttons: [
+            {
+                text: "OK",
+                click: function() {
+                    $( this ).dialog( "close");
+                }
+            }
+        ]
+    });
+    
+    // specify link to open the dialog
+    $("#version-dialog-link").click(function( event ) {
+        $("#version-dialog").dialog( "open");
+        $('.ui-dialog :button').blur();
+        event.preventDefault();
+    });
+    
+});
+</script>
