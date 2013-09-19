@@ -16,6 +16,10 @@
 	                    <a class="dropdown-toggle" data-toggle="dropdown"><i class="icon-question-sign icon-white"></i> <s:text name="help"/> <b class="caret"></b></a>
 	                    <ul class="dropdown-menu">
 	                        <li>
+	                           <a href="http://confluence.siframework.org/x/OQAtAg" target="_blank"><s:text name="prequisites"/></a>
+	                        </li>
+                            <li class="divider"></li>
+	                        <li>
 	                            <a href="http://modularspecs.siframework.org/Provider+Directories+Installation+Guide" target="_blank"><s:text name="installation.guide"/></a>
 	                        </li>
 	                        <li class="divider"></li>
