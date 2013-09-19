@@ -1,0 +1,98 @@
+<project name="PDTI_deployment" default="deploy" basedir=".">
+
+    <fail unless="java.lib.dir" message="java.lib.dir property must be set."/>
+    <fail unless="server.war" message="server.war property must be set."/>
+    <fail unless="client.war" message="client.war property must be set."/>
+    <fail unless="testtool.war" message="testtool.war property must be set."/>
+    <fail unless="deploy.1.url" message="deploy.1.url property must be set."/>
+    <fail unless="deploy.1.user" message="deploy.1.user property must be set."/>
+    <fail unless="deploy.1.pass" message="deploy.1.pass property must be set."/>
+    <fail unless="deploy.2.url" message="deploy.2.url property must be set."/>
+    <fail unless="deploy.2.user" message="deploy.2.user property must be set."/>
+    <fail unless="deploy.2.pass" message="deploy.2.pass property must be set."/>
+    <fail unless="label" message="label property must be set."/>
+    <fail unless="server.1.hostname" message="server.1.hostname property must be set."/>
+    <fail unless="server.2.hostname" message="server.2.hostname property must be set."/>
+    
+    <taskdef resource="org/apache/catalina/ant/catalina.tasks">
+        <classpath>
+            <fileset dir="${java.lib.dir}">
+                <include name="*.jar"/>
+            </fileset>
+        </classpath>
+    </taskdef>
+    
+    <property name="temp.dir" value="${basedir}/.pdti_temp"/>
+    <property name="server.1.dir" value="${temp.dir}/1_server"/>
+    <property name="server.1.extracted.dir" value="${server.1.dir}/extracted"/>
+    <property name="client.1.dir" value="${temp.dir}/1_client"/>
+    <property name="client.1.extracted.dir" value="${client.1.dir}/extracted"/>
+    <property name="server.2.dir" value="${temp.dir}/2_server"/>
+    <property name="server.2.extracted.dir" value="${server.2.dir}/extracted"/>
+    <property name="server.war.name" value="pdti-server.war"/>
+    <property name="server.context" value="/pdti-server"/>
+    <property name="client.war.name" value="pdti-client.war"/>
+    <property name="client.context" value="/pdti-client"/>
+    <property name="client.context" value="/testtool"/>
+
+    <target name="deploy">
+        <echo message="server.war =${server.war}"/>
+    	<delete dir="${server.2.extracted.dir}"/>
+        <mkdir dir="${server.2.extracted.dir}"/>
+        <unzip src="${server.war}" dest="${server.2.extracted.dir}"/>
+        <replace file="${server.2.extracted.dir}/META-INF/data/directory/directory-default.xml" value="PDTI_${label}_2_DSML_BASED">
+            <replacetoken><![CDATA[pdti-dir_#{ new java.util.Date().time }]]></replacetoken>
+        </replace>
+        <replace file="${server.2.extracted.dir}/META-INF/data/directory/directory-default.xml" value="PDTI_${label}_2_HPDPLUS">
+            <replacetoken><![CDATA[pdti-hpdplus-dir_#{ new java.util.Date().time }]]></replacetoken>
+        </replace>
+        <replace file="${server.2.extracted.dir}/META-INF/data/directory/directory-default.xml" value="${server.2.hostname}">
+            <replacetoken><![CDATA[localhost:8080]]></replacetoken>
+        </replace>
+        <replace file="${server.2.extracted.dir}/META-INF/data/directory/directory-default.xml" value="o=dev2.provider-directories.com,dc=hpd">
+            <replacetoken><![CDATA[o=dev.provider-directories.com,dc=hpd]]></replacetoken>
+        </replace>
+        <zip destfile="${server.2.dir}/${server.war.name}" basedir="${server.2.extracted.dir}"/>
+        <undeploy url="${deploy.2.url}" username="${deploy.2.user}" password="${deploy.2.pass}" path="${server.context}"/>
+        <deploy url="${deploy.2.url}" username="${deploy.2.user}" password="${deploy.2.pass}" path="${server.context}" war="file:${server.2.dir}/${server.war.name}"/>
+        
+        <mkdir dir="${server.1.extracted.dir}"/>
+        <unzip src="${server.war}" dest="${server.1.extracted.dir}"/>
+        <replace file="${server.1.extracted.dir}/META-INF/data/directory/directory-default.xml" value="PDTI_${label}_1_DSML_BASED">
+            <replacetoken><![CDATA[pdti-dir_#{ new java.util.Date().time }]]></replacetoken>
+        </replace>
+        <replace file="${server.1.extracted.dir}/META-INF/data/directory/directory-default.xml" value="PDTI_${label}_1_HPDPLUS">
+            <replacetoken><![CDATA[pdti-hpdplus-dir_#{ new java.util.Date().time }]]></replacetoken>
+        </replace>
+        <replace file="${server.1.extracted.dir}/META-INF/data/directory/directory-default.xml" value="${server.1.hostname}">
+            <replacetoken><![CDATA[localhost:8080]]></replacetoken>
+        </replace>
+        <replace file="${server.1.extracted.dir}/META-INF/data/federation/federation-default.xml">
+            <replacetoken><![CDATA[<!-- Intentionally left empty (no default federation configuration) -->]]></replacetoken>
+            <replacevalue><![CDATA[
+    <beans:bean id="hpdPlusFederatedDirTest1" class="gov.hhs.onc.pdti.data.impl.DirectoryDescriptorImpl" parent="federatedDir"
+        p:directoryId="PDTI_${label}_2_HPDPLUS"
+        p:baseDn="o=dev2.provider-directories.com,dc=hpd"
+        p:wsdlLocation="http://${server.2.hostname}/pdti-server/Hpd_Plus_ProviderInformationDirectoryService?wsdl">
+        <beans:qualifier type="gov.hhs.onc.pdti.DirectoryStandard" value="HPD_PLUS_PROPOSED"/>
+        <beans:qualifier type="gov.hhs.onc.pdti.DirectoryType" value="FEDERATED"/>
+    </beans:bean>]]></replacevalue>
+        </replace>
+        <zip destfile="${server.1.dir}/${server.war.name}" basedir="${server.1.extracted.dir}"/>
+        <undeploy url="${deploy.1.url}" username="${deploy.1.user}" password="${deploy.1.pass}" path="${server.context}"/>
+        <deploy url="${deploy.1.url}" username="${deploy.1.user}" password="${deploy.1.pass}" path="${server.context}" war="file:${server.1.dir}/${server.war.name}"/>
+        
+        <mkdir dir="${client.1.extracted.dir}"/>
+        <unzip src="${client.war}" dest="${client.1.extracted.dir}"/>
+        <replace file="${client.1.extracted.dir}/WEB-INF/classes/pdti-client.properties" value="${server.1.hostname}">
+            <replacetoken><![CDATA[localhost:8080]]></replacetoken>
+        </replace>
+        <zip destfile="${client.1.dir}/${client.war.name}" basedir="${client.1.extracted.dir}"/>
+        <undeploy url="${deploy.1.url}" username="${deploy.1.user}" password="${deploy.1.pass}" path="${client.context}"/>
+        <deploy url="${deploy.1.url}" username="${deploy.1.user}" password="${deploy.1.pass}" path="${client.context}" war="file:${client.1.dir}/${client.war.name}"/>
+        
+        <undeploy url="${deploy.1.url}" username="${deploy.1.user}" password="${deploy.1.pass}" path="${testtool.context}"/>
+        <deploy url="${deploy.1.url}" username="${deploy.1.user}" password="${deploy.1.pass}" path="${testtool.context}" war="file:${testtool.war}"/>
+    </target>
+
+</project>
