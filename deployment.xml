@@ -33,7 +33,8 @@
     <property name="server.context" value="/pdti-server"/>
     <property name="client.war.name" value="pdti-client.war"/>
     <property name="client.context" value="/pdti-client"/>
-    <property name="client.context" value="/testtool"/>
+    <property name="testtool.context" value="/pdti-testtool"/>
+    
 
     <target name="deploy">
         <echo message="server.war =${server.war}"/>
