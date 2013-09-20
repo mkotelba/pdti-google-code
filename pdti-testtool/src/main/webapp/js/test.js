@@ -115,8 +115,27 @@ $(document).ready(function () {
                 var testStatus = message[2];
                 var testCaseDescription = message[3];
                 var testCaseMessages = message[4];
-                var request = message[5];
-                var response = message[6];
+                var formattedTestCaseMessages = testCaseMessages;
+                if("none" != testCaseMessages) {
+                	formattedTestCaseMessages = "<ol>";
+                    for (var j = 0; j < testCaseMessages.length; j++) {
+                    	formattedTestCaseMessages += "<li>" + testCaseMessages[j] + "</li>";
+                    }
+                    formattedTestCaseMessages += "</ol>";
+                }
+                var requestsList = message[5];
+                var responsesList = message[6];
+                var formattedMessagesAndResponses = "<em>Requests and Responses:</em><br/>";
+                formattedMessagesAndResponses += "<ol>";
+                for(var k = 0; k < requestsList.length; k++) {
+                	var request = requestsList[k];
+                    var response = responsesList[k];
+                    formattedMessagesAndResponses += "<li>";
+                    formattedMessagesAndResponses += "<em>Request Content:</em><br/><pre class=\"sh_xml\">" + request.replace(/</g, "&lt;").replace(/>/g, "&gt;") + "</pre>";
+                    formattedMessagesAndResponses += "<em>Resonse Content:</em><br/><pre class=\"sh_xml\">" + response.replace(/</g, "&lt;").replace(/>/g, "&gt;") + "</pre>";
+                    formattedMessagesAndResponses += "</li>";
+                }
+                formattedMessagesAndResponses += "</ol>";
                 var color = "#FF1919";
                 if("PASSED" == testStatus) {
                     color = "#00CC00";
@@ -126,11 +145,8 @@ $(document).ready(function () {
                     "<em>Test Case Description:</em><br/>" +
                     "<p>" + testCaseDescription + "</p><hr/>" +
                     "<em>Test Case Messages:</em><br/>" +
-                    "<p>" + testCaseMessages + "</p><hr/>" +
-                    "<em>Request Content:</em><br/>" +
-                    "<pre class=\"sh_xml\">" + request.replace(/</g, "&lt;").replace(/>/g, "&gt;") + "</pre>" +
-                    "<em>Response Content:</em><br/>" +
-                    "<pre class=\"sh_xml\">" + response.replace(/</g, "&lt;").replace(/>/g, "&gt;") + "</pre>" +
+                    "<p>" + formattedTestCaseMessages + "</p><hr/>" +
+                    formattedMessagesAndResponses +
                     "</div>";
                 $("#accordion").append(divHtml);
             }
