@@ -20,9 +20,12 @@ import org.slf4j.LoggerFactory;
 
 import com.eviware.soapui.impl.settings.XmlBeansSettingsImpl;
 import com.eviware.soapui.impl.wsdl.WsdlProject;
-import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestRequestStepResult;
+import com.eviware.soapui.impl.wsdl.submit.transports.http.WsdlResponse;
+import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestRequest;
+import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestRequestStep;
 import com.eviware.soapui.model.testsuite.TestCase;
 import com.eviware.soapui.model.testsuite.TestCaseRunner;
+import com.eviware.soapui.model.testsuite.TestStep;
 import com.eviware.soapui.model.testsuite.TestStepResult;
 import com.eviware.soapui.model.testsuite.TestSuite;
 import com.eviware.soapui.settings.HttpSettings;
@@ -60,7 +63,6 @@ public class Execute extends ActionSupport {
             new HashMap<WsdlProject, Map<String, Map<String, String>>>();
     private static final WsdlProject IHE_WSDL_PROJECT = getWsdlProject(IHE_SOAPUI_PROJECT_FILE);
     private static final WsdlProject MSPD_WSDL_PROJECT = getWsdlProject(MSPD_SOAPUI_PROJECT_FILE);
-    private static final String SETTINGS_FILE_NAME = "soapui-settings.xml";
 
     private WsdlProject wsdlProject;
     private String wsdlUrl;
@@ -142,17 +144,22 @@ public class Execute extends ActionSupport {
                     if(FINISHED.equals(testCaseRunner.getStatus().toString())) {
                         testStatus = PASSED;
                     }
+                    List<TestStep> testStepList = testCase.getTestStepList();
+                    List<String> requestsList = new ArrayList<String>();
+                    List<String> responsesList = new ArrayList<String>();
+                    for(TestStep testStep : testStepList) {
+                        WsdlTestRequestStep wsdlTestRequestStep = (WsdlTestRequestStep)testStep;
+                        if(!wsdlTestRequestStep.isDisabled()) {
+                            WsdlTestRequest wsdlTestRequest = wsdlTestRequestStep.getTestRequest();
+                            WsdlResponse wsdlResponse = wsdlTestRequest.getResponse();
+                            requestsList.add(wsdlResponse.getRequestContent());
+                            String response = wsdlResponse.getContentAsXml();
+                            responsesList.add(response);
+                        }
+                    }
                     List<TestStepResult> testStepResultList = testCaseRunner.getResults();
                     List<String> messagesList = new ArrayList<String>();
-                    String requestContent = null;
-                    String responseContent = null;
                     for(TestStepResult testStepResult : testStepResultList) {
-                        WsdlTestRequestStepResult wsdlTestRequestStepResult = null;
-                        if(testStepResult instanceof WsdlTestRequestStepResult) {
-                            wsdlTestRequestStepResult = (WsdlTestRequestStepResult)testStepResult;
-                            requestContent = wsdlTestRequestStepResult.getRequestContentAsXml();
-                            responseContent = wsdlTestRequestStepResult.getResponseContentAsXml();
-                        }
                         String[] messages = testStepResult.getMessages();
                         for(String message : messages) {
                             messagesList.add(message);
@@ -162,8 +169,8 @@ public class Execute extends ActionSupport {
                         }
                     }
                     Object[] testResultData = new Object[] {testSuite.getName(), testCase.getName(), testStatus,
-                            testCasesDescriptionsMap.get(testCase.getName()), messagesList, requestContent,
-                            responseContent};
+                            testCasesDescriptionsMap.get(testCase.getName()), messagesList, requestsList,
+                            responsesList};
                     testResults.add(testResultData);
                     status = testCaseCounter + SLASH + numberOfTestCases;
                 }
