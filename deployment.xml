@@ -74,11 +74,12 @@
     <beans:bean id="hpdPlusFederatedDirTest1" class="gov.hhs.onc.pdti.data.impl.DirectoryDescriptorImpl" parent="federatedDir"
         p:directoryId="PDTI_${label}_2_HPDPLUS"
         p:baseDn="o=dev2.provider-directories.com,dc=hpd"
-        p:wsdlLocation="http://${server.2.hostname}/pdti-server/Hpd_Plus_ProviderInformationDirectoryService?wsdl">
+        p:wsdlLocation="http://REPLACE_TOKEN/pdti-server/Hpd_Plus_ProviderInformationDirectoryService?wsdl">
         <beans:qualifier type="gov.hhs.onc.pdti.DirectoryStandard" value="HPD_PLUS_PROPOSED"/>
         <beans:qualifier type="gov.hhs.onc.pdti.DirectoryType" value="FEDERATED"/>
     </beans:bean>]]></replacevalue>
         </replace>
+        <replace file="${server.1.extracted.dir}/META-INF/data/federation/federation-default.xml" token="REPLACE_TOKEN" value="${server.2.hostname}"/>
         <zip destfile="${server.1.dir}/${server.war.name}" basedir="${server.1.extracted.dir}"/>
         <undeploy url="${deploy.1.url}" username="${deploy.1.user}" password="${deploy.1.pass}" path="${server.context}"/>
         <deploy url="${deploy.1.url}" username="${deploy.1.user}" password="${deploy.1.pass}" path="${server.context}" war="file:${server.1.dir}/${server.war.name}"/>

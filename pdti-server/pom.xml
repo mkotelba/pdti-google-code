@@ -523,14 +523,14 @@
                         <executions>
                             <execution>
                                 <id>tomcat7-deploy-server1</id>
-                                <phase>install</phase>
+                                <phase>deploy</phase>
                                 <goals>
                                     <goal>deploy-only</goal>
                                 </goals>
                             </execution>
                             <execution>
                                 <id>tomcat7-deploy-server2</id>
-                                <phase>install</phase>
+                                <phase>deploy</phase>
                                 <goals>
                                     <goal>deploy-only</goal>
                                 </goals>
