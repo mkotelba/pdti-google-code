@@ -508,43 +508,5 @@
                 </plugins>
             </build>
         </profile>
-        <profile>
-            <id>deploy-servers</id>
-            <activation>
-                <property>
-                    <name>!skipTests</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.tomcat.maven</groupId>
-                        <artifactId>tomcat7-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>tomcat7-deploy-server1</id>
-                                <phase>deploy</phase>
-                                <goals>
-                                    <goal>deploy-only</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>tomcat7-deploy-server2</id>
-                                <phase>deploy</phase>
-                                <goals>
-                                    <goal>deploy-only</goal>
-                                </goals>
-                                <configuration combine.self="override">
-                                    <password>${tomcat.manager.2.password}</password>
-                                    <path>/${project.deploy.server.2.context}</path>
-                                    <url>${tomcat.manager.2.url}</url>
-                                    <username>${tomcat.manager.2.username}</username>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
     </profiles>
 </project>
