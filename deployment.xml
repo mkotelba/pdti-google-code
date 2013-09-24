@@ -72,14 +72,15 @@
             <replacetoken><![CDATA[<!-- Intentionally left empty (no default federation configuration) -->]]></replacetoken>
             <replacevalue><![CDATA[
     <beans:bean id="hpdPlusFederatedDirTest1" class="gov.hhs.onc.pdti.data.impl.DirectoryDescriptorImpl" parent="federatedDir"
-        p:directoryId="PDTI_${label}_2_HPDPLUS"
+        p:directoryId="PDTI_LABEL_REPLACE_TOKEN_2_HPDPLUS"
         p:baseDn="o=dev2.provider-directories.com,dc=hpd"
-        p:wsdlLocation="http://REPLACE_TOKEN/pdti-server/Hpd_Plus_ProviderInformationDirectoryService?wsdl">
+        p:wsdlLocation="http://HOSTNAME_REPLACE_TOKEN/pdti-server/Hpd_Plus_ProviderInformationDirectoryService?wsdl">
         <beans:qualifier type="gov.hhs.onc.pdti.DirectoryStandard" value="HPD_PLUS_PROPOSED"/>
         <beans:qualifier type="gov.hhs.onc.pdti.DirectoryType" value="FEDERATED"/>
     </beans:bean>]]></replacevalue>
         </replace>
-        <replace file="${server.1.extracted.dir}/META-INF/data/federation/federation-default.xml" token="REPLACE_TOKEN" value="${server.2.hostname}"/>
+        <replace file="${server.1.extracted.dir}/META-INF/data/federation/federation-default.xml" token="HOSTNAME_REPLACE_TOKEN" value="${server.2.hostname}"/>
+        <replace file="${server.1.extracted.dir}/META-INF/data/federation/federation-default.xml" token="LABEL_REPLACE_TOKEN" value="${label}"/>
         <zip destfile="${server.1.dir}/${server.war.name}" basedir="${server.1.extracted.dir}"/>
         <undeploy url="${deploy.1.url}" username="${deploy.1.user}" password="${deploy.1.pass}" path="${server.context}" failOnError="false"/>
         <deploy url="${deploy.1.url}" username="${deploy.1.user}" password="${deploy.1.pass}" path="${server.context}" war="file:${server.1.dir}/${server.war.name}"/>
