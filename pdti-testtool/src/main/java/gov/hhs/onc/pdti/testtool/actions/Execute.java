@@ -126,7 +126,12 @@ public class Execute extends ActionSupport {
         }
         wsdlProject.setPropertyValue(URL_PROPERTY, getWsdlUrl());
         wsdlProject.setPropertyValue(BASE_DN_PROPERTY, getBaseDn());
-        executeTests();
+        try {
+            executeTests();
+        } catch(Exception exception) {
+            LOGGER.error(exception.getMessage());
+            return ERROR;
+        }
         return SUCCESS;
     }
 
