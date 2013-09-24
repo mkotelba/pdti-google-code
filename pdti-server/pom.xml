@@ -278,6 +278,7 @@
                                     <projectProperties>
                                         <value>project.test.server.wsdl.url=${project.test.server.1.dir.wsdl.location}</value>
                                         <value>project.test.server.dsml.dn.base=${project.test.server.1.dir.dn.base}</value>
+                                        <value>project.test.server.dsml.federated.dn.base=${project.test.server.2.dir.dn.base}</value>
                                     </projectProperties>
                                     <settingsFile>${project.build.testOutputDirectory}/soapui-settings.xml</settingsFile>
                                     <soapuiProperties>
@@ -300,6 +301,7 @@
                                     <projectProperties>
                                         <value>project.test.server.wsdl.url=${project.test.server.1.dir.wsdl.location.hpdplus}</value>
                                         <value>project.test.server.dsml.dn.base=${project.test.server.1.dir.dn.base}</value>
+                                        <value>project.test.server.dsml.federated.dn.base=${project.test.server.2.dir.dn.base}</value>
                                     </projectProperties>
                                     <settingsFile>${project.build.testOutputDirectory}/soapui-settings.xml</settingsFile>
                                     <soapuiProperties>

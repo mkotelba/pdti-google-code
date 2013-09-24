@@ -4488,7 +4488,7 @@ count(//dsml:attr[@name[not(matches(.,"^objectclass$","i"))]])</path><content>5<
    <soap-env:Body>
       <hpdplus:hpdPlusRequest requestID="${=project.name}_${=testSuite.name}_${=testCase.name}_${=testStep.name}_${=request.name}_${=UUID.randomUUID()}" xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
          <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <dsml:searchRequest dn="ou=Providers,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
+            <dsml:searchRequest dn="ou=Providers,${#Project#project.test.server.dsml.federated.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
                <dsml:filter>
                   <dsml:equalityMatch name="HcIdentifier">
                      <dsml:value>${#TestCase#rdn}</dsml:value>
@@ -4604,7 +4604,7 @@ empty(//dsml:searchResultEntry/dsml:attr[@name[matches(.,"^hpdProviderStatus$","
    <soap-env:Body>
       <hpdplus:hpdPlusRequest requestID="${=project.name}_${=testSuite.name}_${=testCase.name}_${=testStep.name}_${=request.name}_${=UUID.randomUUID()}" xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <dsml:searchRequest dn="ou=Organizations,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
+            <dsml:searchRequest dn="ou=Organizations,${#Project#project.test.server.dsml.federated.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
                 <dsml:filter>
                    <dsml:equalityMatch name="hpdOrgId">
                       <dsml:value>${#TestCase#rdn}</dsml:value>
@@ -4699,7 +4699,7 @@ empty(//dsml:searchResultEntry/dsml:attr[@name[matches(.,"^hpdproviderstatus$","
    <soap-env:Body>
       <hpdplus:hpdPlusRequest requestID="${=project.name}_${=testSuite.name}_${=testCase.name}_${=testStep.name}_${=request.name}_${=UUID.randomUUID()}" xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <dsml:searchRequest dn="ou=Memberships,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
+            <dsml:searchRequest dn="ou=Memberships,${#Project#project.test.server.dsml.federated.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
                 <dsml:filter>
                    <dsml:equalityMatch name="hpdMemberId">
                       <dsml:value>${#TestCase#rdn}</dsml:value>
@@ -4772,7 +4772,7 @@ empty(//dsml:searchResultEntry/dsml:attr[@name[matches(.,"^facsimiletelephonenum
    <soap-env:Body>
       <hpdplus:hpdPlusRequest requestID="${=project.name}_${=testSuite.name}_${=testCase.name}_${=testStep.name}_${=request.name}_${=UUID.randomUUID()}" xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
         <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <dsml:searchRequest dn="ou=Credentials,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
+            <dsml:searchRequest dn="ou=Credentials,${#Project#project.test.server.dsml.federated.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
                 <dsml:filter>
                    <dsml:equalityMatch name="hpdCredentialId">
                       <dsml:value>${#TestCase#rdn}</dsml:value>
@@ -4847,7 +4847,7 @@ empty(//dsml:searchResultEntry/dsml:attr[@name[matches(.,"^hpdhasaprovider$","i"
    <soap-env:Body>
       <hpdplus:hpdPlusRequest requestID="${=project.name}_${=testSuite.name}_${=testCase.name}_${=testStep.name}_${=request.name}_${=UUID.randomUUID()}" xmlns:hpdplus="urn:gov:hhs:onc:hpdplus:2013">
       <dsml:batchRequest xmlns:dsml="urn:oasis:names:tc:DSML:2:0:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-         <dsml:searchRequest dn="ou=Services,${#Project#project.test.server.dsml.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
+         <dsml:searchRequest dn="ou=Services,${#Project#project.test.server.dsml.federated.dn.base}" scope="singleLevel" derefAliases="derefFindingBaseObj">
             <dsml:filter>
                <dsml:equalityMatch name="hpdServiceId">
                   <dsml:value>${#TestCase#rdn}</dsml:value>
