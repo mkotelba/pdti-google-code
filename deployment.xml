@@ -77,6 +77,13 @@
         p:wsdlLocation="http://HOSTNAME_REPLACE_TOKEN/pdti-server/Hpd_Plus_ProviderInformationDirectoryService?wsdl">
         <beans:qualifier type="gov.hhs.onc.pdti.DirectoryStandard" value="HPD_PLUS_PROPOSED"/>
         <beans:qualifier type="gov.hhs.onc.pdti.DirectoryType" value="FEDERATED"/>
+    </beans:bean>
+    <beans:bean id="iheFederatedDirTest1" class="gov.hhs.onc.pdti.data.impl.DirectoryDescriptorImpl" parent="federatedDir"
+       p:directoryId="PDTI_LABEL_REPLACE_TOKEN_2_IHE"
+       p:baseDn="o=dev2.provider-directories.com,dc=hpd"
+       p:wsdlLocation="http://HOSTNAME_REPLACE_TOKEN/pdti-server/ProviderInformationDirectoryService?wsdl">
+       <beans:qualifier type="gov.hhs.onc.pdti.DirectoryStandard" value="IHE"/>
+       <beans:qualifier type="gov.hhs.onc.pdti.DirectoryType" value="FEDERATED"/>
     </beans:bean>]]></replacevalue>
         </replace>
         <replace file="${server.1.extracted.dir}/META-INF/data/federation/federation-default.xml" token="HOSTNAME_REPLACE_TOKEN" value="${server.2.hostname}"/>
